@@ -2239,7 +2239,6 @@ private: System::Windows::Forms::CheckBox^  checkBoxShowResult;
 			checkBoxGetIP->Checked            = MTOPTION.GET_IP_ENABLE;
 			checkBoxShowGameOption->Checked   = MTOPTION.SHOW_GAME_OPTION;
 			checkBoxShowResult->Checked       = MTOPTION.SHOW_RESULT;
-			checkBoxLogClearWithoutWelcome->Checked = MTOPTION.LOG_CLEAR_WITHOUT_WELCOME;
 
 			numericUpDownMaxConnection->Value = MTOPTION.MAX_CONNECTION;
 			trackBarBGM->Value                = MTOPTION.BGM_VOLUME / 5;
@@ -2256,10 +2255,6 @@ private: System::Windows::Forms::CheckBox^  checkBoxShowResult;
 			checkBoxRand->Checked             = MTOPTION.DISPLAY_RAND;
 			checkBoxDivide->Checked           = MTOPTION.REPLAY_DIVIDE;
 			checkBoxWindowSize->Checked       = MTOPTION.CHANGE_WINDOW_SIZE;
-
-			radioButtonLogRTF->Checked = MTOPTION.LOG_FORMAT_RTF;
-			radioButtonLogTXT->Checked = !MTOPTION.LOG_FORMAT_RTF;
-
 			checkBoxTalkFlash->Checked        = MTOPTION.TALK_FLASH;
 			checkBoxNameFlash->Checked        = MTOPTION.NAME_FLASH;
 			checkBoxTeamRoundHP->Checked      = MTOPTION.TEAM_ROUND_HP;
@@ -2412,13 +2407,14 @@ private: System::Windows::Forms::CheckBox^  checkBoxShowResult;
 			openFileDialog1->Title  = gcnew String(L"Select a Fighter Maker executable file");
 			openFileDialog1->Filter = gcnew String(L"Executable file (*.exe)|*.exe");
 
+            //TODO: Again, detecting whether it is supported should NOT be dependent on the file description.
 			if(openFileDialog1->ShowDialog() == ::DialogResult::OK){
 				FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(openFileDialog1->FileName);
 
                 if (MTINFO.DEBUG)
                     MessageBox::Show(info->Language + "\n" + info->FileDescription, "Debug: File version info");
 
-				if(IsCompatibleFMExecutable(info->FileDescription)){
+				if(info->FileDescription == L"２Ｄ格闘ツクール2nd." || info->FileDescription == L"２Ｄ格闘ツクール９５"){
 					textBoxGameExe->Text = openFileDialog1->FileName;
 				}
 				else{
@@ -2632,7 +2628,8 @@ private: System::Windows::Forms::CheckBox^  checkBoxShowResult;
 				String^ extension = Path::GetExtension(file[0])->ToLower();
 				FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(file[0]);
 
-				if(extension == ".exe" && (IsCompatibleFMExecutable(info->FileDescription))) {
+                //TODO: game file detection
+				if(extension == ".exe" && (info->FileDescription == L"２Ｄ格闘ツクール2nd." || info->FileDescription == L"２Ｄ格闘ツクール９５")){
 					e->Effect = DragDropEffects::All;
 				}
 			}

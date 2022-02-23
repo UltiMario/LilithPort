@@ -6,7 +6,6 @@
 
 // TODO: プログラムに必要な追加ヘッダーをここで参照してください。
 #include <windows.h>
-#include <Shlwapi.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,18 +15,6 @@
 
 #pragma comment(lib, "user32.lib")
 #pragma comment(lib, "winmm.lib")
-
-// UPnP
-#include <natupnp.h>
-#pragma comment(lib, "ole32.lib")
-#pragma comment(lib, "oleauth32.lib")
-
-// IP acquisition
-#include <winsock.h>
-#include <OleAuto.h>
-
-//const IID UPNPNAT_CLSID = {0xAE1E00AA, 0x3FD5, 0x403C, {0x8A, 0x27, 0x2B, 0xBD, 0xC3, 0x0C, 0xD0, 0xE1}};
-//const IID IUPNPNAT_IID  = {0xb171c812, 0xcc76, 0x485a, {0x94, 0xd8, 0xb6, 0xb3, 0xa2, 0x79, 0x4e, 0x99}};
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -42,23 +29,16 @@ void ApplicationUnhandledException(Object^ sender, UnhandledExceptionEventArgs^ 
 
 void LoadMTOption();
 void SaveMTOption();
-void ReplaceWelcomeTab(bool TtoN);
 void SaveProfileOption();
 void CheckMTOption();
 void DeleteSection(TCHAR* obj);
 void ChangeStageValue();
 void SetCaption();
 
-bool IsCompatibleFM2KExecutable(String^ fileDesc);
-bool IsCompatibleFM95Executable(String^ fileDesc);
-bool IsCompatibleFMExecutable(String^ fileDesc);
-
 String^ EncryptionIP(String^ ip);
 String^ MTEncryptionIP(String^ ip);
 _int64 DecryptionIP(String^ cipher_ip, bool enc);
 _int64 MTDecryptionIP(String^ cipher_ip);
-BSTR GetLocalIP();
-void UPnP_PortOpenClose(bool s, bool auto_close);
 
 UINT CipherRand(UINT32 seed = 0);
 UINT XorShift(UINT32 seed = 0);
@@ -70,6 +50,7 @@ public ref struct MemberInfo
 	IPEndPoint^ IP_EP;
 	String^     NAME;
 	String^     COMMENT;
+	String^		REGION;
 	UINT16      ID;
 	UINT        TYPE;
 	UINT        STATE;
@@ -217,7 +198,7 @@ const BYTE VOLUME_SET_2_95_CODE[] = {0x50,0x8B,0x08,0xCC,0x52,0x50,0xFF,0x51,0x3
 
 // バージョン情報
 // LilithPort 1.03以上互換, それ以前はなし
-const UINT LP_VERSION = 108;
+const UINT LP_VERSION = 107;
 
 // 設定項目
 const UINT MAX_NAME   = 32;
@@ -298,6 +279,7 @@ typedef struct _MT_SP_OPTION
 	TCHAR KEYWORD[MAX_KEYWORD];
 	TCHAR NAME[MAX_NAME];
 	TCHAR COMMENT[MAX_NAME];
+	TCHAR REGION[MAX_NAME];
 	UINT  PORT;
 	UINT  OPEN_PORT;
 	UINT  AUTO_SAVE;
@@ -325,7 +307,6 @@ typedef struct _MT_SP_OPTION
 	bool  ALLOW_SPECTATOR;
 	bool  LOG_WORDWRAP;
 	bool  LOG_LOCK;
-	bool  LOG_FORMAT_RTF;
 	bool  NAME_FLASH;
 	bool  TALK_FLASH;
 	bool  AFTER_REST;
@@ -334,7 +315,6 @@ typedef struct _MT_SP_OPTION
 	bool  GET_IP_ENABLE;
 	bool  SHOW_GAME_OPTION;
 	bool  SHOW_RESULT;
-	bool  LOG_CLEAR_WITHOUT_WELCOME;
 	TCHAR PROFILE[MAX_ARRAY];
 	TCHAR PROFILE_LIST[MAX_PROFILE];
 	UINT  PROFILE_INDEX;

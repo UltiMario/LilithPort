@@ -62,8 +62,7 @@ void LoadMTOption()
 		tmpType[MAX_TITLE], tmpPort[MAX_TITLE], bufSection[MAX_ARRAY];
 	TCHAR* iniSection = _T("LilithPort");
 	UINT iniVersion;
-	//_stprintf_s(ini, _T("%sLilithPort.ini"), MTOPTION.PATH);
-	PathCombine(ini, MTOPTION.PATH, L"LilithPort.ini");
+	_stprintf_s(ini, _T("%sLilithPort.ini"), MTOPTION.PATH);
 	// stdafx.hに記述
 	TCHAR iniSystem[MAX_NAME], iniState[MAX_NAME], iniColor[MAX_NAME];
 
@@ -288,8 +287,7 @@ void SaveMTOption()
 	_tcscpy_s(iniColor, static_cast<PTCHAR>(mp.ToPointer()));
 	Runtime::InteropServices::Marshal::FreeHGlobal(mp);
 
-	//_stprintf_s(ini, _T("%sLilithPort.ini"), MTOPTION.PATH);
-	PathCombine(ini, MTOPTION.PATH, L"LilithPort.ini");
+	_stprintf_s(ini, _T("%sLilithPort.ini"), MTOPTION.PATH);
 
 	// グローバルセクション書き込み
 	_itot_s(LP_VERSION, buf, 10);
@@ -477,15 +475,13 @@ void SaveMTOption()
 // プロファイルセクション削除
 void DeleteSection(TCHAR* obj){
 	TCHAR ini[_MAX_PATH];
-	//_stprintf_s(ini, _T("%sLilithPort.ini"), MTOPTION.PATH);
-	PathCombine(ini, MTOPTION.PATH, L"LilithPort.ini");
+	_stprintf_s(ini, _T("%sLilithPort.ini"), MTOPTION.PATH);
 	WritePrivateProfileStruct(obj, NULL, NULL, 0, ini);
 }
 // プロファイル関連のみ書き出し
 void SaveProfileOption(){
 	TCHAR ini[_MAX_PATH];
-	//_stprintf_s(ini, _T("%sLilithPort.ini"), MTOPTION.PATH);
-	PathCombine(ini, MTOPTION.PATH, L"LilithPort.ini");
+	_stprintf_s(ini, _T("%sLilithPort.ini"), MTOPTION.PATH);
 
 	IntPtr mp;
 	TCHAR iniSystem[MAX_NAME];
@@ -608,22 +604,6 @@ void SetCaption()
 	}
 
 	LeaveCriticalSection(&CS_CAPTION);
-}
-
-bool IsCompatibleFM2KExecutable(String ^ fileDesc)
-{
-	return fileDesc == L"２Ｄ格闘ツクール2nd." ||
-		fileDesc == L"2D Fighter Maker 2015";
-}
-
-bool IsCompatibleFM95Executable(String ^ fileDesc)
-{
-	return fileDesc == L"２Ｄ格闘ツクール９５";
-}
-
-bool IsCompatibleFMExecutable(String ^ fileDesc)
-{
-	return IsCompatibleFM2KExecutable(fileDesc) || IsCompatibleFM95Executable(fileDesc);
 }
 
 // 暗号復号用乱数

@@ -105,7 +105,12 @@ void MainForm::Begin()
 			WriteMessage(L"Server initialization complete.\n[MOTD]-------------------\n", SystemMessageColor);
 
 			// Welcomeメッセージの表示
-			ReplaceWelcomeTab(true);
+			int len = _tcslen(MTOPTION.WELCOME);
+			for(int i = 0; i < len; i++){
+				if(MTOPTION.WELCOME[i] == _T('\t')){
+					MTOPTION.WELCOME[i] = _T('\n');
+				}
+			}
 			richTextBoxLog->SelectionFont = gcnew Drawing::Font(richTextBoxLog->Font->FontFamily, richTextBoxLog->Font->Size + 2);
 			richTextBoxLog->SelectionColor = TalkMessageColor;
 			richTextBoxLog->SelectionBackColor = NoticeBackColor;
@@ -340,10 +345,10 @@ void MainForm::Begin()
 						}
 						else if(ServerName[0] == '#'){
 							ServerMode = SM_NORA;
-							WriteMessage(L"Anonymous server: chat and names are invisible.\n", SystemMessageColor); //fixme: hard translation (野良サーバ)
+							WriteMessage(L"Whoa! A Nora server!\n", SystemMessageColor); //fixme: hard translation (野良サーバ)
 
 							ListView = LV_BLIND;
-							listBoxMember->Items[0] = gcnew String(L"Anonymous Mode"); //fixme: hard translation (野試合会場)
+							listBoxMember->Items[0] = gcnew String(L"Open Match"); //fixme: hard translation (野試合会場)
 						}
 					}
 
@@ -455,9 +460,6 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 		case PH_PING:
 			rcv[0] = PH_PONG;
 			UDP->Send(rcv, rcv->Length, ep);
-			if (MTINFO.DEBUG) {
-				form->WriteMessage(String::Format(L"Ping from {0}\n", ep), DebugMessageColor);
-			}
 			break;
 
 		case PH_PONG:
@@ -480,6 +482,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				array<BYTE>^ saba = Encoding::Unicode->GetBytes(ServerName);
 				array<BYTE>^ name = Encoding::Unicode->GetBytes(MemberList[0]->NAME);
 				array<BYTE>^ cmnt = Encoding::Unicode->GetBytes(MemberList[0]->COMMENT);
+				array<BYTE>^ reg = Encoding::Unicode->GetBytes(MemberList[0]->REGION);
 
 				MemberInfo^ mi;
 				PacketPacker^  pp = gcnew PacketPacker;
@@ -529,6 +532,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 						if(ListView == LV_BLIND){
 							mi->NAME = gcnew String(L"◆");
 							mi->COMMENT = String::Empty;
+							mi->REGION = String::Empty;
 						}
 
 						MemberList->Add(mi);
@@ -563,6 +567,9 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				pp->Pack((BYTE)cmnt->Length);
 				pp->Pack(cmnt);
 
+				pp->Pack((BYTE)reg->Length);
+				pp->Pack(reg);
+
 				// 状態
 				pp->Pack((BYTE)MemberList[0]->STATE);
 
@@ -578,6 +585,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 					// 全員に入室を通知
 					name = Encoding::Unicode->GetBytes(mi->NAME);
 					cmnt = Encoding::Unicode->GetBytes(mi->COMMENT);
+					reg = Encoding::Unicode->GetBytes(mi->REGION);
 					array<BYTE>^ address = ep->Address->GetAddressBytes();
 					array<BYTE>^ port = BitConverter::GetBytes((UINT16)ep->Port);
 
@@ -616,8 +624,13 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 			}
 
 			// Welcomeメッセージ
-			ReplaceWelcomeTab(true);
+			for(UINT j = 0; j < _tcslen(MTOPTION.WELCOME); j++){
+				if(MTOPTION.WELCOME[j] == _T('\t')){
+					MTOPTION.WELCOME[j] = _T('\n');
+				}
+			}
 			i = _tcslen(MTOPTION.WELCOME)*2;
+
 
 			if(i > 0){
 				Thread::Sleep(50);
@@ -647,7 +660,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 
 		case PH_NOTICE:
 			if(UDP != nullptr){
-				form->WriteMessage(L"[Notice]-------------------\n", SystemMessageColor);
+				form->WriteMessage(L"[Message of the Day]-------------------\n", SystemMessageColor);
 				form->WriteNotice(Encoding::Unicode->GetString(rcv, 2, (rcv->Length)-2));
 				form->WriteMessage(L"-------------------------------\n", SystemMessageColor);
 			}
@@ -1096,12 +1109,6 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 
 		case PH_REQ_VS:
 
-			if (MemberList[0]->STATE == MS_SEEK && GameThread != nullptr) {
-				form->QuitGame();
-				GameThread = nullptr;
-				Thread::Sleep(500);
-			}
-
 			// 準備時間が長すぎた場合は新規接続受付
 			if(NetVS != nullptr && MemberList[0]->STATE == MS_READY){
 				if((timeGetTime() - NetVS->START_UP) > TIME_OUT*2 + 1000){
@@ -1111,16 +1118,23 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				}
 			}
 
+			if(MemberList[0]->STATE == MS_SEEK && GameThread != nullptr){
+				form->QuitGame();
+				GameThread = nullptr;
+				Thread::Sleep(500);
+			}
+
 			send = gcnew array<BYTE>(2);
 			send[0] = PH_RES_VS;
 			send[1] = (BYTE)MemberList[0]->STATE;
 
 			// 格ツクじゃないよ
 			try{
+                //TODO: change FM exe check
 				String^ exe = gcnew String(MTOPTION.GAME_EXE);
 				FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(exe);
 
-				if(!IsCompatibleFMExecutable(info->FileDescription)){
+				if(info->FileDescription != L"２Ｄ格闘ツクール2nd." && info->FileDescription != L"２Ｄ格闘ツクール９５"){
 					throw gcnew Exception;
 				}
 				/*
@@ -1135,7 +1149,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 					if((INT32)(Path::GetFileNameWithoutExtension(exe)->GetHashCode()) != BitConverter::ToInt32(rcv, 3)){
 						send[1] = 0xFE;
 					}
-					if(IsCompatibleFM2KExecutable(info->FileDescription)){
+					if(info->FileDescription == L"２Ｄ格闘ツクール2nd."){
 						MTINFO.KGT2K = true;
 					}
 					else{
@@ -1146,7 +1160,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 			catch(Exception^){
 				send[1] = 0xFF;
 				form->WriteMessage(L"ERROR: This is not a valid 2D Fighter Maker executable.\n", ErrorMessageColor);
-				form->WriteMessage(L"Please go to the settings menu and set the path to a compatible game executable.\n", ErrorMessageColor);
+				form->WriteMessage(L"Please go to the settings menu and set it.\n", ErrorMessageColor);
 			}
 
 			UDP->BeginSend(send, send->Length, ep, gcnew AsyncCallback(SendPackets), UDP);
@@ -1560,7 +1574,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				si->IP_EP = ep;
 				si->FRAME = 0;
 
-				if(SpectatorThread != nullptr && SpectatorThread->IsAlive && AllowWatch){
+				if(SpectacleThread != nullptr && SpectacleThread->IsAlive && AllowWatch){
 					// 既にはじめてる
 					send = gcnew array<BYTE>(14);
 					send[0] = PH_RES_WATCH;
@@ -1627,7 +1641,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 					break;
 
 				case 4:
-					form->WriteMessage(L"This person is already watching you!\n", SystemMessageColor); //fixme: hard translation: 既に相手がこちらを観戦対象にしていました。
+					form->WriteMessage(L"You are already watching the opponent!\n", SystemMessageColor); //fixme: hard translation: 既に相手がこちらを観戦対象にしていました。
 					break;
 				}
 
@@ -1828,7 +1842,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 	}
 	catch(ObjectDisposedException^){
 		// UDP接続終了
-		if(UDP != nullptr && MTOPTION.CONNECTION_TYPE != CT_FREE){
+		if(UDP != nullptr){
 			UDP = nullptr;
 			form->WriteMessage(L"Connection was interrupted!\n", SystemMessageColor);
 		}
@@ -2001,11 +2015,6 @@ void MainForm::RunGame(Object^ obj)
 
 	// 送信間隔を計算
 	if(run_type == RT_VS){
-		if (NetVS == nullptr) {
-			WriteMessage(L"An error occurred. This may be caused by you and your opponent having sent a match request at the same time.", ErrorMessageColor);
-			return;
-		}
-
 		NetVS->INTERVAL  = 0;
 		NetVS->INTERVAL2 = 0;
 
@@ -2231,8 +2240,8 @@ void MainForm::RunGame(Object^ obj)
 		AllowWatch = false;
 		InputFrame = 0;
 
-		SpectatorThread = gcnew Thread(gcnew ThreadStart(this, &MainForm::RunSpectator));
-		SpectatorThread->Start();
+		SpectacleThread = gcnew Thread(gcnew ThreadStart(this, &MainForm::RunSpectacle));
+		SpectacleThread->Start();
 	}
 
 	// 対戦中通知
@@ -2250,8 +2259,7 @@ void MainForm::RunGame(Object^ obj)
 
 		// 作業ディレクトリ
 		_tsplitpath_s(MTOPTION.GAME_EXE, drive, _MAX_DRIVE, buf, _MAX_DIR, NULL, 0, NULL, 0);
-		//_stprintf_s(wdir, _countof(drive)+_countof(buf), _T("%s%s"), drive, buf);
-		PathCombine(wdir, drive, buf);
+		_stprintf_s(wdir, _T("%s%s"), drive, buf);
 		
 		if(CreateProcess(MTOPTION.GAME_EXE, NULL, NULL, NULL, false, DEBUG_PROCESS, NULL, wdir, &si, &pi)){
 			if(run_type == RT_PLAYBACK){
@@ -2821,8 +2829,7 @@ void MainForm::RunGame(Object^ obj)
 					if(MTOPTION.CHANGE_WINDOW_SIZE){
 						TCHAR val[32];
 
-						//_stprintf_s(buf, _T("%sgame.ini"), wdir);
-						PathCombine(buf, wdir, L"game.ini");
+						_stprintf_s(buf, _T("%sgame.ini"), wdir);
 
 						if(File::Exists(gcnew String(buf))){
 							_itot_s(640, val, 10);
@@ -2991,7 +2998,7 @@ void MainForm::RunGame(Object^ obj)
 
 		if(allow_spectator){
 			AllowWatch = false;
-			SpectatorThread->Join();
+			SpectacleThread->Join();
 		}
 
 		if(AfterCloseUDP){
@@ -3007,9 +3014,7 @@ void MainForm::RunGame(Object^ obj)
 				ChangeState((BYTE)MS_REST);
 			}
 			else{
-				if (MemberList[0]->STATE != MS_SEEK) {
-					ChangeState((BYTE)MS_FREE);
-				}
+				ChangeState((BYTE)MS_FREE);
 			}
 		}
 
@@ -3145,7 +3150,7 @@ void MainForm::RunVersus()
 	}
 }
 
-void MainForm::RunSpectator()
+void MainForm::RunSpectacle()
 {
 	int i, d;
 	UINT32 frame = 0, s_frame;
@@ -3548,11 +3553,7 @@ void MainForm::RunAutoRest() {
 		GetLastInputInfo(&li);
 		te = GetTickCount();
 		to = MTOPTION.AUTO_REST_TIME;
-
-		if (MTINFO.DEBUG) {
-			//WriteMessage(String::Format(L"{0} seconds elapsed.\n", ((te-li.dwTime)/1000) ), DebugMessageColor);
-		}
-
+		//WriteMessage(String::Format(L"{0}秒経過\n", ((te-li.dwTime)/1000) ), DebugMessageColor);
 		if(((te-li.dwTime)/1000) >= UINT(to*60)){
 			// フリー状態なら休憩状態にする
 			if(UDP != nullptr && MemberList[0]->STATE == MS_FREE){
@@ -3571,8 +3572,7 @@ void MainForm::ChangeSeek() {
 		ChangeState((BYTE)MS_SEEK);
 		WriteMessage(L"Seek mode set to ON.\n", SystemMessageColor);
 		WriteTime(0, SystemMessageColor);
-		WriteMessage(String::Format(L"{0} is now in seek mode.\n",
-			ServerMode == SM_NORA ? L"◆" : MemberList[0]->NAME), SystemMessageColor);
+		WriteMessage(String::Format(L"{0} is now in seek mode.\n", MemberList[0]->NAME), SystemMessageColor);
 	}
 	else if(MemberList[0]->STATE == MS_SEEK){
 		if(GameThread != nullptr && GameThread->IsAlive){
@@ -3583,8 +3583,7 @@ void MainForm::ChangeSeek() {
 		
 		WriteMessage(L"Seek mode set to OFF.\n", SystemMessageColor);
 		WriteTime(0, SystemMessageColor);
-		WriteMessage(String::Format(L"{0} has left seek mode.\n",
-			ServerMode == SM_NORA ? L"◆" : MemberList[0]->NAME), SystemMessageColor);
+		WriteMessage(String::Format(L"{0} has left seek mode.\n", MemberList[0]->NAME), SystemMessageColor);
 	}
 }
 void MainForm::ChangeLogWordWrap() {
@@ -3598,27 +3597,18 @@ void MainForm::ChangeLogWordWrap() {
 	}
 }
 void MainForm::ClearLog(){
-	if(MessageBox::Show(L"This will remove the entire log.\n"
-		"Are you sure you want to clear the log?", L"Clear Log",
-		MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
+	if(MessageBox::Show(L"This will remove all but the last 10 lines of the log.\nAre you sure you want to clear the log?", L"Clear Log", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
 	}else{
 		return;
 	}
 	Monitor::Enter(richTextBoxLog);
 	try{
-		richTextBoxLog->Clear();
-		WriteTime(0, SystemMessageColor);
-		WriteMessage(L"[Deleted]\n", SystemMessageColor);
-
-		if (MemberList[0]->TYPE == CT_FREE) return;
-
-		if (MTOPTION.LOG_CLEAR_WITHOUT_WELCOME) {
-			WriteMessage(L"[MOTD]-------------------------\n", SystemMessageColor);
-			richTextBoxLog->SelectionFont = gcnew Drawing::Font(richTextBoxLog->Font->FontFamily, richTextBoxLog->Font->Size + 2);
-			richTextBoxLog->SelectionColor = TalkMessageColor;
-			richTextBoxLog->SelectionBackColor = NoticeBackColor;
-			richTextBoxLog->AppendText(gcnew String(MTOPTION.WELCOME) + "\n");
-			WriteMessage(L"-------------------------------\n", SystemMessageColor);
+		int len = richTextBoxLog->Lines->Length;	// 全体行数
+		if(len > 10){
+			int index = richTextBoxLog->GetFirstCharIndexFromLine(len-11);
+			richTextBoxLog->SelectionStart=0;
+			richTextBoxLog->Select(0, index);
+			richTextBoxLog->SelectedText= L"[Deleted]\n";
 		}
 	}
 	catch(Exception ^e){
@@ -3627,28 +3617,4 @@ void MainForm::ClearLog(){
 	finally{
 		Monitor::Exit(richTextBoxLog);
 	}
-}
-
-void MainForm::SaveLog() {
-	// 形式別ログ保存
-	String^ path = gcnew String(MTOPTION.PATH);
-	String^ file = String::Format("LilithPort_{0}.{1}", DateTime::Now.ToString("yyyyMMdd-HHmmss"),
-		MTOPTION.LOG_FORMAT_RTF ? "rtf" : "txt");
-	path += file;
-	Monitor::Enter(richTextBoxLog);
-	try {
-		if (MTOPTION.LOG_FORMAT_RTF) {
-			richTextBoxLog->SaveFile(path, RichTextBoxStreamType::RichText);
-		}
-		else {
-			richTextBoxLog->SaveFile(path, RichTextBoxStreamType::PlainText);
-		}
-	}
-	catch (Exception ^e) {
-		WriteErrorLog(e->ToString(), "SaveLog");
-	}
-	finally {
-		Monitor::Exit(richTextBoxLog);
-	}
-	WriteMessage(String::Format(L"Log written to {0}", file), SystemMessageColor);
 }

@@ -5,12 +5,13 @@
 using namespace LilithPort;
 
 void OptionForm::SaveOption(bool apply){
+    //TODO: change FM exe check
 	MainForm^ parent = safe_cast<MainForm^>(this->Owner);
 
 	try{
 		FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(textBoxGameExe->Text);
 
-		if(!IsCompatibleFMExecutable(info->FileDescription)){
+		if(info->FileDescription != L"２Ｄ格闘ツクール2nd." && info->FileDescription != L"２Ｄ格闘ツクール９５"){
 			throw gcnew Exception;
 		}
 	}
@@ -72,7 +73,6 @@ void OptionForm::SaveOption(bool apply){
 	MTOPTION.GET_IP_ENABLE        = checkBoxGetIP->Checked;
 	MTOPTION.SHOW_GAME_OPTION     = checkBoxShowGameOption->Checked;
 	MTOPTION.SHOW_RESULT          = checkBoxShowResult->Checked;
-	MTOPTION.LOG_CLEAR_WITHOUT_WELCOME = checkBoxLogClearWithoutWelcome->Checked;
 
 	// コメント
 	if(textBoxComment->Text != gcnew String(MTOPTION.COMMENT)){
@@ -82,7 +82,6 @@ void OptionForm::SaveOption(bool apply){
 
 		parent->ChangeComment(textBoxComment->Text);
 	}
-
 	// ゲーム
 	MTOPTION.MAX_STAGE      = (UINT)numericUpDownMaxStage->Value;
 	MTOPTION.STAGE_SELECT   = (UINT)numericUpDownStageSelect->Value;
@@ -128,9 +127,6 @@ void OptionForm::SaveOption(bool apply){
 	}
 
 	// 詳細設定
-	// ログファイル保存形式
-	MTOPTION.LOG_FORMAT_RTF = radioButtonLogRTF->Checked;
-
 	// 発言でウィンドウを点滅
 	MTOPTION.TALK_FLASH = checkBoxTalkFlash->Checked;
 	// 名前が呼ばれたらウィンドウを点滅
