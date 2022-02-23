@@ -6,6 +6,7 @@
 
 // TODO: プログラムに必要な追加ヘッダーをここで参照してください。
 #include <windows.h>
+#include <Shlwapi.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,6 +36,10 @@ void DeleteSection(TCHAR* obj);
 void ChangeStageValue();
 void SetCaption();
 
+bool IsCompatibleFM2KExecutable(String^ fileDesc);
+bool IsCompatibleFM95Executable(String^ fileDesc);
+bool IsCompatibleFMExecutable(String^ fileDesc);
+
 String^ EncryptionIP(String^ ip);
 String^ MTEncryptionIP(String^ ip);
 _int64 DecryptionIP(String^ cipher_ip, bool enc);
@@ -50,7 +55,6 @@ public ref struct MemberInfo
 	IPEndPoint^ IP_EP;
 	String^     NAME;
 	String^     COMMENT;
-	String^		REGION;
 	UINT16      ID;
 	UINT        TYPE;
 	UINT        STATE;
@@ -279,7 +283,6 @@ typedef struct _MT_SP_OPTION
 	TCHAR KEYWORD[MAX_KEYWORD];
 	TCHAR NAME[MAX_NAME];
 	TCHAR COMMENT[MAX_NAME];
-	TCHAR REGION[MAX_NAME];
 	UINT  PORT;
 	UINT  OPEN_PORT;
 	UINT  AUTO_SAVE;

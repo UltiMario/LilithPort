@@ -482,7 +482,6 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				array<BYTE>^ saba = Encoding::Unicode->GetBytes(ServerName);
 				array<BYTE>^ name = Encoding::Unicode->GetBytes(MemberList[0]->NAME);
 				array<BYTE>^ cmnt = Encoding::Unicode->GetBytes(MemberList[0]->COMMENT);
-				array<BYTE>^ reg = Encoding::Unicode->GetBytes(MemberList[0]->REGION);
 
 				MemberInfo^ mi;
 				PacketPacker^  pp = gcnew PacketPacker;
@@ -532,7 +531,6 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 						if(ListView == LV_BLIND){
 							mi->NAME = gcnew String(L"◆");
 							mi->COMMENT = String::Empty;
-							mi->REGION = String::Empty;
 						}
 
 						MemberList->Add(mi);
@@ -567,9 +565,6 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				pp->Pack((BYTE)cmnt->Length);
 				pp->Pack(cmnt);
 
-				pp->Pack((BYTE)reg->Length);
-				pp->Pack(reg);
-
 				// 状態
 				pp->Pack((BYTE)MemberList[0]->STATE);
 
@@ -585,7 +580,6 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 					// 全員に入室を通知
 					name = Encoding::Unicode->GetBytes(mi->NAME);
 					cmnt = Encoding::Unicode->GetBytes(mi->COMMENT);
-					reg = Encoding::Unicode->GetBytes(mi->REGION);
 					array<BYTE>^ address = ep->Address->GetAddressBytes();
 					array<BYTE>^ port = BitConverter::GetBytes((UINT16)ep->Port);
 
@@ -660,7 +654,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 
 		case PH_NOTICE:
 			if(UDP != nullptr){
-				form->WriteMessage(L"[Message of the Day]-------------------\n", SystemMessageColor);
+				form->WriteMessage(L"[Notice]-------------------\n", SystemMessageColor);
 				form->WriteNotice(Encoding::Unicode->GetString(rcv, 2, (rcv->Length)-2));
 				form->WriteMessage(L"-------------------------------\n", SystemMessageColor);
 			}
@@ -1130,11 +1124,10 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 
 			// 格ツクじゃないよ
 			try{
-                //TODO: change FM exe check
 				String^ exe = gcnew String(MTOPTION.GAME_EXE);
 				FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(exe);
 
-				if(info->FileDescription != L"２Ｄ格闘ツクール2nd." && info->FileDescription != L"２Ｄ格闘ツクール９５"){
+				if(!IsCompatibleFMExecutable(info->FileDescription)){
 					throw gcnew Exception;
 				}
 				/*
@@ -1149,7 +1142,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 					if((INT32)(Path::GetFileNameWithoutExtension(exe)->GetHashCode()) != BitConverter::ToInt32(rcv, 3)){
 						send[1] = 0xFE;
 					}
-					if(info->FileDescription == L"２Ｄ格闘ツクール2nd."){
+					if(IsCompatibleFM2KExecutable(info->FileDescription)){
 						MTINFO.KGT2K = true;
 					}
 					else{
@@ -1160,7 +1153,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 			catch(Exception^){
 				send[1] = 0xFF;
 				form->WriteMessage(L"ERROR: This is not a valid 2D Fighter Maker executable.\n", ErrorMessageColor);
-				form->WriteMessage(L"Please go to the settings menu and set it.\n", ErrorMessageColor);
+				form->WriteMessage(L"Please go to the settings menu and set the path to a compatible game executable.\n", ErrorMessageColor);
 			}
 
 			UDP->BeginSend(send, send->Length, ep, gcnew AsyncCallback(SendPackets), UDP);
@@ -2259,7 +2252,8 @@ void MainForm::RunGame(Object^ obj)
 
 		// 作業ディレクトリ
 		_tsplitpath_s(MTOPTION.GAME_EXE, drive, _MAX_DRIVE, buf, _MAX_DIR, NULL, 0, NULL, 0);
-		_stprintf_s(wdir, _T("%s%s"), drive, buf);
+		//_stprintf_s(wdir, _countof(drive)+_countof(buf), _T("%s%s"), drive, buf);
+		PathCombine(wdir, drive, buf);
 		
 		if(CreateProcess(MTOPTION.GAME_EXE, NULL, NULL, NULL, false, DEBUG_PROCESS, NULL, wdir, &si, &pi)){
 			if(run_type == RT_PLAYBACK){
@@ -2829,7 +2823,8 @@ void MainForm::RunGame(Object^ obj)
 					if(MTOPTION.CHANGE_WINDOW_SIZE){
 						TCHAR val[32];
 
-						_stprintf_s(buf, _T("%sgame.ini"), wdir);
+						//_stprintf_s(buf, _T("%sgame.ini"), wdir);
+						PathCombine(buf, wdir, L"game.ini");
 
 						if(File::Exists(gcnew String(buf))){
 							_itot_s(640, val, 10);

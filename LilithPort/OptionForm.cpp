@@ -5,13 +5,12 @@
 using namespace LilithPort;
 
 void OptionForm::SaveOption(bool apply){
-    //TODO: change FM exe check
 	MainForm^ parent = safe_cast<MainForm^>(this->Owner);
 
 	try{
 		FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(textBoxGameExe->Text);
 
-		if(info->FileDescription != L"２Ｄ格闘ツクール2nd." && info->FileDescription != L"２Ｄ格闘ツクール９５"){
+		if(!IsCompatibleFMExecutable(info->FileDescription)){
 			throw gcnew Exception;
 		}
 	}
@@ -82,6 +81,7 @@ void OptionForm::SaveOption(bool apply){
 
 		parent->ChangeComment(textBoxComment->Text);
 	}
+
 	// ゲーム
 	MTOPTION.MAX_STAGE      = (UINT)numericUpDownMaxStage->Value;
 	MTOPTION.STAGE_SELECT   = (UINT)numericUpDownStageSelect->Value;

@@ -263,6 +263,12 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			this->toolStripMenuItemVersion = (gcnew System::Windows::Forms::MenuItem());
 			this->splitContainer1 = (gcnew System::Windows::Forms::SplitContainer());
 			this->listBoxMember = (gcnew System::Windows::Forms::ListBox());
+			this->textBoxInput = (gcnew System::Windows::Forms::TextBox());
+			this->richTextBoxLog = (gcnew System::Windows::Forms::RichTextBox());
+			this->contextMenuStrip2 = (gcnew System::Windows::Forms::ContextMenu());
+			this->contextMenuItemCopy = (gcnew System::Windows::Forms::MenuItem());
+			this->toolStripSeparator6 = (gcnew System::Windows::Forms::MenuItem());
+			this->contxtMenuItemSaveLog = (gcnew System::Windows::Forms::MenuItem());
 			this->contextMenuStripMember = (gcnew System::Windows::Forms::ContextMenu());
 			this->toolStripMenuItemVS = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripMenuItemWatch = (gcnew System::Windows::Forms::MenuItem());
@@ -270,12 +276,6 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			this->toolStripMenuItemPing = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripSeparator12 = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripMenuItemKick = (gcnew System::Windows::Forms::MenuItem());
-			this->textBoxInput = (gcnew System::Windows::Forms::TextBox());
-			this->richTextBoxLog = (gcnew System::Windows::Forms::RichTextBox());
-			this->contextMenuStrip2 = (gcnew System::Windows::Forms::ContextMenu());
-			this->contextMenuItemCopy = (gcnew System::Windows::Forms::MenuItem());
-			this->toolStripSeparator6 = (gcnew System::Windows::Forms::MenuItem());
-			this->contxtMenuItemSaveLog = (gcnew System::Windows::Forms::MenuItem());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->toolTipMember = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
@@ -569,7 +569,6 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			// 
 			// toolStripMenuItemWordWrap
 			// 
-			this->toolStripMenuItemWordWrap->Checked = true;
 			this->toolStripMenuItemWordWrap->Index = 6;
 			this->toolStripMenuItemWordWrap->Text = L"&Word wrap chat";
 			this->toolStripMenuItemWordWrap->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemWordWrap_Click);
@@ -713,7 +712,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			// 
 			this->splitContainer1->Panel2->Controls->Add(this->textBoxInput);
 			this->splitContainer1->Panel2->Controls->Add(this->richTextBoxLog);
-			this->splitContainer1->Size = System::Drawing::Size(656, 366);
+			this->splitContainer1->Size = System::Drawing::Size(656, 375);
 			this->splitContainer1->SplitterDistance = 96;
 			this->splitContainer1->TabIndex = 2;
 			this->splitContainer1->TabStop = false;
@@ -721,18 +720,73 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			// listBoxMember
 			// 
 			this->listBoxMember->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->listBoxMember->ContextMenu = this->contextMenuStripMember;
 			this->listBoxMember->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->listBoxMember->DrawMode = System::Windows::Forms::DrawMode::OwnerDrawFixed;
 			this->listBoxMember->FormattingEnabled = true;
 			this->listBoxMember->ItemHeight = 12;
 			this->listBoxMember->Location = System::Drawing::Point(0, 0);
 			this->listBoxMember->Name = L"listBoxMember";
-			this->listBoxMember->Size = System::Drawing::Size(94, 364);
+			this->listBoxMember->Size = System::Drawing::Size(94, 373);
 			this->listBoxMember->TabIndex = 2;
-			this->listBoxMember->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::listBoxMember_MouseClick);
 			this->listBoxMember->DrawItem += gcnew System::Windows::Forms::DrawItemEventHandler(this, &MainForm::listBoxMember_DrawItem);
 			this->listBoxMember->MouseDoubleClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::listBoxMember_MouseDoubleClick);
+			this->listBoxMember->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::listBoxMember_MouseDown);
+			this->listBoxMember->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::listBoxMember_MouseUp);
+			// 
+			// textBoxInput
+			// 
+			this->textBoxInput->BackColor = System::Drawing::SystemColors::Window;
+			this->textBoxInput->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->textBoxInput->Location = System::Drawing::Point(0, 353);
+			this->textBoxInput->MaxLength = 127;
+			this->textBoxInput->Name = L"textBoxInput";
+			this->textBoxInput->Size = System::Drawing::Size(554, 20);
+			this->textBoxInput->TabIndex = 0;
+			this->textBoxInput->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::textBoxInput_KeyDown);
+			// 
+			// richTextBoxLog
+			// 
+			this->richTextBoxLog->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->richTextBoxLog->BackColor = System::Drawing::SystemColors::Window;
+			this->richTextBoxLog->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->richTextBoxLog->ContextMenu = this->contextMenuStrip2;
+			this->richTextBoxLog->Location = System::Drawing::Point(0, 0);
+			this->richTextBoxLog->Name = L"richTextBoxLog";
+			this->richTextBoxLog->ReadOnly = true;
+			this->richTextBoxLog->Size = System::Drawing::Size(554, 353);
+			this->richTextBoxLog->TabIndex = 0;
+			this->richTextBoxLog->TabStop = false;
+			this->richTextBoxLog->Text = L"";
+			this->richTextBoxLog->WordWrap = false;
+			this->richTextBoxLog->LinkClicked += gcnew System::Windows::Forms::LinkClickedEventHandler(this, &MainForm::richTextBoxLog_LinkClicked);
+			// 
+			// contextMenuStrip2
+			// 
+			this->contextMenuStrip2->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(3) {
+				this->contextMenuItemCopy,
+					this->toolStripSeparator6, this->contxtMenuItemSaveLog
+			});
+			// 
+			// contextMenuItemCopy
+			// 
+			this->contextMenuItemCopy->Index = 0;
+			this->contextMenuItemCopy->Shortcut = System::Windows::Forms::Shortcut::CtrlC;
+			this->contextMenuItemCopy->Text = L"&Copy";
+			this->contextMenuItemCopy->Click += gcnew System::EventHandler(this, &MainForm::contextMenuItemCopy_Click);
+			// 
+			// toolStripSeparator6
+			// 
+			this->toolStripSeparator6->Index = 1;
+			this->toolStripSeparator6->Text = L"-";
+			// 
+			// contxtMenuItemSaveLog
+			// 
+			this->contxtMenuItemSaveLog->Index = 2;
+			this->contxtMenuItemSaveLog->Shortcut = System::Windows::Forms::Shortcut::CtrlS;
+			this->contxtMenuItemSaveLog->Text = L"&Save log";
+			this->contxtMenuItemSaveLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemSaveLog_Click);
 			// 
 			// contextMenuStripMember
 			// 
@@ -777,61 +831,6 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			this->toolStripMenuItemKick->Text = L"Kick";
 			this->toolStripMenuItemKick->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemKick_Click);
 			// 
-			// textBoxInput
-			// 
-			this->textBoxInput->BackColor = System::Drawing::SystemColors::Window;
-			this->textBoxInput->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->textBoxInput->Location = System::Drawing::Point(0, 344);
-			this->textBoxInput->MaxLength = 255;
-			this->textBoxInput->Name = L"textBoxInput";
-			this->textBoxInput->Size = System::Drawing::Size(554, 20);
-			this->textBoxInput->TabIndex = 0;
-			this->textBoxInput->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::textBoxInput_KeyDown);
-			// 
-			// richTextBoxLog
-			// 
-			this->richTextBoxLog->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->richTextBoxLog->BackColor = System::Drawing::SystemColors::Window;
-			this->richTextBoxLog->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->richTextBoxLog->ContextMenu = this->contextMenuStrip2;
-			this->richTextBoxLog->Location = System::Drawing::Point(0, 0);
-			this->richTextBoxLog->Name = L"richTextBoxLog";
-			this->richTextBoxLog->ReadOnly = true;
-			this->richTextBoxLog->Size = System::Drawing::Size(554, 344);
-			this->richTextBoxLog->TabIndex = 0;
-			this->richTextBoxLog->TabStop = false;
-			this->richTextBoxLog->Text = L"";
-			this->richTextBoxLog->WordWrap = false;
-			this->richTextBoxLog->LinkClicked += gcnew System::Windows::Forms::LinkClickedEventHandler(this, &MainForm::richTextBoxLog_LinkClicked);
-			// 
-			// contextMenuStrip2
-			// 
-			this->contextMenuStrip2->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(3) {
-				this->contextMenuItemCopy,
-					this->toolStripSeparator6, this->contxtMenuItemSaveLog
-			});
-			// 
-			// contextMenuItemCopy
-			// 
-			this->contextMenuItemCopy->Index = 0;
-			this->contextMenuItemCopy->Shortcut = System::Windows::Forms::Shortcut::CtrlC;
-			this->contextMenuItemCopy->Text = L"&Copy";
-			this->contextMenuItemCopy->Click += gcnew System::EventHandler(this, &MainForm::contextMenuItemCopy_Click);
-			// 
-			// toolStripSeparator6
-			// 
-			this->toolStripSeparator6->Index = 1;
-			this->toolStripSeparator6->Text = L"-";
-			// 
-			// contxtMenuItemSaveLog
-			// 
-			this->contxtMenuItemSaveLog->Index = 2;
-			this->contxtMenuItemSaveLog->Shortcut = System::Windows::Forms::Shortcut::CtrlS;
-			this->contxtMenuItemSaveLog->Text = L"&Save log";
-			this->contxtMenuItemSaveLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemSaveLog_Click);
-			// 
 			// openFileDialog1
 			// 
 			this->openFileDialog1->Filter = L"MT replay file (*.mtr)|*.mtr";
@@ -839,16 +838,14 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			// 
 			// statusStrip1
 			// 
-			this->statusStrip1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->statusStrip1->Dock = System::Windows::Forms::DockStyle::None;
 			this->statusStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->toolStripDropDownButtonProfile,
 					this->toolStripStatusLabel
 			});
-			this->statusStrip1->Location = System::Drawing::Point(611, 368);
+			this->statusStrip1->Location = System::Drawing::Point(0, 378);
 			this->statusStrip1->Name = L"statusStrip1";
 			this->statusStrip1->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->statusStrip1->Size = System::Drawing::Size(44, 22);
+			this->statusStrip1->Size = System::Drawing::Size(658, 22);
 			this->statusStrip1->TabIndex = 3;
 			this->statusStrip1->Text = L"statusStrip1";
 			// 
@@ -876,7 +873,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			this->AllowDrop = true;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(658, 391);
+			this->ClientSize = System::Drawing::Size(658, 400);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->splitContainer1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
@@ -1035,14 +1032,13 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		void StartGame(UINT type){
 			// 格ツクじゃないよ
 			try{
-                //TODO: Quite frankly, I think this is a really bad way of detecting "supported" FM files. Case in point: FM15.
 				FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(gcnew String(MTOPTION.GAME_EXE));
 
-				if(info->FileDescription != L"２Ｄ格闘ツクール2nd." && info->FileDescription != L"２Ｄ格闘ツクール９５"){
+				if(!IsCompatibleFMExecutable(info->FileDescription)){
 					throw gcnew Exception;
 				}
 				else{
-					if(info->FileDescription == L"２Ｄ格闘ツクール2nd."){
+					if(IsCompatibleFM2KExecutable(info->FileDescription)){
 						MTINFO.KGT2K = true;
 					}
 					else{
@@ -1497,7 +1493,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				}
 			}
 			// 発言でウィンドウ点滅
-			if(MemberList[0]->ID != id && !inname) {
+			if(MemberList[0]->ID != id && !inname && UDP == nullptr) {
 				if(MTOPTION.TALK_FLASH) {
 					WindowFlash();
 				}
@@ -1658,7 +1654,8 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				L"/list:    Displays the player list.\n"
 				L"/leave:   Exits the server and enters Free Play mode.\n"
 				L"/exit:    Exits the program.\n"
-                L"LilithPort also supports drag-and-drop for replay files and for locating the FM executable.", SystemMessageColor);
+                L"LilithPort also supports drag-and-drop for replay files and for locating the FM executable.\n"
+				L"More information can be found at https://github.com/oldmud0/LilithPort/blob/master/README.md \n", SystemMessageColor);
 		}
 
 		void RandomVersus(){
@@ -2442,7 +2439,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 						PacketSendAllMember(msg, 0);
 	
-						WriteMessage(L"[Message of the Day]-------------------\n", SystemMessageColor);
+						WriteMessage(L"[Notice]-------------------\n", SystemMessageColor);
 						WriteNotice(textBoxInput->Text);
 						WriteMessage(L"-------------------------------\n", SystemMessageColor);
 					}
@@ -2561,9 +2558,9 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			}
 		}
 
-		System::Void listBoxMember_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
+		System::Void listBoxMember_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
 			int index = listBoxMember->IndexFromPoint(e->X, e->Y);
-
+			
 			if(index == -1 || MTOPTION.CONNECTION_TYPE == CT_FREE || ListView == LV_BLIND){
 				toolTipMember->Active = false;
 				return;
@@ -2578,7 +2575,6 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			if(ListView == LV_NAME){
 				if(MemberList[index]->COMMENT->Length > 0){
 					cap += "\n" + MemberList[index]->COMMENT;
-					
 				}
 			}
 			else if(ListView == LV_COMMENT){
@@ -2586,6 +2582,16 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			}
 			toolTipMember->SetToolTip(listBoxMember, cap);
 		}
+
+		System::Void listBoxMember_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
+			int index = listBoxMember->IndexFromPoint(e->X, e->Y);
+
+			if (index != -1 && e->Button == ::MouseButtons::Right) {
+				listBoxMember->SelectedIndex = index;
+				this->contextMenuStripMember->Show(listBoxMember, e->Location);
+			}
+		}
+
 		System::Void toolStripMenuItemSetting_Click(System::Object^  sender, System::EventArgs^  e) {
 			if(Option == nullptr || Option->IsDisposed){
 				toolStripDropDownButtonProfile->Enabled = false;
@@ -2606,7 +2612,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		}
 
 		System::Void toolStripMenuItemVersion_Click(System::Object^  sender, System::EventArgs^  e) {
-			WriteMessage(L"Telepone Reborn 1.0\n", SystemMessageColor);
+			WriteMessage(L"LilithPort v1.07\nEnglish translation by longbyte1\n", SystemMessageColor);
 		}
 
 		System::Void toolStripMenuItemExit_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -3090,13 +3096,12 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		System::Void MainForm_DragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e) {
 			e->Effect = DragDropEffects::None;
 
-            //TODO: change FM exe check
 			if(e->Data->GetDataPresent(DataFormats::FileDrop)){
 				array<String^>^ file = safe_cast<array<String^>^>(e->Data->GetData(DataFormats::FileDrop, false));
 				String^ extension = Path::GetExtension(file[0])->ToLower();
 				FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(file[0]);
 
-				if(extension == ".mtr" || (extension == ".exe" && (info->FileDescription == L"２Ｄ格闘ツクール2nd." || info->FileDescription == L"２Ｄ格闘ツクール９５"))){
+				if(extension == ".mtr" || (extension == ".exe" && (IsCompatibleFMExecutable(info->FileDescription)))) {
 					e->Effect = DragDropEffects::All;
 				}
 			}
@@ -3125,13 +3130,15 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 						_tsplitpath_s(MTOPTION.GAME_EXE, drive, _MAX_DRIVE, dir, _MAX_DIR, NULL, 0, NULL, 0);
 
-						if(info->FileDescription == L"２Ｄ格闘ツクール2nd."){
+						if(IsCompatibleFM2KExecutable(info->FileDescription)){
 							b2nd = true;
-							_stprintf_s(ini, _T("%s%sgame.ini"), drive, dir);
+							//_stprintf_s(ini, _T("%s%sgame.ini"), drive, dir);
+							PathCombine(ini, PathCombine(ini, drive, dir), L"game.ini");
 						}
 						else{
 							b2nd = false;
-							_stprintf_s(ini, _T("%s%s２Ｄ格闘ツクール９５.ini"), drive, dir);
+							//_stprintf_s(ini, _T("%s%s２Ｄ格闘ツクール９５.ini"), drive, dir);
+							PathCombine(ini, PathCombine(ini, drive, dir), L"２Ｄ格闘ツクール９５.ini");
 						}
 
 						if(File::Exists(gcnew String(ini))){
