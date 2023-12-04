@@ -98,6 +98,8 @@ void LoadMTOption()
 	GetPrivateProfileString(iniSystem, _T("KeywordSound"),       _T("name.wav"),    MTOPTION.KEYWORD_SOUND, _MAX_PATH,    ini);
 	GetPrivateProfileString(iniSystem, _T("Keyword"),            _T(""),            MTOPTION.KEYWORD,        MAX_KEYWORD, ini);
 	GetPrivateProfileString(iniSystem, _T("Name"),               _T("NamelessDude"),MTOPTION.NAME,           MAX_NAME,    ini);
+	GetPrivateProfileString(iniSystem, _T("Looking"), _T(""), MTOPTION.LOOKING, MAX_NAME, ini);
+	GetPrivateProfileString(iniSystem, _T("Avoiding"), _T(""), MTOPTION.AVOIDING, MAX_NAME, ini);
 	GetPrivateProfileString(iniSystem, _T("Comment"),            _T(""),            MTOPTION.COMMENT,        MAX_NAME,    ini);
 	MTOPTION.CONNECTION_TYPE      = GetPrivateProfileInt(iniSystem, _T("ConnectType"),          0, ini);
 	MTOPTION.PORT                 = GetPrivateProfileInt(iniSystem, _T("Port"),              7500, ini);
@@ -308,6 +310,8 @@ void SaveMTOption()
 	WritePrivateProfileString(iniSystem, _T("KeywordSound"),         MTOPTION.KEYWORD_SOUND,          ini);
 	WritePrivateProfileString(iniSystem, _T("Keyword"),              MTOPTION.KEYWORD,                ini);
 	WritePrivateProfileString(iniSystem, _T("Name"),                 MTOPTION.NAME,                   ini);
+	WritePrivateProfileString(iniSystem, _T("Looking"), MTOPTION.LOOKING, ini);
+	WritePrivateProfileString(iniSystem, _T("Avoiding"), MTOPTION.AVOIDING, ini);
 	WritePrivateProfileString(iniSystem, _T("Comment"),              MTOPTION.COMMENT,                ini);
 
 	_itot_s(MTOPTION.PORT, buf, 10);

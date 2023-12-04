@@ -177,6 +177,9 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime60;
 private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime120;
 private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
 private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
+private: System::Windows::Forms::Panel^  panel1;
+private: System::Windows::Forms::Button^  button1;
+private: System::Windows::Forms::Button^  button2;
 
 
 
@@ -281,12 +284,16 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->toolStripDropDownButtonProfile = (gcnew System::Windows::Forms::ToolStripDropDownButton());
 			this->toolStripStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			ReloadListToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
 			this->splitContainer1->Panel1->SuspendLayout();
 			this->splitContainer1->Panel2->SuspendLayout();
 			this->splitContainer1->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
+			this->panel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// ReloadListToolStripMenuItem
@@ -712,8 +719,8 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			// 
 			this->splitContainer1->Panel2->Controls->Add(this->textBoxInput);
 			this->splitContainer1->Panel2->Controls->Add(this->richTextBoxLog);
-			this->splitContainer1->Size = System::Drawing::Size(656, 375);
-			this->splitContainer1->SplitterDistance = 96;
+			this->splitContainer1->Size = System::Drawing::Size(676, 359);
+			this->splitContainer1->SplitterDistance = 98;
 			this->splitContainer1->TabIndex = 2;
 			this->splitContainer1->TabStop = false;
 			// 
@@ -726,7 +733,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			this->listBoxMember->ItemHeight = 12;
 			this->listBoxMember->Location = System::Drawing::Point(0, 0);
 			this->listBoxMember->Name = L"listBoxMember";
-			this->listBoxMember->Size = System::Drawing::Size(94, 373);
+			this->listBoxMember->Size = System::Drawing::Size(96, 357);
 			this->listBoxMember->TabIndex = 2;
 			this->listBoxMember->DrawItem += gcnew System::Windows::Forms::DrawItemEventHandler(this, &MainForm::listBoxMember_DrawItem);
 			this->listBoxMember->MouseDoubleClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::listBoxMember_MouseDoubleClick);
@@ -737,10 +744,10 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			// 
 			this->textBoxInput->BackColor = System::Drawing::SystemColors::Window;
 			this->textBoxInput->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->textBoxInput->Location = System::Drawing::Point(0, 353);
+			this->textBoxInput->Location = System::Drawing::Point(0, 337);
 			this->textBoxInput->MaxLength = 127;
 			this->textBoxInput->Name = L"textBoxInput";
-			this->textBoxInput->Size = System::Drawing::Size(554, 20);
+			this->textBoxInput->Size = System::Drawing::Size(572, 20);
 			this->textBoxInput->TabIndex = 0;
 			this->textBoxInput->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::textBoxInput_KeyDown);
 			// 
@@ -755,7 +762,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			this->richTextBoxLog->Location = System::Drawing::Point(0, 0);
 			this->richTextBoxLog->Name = L"richTextBoxLog";
 			this->richTextBoxLog->ReadOnly = true;
-			this->richTextBoxLog->Size = System::Drawing::Size(554, 353);
+			this->richTextBoxLog->Size = System::Drawing::Size(572, 337);
 			this->richTextBoxLog->TabIndex = 0;
 			this->richTextBoxLog->TabStop = false;
 			this->richTextBoxLog->Text = L"";
@@ -845,10 +852,10 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			this->statusStrip1->Location = System::Drawing::Point(0, 378);
 			this->statusStrip1->Name = L"statusStrip1";
 			this->statusStrip1->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->statusStrip1->Size = System::Drawing::Size(658, 22);
+			this->statusStrip1->Size = System::Drawing::Size(678, 22);
 			this->statusStrip1->TabIndex = 3;
 			this->statusStrip1->Text = L"statusStrip1";
-			this->statusStrip1->ItemClicked += gcnew System::Windows::Forms::ToolStripItemClickedEventHandler(this, &MainForm::statusStrip1_ItemClicked);
+			this->statusStrip1->Visible = false;
 			// 
 			// toolStripDropDownButtonProfile
 			// 
@@ -869,18 +876,48 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			this->toolStripStatusLabel->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
 			this->toolStripStatusLabel->Size = System::Drawing::Size(9, 17);
 			// 
+			// panel1
+			// 
+			this->panel1->Controls->Add(this->button2);
+			this->panel1->Controls->Add(this->button1);
+			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->panel1->Location = System::Drawing::Point(0, 0);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(678, 400);
+			this->panel1->TabIndex = 4;
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(12, 365);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 4;
+			this->button1->Text = L"Refresh List";
+			this->button1->UseVisualStyleBackColor = true;
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(103, 365);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->TabIndex = 5;
+			this->button2->Text = L"button2";
+			this->button2->UseVisualStyleBackColor = true;
+			// 
 			// MainForm
 			// 
 			this->AllowDrop = true;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(658, 400);
+			this->ClientSize = System::Drawing::Size(678, 400);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->splitContainer1);
+			this->Controls->Add(this->panel1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Menu = this->menuStrip1;
+			this->MinimumSize = System::Drawing::Size(700, 466);
 			this->Name = L"MainForm";
-			this->Text = L"LilithPort";
+			this->Text = L"Telepone Reborn";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MainForm::MainForm_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
@@ -894,6 +931,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			this->splitContainer1->ResumeLayout(false);
 			this->statusStrip1->ResumeLayout(false);
 			this->statusStrip1->PerformLayout();
+			this->panel1->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -1293,10 +1331,10 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				TimerGetIPThread->Join();
 			}
 			
-			this->Text = gcnew String(L"LilithPort");
+			this->Text = gcnew String(L"Telepone Reborn");
 
-			StartupForm^ s = gcnew StartupForm;
-			s->ShowDialog(this);
+			// StartupForm^ s = gcnew StartupForm;
+			// s->ShowDialog(this);
 
 			ListView = LV_NAME;
 
@@ -2306,8 +2344,8 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 					MTOPTION.OPEN_PORT = MTINFO.SERVER_MODE_PORT;
 				}
 			}else{
-				StartupForm^ s = gcnew StartupForm;
-				s->ShowDialog(this);
+				// StartupForm^ s = gcnew StartupForm;
+				// s->ShowDialog(this);
 
 				if(!File::Exists(gcnew String(MTOPTION.GAME_EXE))){
 					MessageBox::Show(L"Please set the path to the Fighter Maker executable file.", L"No game file found");
@@ -2573,14 +2611,19 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			if(index > 0){
 				cap += String::Format(L", VS = {0}", MemberList[index]->NUM_VS);
 			}
-			if(ListView == LV_NAME){
-				if(MemberList[index]->COMMENT->Length > 0){
-					cap += "\n" + MemberList[index]->COMMENT;
+			if (ListView == LV_NAME) {
+				if (MemberList[index]->COMMENT->Length) {
+					cap += "\nLooking: " + MemberList[index]->LOOKING;
+					cap += "\nAvoiding: " + MemberList[index]->AVOIDING;
+					cap += "\nComment: " + MemberList[index]->COMMENT;
 				}
 			}
 			else if(ListView == LV_COMMENT){
 				cap += "\n" + MemberList[index]->NAME;
 			}
+
+
+
 			toolTipMember->SetToolTip(listBoxMember, cap);
 		}
 
@@ -3233,7 +3276,5 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		System::Void toolStripMenuItemWordWrap_Click(System::Object^ sender, System::EventArgs^  e) {
 			ChangeLogWordWrap();
 		}
-private: System::Void statusStrip1_ItemClicked(System::Object^  sender, System::Windows::Forms::ToolStripItemClickedEventArgs^  e) {
-}
 };
 }

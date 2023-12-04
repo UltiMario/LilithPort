@@ -54,6 +54,8 @@ public ref struct MemberInfo
 {
 	IPEndPoint^ IP_EP;
 	String^     NAME;
+	String^		LOOKING;
+	String^		AVOIDING;
 	String^     COMMENT;
 	UINT16      ID;
 	UINT        TYPE;
@@ -201,8 +203,8 @@ const BYTE VOLUME_SET_2_95_CODE[] = {0x50,0x8B,0x08,0xCC,0x52,0x50,0xFF,0x51,0x3
                                      0x08,0xCC,0x52,0x50,0xFF,0x51,0x3C,0xE9,0x7A,0xFF,0xFF,0xFF};
 
 // バージョン情報
-// LilithPort 1.03以上互換, それ以前はなし
-const UINT LP_VERSION = 107;
+// Telepone Reborn 1.00以上互換, それ以前はなし
+const UINT LP_VERSION = 100;
 
 // 設定項目
 const UINT MAX_NAME   = 32;
@@ -283,6 +285,8 @@ typedef struct _MT_SP_OPTION
 	TCHAR KEYWORD[MAX_KEYWORD];
 	TCHAR NAME[MAX_NAME];
 	TCHAR COMMENT[MAX_NAME];
+	TCHAR LOOKING[MAX_NAME];
+	TCHAR AVOIDING[MAX_NAME];
 	UINT  PORT;
 	UINT  OPEN_PORT;
 	UINT  AUTO_SAVE;

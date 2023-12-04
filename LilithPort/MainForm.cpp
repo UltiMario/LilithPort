@@ -15,6 +15,8 @@ void MainForm::Begin()
 	me->IP_EP    = gcnew IPEndPoint(0, 0);
 	me->ID       = 0;
 	me->NAME     = gcnew String(MTOPTION.NAME);
+	me->LOOKING = gcnew String(MTOPTION.LOOKING);
+	me->AVOIDING = gcnew String(MTOPTION.AVOIDING);
 	me->COMMENT  = gcnew String(MTOPTION.COMMENT);
 	me->TYPE     = MTOPTION.CONNECTION_TYPE;
 	me->STATE    = MS_FREE;
