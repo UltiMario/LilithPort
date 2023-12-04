@@ -71,6 +71,13 @@ namespace LilithPort {
 	private: System::Windows::Forms::TextBox^  textBoxLooking;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::TextBox^  textBoxAvoiding;
+	private: System::Windows::Forms::Label^  label3;
+	private: System::Windows::Forms::TabPage^  tabPage3;
+	internal: System::Windows::Forms::Panel^  Panel1;
+	private:
+	internal: System::Windows::Forms::Label^  TitleLabel;
+	private: System::Windows::Forms::Label^  label4;
+	internal:
 	private:
 		/// <summary>
 		/// 必要なデザイナ変数です。
@@ -116,6 +123,11 @@ namespace LilithPort {
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
+			this->Panel1 = (gcnew System::Windows::Forms::Panel());
+			this->TitleLabel = (gcnew System::Windows::Forms::Label());
+			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDownOpenPort))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDownPort))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDownMaxConnection))->BeginInit();
@@ -126,6 +138,8 @@ namespace LilithPort {
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			this->tabPage2->SuspendLayout();
+			this->Panel1->SuspendLayout();
+			this->tabPage3->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// radioButtonServer
@@ -174,7 +188,7 @@ namespace LilithPort {
 			// 
 			this->textBoxIP->Location = System::Drawing::Point(61, 19);
 			this->textBoxIP->Name = L"textBoxIP";
-			this->textBoxIP->Size = System::Drawing::Size(168, 22);
+			this->textBoxIP->Size = System::Drawing::Size(267, 22);
 			this->textBoxIP->TabIndex = 0;
 			// 
 			// labelOpenPort
@@ -189,7 +203,7 @@ namespace LilithPort {
 			// numericUpDownOpenPort
 			// 
 			this->numericUpDownOpenPort->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->numericUpDownOpenPort->Location = System::Drawing::Point(82, 44);
+			this->numericUpDownOpenPort->Location = System::Drawing::Point(79, 44);
 			this->numericUpDownOpenPort->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 65535, 0, 0, 0 });
 			this->numericUpDownOpenPort->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1024, 0, 0, 0 });
 			this->numericUpDownOpenPort->Name = L"numericUpDownOpenPort";
@@ -199,12 +213,12 @@ namespace LilithPort {
 			// 
 			// buttonOK
 			// 
-			this->buttonOK->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->buttonOK->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->buttonOK->DialogResult = System::Windows::Forms::DialogResult::OK;
 			this->buttonOK->FlatStyle = System::Windows::Forms::FlatStyle::System;
-			this->buttonOK->Location = System::Drawing::Point(454, 403);
+			this->buttonOK->Location = System::Drawing::Point(228, 326);
 			this->buttonOK->Name = L"buttonOK";
-			this->buttonOK->Size = System::Drawing::Size(99, 26);
+			this->buttonOK->Size = System::Drawing::Size(98, 26);
 			this->buttonOK->TabIndex = 4;
 			this->buttonOK->Text = L"OK";
 			this->buttonOK->UseVisualStyleBackColor = true;
@@ -212,10 +226,10 @@ namespace LilithPort {
 			// 
 			// buttonCancel
 			// 
-			this->buttonCancel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->buttonCancel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->buttonCancel->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->buttonCancel->FlatStyle = System::Windows::Forms::FlatStyle::System;
-			this->buttonCancel->Location = System::Drawing::Point(559, 403);
+			this->buttonCancel->Location = System::Drawing::Point(332, 326);
 			this->buttonCancel->Name = L"buttonCancel";
 			this->buttonCancel->Size = System::Drawing::Size(98, 26);
 			this->buttonCancel->TabIndex = 5;
@@ -227,33 +241,33 @@ namespace LilithPort {
 			// 
 			this->textBoxComment->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBoxComment->Location = System::Drawing::Point(80, 99);
+			this->textBoxComment->Location = System::Drawing::Point(83, 140);
 			this->textBoxComment->Name = L"textBoxComment";
-			this->textBoxComment->Size = System::Drawing::Size(246, 22);
+			this->textBoxComment->Size = System::Drawing::Size(307, 22);
 			this->textBoxComment->TabIndex = 1;
 			// 
 			// labelComment
 			// 
 			this->labelComment->AutoSize = true;
-			this->labelComment->Location = System::Drawing::Point(7, 102);
+			this->labelComment->Location = System::Drawing::Point(10, 143);
 			this->labelComment->Name = L"labelComment";
-			this->labelComment->Size = System::Drawing::Size(69, 13);
+			this->labelComment->Size = System::Drawing::Size(59, 13);
 			this->labelComment->TabIndex = 4;
-			this->labelComment->Text = L"Description:";
+			this->labelComment->Text = L"Comment:";
 			// 
 			// textBoxName
 			// 
 			this->textBoxName->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBoxName->Location = System::Drawing::Point(80, 20);
+			this->textBoxName->Location = System::Drawing::Point(83, 61);
 			this->textBoxName->Name = L"textBoxName";
-			this->textBoxName->Size = System::Drawing::Size(246, 22);
+			this->textBoxName->Size = System::Drawing::Size(307, 22);
 			this->textBoxName->TabIndex = 0;
 			// 
 			// labelName
 			// 
 			this->labelName->AutoSize = true;
-			this->labelName->Location = System::Drawing::Point(6, 23);
+			this->labelName->Location = System::Drawing::Point(9, 64);
 			this->labelName->Name = L"labelName";
 			this->labelName->Size = System::Drawing::Size(60, 13);
 			this->labelName->TabIndex = 0;
@@ -298,7 +312,7 @@ namespace LilithPort {
 			this->groupBoxStartMode->Controls->Add(this->numericUpDownOpenPort);
 			this->groupBoxStartMode->Location = System::Drawing::Point(70, 6);
 			this->groupBoxStartMode->Name = L"groupBoxStartMode";
-			this->groupBoxStartMode->Size = System::Drawing::Size(235, 99);
+			this->groupBoxStartMode->Size = System::Drawing::Size(334, 99);
 			this->groupBoxStartMode->TabIndex = 0;
 			this->groupBoxStartMode->TabStop = false;
 			this->groupBoxStartMode->Text = L"Server";
@@ -309,7 +323,7 @@ namespace LilithPort {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->textBoxServerName->Location = System::Drawing::Point(82, 16);
 			this->textBoxServerName->Name = L"textBoxServerName";
-			this->textBoxServerName->Size = System::Drawing::Size(147, 22);
+			this->textBoxServerName->Size = System::Drawing::Size(246, 22);
 			this->textBoxServerName->TabIndex = 3;
 			// 
 			// groupBoxConnection
@@ -320,7 +334,7 @@ namespace LilithPort {
 			this->groupBoxConnection->Controls->Add(this->numericUpDownPort);
 			this->groupBoxConnection->Location = System::Drawing::Point(70, 111);
 			this->groupBoxConnection->Name = L"groupBoxConnection";
-			this->groupBoxConnection->Size = System::Drawing::Size(253, 84);
+			this->groupBoxConnection->Size = System::Drawing::Size(334, 84);
 			this->groupBoxConnection->TabIndex = 2;
 			this->groupBoxConnection->TabStop = false;
 			this->groupBoxConnection->Text = L"Host/Client";
@@ -348,6 +362,7 @@ namespace LilithPort {
 			this->groupBoxProfile->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
+			this->groupBoxProfile->Controls->Add(this->label4);
 			this->groupBoxProfile->Controls->Add(this->label2);
 			this->groupBoxProfile->Controls->Add(this->textBoxAvoiding);
 			this->groupBoxProfile->Controls->Add(this->label1);
@@ -358,7 +373,7 @@ namespace LilithPort {
 			this->groupBoxProfile->Controls->Add(this->labelName);
 			this->groupBoxProfile->Location = System::Drawing::Point(8, 6);
 			this->groupBoxProfile->Name = L"groupBoxProfile";
-			this->groupBoxProfile->Size = System::Drawing::Size(335, 174);
+			this->groupBoxProfile->Size = System::Drawing::Size(396, 174);
 			this->groupBoxProfile->TabIndex = 1;
 			this->groupBoxProfile->TabStop = false;
 			this->groupBoxProfile->Text = L"Profile";
@@ -366,7 +381,7 @@ namespace LilithPort {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(7, 75);
+			this->label2->Location = System::Drawing::Point(10, 116);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(56, 13);
 			this->label2->TabIndex = 8;
@@ -376,15 +391,15 @@ namespace LilithPort {
 			// 
 			this->textBoxAvoiding->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBoxAvoiding->Location = System::Drawing::Point(80, 72);
+			this->textBoxAvoiding->Location = System::Drawing::Point(83, 113);
 			this->textBoxAvoiding->Name = L"textBoxAvoiding";
-			this->textBoxAvoiding->Size = System::Drawing::Size(246, 22);
+			this->textBoxAvoiding->Size = System::Drawing::Size(307, 22);
 			this->textBoxAvoiding->TabIndex = 7;
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(7, 49);
+			this->label1->Location = System::Drawing::Point(10, 90);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(70, 13);
 			this->label1->TabIndex = 6;
@@ -394,9 +409,9 @@ namespace LilithPort {
 			// 
 			this->textBoxLooking->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBoxLooking->Location = System::Drawing::Point(80, 46);
+			this->textBoxLooking->Location = System::Drawing::Point(83, 87);
 			this->textBoxLooking->Name = L"textBoxLooking";
-			this->textBoxLooking->Size = System::Drawing::Size(246, 22);
+			this->textBoxLooking->Size = System::Drawing::Size(307, 22);
 			this->textBoxLooking->TabIndex = 5;
 			// 
 			// groupBoxWelcome
@@ -404,23 +419,23 @@ namespace LilithPort {
 			this->groupBoxWelcome->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
+			this->groupBoxWelcome->Controls->Add(this->label3);
 			this->groupBoxWelcome->Controls->Add(this->textBoxWelcome);
-			this->groupBoxWelcome->Location = System::Drawing::Point(45, 288);
+			this->groupBoxWelcome->Location = System::Drawing::Point(6, 6);
 			this->groupBoxWelcome->Name = L"groupBoxWelcome";
-			this->groupBoxWelcome->Size = System::Drawing::Size(267, 250);
+			this->groupBoxWelcome->Size = System::Drawing::Size(398, 202);
 			this->groupBoxWelcome->TabIndex = 3;
 			this->groupBoxWelcome->TabStop = false;
 			this->groupBoxWelcome->Text = L"Server message";
 			// 
 			// textBoxWelcome
 			// 
-			this->textBoxWelcome->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
+			this->textBoxWelcome->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBoxWelcome->Location = System::Drawing::Point(8, 21);
+			this->textBoxWelcome->Location = System::Drawing::Point(8, 58);
 			this->textBoxWelcome->MaxLength = 254;
 			this->textBoxWelcome->Name = L"textBoxWelcome";
-			this->textBoxWelcome->Size = System::Drawing::Size(251, 221);
+			this->textBoxWelcome->Size = System::Drawing::Size(382, 136);
 			this->textBoxWelcome->TabIndex = 0;
 			this->textBoxWelcome->Text = L"";
 			// 
@@ -428,10 +443,11 @@ namespace LilithPort {
 			// 
 			this->tabControl1->Controls->Add(this->tabPage1);
 			this->tabControl1->Controls->Add(this->tabPage2);
-			this->tabControl1->Location = System::Drawing::Point(310, 148);
+			this->tabControl1->Controls->Add(this->tabPage3);
+			this->tabControl1->Location = System::Drawing::Point(12, 59);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(357, 240);
+			this->tabControl1->Size = System::Drawing::Size(418, 240);
 			this->tabControl1->TabIndex = 6;
 			// 
 			// tabPage1
@@ -444,7 +460,7 @@ namespace LilithPort {
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(349, 214);
+			this->tabPage1->Size = System::Drawing::Size(410, 214);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Connection";
 			this->tabPage1->UseVisualStyleBackColor = true;
@@ -455,33 +471,91 @@ namespace LilithPort {
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(349, 214);
+			this->tabPage2->Size = System::Drawing::Size(410, 214);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"User Profile";
 			this->tabPage2->UseVisualStyleBackColor = true;
+			// 
+			// Panel1
+			// 
+			this->Panel1->BackColor = System::Drawing::Color::White;
+			this->Panel1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Panel1.BackgroundImage")));
+			this->Panel1->Controls->Add(this->TitleLabel);
+			this->Panel1->Dock = System::Windows::Forms::DockStyle::Top;
+			this->Panel1->Location = System::Drawing::Point(0, 0);
+			this->Panel1->Name = L"Panel1";
+			this->Panel1->Size = System::Drawing::Size(442, 53);
+			this->Panel1->TabIndex = 34;
+			// 
+			// TitleLabel
+			// 
+			this->TitleLabel->AutoSize = true;
+			this->TitleLabel->BackColor = System::Drawing::Color::Transparent;
+			this->TitleLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->TitleLabel->ForeColor = System::Drawing::SystemColors::ControlText;
+			this->TitleLabel->Location = System::Drawing::Point(12, 11);
+			this->TitleLabel->Name = L"TitleLabel";
+			this->TitleLabel->Size = System::Drawing::Size(286, 30);
+			this->TitleLabel->TabIndex = 1;
+			this->TitleLabel->Text = L"Change connection settings...";
+			// 
+			// tabPage3
+			// 
+			this->tabPage3->Controls->Add(this->groupBoxWelcome);
+			this->tabPage3->Location = System::Drawing::Point(4, 22);
+			this->tabPage3->Name = L"tabPage3";
+			this->tabPage3->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage3->Size = System::Drawing::Size(410, 214);
+			this->tabPage3->TabIndex = 2;
+			this->tabPage3->Text = L"Welcome Message";
+			this->tabPage3->UseVisualStyleBackColor = true;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(4, 18);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(391, 26);
+			this->label3->TabIndex = 1;
+			this->label3->Text = L"Server messages display when any user joins the server. You can add useful\r\ninfor"
+				L"mation here like commands, donation links and more.";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(6, 18);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(360, 26);
+			this->label4->TabIndex = 9;
+			this->label4->Text = L"Choose a name for yourself, what you\'re looking for in players, what\r\nyou\'re avoi"
+				L"ding and a comment.";
 			// 
 			// StartupForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::Black;
 			this->CancelButton = this->buttonCancel;
-			this->ClientSize = System::Drawing::Size(679, 473);
+			this->ClientSize = System::Drawing::Size(442, 341);
 			this->ControlBox = false;
+			this->Controls->Add(this->Panel1);
 			this->Controls->Add(this->tabControl1);
-			this->Controls->Add(this->groupBoxWelcome);
 			this->Controls->Add(this->buttonOK);
 			this->Controls->Add(this->buttonCancel);
+			this->DoubleBuffered = true;
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MaximizeBox = false;
+			this->MaximumSize = System::Drawing::Size(464, 386);
 			this->MinimizeBox = false;
-			this->MinimumSize = System::Drawing::Size(464, 299);
+			this->MinimumSize = System::Drawing::Size(464, 386);
 			this->Name = L"StartupForm";
 			this->ShowInTaskbar = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
-			this->Text = L"Welcome";
+			this->Text = L"Settings Panel > Connection";
 			this->Load += gcnew System::EventHandler(this, &StartupForm::StartupForm_Load);
 			this->Shown += gcnew System::EventHandler(this, &StartupForm::StartupForm_Shown);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDownOpenPort))->EndInit();
@@ -494,10 +568,14 @@ namespace LilithPort {
 			this->groupBoxProfile->ResumeLayout(false);
 			this->groupBoxProfile->PerformLayout();
 			this->groupBoxWelcome->ResumeLayout(false);
+			this->groupBoxWelcome->PerformLayout();
 			this->tabControl1->ResumeLayout(false);
 			this->tabPage1->ResumeLayout(false);
 			this->tabPage1->PerformLayout();
 			this->tabPage2->ResumeLayout(false);
+			this->Panel1->ResumeLayout(false);
+			this->Panel1->PerformLayout();
+			this->tabPage3->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}

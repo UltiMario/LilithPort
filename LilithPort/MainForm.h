@@ -175,11 +175,12 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime20;
 private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime30;
 private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime60;
 private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime120;
-private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
+
 private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 private: System::Windows::Forms::Panel^  panel1;
 private: System::Windows::Forms::Button^  button1;
 private: System::Windows::Forms::Button^  button2;
+private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
 
 
 
@@ -281,12 +282,12 @@ private: System::Windows::Forms::Button^  button2;
 			this->toolStripMenuItemKick = (gcnew System::Windows::Forms::MenuItem());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->toolTipMember = (gcnew System::Windows::Forms::ToolTip(this->components));
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->toolStripDropDownButtonProfile = (gcnew System::Windows::Forms::ToolStripDropDownButton());
 			this->toolStripStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
 			ReloadListToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
 			this->splitContainer1->Panel1->SuspendLayout();
@@ -378,12 +379,14 @@ private: System::Windows::Forms::Button^  button2;
 			// 
 			this->GameStartToolStripMenuItem->Index = 0;
 			this->GameStartToolStripMenuItem->Text = L"Start &game";
+			this->GameStartToolStripMenuItem->Visible = false;
 			this->GameStartToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::GameStartToolStripMenuItem_Click);
 			// 
 			// GameStartNoReplayToolStripMenuItem
 			// 
 			this->GameStartNoReplayToolStripMenuItem->Index = 1;
 			this->GameStartNoReplayToolStripMenuItem->Text = L"S&tart game (no replay)";
+			this->GameStartNoReplayToolStripMenuItem->Visible = false;
 			this->GameStartNoReplayToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::GameStartNoReplayToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator9
@@ -577,8 +580,8 @@ private: System::Windows::Forms::Button^  button2;
 			// toolStripMenuItemWordWrap
 			// 
 			this->toolStripMenuItemWordWrap->Index = 6;
-			this->toolStripMenuItemWordWrap->Text = L"&Word wrap chat";
-			this->toolStripMenuItemWordWrap->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemWordWrap_Click);
+			this->toolStripMenuItemWordWrap->Text = L"turd wrap";
+			this->toolStripMenuItemWordWrap->Visible = false;
 			// 
 			// LogLockToolStripMenuItem
 			// 
@@ -719,7 +722,7 @@ private: System::Windows::Forms::Button^  button2;
 			// 
 			this->splitContainer1->Panel2->Controls->Add(this->textBoxInput);
 			this->splitContainer1->Panel2->Controls->Add(this->richTextBoxLog);
-			this->splitContainer1->Size = System::Drawing::Size(676, 359);
+			this->splitContainer1->Size = System::Drawing::Size(676, 380);
 			this->splitContainer1->SplitterDistance = 98;
 			this->splitContainer1->TabIndex = 2;
 			this->splitContainer1->TabStop = false;
@@ -733,7 +736,7 @@ private: System::Windows::Forms::Button^  button2;
 			this->listBoxMember->ItemHeight = 12;
 			this->listBoxMember->Location = System::Drawing::Point(0, 0);
 			this->listBoxMember->Name = L"listBoxMember";
-			this->listBoxMember->Size = System::Drawing::Size(96, 357);
+			this->listBoxMember->Size = System::Drawing::Size(96, 378);
 			this->listBoxMember->TabIndex = 2;
 			this->listBoxMember->DrawItem += gcnew System::Windows::Forms::DrawItemEventHandler(this, &MainForm::listBoxMember_DrawItem);
 			this->listBoxMember->MouseDoubleClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::listBoxMember_MouseDoubleClick);
@@ -744,7 +747,7 @@ private: System::Windows::Forms::Button^  button2;
 			// 
 			this->textBoxInput->BackColor = System::Drawing::SystemColors::Window;
 			this->textBoxInput->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->textBoxInput->Location = System::Drawing::Point(0, 337);
+			this->textBoxInput->Location = System::Drawing::Point(0, 358);
 			this->textBoxInput->MaxLength = 127;
 			this->textBoxInput->Name = L"textBoxInput";
 			this->textBoxInput->Size = System::Drawing::Size(572, 20);
@@ -762,11 +765,10 @@ private: System::Windows::Forms::Button^  button2;
 			this->richTextBoxLog->Location = System::Drawing::Point(0, 0);
 			this->richTextBoxLog->Name = L"richTextBoxLog";
 			this->richTextBoxLog->ReadOnly = true;
-			this->richTextBoxLog->Size = System::Drawing::Size(572, 337);
+			this->richTextBoxLog->Size = System::Drawing::Size(572, 358);
 			this->richTextBoxLog->TabIndex = 0;
 			this->richTextBoxLog->TabStop = false;
 			this->richTextBoxLog->Text = L"";
-			this->richTextBoxLog->WordWrap = false;
 			this->richTextBoxLog->LinkClicked += gcnew System::Windows::Forms::LinkClickedEventHandler(this, &MainForm::richTextBoxLog_LinkClicked);
 			// 
 			// contextMenuStrip2
@@ -843,6 +845,18 @@ private: System::Windows::Forms::Button^  button2;
 			this->openFileDialog1->Filter = L"MT replay file (*.mtr)|*.mtr";
 			this->openFileDialog1->Title = L"Open LilithPort replay";
 			// 
+			// button2
+			// 
+			this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->button2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button2.Image")));
+			this->button2->Location = System::Drawing::Point(103, 385);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(43, 32);
+			this->button2->TabIndex = 5;
+			this->toolTipMember->SetToolTip(this->button2, L"Train in single player.");
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MainForm::button2_Click);
+			// 
 			// statusStrip1
 			// 
 			this->statusStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
@@ -883,33 +897,25 @@ private: System::Windows::Forms::Button^  button2;
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->panel1->Location = System::Drawing::Point(0, 0);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(678, 400);
+			this->panel1->Size = System::Drawing::Size(678, 421);
 			this->panel1->TabIndex = 4;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(12, 365);
+			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->button1->Location = System::Drawing::Point(12, 390);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"Refresh List";
 			this->button1->UseVisualStyleBackColor = true;
 			// 
-			// button2
-			// 
-			this->button2->Location = System::Drawing::Point(103, 365);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
-			this->button2->TabIndex = 5;
-			this->button2->Text = L"button2";
-			this->button2->UseVisualStyleBackColor = true;
-			// 
 			// MainForm
 			// 
 			this->AllowDrop = true;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(678, 400);
+			this->ClientSize = System::Drawing::Size(678, 421);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->splitContainer1);
 			this->Controls->Add(this->panel1);
@@ -1333,8 +1339,8 @@ private: System::Windows::Forms::Button^  button2;
 			
 			this->Text = gcnew String(L"Telepone Reborn");
 
-			// StartupForm^ s = gcnew StartupForm;
-			// s->ShowDialog(this);
+			StartupForm^ s = gcnew StartupForm;
+			s->ShowDialog(this);
 
 			ListView = LV_NAME;
 
@@ -3276,5 +3282,8 @@ private: System::Windows::Forms::Button^  button2;
 		System::Void toolStripMenuItemWordWrap_Click(System::Object^ sender, System::EventArgs^  e) {
 			ChangeLogWordWrap();
 		}
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	StartGame(RT_FREE);
+}
 };
 }
