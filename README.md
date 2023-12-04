@@ -3,7 +3,7 @@ Telepone Reborn is a UDP multiplayer/netplay program for 2D Fighter Maker games.
 
 Telepone Reborn was *not* made with Enterbrain's permission. It was ultimately made by reverse engineering the 2D Fighter Maker code. More so, my translation/continuation of Telepone Reborn was not made with the original LilithPort developer's permission. If he ever decides to pick this back up or make changes to the code, I will comply.
 
-Telepone Reborn requires .NET Framework 3.5.
+Telepone Reborn requires .NET Framework 4.0.
 
 ## Games
 Any game that uses 2D Fighter Maker (95/2002) will work. Telepone Reborn is also backwards compatible with servers that use MTSP.
