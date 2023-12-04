@@ -1,12 +1,12 @@
-# LilithPort
-LilithPort is a UDP multiplayer/netplay program for 2D Fighter Maker games. It includes chat and makes accommodations for players who cannot forward their ports. LilithPort is based off MT Special Edition, which is in turn based off LunaPort.
+# Telepone Reborn
+Telepone Reborn is a UDP multiplayer/netplay program for 2D Fighter Maker games. It includes chat and makes accommodations for players who cannot forward their ports. Telepone Reborn is based off LilithPort and MT Special Edition, which is in turn based off LunaPort.
 
-This program was *not* made with Enterbrain's permission. It was ultimately made by reverse engineering the 2D Fighter Maker code. More so, my translation/continuation of LilithPort was not made with the original LilithPort developer's permission. If he ever decides to pick this back up or make changes to the code, I will comply.
+Telepone Reborn was *not* made with Enterbrain's permission. It was ultimately made by reverse engineering the 2D Fighter Maker code. More so, my translation/continuation of Telepone Reborn was not made with the original LilithPort developer's permission. If he ever decides to pick this back up or make changes to the code, I will comply.
 
-LilithPort requires .NET Framework 3.5.
+Telepone Reborn requires .NET Framework 3.5.
 
 ## Games
-Any game that uses 2D Fighter Maker (95/2002) will work. LilithPort is also backwards compatible with servers that use MTSP.
+Any game that uses 2D Fighter Maker (95/2002) will work. Telepone Reborn is also backwards compatible with servers that use MTSP.
  - [Pokémon Type: Wild](http://oneweakness.com/pokemon-type-wild.html)
  - [Vanguard Princess](http://wiki.mizuumi.net/w/Vanguard_Princess/Netplay)
  - [WonderfulWorld](http://www55.atwiki.jp/ainefill_oinusama/pages/111.html)
@@ -109,4 +109,4 @@ In addition, there is a massive performance penalty for turning on joystick supp
 The reason is that 2DFM will silently error out when a joystick is expected but is not detected. In order to mitigate this, please have at least two controllers plugged in.
 
 ## Dedicated Server
-A dedicated server is coming in the very distant future. In the meantime, you can pass the `-s <port>` command line argument to LilithPort to start server mode immediately and close silently on exception.
+A dedicated server is coming in the very distant future. In the meantime, you can pass the `-s <port>` command line argument to Telepone Reborn to start server mode immediately and close silently on exception.
