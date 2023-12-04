@@ -333,7 +333,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			// toolStripMenuItemExit
 			// 
 			this->toolStripMenuItemExit->Index = 3;
-			this->toolStripMenuItemExit->Text = L"&Exit";
+			this->toolStripMenuItemExit->Text = L"E&xit";
 			this->toolStripMenuItemExit->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemExit_Click);
 			// 
 			// toolStripMenuItemBookMarkMenu
@@ -848,6 +848,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			this->statusStrip1->Size = System::Drawing::Size(658, 22);
 			this->statusStrip1->TabIndex = 3;
 			this->statusStrip1->Text = L"statusStrip1";
+			this->statusStrip1->ItemClicked += gcnew System::Windows::Forms::ToolStripItemClickedEventHandler(this, &MainForm::statusStrip1_ItemClicked);
 			// 
 			// toolStripDropDownButtonProfile
 			// 
@@ -2612,7 +2613,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		}
 
 		System::Void toolStripMenuItemVersion_Click(System::Object^  sender, System::EventArgs^  e) {
-			WriteMessage(L"LilithPort v1.07\nEnglish translation by longbyte1\n", SystemMessageColor);
+			WriteMessage(L"Telepone Reborn 1.0.0.0\n\nMade by WindowsLogic Productions.\n", SystemMessageColor);
 		}
 
 		System::Void toolStripMenuItemExit_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -3232,5 +3233,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		System::Void toolStripMenuItemWordWrap_Click(System::Object^ sender, System::EventArgs^  e) {
 			ChangeLogWordWrap();
 		}
+private: System::Void statusStrip1_ItemClicked(System::Object^  sender, System::Windows::Forms::ToolStripItemClickedEventArgs^  e) {
+}
 };
 }

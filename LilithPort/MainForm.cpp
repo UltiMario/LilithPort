@@ -72,7 +72,7 @@ void MainForm::Begin()
 			WriteMessage(L"ERROR: This port is already in use by another program.\n", ErrorMessageColor);
 		}
 		else{
-			WriteMessage(String::Format(L"ERROR: UDP initialiation failed. ({0})\n", e->ErrorCode), ErrorMessageColor);
+			WriteMessage(String::Format(L"ERROR: UDP initialisation failed. ({0})\n", e->ErrorCode), ErrorMessageColor);
 			if(MTINFO.DEBUG){
 				WriteMessage(e->ToString() + L"\n", DebugMessageColor);
 			}
