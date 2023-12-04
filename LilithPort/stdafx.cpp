@@ -612,8 +612,9 @@ void SetCaption()
 
 bool IsCompatibleFM2KExecutable(String ^ fileDesc)
 {
-	return fileDesc == L"２Ｄ格闘ツクール2nd." ||
-		fileDesc == L"2D Fighter Maker 2015";
+	return fileDesc == L"Fighting is Magic: Aurora" ||
+		fileDesc == L"2D Fighter Maker 2015" ||
+		fileDesc == L"２Ｄ格闘ツクール2nd.";
 }
 
 bool IsCompatibleFM95Executable(String ^ fileDesc)

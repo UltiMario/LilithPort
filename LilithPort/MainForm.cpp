@@ -345,7 +345,7 @@ void MainForm::Begin()
 						}
 						else if(ServerName[0] == '#'){
 							ServerMode = SM_NORA;
-							WriteMessage(L"Whoa! A Nora server!\n", SystemMessageColor); //fixme: hard translation (野良サーバ)
+							WriteMessage(L"Stray server.\n", SystemMessageColor);
 
 							ListView = LV_BLIND;
 							listBoxMember->Items[0] = gcnew String(L"Open Match"); //fixme: hard translation (野試合会場)
@@ -1703,7 +1703,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				UINT32 f = BitConverter::ToUInt32(rcv, 1);
 
 				if(f > WatchFrame + WatchHistory->Length - 20){
-                    form->WriteMessage(L"ERROR: Could not synchronize; leaving spectator mode...\n", ErrorMessageColor); //fixme: hard translation: 同期が取れなくなったため観戦を中止します。
+                    form->WriteMessage(L"ERROR: Spectating will be cancelled as synchronisation is no longer possible.\n", ErrorMessageColor);
 					form->QuitWatch(true);
 				}
 
