@@ -216,9 +216,9 @@ namespace LilithPort {
 			this->buttonOK->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->buttonOK->DialogResult = System::Windows::Forms::DialogResult::OK;
 			this->buttonOK->FlatStyle = System::Windows::Forms::FlatStyle::System;
-			this->buttonOK->Location = System::Drawing::Point(228, 326);
+			this->buttonOK->Location = System::Drawing::Point(274, 307);
 			this->buttonOK->Name = L"buttonOK";
-			this->buttonOK->Size = System::Drawing::Size(98, 26);
+			this->buttonOK->Size = System::Drawing::Size(75, 22);
 			this->buttonOK->TabIndex = 4;
 			this->buttonOK->Text = L"OK";
 			this->buttonOK->UseVisualStyleBackColor = true;
@@ -229,9 +229,9 @@ namespace LilithPort {
 			this->buttonCancel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->buttonCancel->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->buttonCancel->FlatStyle = System::Windows::Forms::FlatStyle::System;
-			this->buttonCancel->Location = System::Drawing::Point(332, 326);
+			this->buttonCancel->Location = System::Drawing::Point(355, 307);
 			this->buttonCancel->Name = L"buttonCancel";
-			this->buttonCancel->Size = System::Drawing::Size(98, 26);
+			this->buttonCancel->Size = System::Drawing::Size(75, 22);
 			this->buttonCancel->TabIndex = 5;
 			this->buttonCancel->Text = L"Cancel";
 			this->buttonCancel->UseVisualStyleBackColor = true;
@@ -538,7 +538,6 @@ namespace LilithPort {
 			this->BackColor = System::Drawing::Color::Black;
 			this->CancelButton = this->buttonCancel;
 			this->ClientSize = System::Drawing::Size(442, 341);
-			this->ControlBox = false;
 			this->Controls->Add(this->Panel1);
 			this->Controls->Add(this->tabControl1);
 			this->Controls->Add(this->buttonOK);

@@ -178,9 +178,20 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime120;
 
 private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 private: System::Windows::Forms::Panel^  panel1;
-private: System::Windows::Forms::Button^  button1;
-private: System::Windows::Forms::Button^  button2;
+private: System::Windows::Forms::Button^  refreshButton;
+
+private: System::Windows::Forms::Button^  trainButton;
+
 private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
+
+
+private: System::Windows::Forms::MenuStrip^  menuStrip2;
+private: System::Windows::Forms::ToolStripMenuItem^  fileToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^  openReplayFileToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^  saveLogToolStripMenuItem;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator14;
+private: System::Windows::Forms::ToolStripMenuItem^  exitToolStripMenuItem;
+private: System::Windows::Forms::Button^  reconnectButton;
 
 
 
@@ -282,12 +293,19 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
 			this->toolStripMenuItemKick = (gcnew System::Windows::Forms::MenuItem());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->toolTipMember = (gcnew System::Windows::Forms::ToolTip(this->components));
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->trainButton = (gcnew System::Windows::Forms::Button());
+			this->reconnectButton = (gcnew System::Windows::Forms::Button());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->toolStripDropDownButtonProfile = (gcnew System::Windows::Forms::ToolStripDropDownButton());
 			this->toolStripStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->refreshButton = (gcnew System::Windows::Forms::Button());
+			this->menuStrip2 = (gcnew System::Windows::Forms::MenuStrip());
+			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->openReplayFileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->saveLogToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator14 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			ReloadListToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
 			this->splitContainer1->Panel1->SuspendLayout();
@@ -295,6 +313,7 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
 			this->splitContainer1->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
 			this->panel1->SuspendLayout();
+			this->menuStrip2->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// ReloadListToolStripMenuItem
@@ -404,6 +423,7 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
 			// 
 			this->LeaveToolStripMenuItem->Index = 4;
 			this->LeaveToolStripMenuItem->Text = L"&Leave";
+			this->LeaveToolStripMenuItem->Visible = false;
 			this->LeaveToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::LeaveToolStripMenuItem_Click);
 			// 
 			// RestToolStripMenuItem
@@ -845,17 +865,29 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
 			this->openFileDialog1->Filter = L"MT replay file (*.mtr)|*.mtr";
 			this->openFileDialog1->Title = L"Open LilithPort replay";
 			// 
-			// button2
+			// trainButton
 			// 
-			this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
-			this->button2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button2.Image")));
-			this->button2->Location = System::Drawing::Point(103, 385);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(43, 32);
-			this->button2->TabIndex = 5;
-			this->toolTipMember->SetToolTip(this->button2, L"Train in single player.");
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &MainForm::button2_Click);
+			this->trainButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->trainButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"trainButton.Image")));
+			this->trainButton->Location = System::Drawing::Point(152, 385);
+			this->trainButton->Name = L"trainButton";
+			this->trainButton->Size = System::Drawing::Size(43, 32);
+			this->trainButton->TabIndex = 5;
+			this->toolTipMember->SetToolTip(this->trainButton, L"Train in single player.");
+			this->trainButton->UseVisualStyleBackColor = true;
+			this->trainButton->Click += gcnew System::EventHandler(this, &MainForm::trainButton_Click);
+			// 
+			// reconnectButton
+			// 
+			this->reconnectButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->reconnectButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"reconnectButton.Image")));
+			this->reconnectButton->Location = System::Drawing::Point(103, 385);
+			this->reconnectButton->Name = L"reconnectButton";
+			this->reconnectButton->Size = System::Drawing::Size(43, 32);
+			this->reconnectButton->TabIndex = 8;
+			this->toolTipMember->SetToolTip(this->reconnectButton, L"Reconnect or go to free play.");
+			this->reconnectButton->UseVisualStyleBackColor = true;
+			this->reconnectButton->Click += gcnew System::EventHandler(this, &MainForm::reconnectButton_Click_1);
 			// 
 			// statusStrip1
 			// 
@@ -892,23 +924,72 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
 			// 
 			// panel1
 			// 
-			this->panel1->Controls->Add(this->button2);
-			this->panel1->Controls->Add(this->button1);
+			this->panel1->BackColor = System::Drawing::SystemColors::GradientInactiveCaption;
+			this->panel1->Controls->Add(this->reconnectButton);
+			this->panel1->Controls->Add(this->trainButton);
+			this->panel1->Controls->Add(this->refreshButton);
+			this->panel1->Controls->Add(this->menuStrip2);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->panel1->Location = System::Drawing::Point(0, 0);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(678, 421);
 			this->panel1->TabIndex = 4;
 			// 
-			// button1
+			// refreshButton
 			// 
-			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
-			this->button1->Location = System::Drawing::Point(12, 390);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 4;
-			this->button1->Text = L"Refresh List";
-			this->button1->UseVisualStyleBackColor = true;
+			this->refreshButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->refreshButton->FlatStyle = System::Windows::Forms::FlatStyle::System;
+			this->refreshButton->Location = System::Drawing::Point(12, 390);
+			this->refreshButton->Name = L"refreshButton";
+			this->refreshButton->Size = System::Drawing::Size(75, 23);
+			this->refreshButton->TabIndex = 4;
+			this->refreshButton->Text = L"Refresh List";
+			this->refreshButton->UseVisualStyleBackColor = true;
+			this->refreshButton->Click += gcnew System::EventHandler(this, &MainForm::refreshButton_Click);
+			// 
+			// menuStrip2
+			// 
+			this->menuStrip2->Dock = System::Windows::Forms::DockStyle::None;
+			this->menuStrip2->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->fileToolStripMenuItem });
+			this->menuStrip2->Location = System::Drawing::Point(538, 390);
+			this->menuStrip2->Name = L"menuStrip2";
+			this->menuStrip2->Size = System::Drawing::Size(45, 24);
+			this->menuStrip2->TabIndex = 7;
+			this->menuStrip2->Text = L"menuStrip2";
+			this->menuStrip2->Visible = false;
+			// 
+			// fileToolStripMenuItem
+			// 
+			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+				this->openReplayFileToolStripMenuItem,
+					this->saveLogToolStripMenuItem, this->toolStripSeparator14, this->exitToolStripMenuItem
+			});
+			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
+			this->fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
+			this->fileToolStripMenuItem->Text = L"File";
+			// 
+			// openReplayFileToolStripMenuItem
+			// 
+			this->openReplayFileToolStripMenuItem->Name = L"openReplayFileToolStripMenuItem";
+			this->openReplayFileToolStripMenuItem->Size = System::Drawing::Size(166, 22);
+			this->openReplayFileToolStripMenuItem->Text = L"Open replay file...";
+			// 
+			// saveLogToolStripMenuItem
+			// 
+			this->saveLogToolStripMenuItem->Name = L"saveLogToolStripMenuItem";
+			this->saveLogToolStripMenuItem->Size = System::Drawing::Size(166, 22);
+			this->saveLogToolStripMenuItem->Text = L"Save log";
+			// 
+			// toolStripSeparator14
+			// 
+			this->toolStripSeparator14->Name = L"toolStripSeparator14";
+			this->toolStripSeparator14->Size = System::Drawing::Size(163, 6);
+			// 
+			// exitToolStripMenuItem
+			// 
+			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(166, 22);
+			this->exitToolStripMenuItem->Text = L"Exit";
 			// 
 			// MainForm
 			// 
@@ -920,6 +1001,7 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
 			this->Controls->Add(this->splitContainer1);
 			this->Controls->Add(this->panel1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip2;
 			this->Menu = this->menuStrip1;
 			this->MinimumSize = System::Drawing::Size(700, 466);
 			this->Name = L"MainForm";
@@ -938,6 +1020,9 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
 			this->statusStrip1->ResumeLayout(false);
 			this->statusStrip1->PerformLayout();
 			this->panel1->ResumeLayout(false);
+			this->panel1->PerformLayout();
+			this->menuStrip2->ResumeLayout(false);
+			this->menuStrip2->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -2646,7 +2731,7 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
 			if(Option == nullptr || Option->IsDisposed){
 				toolStripDropDownButtonProfile->Enabled = false;
 				Option = gcnew OptionForm;
-				Option->Show(this);
+				Option->ShowDialog(this);
 			}
 			else{
 				Option->Activate();
@@ -3282,8 +3367,30 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
 		System::Void toolStripMenuItemWordWrap_Click(System::Object^ sender, System::EventArgs^  e) {
 			ChangeLogWordWrap();
 		}
-private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void trainButton_Click(System::Object^  sender, System::EventArgs^  e) {
 	StartGame(RT_FREE);
+}
+private: System::Void reconnectButton_Click_1(System::Object^  sender, System::EventArgs^  e) {
+	if (MTOPTION.CONNECTION_TYPE == CT_SERVER) {
+		if (MessageBox::Show(L"This will shut down the server and drop all players.\nAre you sure you want to do this?", L"Restart", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes) {
+		}
+		else {
+			return;
+		}
+	}
+
+	if (MTOPTION.CONNECTION_TYPE == CT_HOST || MTOPTION.CONNECTION_TYPE == CT_CLIENT) {
+		if (MessageBox::Show(L"This will disconnect you from the server.\nContinue?", L"Restart", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes) {
+		}
+		else {
+			return;
+		}
+	}
+
+	Restart();
+}
+private: System::Void refreshButton_Click(System::Object^  sender, System::EventArgs^  e) {
+	ReloadList();
 }
 };
 }
