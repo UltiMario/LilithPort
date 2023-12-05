@@ -863,7 +863,7 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			// openFileDialog1
 			// 
 			this->openFileDialog1->Filter = L"MT replay file (*.mtr)|*.mtr";
-			this->openFileDialog1->Title = L"Open LilithPort replay";
+			this->openFileDialog1->Title = L"Open Telepone Reborn replay";
 			// 
 			// trainButton
 			// 
@@ -1453,7 +1453,7 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			MTOPTION.CONNECTION_TYPE = CT_FREE;
 			MemberList[0]->TYPE  = CT_FREE;
 			MemberList[0]->STATE = MS_FREE;
-			this->Text = gcnew String(L"LilithPort (Free Play)");
+			this->Text = gcnew String(L"Telepone Reborn (Free Play)");
 			listBoxMember->Refresh();
 		}
 
@@ -1784,8 +1784,7 @@ private: System::Windows::Forms::Button^  reconnectButton;
 				L"/list:    Displays the player list.\n"
 				L"/leave:   Exits the server and enters Free Play mode.\n"
 				L"/exit:    Exits the program.\n"
-                L"LilithPort also supports drag-and-drop for replay files and for locating the FM executable.\n"
-				L"More information can be found at https://github.com/oldmud0/LilithPort/blob/master/README.md \n", SystemMessageColor);
+				L"Telepone Reborn also supports drag-and-drop for replay files and for locating the FM executable.\n",SystemMessageColor);
 		}
 
 		void RandomVersus(){
@@ -2217,7 +2216,7 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			}
 			catch(Exception^ e) {
 				Global_address = 0;
-				WriteMessage(L"ERROR: Failed to extract IP address information. This version of LilithPort may be outdated.\n", ErrorMessageColor);
+				WriteMessage(L"ERROR: Failed to extract IP address information. This version of Telepone Reborn may be outdated.\n", ErrorMessageColor);
 
 				if(MTINFO.DEBUG){
 					WriteMessage(e->ToString() + L"\n", DebugMessageColor);
@@ -2230,7 +2229,7 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			}
 			if(Global_address > 0) {
 				WriteMessage(String::Format(L"IP address acquired: {0}\n", s3[1]), SystemMessageColor);
-				WriteMessage(L"[Converted address]\nLilithPort: ", SystemMessageColor);
+				WriteMessage(L"[Converted address]\nTelepone Reborn: ", SystemMessageColor);
 
 				richTextBoxLog->SelectionColor = TalkMessageColor;
 				richTextBoxLog->SelectionBackColor = NoticeBackColor;
@@ -2461,7 +2460,7 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			}
 
 			if(MTOPTION.CONNECTION_TYPE == CT_SERVER && MTINFO.ERRORED == false){
-				if(MessageBox::Show(L"If you close LilithPort, the server will be closed and all players will be kicked.\nShut down the server?", L"Confirm Server Shutdown", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::No){
+				if(MessageBox::Show(L"If you close Telepone Reborn, the server will be closed and all players will be kicked.\nShut down the server?", L"Confirm Server Shutdown", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::No){
 					IsFormClosing = false;
 					e->Cancel = true;
 					return;
@@ -2938,7 +2937,7 @@ private: System::Windows::Forms::Button^  reconnectButton;
 
 		System::Void toolStripMenuItemSaveLog_Click(System::Object^  sender, System::EventArgs^  e) {
 			String^ path = gcnew String(MTOPTION.PATH);
-			String^ file = String::Format(L"LilithPort_{0}.log", DateTime::Now.ToString("yyMMdd-HHmmss"));
+			String^ file = String::Format(L"TR_{0}.log", DateTime::Now.ToString("yyMMdd-HHmmss"));
 			path += file;
 
 			Monitor::Enter(richTextBoxLog);

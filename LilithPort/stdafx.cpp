@@ -35,7 +35,7 @@ void ApplicationThreadException(Object^ sender, Threading::ThreadExceptionEventA
 	MTINFO.ERRORED = true;
 
 	if(!MTINFO.SERVER_MODE){
-		MessageBox::Show(L"An error occurred, and LilithPort must exit.\nThe exception has been written to a text file.\n"+e->Exception->ToString(), L"Unhandled thread exception");
+		MessageBox::Show(L"An error occurred, and Telepone Reborn must exit.\nThe exception has been written to a text file.\n"+e->Exception->ToString(), L"Unhandled thread exception");
 	}
 
 	Application::Exit();
@@ -48,7 +48,7 @@ void ApplicationUnhandledException(Object^ sender, UnhandledExceptionEventArgs^ 
 	MTINFO.ERRORED = true;
 
 	if(!MTINFO.SERVER_MODE){
-        MessageBox::Show(L"An error occurred, and LilithPort must exit.\nThe exception has been written to a text file.\n" + safe_cast<Exception^>(e->ExceptionObject)->ToString(), L"Unhandled exception");
+        MessageBox::Show(L"An error occurred, and Telepone Reborn must exit.\nThe exception has been written to a text file.\n" + safe_cast<Exception^>(e->ExceptionObject)->ToString(), L"Unhandled exception");
 	}
 
 	Application::Exit();
@@ -60,10 +60,10 @@ void LoadMTOption()
 	IntPtr mp;
 	TCHAR ini[_MAX_PATH], tmpName[MAX_TITLE], tmpIP[MAX_TITLE],
 		tmpType[MAX_TITLE], tmpPort[MAX_TITLE], bufSection[MAX_ARRAY];
-	TCHAR* iniSection = _T("LilithPort");
+	TCHAR* iniSection = _T("Telepone Reborn");
 	UINT iniVersion;
 	//_stprintf_s(ini, _T("%sLilithPort.ini"), MTOPTION.PATH);
-	PathCombine(ini, MTOPTION.PATH, L"LilithPort.ini");
+	PathCombine(ini, MTOPTION.PATH, L"Telepone Reborn.ini");
 	// stdafx.hに記述
 	TCHAR iniSystem[MAX_NAME], iniState[MAX_NAME], iniColor[MAX_NAME];
 
@@ -83,7 +83,7 @@ void LoadMTOption()
 	}
 
 	if(_tcslen(MTOPTION.PROFILE) == 0){
-		GetPrivateProfileString(iniSystem, _T("DefaultProfile"), _T("LilithPort"),  MTOPTION.PROFILE,        MAX_ARRAY,   ini);
+		GetPrivateProfileString(iniSystem, _T("DefaultProfile"), _T("Telepone Reborn"),  MTOPTION.PROFILE,        MAX_ARRAY,   ini);
 	}
 	GetPrivateProfileString(iniSystem, _T("ProfileList"),        _T(""),            MTOPTION.PROFILE_LIST,   MAX_PROFILE, ini);
 	GetPrivateProfileString(iniSystem, _T("ServerName"),         _T(""),            MTOPTION.SERVER_NAME,    MAX_NAME,    ini);
@@ -291,7 +291,7 @@ void SaveMTOption()
 	Runtime::InteropServices::Marshal::FreeHGlobal(mp);
 
 	//_stprintf_s(ini, _T("%sLilithPort.ini"), MTOPTION.PATH);
-	PathCombine(ini, MTOPTION.PATH, L"LilithPort.ini");
+	PathCombine(ini, MTOPTION.PATH, L"Telepone Reborn.ini");
 
 	// グローバルセクション書き込み
 	_itot_s(LP_VERSION, buf, 10);
@@ -482,14 +482,14 @@ void SaveMTOption()
 void DeleteSection(TCHAR* obj){
 	TCHAR ini[_MAX_PATH];
 	//_stprintf_s(ini, _T("%sLilithPort.ini"), MTOPTION.PATH);
-	PathCombine(ini, MTOPTION.PATH, L"LilithPort.ini");
+	PathCombine(ini, MTOPTION.PATH, L"Telepone Reborn.ini");
 	WritePrivateProfileStruct(obj, NULL, NULL, 0, ini);
 }
 // プロファイル関連のみ書き出し
 void SaveProfileOption(){
 	TCHAR ini[_MAX_PATH];
 	//_stprintf_s(ini, _T("%sLilithPort.ini"), MTOPTION.PATH);
-	PathCombine(ini, MTOPTION.PATH, L"LilithPort.ini");
+	PathCombine(ini, MTOPTION.PATH, L"Telepone Reborn.ini");
 
 	IntPtr mp;
 	TCHAR iniSystem[MAX_NAME];

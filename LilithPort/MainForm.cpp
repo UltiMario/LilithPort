@@ -321,7 +321,7 @@ void MainForm::Begin()
 						}
 					}
 					else{
-						WriteMessage(L"WARNING: You are connecting to an MTSP server or a very old LilithPort server. Some functions will be incompatible.\n", ErrorMessageColor);
+						WriteMessage(L"WARNING: You are connecting to an MTSP server or a very old Telepone Reborn server. Some functions will be incompatible.\n", ErrorMessageColor);
 					}
 
 					// 蔵受信開始
@@ -1394,7 +1394,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				}
 				catch(Exception^){
 					MTINFO.TEAM_ROUND_HP = false;
-					form->WriteMessage(L"ERROR: Opponent is using an old version of LilithPort or MTSP!\n", ErrorMessageColor);
+					form->WriteMessage(L"ERROR: Opponent is using an old version of Telepone Reborn or MTSP!\n", ErrorMessageColor);
 				}
 				
 
