@@ -192,6 +192,8 @@ private: System::Windows::Forms::ToolStripMenuItem^  saveLogToolStripMenuItem;
 private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator14;
 private: System::Windows::Forms::ToolStripMenuItem^  exitToolStripMenuItem;
 private: System::Windows::Forms::Button^  reconnectButton;
+private: System::Windows::Forms::MenuItem^  toolStripMenuItemRestConnect;
+
 
 
 
@@ -221,22 +223,22 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			this->toolStripMenuItemSaveLog = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripSeparator1 = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripMenuItemExit = (gcnew System::Windows::Forms::MenuItem());
-			this->toolStripMenuItemBookMarkMenu = (gcnew System::Windows::Forms::MenuItem());
-			this->toolStripMenuItemAddBookMark = (gcnew System::Windows::Forms::MenuItem());
-			this->toolStripSeparator8 = (gcnew System::Windows::Forms::MenuItem());
 			this->CommandToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
 			this->GameStartToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
 			this->GameStartNoReplayToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripSeparator9 = (gcnew System::Windows::Forms::MenuItem());
+			this->RestToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
 			this->RestartToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
 			this->LeaveToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
-			this->RestToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
 			this->SeekToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripSeparator10 = (gcnew System::Windows::Forms::MenuItem());
 			this->ClearToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
 			this->ToggleHitJudgeToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripSeparator11 = (gcnew System::Windows::Forms::MenuItem());
 			this->GetIPToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
+			this->toolStripMenuItemBookMarkMenu = (gcnew System::Windows::Forms::MenuItem());
+			this->toolStripMenuItemAddBookMark = (gcnew System::Windows::Forms::MenuItem());
+			this->toolStripSeparator8 = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripMenuItemOption = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripMenuItemSetting = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripSeparator2 = (gcnew System::Windows::Forms::MenuItem());
@@ -260,6 +262,7 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			this->toolStripMenuItemWordWrap = (gcnew System::Windows::Forms::MenuItem());
 			this->LogLockToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripSeparator7 = (gcnew System::Windows::Forms::MenuItem());
+			this->toolStripMenuItemRestConnect = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripMenuItemAfterRest = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripMenuItemAutoRest = (gcnew System::Windows::Forms::MenuItem());
 			this->toolStripMenuItemAutoRestEnable = (gcnew System::Windows::Forms::MenuItem());
@@ -321,13 +324,14 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			ReloadListToolStripMenuItem->Index = 7;
 			ReloadListToolStripMenuItem->Shortcut = System::Windows::Forms::Shortcut::F5;
 			ReloadListToolStripMenuItem->Text = L"&Refresh player list";
+			ReloadListToolStripMenuItem->Visible = false;
 			ReloadListToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ReloadListToolStripMenuItem_Click);
 			// 
 			// menuStrip1
 			// 
 			this->menuStrip1->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(5) {
 				this->toolStripMenuItemFile,
-					this->toolStripMenuItemBookMarkMenu, this->CommandToolStripMenuItem, this->toolStripMenuItemOption, this->toolStripMenuItemHelp
+					this->CommandToolStripMenuItem, this->toolStripMenuItemBookMarkMenu, this->toolStripMenuItemOption, this->toolStripMenuItemHelp
 			});
 			// 
 			// toolStripMenuItemFile
@@ -363,33 +367,13 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			this->toolStripMenuItemExit->Text = L"E&xit";
 			this->toolStripMenuItemExit->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemExit_Click);
 			// 
-			// toolStripMenuItemBookMarkMenu
-			// 
-			this->toolStripMenuItemBookMarkMenu->Index = 1;
-			this->toolStripMenuItemBookMarkMenu->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(2) {
-				this->toolStripMenuItemAddBookMark,
-					this->toolStripSeparator8
-			});
-			this->toolStripMenuItemBookMarkMenu->Text = L"&Bookmarks";
-			// 
-			// toolStripMenuItemAddBookMark
-			// 
-			this->toolStripMenuItemAddBookMark->Index = 0;
-			this->toolStripMenuItemAddBookMark->Text = L"&Add server";
-			this->toolStripMenuItemAddBookMark->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAddBookMark_Click);
-			// 
-			// toolStripSeparator8
-			// 
-			this->toolStripSeparator8->Index = 1;
-			this->toolStripSeparator8->Text = L"-";
-			// 
 			// CommandToolStripMenuItem
 			// 
-			this->CommandToolStripMenuItem->Index = 2;
+			this->CommandToolStripMenuItem->Index = 1;
 			this->CommandToolStripMenuItem->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(13) {
 				this->GameStartToolStripMenuItem,
-					this->GameStartNoReplayToolStripMenuItem, this->toolStripSeparator9, this->RestartToolStripMenuItem, this->LeaveToolStripMenuItem,
-					this->RestToolStripMenuItem, this->SeekToolStripMenuItem, ReloadListToolStripMenuItem, this->toolStripSeparator10, this->ClearToolStripMenuItem,
+					this->GameStartNoReplayToolStripMenuItem, this->toolStripSeparator9, this->RestToolStripMenuItem, this->RestartToolStripMenuItem,
+					this->LeaveToolStripMenuItem, this->SeekToolStripMenuItem, ReloadListToolStripMenuItem, this->toolStripSeparator10, this->ClearToolStripMenuItem,
 					this->ToggleHitJudgeToolStripMenuItem, this->toolStripSeparator11, this->GetIPToolStripMenuItem
 			});
 			this->CommandToolStripMenuItem->Text = L"&Commands";
@@ -412,30 +396,32 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			// 
 			this->toolStripSeparator9->Index = 2;
 			this->toolStripSeparator9->Text = L"-";
+			this->toolStripSeparator9->Visible = false;
+			// 
+			// RestToolStripMenuItem
+			// 
+			this->RestToolStripMenuItem->Index = 3;
+			this->RestToolStripMenuItem->Text = L"Toggle rest &mode";
+			this->RestToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::RestToolStripMenuItem_Click);
 			// 
 			// RestartToolStripMenuItem
 			// 
-			this->RestartToolStripMenuItem->Index = 3;
-			this->RestartToolStripMenuItem->Text = L"&Restart";
+			this->RestartToolStripMenuItem->Index = 4;
+			this->RestartToolStripMenuItem->Text = L"&Reconnect";
 			this->RestartToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::RestartToolStripMenuItem_Click);
 			// 
 			// LeaveToolStripMenuItem
 			// 
-			this->LeaveToolStripMenuItem->Index = 4;
+			this->LeaveToolStripMenuItem->Index = 5;
 			this->LeaveToolStripMenuItem->Text = L"&Leave";
 			this->LeaveToolStripMenuItem->Visible = false;
 			this->LeaveToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::LeaveToolStripMenuItem_Click);
-			// 
-			// RestToolStripMenuItem
-			// 
-			this->RestToolStripMenuItem->Index = 5;
-			this->RestToolStripMenuItem->Text = L"Toggle rest &mode";
-			this->RestToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::RestToolStripMenuItem_Click);
 			// 
 			// SeekToolStripMenuItem
 			// 
 			this->SeekToolStripMenuItem->Index = 6;
 			this->SeekToolStripMenuItem->Text = L"Toggle &seek mode";
+			this->SeekToolStripMenuItem->Visible = false;
 			this->SeekToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::SeekToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator10
@@ -447,6 +433,7 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			// 
 			this->ClearToolStripMenuItem->Index = 9;
 			this->ClearToolStripMenuItem->Text = L"&Clear chat";
+			this->ClearToolStripMenuItem->Visible = false;
 			this->ClearToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ClearToolStripMenuItem_Click);
 			// 
 			// ToggleHitJudgeToolStripMenuItem
@@ -467,14 +454,34 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			this->GetIPToolStripMenuItem->Text = L"Get &IP address";
 			this->GetIPToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::GetIPToolStripMenuItem_Click);
 			// 
+			// toolStripMenuItemBookMarkMenu
+			// 
+			this->toolStripMenuItemBookMarkMenu->Index = 2;
+			this->toolStripMenuItemBookMarkMenu->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(2) {
+				this->toolStripMenuItemAddBookMark,
+					this->toolStripSeparator8
+			});
+			this->toolStripMenuItemBookMarkMenu->Text = L"&Bookmarks";
+			// 
+			// toolStripMenuItemAddBookMark
+			// 
+			this->toolStripMenuItemAddBookMark->Index = 0;
+			this->toolStripMenuItemAddBookMark->Text = L"&Add server";
+			this->toolStripMenuItemAddBookMark->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAddBookMark_Click);
+			// 
+			// toolStripSeparator8
+			// 
+			this->toolStripSeparator8->Index = 1;
+			this->toolStripSeparator8->Text = L"-";
+			// 
 			// toolStripMenuItemOption
 			// 
 			this->toolStripMenuItemOption->Index = 3;
-			this->toolStripMenuItemOption->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(11) {
+			this->toolStripMenuItemOption->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(12) {
 				this->toolStripMenuItemSetting,
 					this->toolStripSeparator2, this->toolStripMenuItemDelay, this->toolStripSeparator3, this->toolStripMenuItemRecordReplay, this->toolStripMenuItemAllowSpectator,
-					this->toolStripMenuItemWordWrap, this->LogLockToolStripMenuItem, this->toolStripSeparator7, this->toolStripMenuItemAfterRest,
-					this->toolStripMenuItemAutoRest
+					this->toolStripMenuItemWordWrap, this->LogLockToolStripMenuItem, this->toolStripSeparator7, this->toolStripMenuItemRestConnect,
+					this->toolStripMenuItemAfterRest, this->toolStripMenuItemAutoRest
 			});
 			this->toolStripMenuItemOption->Text = L"&Options";
 			// 
@@ -600,7 +607,7 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			// toolStripMenuItemWordWrap
 			// 
 			this->toolStripMenuItemWordWrap->Index = 6;
-			this->toolStripMenuItemWordWrap->Text = L"turd wrap";
+			this->toolStripMenuItemWordWrap->Text = L"&Word wrap";
 			this->toolStripMenuItemWordWrap->Visible = false;
 			// 
 			// LogLockToolStripMenuItem
@@ -616,15 +623,21 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			this->toolStripSeparator7->Index = 8;
 			this->toolStripSeparator7->Text = L"-";
 			// 
+			// toolStripMenuItemRestConnect
+			// 
+			this->toolStripMenuItemRestConnect->Index = 9;
+			this->toolStripMenuItemRestConnect->Text = L"Rest on connect";
+			this->toolStripMenuItemRestConnect->Click += gcnew System::EventHandler(this, &MainForm::menuItem1_Click);
+			// 
 			// toolStripMenuItemAfterRest
 			// 
-			this->toolStripMenuItemAfterRest->Index = 9;
+			this->toolStripMenuItemAfterRest->Index = 10;
 			this->toolStripMenuItemAfterRest->Text = L"Rest after &net battle";
 			this->toolStripMenuItemAfterRest->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAfterRest_Click);
 			// 
 			// toolStripMenuItemAutoRest
 			// 
-			this->toolStripMenuItemAutoRest->Index = 10;
+			this->toolStripMenuItemAutoRest->Index = 11;
 			this->toolStripMenuItemAutoRest->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(9) {
 				this->toolStripMenuItemAutoRestEnable,
 					this->toolStripSeparator13, this->toolStripMenuItemAutoRestTime5, this->toolStripMenuItemAutoRestTime10, this->toolStripMenuItemAutoRestTime15,
@@ -869,7 +882,7 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			// 
 			this->trainButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->trainButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"trainButton.Image")));
-			this->trainButton->Location = System::Drawing::Point(152, 385);
+			this->trainButton->Location = System::Drawing::Point(152, 386);
 			this->trainButton->Name = L"trainButton";
 			this->trainButton->Size = System::Drawing::Size(43, 32);
 			this->trainButton->TabIndex = 5;
@@ -881,7 +894,7 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			// 
 			this->reconnectButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->reconnectButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"reconnectButton.Image")));
-			this->reconnectButton->Location = System::Drawing::Point(103, 385);
+			this->reconnectButton->Location = System::Drawing::Point(103, 386);
 			this->reconnectButton->Name = L"reconnectButton";
 			this->reconnectButton->Size = System::Drawing::Size(43, 32);
 			this->reconnectButton->TabIndex = 8;
@@ -932,14 +945,14 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->panel1->Location = System::Drawing::Point(0, 0);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(678, 421);
+			this->panel1->Size = System::Drawing::Size(684, 427);
 			this->panel1->TabIndex = 4;
 			// 
 			// refreshButton
 			// 
 			this->refreshButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->refreshButton->FlatStyle = System::Windows::Forms::FlatStyle::System;
-			this->refreshButton->Location = System::Drawing::Point(12, 390);
+			this->refreshButton->Location = System::Drawing::Point(12, 391);
 			this->refreshButton->Name = L"refreshButton";
 			this->refreshButton->Size = System::Drawing::Size(75, 23);
 			this->refreshButton->TabIndex = 4;
@@ -996,7 +1009,7 @@ private: System::Windows::Forms::Button^  reconnectButton;
 			this->AllowDrop = true;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(678, 421);
+			this->ClientSize = System::Drawing::Size(684, 427);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->splitContainer1);
 			this->Controls->Add(this->panel1);
@@ -3391,6 +3404,9 @@ private: System::Void reconnectButton_Click_1(System::Object^  sender, System::E
 }
 private: System::Void refreshButton_Click(System::Object^  sender, System::EventArgs^  e) {
 	ReloadList();
+}
+private: System::Void menuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
+	
 }
 };
 }

@@ -16,7 +16,7 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyConfigurationAttribute("")];
 [assembly:AssemblyCompanyAttribute("WindowsLogic Productions")];
 [assembly:AssemblyProductAttribute("Telepone Reborn")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c) 2023 WindowsLogic Productions")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) 2024 WindowsLogic Productions")];
 [assembly:AssemblyTrademarkAttribute("Telepone Reborn")];
 [assembly:AssemblyCultureAttribute("")];
 

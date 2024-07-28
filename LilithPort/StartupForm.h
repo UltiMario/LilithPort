@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "stdafx.h"
+#include "MainForm.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -714,6 +715,13 @@ namespace LilithPort {
 			mp = Runtime::InteropServices::Marshal::StringToHGlobalAuto(textBoxWelcome->Text);
 			_tcscpy_s(MTOPTION.WELCOME, static_cast<PTCHAR>(mp.ToPointer()));
 			Runtime::InteropServices::Marshal::FreeHGlobal(mp);
+
+			if (MainForm->toolStripMenuItemRestConnect->Checked){
+			
+			}
+			else{
+
+			}
 
 			this->Close();
 		}
