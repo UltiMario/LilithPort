@@ -716,12 +716,12 @@ namespace LilithPort {
 			_tcscpy_s(MTOPTION.WELCOME, static_cast<PTCHAR>(mp.ToPointer()));
 			Runtime::InteropServices::Marshal::FreeHGlobal(mp);
 
-			if (MainForm->toolStripMenuItemRestConnect->Checked){
-			
-			}
-			else{
-
-			}
+			//if (MainForm->toolStripMenuItemRestConnect->Checked){
+			//
+			//}
+			//else{
+			//
+			//}
 
 			this->Close();
 		}

@@ -126,11 +126,6 @@
   <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>310, 17</value>
   </metadata>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Note: Some options are not how we want this dialogue to look and it's a bit of a mess. We will
-clean it up in future versions. Until then, we have tried our best to streamline the options as
-best as possible.</value>
-  </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>431, 17</value>
   </metadata>

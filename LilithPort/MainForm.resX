@@ -165,6 +165,16 @@
         RK5CYII=
 </value>
   </data>
+  <data name="restButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABIAAAAQCAYAAAAbBi9cAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAGnRFWHRTb2Z0d2FyZQBQYWludC5ORVQg
+        djMuNS4xMDD0cqEAAAC5SURBVDhPrZDLEYMwDETdRqrhRC/phTudpIwcqSGntBDDGq+zkvHwGXbmjS1F
+        ekBCjPEWyuUxTmQp1+hdk/tN0XLYtEQ5x0XIjgy/py9RUfh2fVokTOvOoFeJwO/zTAOaLYGmiICKuIhT
+        8cn9/6cBFRGRpP8Rp+4QU+yIKDM7xBQUeZmTmh1iCgypyIsviQBq9vStdIdUDaCSLZmfB1VD8TIKX++h
+        PIizZtGjAoVvhztnzeIZKFxlMcxFkEUzSidDTAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>758, 17</value>
   </metadata>

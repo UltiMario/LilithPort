@@ -15,7 +15,7 @@ void OptionForm::SaveOption(bool apply){
 		}
 	}
 	catch(Exception^){
-		textBoxGameExe->Text = gcnew String(L"Invalid or non-Fighter Maker 95/2002 executable file.");
+		textBoxGameExe->Text = gcnew String(L"Invalid or non-Fighter Maker 95/2nd. executable.");
 	}
 
 	IntPtr mp;

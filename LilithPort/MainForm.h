@@ -193,6 +193,7 @@ private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator14;
 private: System::Windows::Forms::ToolStripMenuItem^  exitToolStripMenuItem;
 private: System::Windows::Forms::Button^  reconnectButton;
 private: System::Windows::Forms::MenuItem^  toolStripMenuItemRestConnect;
+private: System::Windows::Forms::Button^  restButton;
 
 
 
@@ -298,6 +299,7 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemRestConnect;
 			this->toolTipMember = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->trainButton = (gcnew System::Windows::Forms::Button());
 			this->reconnectButton = (gcnew System::Windows::Forms::Button());
+			this->restButton = (gcnew System::Windows::Forms::Button());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->toolStripDropDownButtonProfile = (gcnew System::Windows::Forms::ToolStripDropDownButton());
 			this->toolStripStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
@@ -627,7 +629,6 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemRestConnect;
 			// 
 			this->toolStripMenuItemRestConnect->Index = 9;
 			this->toolStripMenuItemRestConnect->Text = L"Rest on connect";
-			this->toolStripMenuItemRestConnect->Click += gcnew System::EventHandler(this, &MainForm::menuItem1_Click);
 			// 
 			// toolStripMenuItemAfterRest
 			// 
@@ -780,10 +781,10 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemRestConnect;
 			// 
 			this->textBoxInput->BackColor = System::Drawing::SystemColors::Window;
 			this->textBoxInput->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->textBoxInput->Location = System::Drawing::Point(0, 358);
+			this->textBoxInput->Location = System::Drawing::Point(0, 356);
 			this->textBoxInput->MaxLength = 127;
 			this->textBoxInput->Name = L"textBoxInput";
-			this->textBoxInput->Size = System::Drawing::Size(572, 20);
+			this->textBoxInput->Size = System::Drawing::Size(572, 22);
 			this->textBoxInput->TabIndex = 0;
 			this->textBoxInput->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::textBoxInput_KeyDown);
 			// 
@@ -795,7 +796,7 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemRestConnect;
 			this->richTextBoxLog->BackColor = System::Drawing::SystemColors::Window;
 			this->richTextBoxLog->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->richTextBoxLog->ContextMenu = this->contextMenuStrip2;
-			this->richTextBoxLog->Location = System::Drawing::Point(0, 0);
+			this->richTextBoxLog->Location = System::Drawing::Point(0, -1);
 			this->richTextBoxLog->Name = L"richTextBoxLog";
 			this->richTextBoxLog->ReadOnly = true;
 			this->richTextBoxLog->Size = System::Drawing::Size(572, 358);
@@ -882,7 +883,7 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemRestConnect;
 			// 
 			this->trainButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->trainButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"trainButton.Image")));
-			this->trainButton->Location = System::Drawing::Point(152, 386);
+			this->trainButton->Location = System::Drawing::Point(201, 386);
 			this->trainButton->Name = L"trainButton";
 			this->trainButton->Size = System::Drawing::Size(43, 32);
 			this->trainButton->TabIndex = 5;
@@ -901,6 +902,18 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemRestConnect;
 			this->toolTipMember->SetToolTip(this->reconnectButton, L"Reconnect or go to free play.");
 			this->reconnectButton->UseVisualStyleBackColor = true;
 			this->reconnectButton->Click += gcnew System::EventHandler(this, &MainForm::reconnectButton_Click_1);
+			// 
+			// restButton
+			// 
+			this->restButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->restButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"restButton.Image")));
+			this->restButton->Location = System::Drawing::Point(152, 386);
+			this->restButton->Name = L"restButton";
+			this->restButton->Size = System::Drawing::Size(43, 32);
+			this->restButton->TabIndex = 9;
+			this->toolTipMember->SetToolTip(this->restButton, L"Train in single player.");
+			this->restButton->UseVisualStyleBackColor = true;
+			this->restButton->Click += gcnew System::EventHandler(this, &MainForm::restButton_Click);
 			// 
 			// statusStrip1
 			// 
@@ -937,7 +950,8 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemRestConnect;
 			// 
 			// panel1
 			// 
-			this->panel1->BackColor = System::Drawing::SystemColors::GradientInactiveCaption;
+			this->panel1->BackColor = System::Drawing::Color::Black;
+			this->panel1->Controls->Add(this->restButton);
 			this->panel1->Controls->Add(this->reconnectButton);
 			this->panel1->Controls->Add(this->trainButton);
 			this->panel1->Controls->Add(this->refreshButton);
@@ -952,6 +966,8 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemRestConnect;
 			// 
 			this->refreshButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->refreshButton->FlatStyle = System::Windows::Forms::FlatStyle::System;
+			this->refreshButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->refreshButton->Location = System::Drawing::Point(12, 391);
 			this->refreshButton->Name = L"refreshButton";
 			this->refreshButton->Size = System::Drawing::Size(75, 23);
@@ -1013,6 +1029,8 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemRestConnect;
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->splitContainer1);
 			this->Controls->Add(this->panel1);
+			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip2;
 			this->Menu = this->menuStrip1;
@@ -2448,8 +2466,8 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemRestConnect;
 					MTOPTION.OPEN_PORT = MTINFO.SERVER_MODE_PORT;
 				}
 			}else{
-				// StartupForm^ s = gcnew StartupForm;
-				// s->ShowDialog(this);
+				StartupForm^ s = gcnew StartupForm;
+				s->ShowDialog(this);
 
 				if(!File::Exists(gcnew String(MTOPTION.GAME_EXE))){
 					MessageBox::Show(L"Please set the path to the Fighter Maker executable file.", L"No game file found");
@@ -2741,14 +2759,8 @@ private: System::Windows::Forms::MenuItem^  toolStripMenuItemRestConnect;
 		}
 
 		System::Void toolStripMenuItemSetting_Click(System::Object^  sender, System::EventArgs^  e) {
-			if(Option == nullptr || Option->IsDisposed){
-				toolStripDropDownButtonProfile->Enabled = false;
-				Option = gcnew OptionForm;
-				Option->ShowDialog(this);
-			}
-			else{
-				Option->Activate();
-			}
+			Option = gcnew OptionForm;
+			Option->ShowDialog(this);
 		}
 
 		System::Void toolStripMenuItemViewCommand_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -3405,8 +3417,17 @@ private: System::Void reconnectButton_Click_1(System::Object^  sender, System::E
 private: System::Void refreshButton_Click(System::Object^  sender, System::EventArgs^  e) {
 	ReloadList();
 }
-private: System::Void menuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
-	
+private: System::Void restButton_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (MTOPTION.CONNECTION_TYPE == CT_FREE) return;
+
+	if (MemberList[0]->STATE == MS_FREE) {
+		ChangeState((BYTE)MS_REST);
+		WriteMessage(L"Rest mode is now ON.\n", SystemMessageColor);
+	}
+	else if (MemberList[0]->STATE == MS_REST) {
+		ChangeState((BYTE)MS_FREE);
+		WriteMessage(L"Rest mode is now OFF.\n", SystemMessageColor);
+	}
 }
 };
 }
