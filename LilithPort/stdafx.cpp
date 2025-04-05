@@ -98,6 +98,8 @@ void LoadMTOption()
 	GetPrivateProfileString(iniSystem, _T("KeywordSound"),       _T("name.wav"),    MTOPTION.KEYWORD_SOUND, _MAX_PATH,    ini);
 	GetPrivateProfileString(iniSystem, _T("Keyword"),            _T(""),            MTOPTION.KEYWORD,        MAX_KEYWORD, ini);
 	GetPrivateProfileString(iniSystem, _T("Name"),               _T("DefaultUser"),  MTOPTION.NAME,           MAX_NAME,    ini);
+	GetPrivateProfileString(iniSystem, _T("Looking"), _T(""), MTOPTION.LOOKING, MAX_NAME, ini);
+	GetPrivateProfileString(iniSystem, _T("Avoiding"), _T(""), MTOPTION.AVOIDING, MAX_NAME, ini);
 	GetPrivateProfileString(iniSystem, _T("Comment"),            _T(""),            MTOPTION.COMMENT,        MAX_NAME,    ini);
 	MTOPTION.CONNECTION_TYPE			= GetPrivateProfileInt(iniSystem, _T("ConnectType"),          0, ini);
 	MTOPTION.PORT						= GetPrivateProfileInt(iniSystem, _T("Port"),              7500, ini);
@@ -248,7 +250,13 @@ void LoadMTOption()
 	MTCOLOR.SECRET         = GetPrivateProfileInt(iniColor, _T("Secret"),        Color::HotPink.ToArgb(),     ini);
 
 	// Welcome‚Ìƒ^ƒu‚ð‰üs‚É
-	ReplaceWelcomeTab(true);
+	//ReplaceWelcomeTab(true);
+	int len = _tcslen(MTOPTION.WELCOME);
+	for (int i = 0; i < len; i++) {
+		if (MTOPTION.WELCOME[i] == (true ? _T('\t') : _T('\n'))) {
+			MTOPTION.WELCOME[i] = (true ? _T('\n') : _T('\t'));
+		}
+	}
 
 	// 1.04ˆÈ‰ºŒÝŠ·—p
 	if(iniVersion == 0){
@@ -269,7 +277,13 @@ void SaveMTOption()
 	TCHAR* iniSection = MTOPTION.PROFILE;
 
 	// ‰üs‚ðƒ^ƒu‚É’uŠ·
-	ReplaceWelcomeTab(false);
+	//ReplaceWelcomeTab(bool false)
+	int len = _tcslen(MTOPTION.WELCOME);
+	for (int i = 0; i < len; i++) {
+		if (MTOPTION.WELCOME[i] == (false ? _T('\t') : _T('\n'))) {
+			MTOPTION.WELCOME[i] = (false ? _T('\n') : _T('\t'));
+		}
+	}
 
 	// stdafx.h‚É‹Lq
 	TCHAR iniSystem[MAX_NAME], iniState[MAX_NAME], iniColor[MAX_NAME];
@@ -301,6 +315,8 @@ void SaveMTOption()
 	WritePrivateProfileString(iniSystem, _T("KeywordSound"),         MTOPTION.KEYWORD_SOUND,          ini);
 	WritePrivateProfileString(iniSystem, _T("Keyword"),              MTOPTION.KEYWORD,                ini);
 	WritePrivateProfileString(iniSystem, _T("Name"),                 MTOPTION.NAME,                   ini);
+	WritePrivateProfileString(iniSystem, _T("Looking"), MTOPTION.LOOKING, ini);
+	WritePrivateProfileString(iniSystem, _T("Avoiding"), MTOPTION.AVOIDING, ini);
 	WritePrivateProfileString(iniSystem, _T("Comment"),              MTOPTION.COMMENT,                ini);
 
 	_itot_s(MTOPTION.PORT, buf, 10);					WritePrivateProfileString(iniSystem, _T("Port"), buf, ini);
@@ -586,7 +602,26 @@ void SetCaption()
 
 	LeaveCriticalSection(&CS_CAPTION);
 }
-// ˆÃ†•œ†—p—”
+
+bool IsCompatibleFM2KExecutable(String ^ fileDesc, String ^ LegalCopyright)
+{
+	return fileDesc == L"Fighting is Magic: Aurora" ||
+		fileDesc == L"2D Fighter Maker 2015" ||
+		fileDesc == L"２Ｄ格闘ツクール2nd."	||
+		LegalCopyright == "(C)2001 ENTERBRAIN,INC / OUTBACK";
+}
+
+bool IsCompatibleFM95Executable(String ^ fileDesc)
+{
+	return fileDesc == L"２Ｄ格闘ツクール９５";
+}
+
+bool IsCompatibleFMExecutable(String ^ fileDesc, String ^ LegalCopyright)
+{
+	return IsCompatibleFM2KExecutable(fileDesc, LegalCopyright) || IsCompatibleFM95Executable(fileDesc);
+}
+
+// 暗号復号用乱数
 UINT CipherRand(UINT32 seed)
 {
 	static UINT32 a[4] = {1812433254, 3713160357, 3109174145, 64984499};

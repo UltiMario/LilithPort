@@ -11,13 +11,13 @@ using namespace System::Security::Permissions;
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
 //
-[assembly:AssemblyTitleAttribute("LilithPort")];
-[assembly:AssemblyDescriptionAttribute("")];
+[assembly:AssemblyTitleAttribute("Telepone Reborn")];
+[assembly:AssemblyDescriptionAttribute("A new way to play FM2K games online!")];
 [assembly:AssemblyConfigurationAttribute("")];
-[assembly:AssemblyCompanyAttribute("")];
-[assembly:AssemblyProductAttribute("LilithPort")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c)  2014")];
-[assembly:AssemblyTrademarkAttribute("")];
+[assembly:AssemblyCompanyAttribute("WindowsLogic Productions")];
+[assembly:AssemblyProductAttribute("Telepone Reborn")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) 2024 WindowsLogic Productions")];
+[assembly:AssemblyTrademarkAttribute("Telepone Reborn")];
 [assembly:AssemblyCultureAttribute("")];
 
 //

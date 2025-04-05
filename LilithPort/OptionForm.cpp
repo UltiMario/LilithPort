@@ -7,19 +7,19 @@ using namespace LilithPort;
 void OptionForm::SaveOption(bool apply){
 	MainForm^ parent = safe_cast<MainForm^>(this->Owner);
 
-	try{
+	try {
 		FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(textBoxGameExe->Text);
 
-		if (info->LegalCopyright != "(C)2001 ENTERBRAIN,INC / OUTBACK"){
+		if (!IsCompatibleFMExecutable(info->FileDescription, info->LegalCopyright)) {
 			throw gcnew Exception;
 		}
 	}
-	catch(Exception^){
-		textBoxGameExe->Text = gcnew String("Invalid File. Choose a Fighter Maker executable.");
+	catch (Exception^) {
+		textBoxGameExe->Text = gcnew String(L"Invalid or non-Fighter Maker 95/2002 executable file.");
 	}
 
 	IntPtr mp;
-	// ƒpƒX
+	// ï¿½pï¿½X
 	mp = Runtime::InteropServices::Marshal::StringToHGlobalAuto(textBoxGameExe->Text);
 	_tcscpy_s(MTOPTION.GAME_EXE, static_cast<PTCHAR>(mp.ToPointer()));
 	Runtime::InteropServices::Marshal::FreeHGlobal(mp);
@@ -72,9 +72,8 @@ void OptionForm::SaveOption(bool apply){
 	MTOPTION.GET_IP_ENABLE        = checkBoxGetIP->Checked;
 	MTOPTION.SHOW_GAME_OPTION     = checkBoxShowGameOption->Checked;
 	MTOPTION.SHOW_RESULT          = checkBoxShowResult->Checked;
-	MTOPTION.LOG_CLEAR_WITHOUT_WELCOME = checkBoxLogClearWithoutWelcome->Checked;
 
-	// ƒRƒƒ“ƒg
+	// ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½g
 	if(textBoxComment->Text != gcnew String(MTOPTION.COMMENT)){
 		mp = Runtime::InteropServices::Marshal::StringToHGlobalAuto(textBoxComment->Text);
 		_tcscpy_s(MTOPTION.COMMENT, static_cast<PTCHAR>(mp.ToPointer()));
@@ -83,7 +82,7 @@ void OptionForm::SaveOption(bool apply){
 		parent->ChangeComment(textBoxComment->Text);
 	}
 
-	// ƒQ[ƒ€
+	// ï¿½Qï¿½[ï¿½ï¿½
 	MTOPTION.MAX_STAGE      = (UINT)numericUpDownMaxStage->Value;
 	MTOPTION.STAGE_SELECT   = (UINT)numericUpDownStageSelect->Value;
 	MTOPTION.ROUND          = (UINT)numericUpDownRound->Value;
@@ -110,11 +109,11 @@ void OptionForm::SaveOption(bool apply){
 		MTOPTION.REPLAY_VERSION = 1;
 	}
 
-	// “–‚½‚è”»’è
+	// ï¿½ï¿½ï¿½ï¿½ï¿½è”»ï¿½ï¿½
 	if(MTOPTION.HIT_JUDGE != checkBoxHitJudge->Checked){
 		MTOPTION.HIT_JUDGE = checkBoxHitJudge->Checked;
 
-		// ƒQ[ƒ€‹N“®’†‚È‚ç‘¦•ÏX
+		// ï¿½Qï¿½[ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½È‚ç‘¦ï¿½ï¿½ï¿½ÏX
 		if(MTINFO.INITIALIZED && MTINFO.PROCESS != NULL){
 			DWORD b = MTOPTION.HIT_JUDGE;
 
@@ -127,20 +126,20 @@ void OptionForm::SaveOption(bool apply){
 		}
 	}
 
-	// Ú×İ’è
-	// ƒƒOƒtƒ@ƒCƒ‹•Û‘¶Œ`®
+	// ï¿½Ú×İ’ï¿½
+	// ï¿½ï¿½ï¿½Oï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Û‘ï¿½ï¿½`ï¿½ï¿½
 	if(radioButtonLogRTF->Checked){
 		MTOPTION.LOG_FORMAT_RTF = true;
 	}else{
 		MTOPTION.LOG_FORMAT_RTF = false;
 	}
 
-	// ”­Œ¾‚ÅƒEƒBƒ“ƒhƒE‚ğ“_–Å
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ÅƒEï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½ï¿½_ï¿½ï¿½
 	MTOPTION.TALK_FLASH = checkBoxTalkFlash->Checked;
-	// –¼‘O‚ªŒÄ‚Î‚ê‚½‚çƒEƒBƒ“ƒhƒE‚ğ“_–Å
+	// ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Ä‚Î‚ê‚½ï¿½ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½ï¿½_ï¿½ï¿½
 	MTOPTION.NAME_FLASH = checkBoxNameFlash->Checked;
 
-	//@F
+	//ï¿½@ï¿½F
 	MTCOLOR.SERVER_NAME    = buttonServerName->ForeColor.ToArgb();
 	MTCOLOR.HOST_NAME      = buttonHostName->ForeColor.ToArgb();
 	MTCOLOR.CLIENT_NAME    = buttonClientName->ForeColor.ToArgb();
@@ -156,10 +155,10 @@ void OptionForm::SaveOption(bool apply){
 	MTCOLOR.COMMENT_BACK   = buttonCommentBack->BackColor.ToArgb();
 	MTCOLOR.SECRET         = buttonSecret->ForeColor.ToArgb();
 
-	// F‚ğ”½‰f‚³‚¹‚é
+	// ï¿½Fï¿½ğ”½‰fï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	parent->ResetColor();
 
-	// ’l‚Ìƒ`ƒFƒbƒN
+	// ï¿½lï¿½Ìƒ`ï¿½Fï¿½bï¿½N
 	CheckMTOption();
 
 	if(apply){
@@ -181,35 +180,35 @@ void OptionForm::CloseOption(){
 	parent->ChangeProfileEnabled();
 }
 bool OptionForm::CheckTextProfileName(String^ buf){
-	// ƒvƒƒtƒ@ƒCƒ‹–¼ƒoƒŠƒf[ƒVƒ‡ƒ“
+	// ï¿½vï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½fï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½
 	String^ mes;
 	if(buf == gcnew String(MTOPTION.PROFILE)){
 		return true;
 	}
 	if(buf->Length == 0){
-		mes = "ƒvƒƒtƒ@ƒCƒ‹–¼‚ª‹ó—“‚Å‚·B";
+		mes = "ï¿½vï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó—“‚Å‚ï¿½ï¿½B";
 	}
 	if(buf->Contains(",") || buf->Contains("[") || buf->Contains("]")){
-		mes = "ƒvƒƒtƒ@ƒCƒ‹–¼‚Ég—p‚Å‚«‚È‚¢•¶ši, [ ]j‚ªŠÜ‚Ü‚ê‚Ä‚¢‚Ü‚·B";
+		mes = "ï¿½vï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Égï¿½pï¿½Å‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½i, [ ]ï¿½jï¿½ï¿½ï¿½Ü‚Ü‚ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½B";
 	}
 	for(int i=0; i < Profile::SystemSection->Length; i++){
 		if(buf == Profile::SystemSection[i]){
-			mes = "‚»‚Ìƒvƒƒtƒ@ƒCƒ‹–¼‚Íg—p‚Å‚«‚Ü‚¹‚ñB";
+			mes = "ï¿½ï¿½ï¿½Ìƒvï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Ígï¿½pï¿½Å‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B";
 		}
 	}
 	for(int i=0; i < Profile::ProfileList->Count; i++){
 		if(buf == Profile::ProfileList[i]){
-			mes = "‚»‚Ìƒvƒƒtƒ@ƒCƒ‹–¼‚ÍŠù‚É‘¶İ‚µ‚Ü‚·B";
+			mes = "ï¿½ï¿½ï¿½Ìƒvï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ÍŠï¿½ï¿½É‘ï¿½ï¿½İ‚ï¿½ï¿½Ü‚ï¿½ï¿½B";
 		}
 	}
 	if(mes != nullptr){
-		MessageBox::Show(mes, "ƒvƒƒtƒ@ƒCƒ‹•Û‘¶", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+		MessageBox::Show(mes, "ï¿½vï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Û‘ï¿½", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
 		return true;
 	}
 	return false;
 }
 void OptionForm::DeleteProfile(String^ buf){
-	// ƒvƒƒtƒ@ƒCƒ‹íœ
+	// ï¿½vï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½íœ
 	TCHAR bufProfile[MAX_ARRAY];
 	IntPtr mp = Runtime::InteropServices::Marshal::StringToHGlobalAuto(buf);
 	_tcscpy_s(bufProfile, static_cast<PTCHAR>(mp.ToPointer()));
@@ -219,7 +218,7 @@ void OptionForm::DeleteProfile(String^ buf){
 	SaveProfileOption();
 }
 void OptionForm::OverWriteProfile(String^ buf){
-	// ã‘‚«•Û‘¶
+	// ï¿½ã‘ï¿½ï¿½ï¿½Û‘ï¿½
 	DeleteSection(MTOPTION.PROFILE);
 
 	IntPtr mp = Runtime::InteropServices::Marshal::StringToHGlobalAuto(buf);

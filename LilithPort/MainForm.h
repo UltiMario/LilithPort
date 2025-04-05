@@ -18,13 +18,13 @@ namespace LilithPort {
 	using namespace System::Diagnostics;
 
 	/// <summary>
-	/// MainForm ‚ÌŠT—v
+	/// MainForm ï¿½ÌŠTï¿½v
 	///
-	/// Œx: ‚±‚ÌƒNƒ‰ƒX‚Ì–¼‘O‚ğ•ÏX‚·‚éê‡A‚±‚ÌƒNƒ‰ƒX‚ªˆË‘¶‚·‚é‚·‚×‚Ä‚Ì .resx ƒtƒ@ƒCƒ‹‚ÉŠÖ˜A•t‚¯‚ç‚ê‚½
-	///          ƒ}ƒl[ƒW ƒŠƒ\[ƒX ƒRƒ“ƒpƒCƒ‰ ƒc[ƒ‹‚É‘Î‚µ‚Ä 'Resource File Name' ƒvƒƒpƒeƒB‚ğ
-	///          •ÏX‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B‚±‚Ì•ÏX‚ğs‚í‚È‚¢‚ÆA
-	///          ƒfƒUƒCƒi‚ÆA‚±‚ÌƒtƒH[ƒ€‚ÉŠÖ˜A•t‚¯‚ç‚ê‚½ƒ[ƒJƒ‰ƒCƒYÏ‚İƒŠƒ\[ƒX‚Æ‚ªA
-	///          ³‚µ‚­‘ŠŒİ‚É—˜—p‚Å‚«‚È‚­‚È‚è‚Ü‚·B
+	/// ï¿½xï¿½ï¿½: ï¿½ï¿½ï¿½ÌƒNï¿½ï¿½ï¿½Xï¿½Ì–ï¿½ï¿½Oï¿½ï¿½ÏXï¿½ï¿½ï¿½ï¿½ê‡ï¿½Aï¿½ï¿½ï¿½ÌƒNï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½Ë‘ï¿½ï¿½ï¿½ï¿½é‚·ï¿½×‚Ä‚ï¿½ .resx ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ÉŠÖ˜Aï¿½tï¿½ï¿½ï¿½ï¿½ê‚½
+	///          ï¿½}ï¿½lï¿½[ï¿½W ï¿½ï¿½ï¿½\ï¿½[ï¿½X ï¿½Rï¿½ï¿½ï¿½pï¿½Cï¿½ï¿½ ï¿½cï¿½[ï¿½ï¿½ï¿½É‘Î‚ï¿½ï¿½ï¿½ 'Resource File Name' ï¿½vï¿½ï¿½ï¿½pï¿½eï¿½Bï¿½ï¿½
+	///          ï¿½ÏXï¿½ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½Bï¿½ï¿½ï¿½Ì•ÏXï¿½ï¿½ï¿½sï¿½ï¿½È‚ï¿½ï¿½ÆA
+	///          ï¿½fï¿½Uï¿½Cï¿½iï¿½ÆAï¿½ï¿½ï¿½Ìƒtï¿½Hï¿½[ï¿½ï¿½ï¿½ÉŠÖ˜Aï¿½tï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½Cï¿½Yï¿½Ï‚İƒï¿½ï¿½\ï¿½[ï¿½Xï¿½Æ‚ï¿½ï¿½A
+	///          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ‚É—ï¿½ï¿½pï¿½Å‚ï¿½ï¿½È‚ï¿½ï¿½È‚ï¿½Ü‚ï¿½ï¿½B
 	/// </summary>
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
@@ -33,10 +33,10 @@ namespace LilithPort {
 		{
 			InitializeComponent();
 			//
-			//TODO: ‚±‚±‚ÉƒRƒ“ƒXƒgƒ‰ƒNƒ^ ƒR[ƒh‚ğ’Ç‰Á‚µ‚Ü‚·
+			//TODO: ï¿½ï¿½ï¿½ï¿½ï¿½ÉƒRï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^ ï¿½Rï¿½[ï¿½hï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 			//
 
-			// ƒuƒbƒNƒ}[ƒN‚ğƒƒjƒ…[‚É“o˜^
+			// ï¿½uï¿½bï¿½Nï¿½}ï¿½[ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½É“oï¿½^
 			String^ tmpName;
 			if(MTOPTION.BOOKMARK_COUNT > 0) {
 				for(UINT i=0;i < MTOPTION.BOOKMARK_COUNT;i++) {
@@ -51,13 +51,13 @@ namespace LilithPort {
 					
 					toolStripMenuItemDelBookMark = (gcnew System::Windows::Forms::ToolStripMenuItem());
 					toolStripMenuItemBookMark->DropDownItems->Add(toolStripMenuItemDelBookMark);
-					toolStripMenuItemDelBookMark->Text = L"Delete";
+					toolStripMenuItemDelBookMark->Text = L"ï¿½Delete";
 					toolStripMenuItemDelBookMark->Tag = L"toolStripMenuItemBookMark" + i;
 					toolStripMenuItemDelBookMark->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelBookMark_Click);
 				}
 			}
 
-			// ƒvƒƒtƒ@ƒCƒ‹‚ğƒRƒ“ƒ{ƒ{ƒbƒNƒX‚É“o˜^
+			// ï¿½vï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½{ï¿½{ï¿½bï¿½Nï¿½Xï¿½É“oï¿½^
 			for(int i=0; i < Profile::ProfileList->Count; i++){
 				if(Profile::ProfileList[i] == gcnew String(MTOPTION.PROFILE)){
 					toolStripDropDownButtonProfile->Text = Profile::ProfileList[i];			
@@ -69,7 +69,7 @@ namespace LilithPort {
 
 	protected:
 		/// <summary>
-		/// g—p’†‚ÌƒŠƒ\[ƒX‚ğ‚·‚×‚ÄƒNƒŠ[ƒ“ƒAƒbƒv‚µ‚Ü‚·B
+		/// ï¿½gï¿½pï¿½ï¿½ï¿½Ìƒï¿½ï¿½\ï¿½[ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½×‚ÄƒNï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Aï¿½bï¿½vï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
 		/// </summary>
 		~MainForm()
 		{
@@ -78,76 +78,76 @@ namespace LilithPort {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::MenuStrip^  menuStrip1;
-	private: System::Windows::Forms::SplitContainer^  splitContainer1;
-	private: System::Windows::Forms::ListBox^  listBoxMember;
-	private: System::Windows::Forms::RichTextBox^  richTextBoxLog;
-	private: System::Windows::Forms::TextBox^  textBoxInput;
+private: System::Windows::Forms::MenuStrip^  menuStrip1;
+private: System::Windows::Forms::SplitContainer^  splitContainer1;
+private: System::Windows::Forms::ListBox^  listBoxMember;
+private: System::Windows::Forms::RichTextBox^  richTextBoxLog;
+private: System::Windows::Forms::TextBox^  textBoxInput;
 
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemFile;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemSaveLog;
-	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator1;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemExit;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemFile;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemSaveLog;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator1;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemExit;
 
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemOption;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemSetting;
-	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator2;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelayAuto;
-	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator4;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay2;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay3;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay4;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay5;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay6;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay7;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay8;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay9;
-	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator3;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemRecordReplay;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAllowSpectator;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemOption;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemSetting;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator2;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelayAuto;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator4;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay2;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay3;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay4;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay5;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay6;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay7;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay8;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay9;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator3;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemRecordReplay;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAllowSpectator;
 
 
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemHelp;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemViewCommand;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemHelp;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemViewCommand;
 
-	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator5;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemVersion;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator5;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemVersion;
 
-	private: System::Windows::Forms::ContextMenuStrip^  contextMenuStripMember;
-	private: System::Windows::Forms::ContextMenuStrip^  contextMenuStripLog;
-	private: System::Windows::Forms::ToolStripMenuItem^  contextMenuItemCopy;
+private: System::Windows::Forms::ContextMenuStrip^  contextMenuStripMember;
+private: System::Windows::Forms::ContextMenuStrip^  contextMenuStripLog;
+private: System::Windows::Forms::ToolStripMenuItem^  contextMenuItemCopy;
 
-	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator6;
-	private: System::Windows::Forms::ToolStripMenuItem^  contxtMenuItemSaveLog;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemVS;
-	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
-	private: System::Windows::Forms::ToolTip^  toolTipMember;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemPing;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemReplay;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator6;
+private: System::Windows::Forms::ToolStripMenuItem^  contxtMenuItemSaveLog;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemVS;
+private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
+private: System::Windows::Forms::ToolTip^  toolTipMember;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemPing;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemReplay;
 
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemWatch;
-	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator7;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAfterRest;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemChangeList;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay10;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay11;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay12;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemBookMarkMenu;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAddBookMark;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemBookMark;
-	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelBookMark;
-	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator8;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemWatch;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator7;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAfterRest;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemChangeList;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay10;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay11;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay12;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemBookMarkMenu;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAddBookMark;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemBookMark;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelBookMark;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator8;
 
-	private: System::Windows::Forms::ToolStripMenuItem^  CommandToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  GameStartToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  RestartToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator9;
-	private: System::Windows::Forms::ToolStripMenuItem^  LeaveToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  RestToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  SeekToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  ClearToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator10;
+private: System::Windows::Forms::ToolStripMenuItem^  CommandToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^  GameStartToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^  RestartToolStripMenuItem;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator9;
+private: System::Windows::Forms::ToolStripMenuItem^  LeaveToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^  RestToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^  SeekToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^  ClearToolStripMenuItem;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator10;
 
 private: System::Windows::Forms::ToolStripMenuItem^  ToggleHitJudgeToolStripMenuItem;
 private: System::Windows::Forms::ToolStripMenuItem^  LogLockToolStripMenuItem;
@@ -183,14 +183,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 
 	private:
 		/// <summary>
-		/// •K—v‚ÈƒfƒUƒCƒi•Ï”‚Å‚·B
+		/// ï¿½Kï¿½vï¿½Èƒfï¿½Uï¿½Cï¿½iï¿½Ïï¿½ï¿½Å‚ï¿½ï¿½B
 		/// </summary>
 		System::ComponentModel::IContainer^  components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// ƒfƒUƒCƒi ƒTƒ|[ƒg‚É•K—v‚Èƒƒ\ƒbƒh‚Å‚·B‚±‚Ìƒƒ\ƒbƒh‚Ì“à—e‚ğ
-		/// ƒR[ƒh ƒGƒfƒBƒ^‚Å•ÏX‚µ‚È‚¢‚Å‚­‚¾‚³‚¢B
+		/// ï¿½fï¿½Uï¿½Cï¿½i ï¿½Tï¿½|ï¿½[ï¿½gï¿½É•Kï¿½vï¿½Èƒï¿½ï¿½\ï¿½bï¿½hï¿½Å‚ï¿½ï¿½Bï¿½ï¿½ï¿½Ìƒï¿½ï¿½\ï¿½bï¿½hï¿½Ì“ï¿½ï¿½eï¿½ï¿½
+		/// ï¿½Rï¿½[ï¿½h ï¿½Gï¿½fï¿½Bï¿½^ï¿½Å•ÏXï¿½ï¿½ï¿½È‚ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -318,7 +318,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			this->toolStripSeparator1->Size = System::Drawing::Size(223, 6);
 			this->toolStripMenuItemExit->Name = L"toolStripMenuItemExit";
 			this->toolStripMenuItemExit->Size = System::Drawing::Size(226, 22);
-			this->toolStripMenuItemExit->Text = L"Exit";
+			this->toolStripMenuItemExit->Text = L"ï¿½Exit";
 			this->toolStripMenuItemExit->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemExit_Click);
 			this->toolStripMenuItemBookMarkMenu->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->toolStripMenuItemAddBookMark, 
 				this->toolStripSeparator8});
@@ -351,7 +351,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			this->toolStripSeparator9->Size = System::Drawing::Size(307, 6);
 			this->RestartToolStripMenuItem->Name = L"RestartToolStripMenuItem";
 			this->RestartToolStripMenuItem->Size = System::Drawing::Size(310, 22);
-			this->RestartToolStripMenuItem->Text = L"Restart";
+			this->RestartToolStripMenuItem->Text = L"ï¿½Restart";
 			this->RestartToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::RestartToolStripMenuItem_Click);
 			this->LeaveToolStripMenuItem->Name = L"LeaveToolStripMenuItem";
 			this->LeaveToolStripMenuItem->Size = System::Drawing::Size(310, 22);
@@ -391,7 +391,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			this->toolStripMenuItemOption->Text = L"Options";
 			this->toolStripMenuItemSetting->Name = L"toolStripMenuItemSetting";
 			this->toolStripMenuItemSetting->Size = System::Drawing::Size(247, 22);
-			this->toolStripMenuItemSetting->Text = L"Settings";
+			this->toolStripMenuItemSetting->Text = L"ï¿½Settings";
 			this->toolStripMenuItemSetting->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemSetting_Click);
 			this->toolStripSeparator2->Name = L"toolStripSeparator2";
 			this->toolStripSeparator2->Size = System::Drawing::Size(244, 6);
@@ -706,16 +706,16 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 		static LIST_VIEW ListView;
 		static String^ ReplayFilePath;
 
-		// ƒuƒbƒNƒ}[ƒN
+		// ï¿½uï¿½bï¿½Nï¿½}ï¿½[ï¿½N
 		Object^ tmpIP;
 		IntPtr BookMarkServerName;
 		IntPtr BookMarkConnectIP;
 
-		// ƒ`ƒƒƒbƒg—š—ğ
+		// ï¿½`ï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½ï¿½
 		static int ChatHistoryNumber;
 		static Generic::List<String^>^ ChatHistory;
 
-		// ŠeF
+		// ï¿½eï¿½F
 		static array<Color>^ NameColor;
 		static array<Color>^ StateRectColor;
 		static Color TalkMessageColor;
@@ -728,7 +728,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 
 		delegate void WriteMessageDelegate(String^ msg, Color color);
 
-		// MemberInfo‚³‚ñ‚Ístdafx.h‚É‚¨ˆø‰z‚µ‚µ‚Ü‚µ‚½
+		// MemberInfoï¿½ï¿½ï¿½ï¿½ï¿½stdafx.hï¿½É‚ï¿½ï¿½ï¿½ï¿½zï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½
 		static Generic::List<MemberInfo^>^ MemberList;
 		static Generic::List<MemberInfoBackUp^>^ MemberListBackUp;
 		static UINT16 IDCounter; // Max 3FFF(16383)
@@ -738,51 +738,51 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 		static UdpClient^ UDP;
 		static String^ ServerName;
 		static String^ ConnectIP;
-		static bool AfterCloseUDP; // ‘Îí’†‚ÌI—‚¿‚ÉŠª‚«‚Ü‚ê‚È‚¢‚æ‚¤‚É
+		static bool AfterCloseUDP; // ï¿½Îí’†ï¿½ÌIï¿½ï¿½ï¿½ï¿½ï¿½ÉŠï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½È‚ï¿½ï¿½æ‚¤ï¿½ï¿½
 
-		// IPæ“¾—p
+		// IPï¿½æ“¾ï¿½p
 		static WebClient^ GetIPClient;
 		static Uri^ GetIPUri = gcnew Uri("http://checkip.dyndns.org/");
 		static Thread^ TimerGetIPThread;
 		static bool    GetIPCancelled;
 		static bool    GetIPSleeping;
 
-		// ƒ`[ƒ€HP‚¿‰z‚µ—p
+		// ï¿½`ï¿½[ï¿½ï¿½HPï¿½ï¿½ï¿½ï¿½ï¿½zï¿½ï¿½ï¿½p
 		static Thread^ SetTeamHPThread;
 		static UINT P_HP;
 		static UINT Winner;
 
-		// ‰ñü‚Ì¶€”»’è
+		// ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		static Thread^ SonarThread;
 		static bool    Ranging;
 		static bool    SonarSleeping;
 
-		// ƒlƒbƒg‘ÎíŠÖ˜A
+		// ï¿½lï¿½bï¿½gï¿½Îï¿½Ö˜A
 		ref struct VersusInfo
 		{
-			UINT           SEQUENCE;  // ‚â‚èæ‚è“¯Šú—p
-			bool           SLEEPING;  // ƒXƒŒƒbƒh‘Ò‹@—p
-			int            WAITING;   // ƒpƒPóM‘Ò‹@—p 1-:Wait ON 2:Sleep
-			DWORD          START_UP;  // ‹N“®ŠÔ
+			UINT           SEQUENCE;  // ï¿½ï¿½ï¿½ï¿½è“¯ï¿½ï¿½ï¿½p
+			bool           SLEEPING;  // ï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½Ò‹@ï¿½p
+			int            WAITING;   // ï¿½pï¿½Pï¿½ï¿½Mï¿½Ò‹@ï¿½p 1-:Wait ON 2:Sleep
+			DWORD          START_UP;  // ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			IPEndPoint^    IP_EP;
 			array<UINT>^   PING;
 			array<UINT>^   PONG;
-			UINT           DELAY;     // ƒfƒBƒŒƒC‚Í‘å‚«‚¢•û‚É‡‚í‚¹‚é
-			UINT           INTERVAL;  // ‘—MŠÔŠu ¬:1f‚ ‚½‚è‚Ì“ü—Íƒf[ƒ^‘—M‰ñ”‚ğ4‚É ’†:3‰ñ ‘å:2‰ñ
-			UINT           INTERVAL2; // ‘—MŠÔŠuŒvZ—p
-			array<BYTE>^   SEND;      // ‘—M—pƒoƒbƒtƒ@
-			array<UINT16>^ LOCAL;     // ƒŠƒ“ƒOƒoƒbƒtƒ@
-			UINT32         L_FRAME;   // ‘ƒtƒŒ[ƒ€”
-			int            L_READ;    // “Ç‚İæ‚èˆÊ’u
-			array<UINT16>^ REMOTE;    // ‚±‚Ì‚Q‚Â‚ÍƒL[‚Ì—š—ğ‚ğ•Û‚·‚é
-			UINT32         R_FRAME;   // ‘ƒtƒŒ[ƒ€”
-			int            R_READ;    // “Ç‚İæ‚èˆÊ’u
+			UINT           DELAY;     // ï¿½fï¿½Bï¿½ï¿½ï¿½Cï¿½Í‘å‚«ï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½í‚¹ï¿½ï¿½
+			UINT           INTERVAL;  // ï¿½ï¿½ï¿½Mï¿½ÔŠu ï¿½ï¿½:1fï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì“ï¿½ï¿½Íƒfï¿½[ï¿½^ï¿½ï¿½ï¿½Mï¿½ñ”‚ï¿½4ï¿½ï¿½ ï¿½ï¿½:3ï¿½ï¿½ ï¿½ï¿½:2ï¿½ï¿½
+			UINT           INTERVAL2; // ï¿½ï¿½ï¿½Mï¿½ÔŠuï¿½vï¿½Zï¿½p
+			array<BYTE>^   SEND;      // ï¿½ï¿½ï¿½Mï¿½pï¿½oï¿½bï¿½tï¿½@
+			array<UINT16>^ LOCAL;     // ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½oï¿½bï¿½tï¿½@
+			UINT32         L_FRAME;   // ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½
+			int            L_READ;    // ï¿½Ç‚İï¿½ï¿½Ê’u
+			array<UINT16>^ REMOTE;    // ï¿½ï¿½ï¿½Ì‚Qï¿½Â‚ÍƒLï¿½[ï¿½Ì—ï¿½ï¿½ï¿½ï¿½ï¿½Ûï¿½ï¿½ï¿½ï¿½ï¿½
+			UINT32         R_FRAME;   // ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½
+			int            R_READ;    // ï¿½Ç‚İï¿½ï¿½Ê’u
 		};
 
 		static Thread^ VersusThread;
 		static VersusInfo^ NetVS;
 
-		// ŠÏíŠÖ˜A
+		// ï¿½Ïï¿½Ö˜A
 		ref struct SpectatorInfo
 		{
 			UINT16      ID;
@@ -792,22 +792,22 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 
 		static Thread^ SpectacleThread;
 		static Generic::List<SpectatorInfo^>^ SpectatorList;
-		static bool           AllowWatch;      // ƒXƒŒƒbƒh§Œä
-		static UINT           WaitingWatch;    // ƒpƒPƒbƒg‘Ò‚¿ 1:ŠJn‘Ò‚¿ 2:ƒf[ƒ^‘Ò‚¿
-		static IPEndPoint^    WatchTarget;     // ŠÏí‘ÎÛ
+		static bool           AllowWatch;      // ï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½ï¿½ï¿½ï¿½
+		static UINT           WaitingWatch;    // ï¿½pï¿½Pï¿½bï¿½gï¿½Ò‚ï¿½ 1:ï¿½Jï¿½nï¿½Ò‚ï¿½ 2:ï¿½fï¿½[ï¿½^ï¿½Ò‚ï¿½
+		static IPEndPoint^    WatchTarget;     // ï¿½Ïï¿½Îï¿½
 		static UINT16         TargetID;
-		static UINT16         P1ID, P2ID;      // P2‚ª0xFFFF‚ÅˆêlƒvƒŒƒC
-		static UINT32         WatchFrame;      // “Ç‚İæ‚èˆÊ’u
-		static array<UINT16>^ WatchHistory;    // ƒoƒbƒtƒ@ TIME_OUT/5 * 3 = 1800‚Ì900ƒtƒŒ[ƒ€•ª
-		static UINT32         InputFrame;      // ‘‚«‚İˆÊ’u
-		static array<UINT16>^ InputHistory;    // ƒoƒbƒtƒ@
+		static UINT16         P1ID, P2ID;      // P2ï¿½ï¿½0xFFFFï¿½Åˆï¿½lï¿½vï¿½ï¿½ï¿½C
+		static UINT32         WatchFrame;      // ï¿½Ç‚İï¿½ï¿½Ê’u
+		static array<UINT16>^ WatchHistory;    // ï¿½oï¿½bï¿½tï¿½@ TIME_OUT/5 * 3 = 1800ï¿½ï¿½900ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½
+		static UINT32         InputFrame;      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İˆÊ’u
+		static array<UINT16>^ InputHistory;    // ï¿½oï¿½bï¿½tï¿½@
 
-		// ©“®‹xŒe
+		// ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½e
 		static Thread^ AutoRestThread;
 		static bool AutoRestRanging;
 		static bool AutoRestSleeping;
 
-		// MainForm.cpp‚É‹Lq
+		// MainForm.cppï¿½É‹Lï¿½q
 		void Begin();
 		void TimerGetIP();
 		void SetTeamHP();
@@ -831,21 +831,20 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 
 	protected:
 		void StartGame(UINT type){
-			// ŠiƒcƒN‚¶‚á‚È‚¢‚æ
-			try{
+			// ï¿½iï¿½cï¿½Nï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½
+			try {
 				FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(gcnew String(MTOPTION.GAME_EXE));
 
-				if (info->LegalCopyright != "(C)2001 ENTERBRAIN,INC / OUTBACK") {
+				if (!IsCompatibleFMExecutable(info->FileDescription, info->LegalCopyright)) {
 					throw gcnew Exception;
 				}
-				else{
-					//if(info->FileDescription == "‚Q‚cŠi“¬ƒcƒN[ƒ‹2nd."){
+				else {
+					if (IsCompatibleFM2KExecutable(info->FileDescription, info->LegalCopyright)) {
 						MTINFO.KGT2K = true;
-					//}
-					//else{
-						//MTINFO.KGT2K = false;
-					//} 
-					//commenting out for now
+					}
+					else {
+						MTINFO.KGT2K = false;
+					}
 				}
 			}
 			catch(Exception^){
@@ -913,11 +912,11 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 						NetVS->R_FRAME  = 0;
 						NetVS->L_READ   = 0;
 
-						// ŠÏí—pID
+						// ï¿½Ïï¿½pID
 						P1ID = MemberList[listBoxMember->SelectedIndex]->ID;
 						P2ID = MemberList[0]->ID;
 
-						// –¼‘O
+						// ï¿½ï¿½ï¿½O
 						ZeroMemory(MTINFO.P1_NAME, sizeof(MTINFO.P1_NAME));
 						ZeroMemory(MTINFO.P2_NAME, sizeof(MTINFO.P2_NAME));
 
@@ -929,10 +928,10 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 							_tcscpy_s(MTINFO.P2_NAME, MTOPTION.NAME);
 						}
 
-						// ‘Îí‰ñ”
+						// ï¿½Îï¿½ï¿½
 						MemberList[listBoxMember->SelectedIndex]->NUM_VS++;
 
-						// ƒlƒbƒg‘Îí€”õ—pƒXƒŒƒbƒh‚Ì‹N“®
+						// ï¿½lï¿½bï¿½gï¿½Îí€ï¿½ï¿½ï¿½pï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½Ì‹Nï¿½ï¿½
 						MTINFO.CONTROL = 1;
 						VersusThread = gcnew Thread(gcnew ThreadStart(this, &MainForm::RunVersus));
 						VersusThread->Start();
@@ -954,13 +953,13 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 						}
 					}
 
-					// ƒtƒH[ƒ}ƒbƒg‚ÌŠm”F
+					// ï¿½tï¿½Hï¿½[ï¿½}ï¿½bï¿½gï¿½ÌŠmï¿½F
 					TCHAR ver;
 					array<TCHAR>^ header = gcnew array<TCHAR>{'T', 'Y', 'M', 'T', 'R'};
 					BinaryReader^ br = gcnew BinaryReader(File::OpenRead(ReplayFilePath));
 
 					try{
-						// ƒwƒbƒ_
+						// ï¿½wï¿½bï¿½_
 						array<TCHAR>^ h = br->ReadChars(header->Length);
 						for(int i = 0; i < h->Length; i++){
 							if(h[i] != header[i]){
@@ -986,10 +985,10 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			}
 			else{
 				if(_tcslen(MTINFO.ORIGINAL_TITLE) > 0){
-					WriteMessage(String::Format("{0}‚ª‹N“®’†‚Å‚·B\n", gcnew String(MTINFO.ORIGINAL_TITLE)), SystemMessageColor);
+					WriteMessage(String::Format("{0}ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½B\n", gcnew String(MTINFO.ORIGINAL_TITLE)), SystemMessageColor);
 				}
 				else{
-					WriteMessage("‘¼‚ÌƒQ[ƒ€‚ª‹N“®’†‚Å‚·B\n", SystemMessageColor);
+					WriteMessage("ï¿½ï¿½ï¿½ÌƒQï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½B\n", SystemMessageColor);
 				}
 			}
 		}
@@ -1018,17 +1017,17 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 					if(ps->Length > 0){
 						for(int i=0; i < ps->Length; i++){
 							if(ps[0]->MainWindowTitle == game){
-								WriteMessage(String::Format("{0}‚ğI—¹‚µ‚Ü‚·B\n", ps[0]->MainWindowTitle), SystemMessageColor);
+								WriteMessage(String::Format("{0}ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B\n", ps[0]->MainWindowTitle), SystemMessageColor);
 								ps[0]->CloseMainWindow();
 							}
 						}
 					}else{
-						WriteMessage(String::Format("I—¹‚·‚éƒQ[ƒ€\"{0}\"‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B\nƒIƒvƒVƒ‡ƒ“‚ÌÀsƒtƒ@ƒCƒ‹‚ÌƒpƒXA‚Ü‚½‚Íƒvƒƒtƒ@ƒCƒ‹‚ª‡‚Á‚Ä‚¢‚é‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢B\n", game), ErrorMessageColor);
+						WriteMessage(String::Format("ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½[ï¿½ï¿½\"{0}\"ï¿½ï¿½ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½B\nï¿½Iï¿½vï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½sï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Ìƒpï¿½Xï¿½Aï¿½Ü‚ï¿½ï¿½Íƒvï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½mï¿½Fï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B\n", game), ErrorMessageColor);
 						return;
 					}
 				}
 				catch(Exception^ e){
-					WriteMessage("ƒQ[ƒ€‚ğI—¹‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B\n", ErrorMessageColor);
+					WriteMessage("ï¿½Qï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½Å‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½B\n", ErrorMessageColor);
 					if(MTINFO.DEBUG){
 						WriteMessage(String::Format("{0}\n", e->ToString()), DebugMessageColor);
 					}
@@ -1075,7 +1074,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 		}
 
 		void Restart(){
-			// ƒtƒŠ[ƒvƒŒƒC‚¾‚¯‚Ç‘Îí’†
+			// ï¿½tï¿½ï¿½ï¿½[ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Ç‘Îí’†
 			if(AfterCloseUDP) return;
 
 			CloseUdp(true);
@@ -1083,7 +1082,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			MemberList->Clear();
 			listBoxMember->Items->Clear();
 
-			// IPæ“¾‚ÌƒLƒƒƒ“ƒZƒ‹
+			// IPï¿½æ“¾ï¿½ÌƒLï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½
 			if(GetIPClient != nullptr){
 				GetIPClient->CancelAsync();
 			}
@@ -1166,7 +1165,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			if(UDP != nullptr){
 				array<BYTE>^ quit;
 
-				// ƒ\ƒi[’â~
+				// ï¿½\ï¿½iï¿½[ï¿½ï¿½~
 				if(SonarThread != nullptr && SonarThread->IsAlive && Ranging){
 					Ranging = false;
 
@@ -1176,7 +1175,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 
 					SonarThread->Join();
 				}
-				// ©“®‹xŒeƒXƒŒƒbƒh’â~
+				// ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½eï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½ï¿½~
 				if(AutoRestThread != nullptr && AutoRestThread->IsAlive && AutoRestRanging){
 					AutoRestRanging = false;
 					AutoRestThread->Abort();
@@ -1184,7 +1183,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				}
 
 				if(send_packet){
-					// ‘ŞºƒƒbƒZ[ƒW‚ğ‘—M
+					// ï¿½Şï¿½ï¿½ï¿½ï¿½bï¿½Zï¿½[ï¿½Wï¿½ğ‘—M
 					if(MTOPTION.CONNECTION_TYPE == CT_SERVER){
 						quit = gcnew array<BYTE>(3){ PH_QUIT, 0, 0 };
 						PacketSendAllMember(quit, 0);
@@ -1211,25 +1210,25 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			String^ name;
 			Color col;
 
-			// ‘—óM
+			// ï¿½ï¿½ï¿½ï¿½M
 			if(UDP != nullptr && MemberList->Count > 1){
 				if(MTOPTION.CONNECTION_TYPE == CT_SERVER){
-					// –{l‚Æ”­MÒˆÈŠO‚É‘—M
+					// ï¿½{ï¿½lï¿½Æ”ï¿½ï¿½Mï¿½ÒˆÈŠOï¿½É‘ï¿½ï¿½M
 					PacketSendAllMember(msg, id);
 				}
 				else{
-					// óM‚Å‚È‚¯‚ê‚ÎAƒT[ƒo‚É‘—M
+					// ï¿½ï¿½Mï¿½Å‚È‚ï¿½ï¿½ï¿½ÎAï¿½Tï¿½[ï¿½oï¿½É‘ï¿½ï¿½M
 					if(id != 0xFFFF){
 						UDP->BeginSend(msg, msg->Length, MemberList[1]->IP_EP, gcnew AsyncCallback(SendPackets), UDP);
 					}
 					else{
-						// óMƒtƒ‰ƒO‚ğƒNƒŠƒA
+						// ï¿½ï¿½Mï¿½tï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½A
 						id = BitConverter::ToUInt16(msg, 1);
 					}
 				}
 			}
 
-			// ƒƒ“ƒo[ŒŸõ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½[ï¿½ï¿½ï¿½ï¿½
 			Monitor::Enter(MemberList);
 			try{
 				for(i = 0; i < MemberList->Count; i++){
@@ -1244,7 +1243,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 					name = gcnew String(String::Format("Unknown(ID:{0})", id));
 					col  = ErrorMessageColor;
 
-					// ƒƒ“ƒo[ƒŠƒXƒgŠO‚ÌID‚ª‚¢‚½‚Ì‚Å–â‚¢‡‚í‚¹
+					// ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½[ï¿½ï¿½ï¿½Xï¿½gï¿½Oï¿½ï¿½IDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚Å–â‚¢ï¿½ï¿½ï¿½í‚¹
 					array<BYTE>^ send = gcnew array<BYTE>(3){ PH_REQ_LIST };
 					Array::Copy(BitConverter::GetBytes(id), 0, send, 1, 2);
 					UDP->Send(send, 3, MemberList[1]->IP_EP);
@@ -1254,12 +1253,12 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				Monitor::Exit(MemberList);
 			}
 
-			// ‰¹º—Dæ“x: ƒjƒbƒNƒl[ƒ€ > ƒL[ƒ[ƒh > ”­Œ¾
-			// ƒjƒbƒNƒl[ƒ€‰¹ºÄ¶
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Dï¿½ï¿½x: ï¿½jï¿½bï¿½Nï¿½lï¿½[ï¿½ï¿½ > ï¿½Lï¿½[ï¿½ï¿½ï¿½[ï¿½h > ï¿½ï¿½ï¿½ï¿½
+			// ï¿½jï¿½bï¿½Nï¿½lï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äï¿½
 			String ^tmpMsg = Encoding::Unicode->GetString(msg, 4, msg[3]);
 			bool inname = 0;
 			if(tmpMsg->Contains(gcnew String(MTOPTION.NAME))) {
-				// –¼‘O‚ªŒÄ‚Î‚ê‚½‚çƒEƒBƒ“ƒhƒE“_–Å
+				// ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Ä‚Î‚ê‚½ï¿½ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½_ï¿½ï¿½
 				if(MTOPTION.NAME_FLASH) {
 					WindowFlash();
 				}
@@ -1273,10 +1272,10 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 					}
 				}
 			}
-			// ƒL[ƒ[ƒh”½‰
+			// ï¿½Lï¿½[ï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½ï¿½
 			bool inkeyword = 0;
 			if(MTOPTION.KEYWORD_SOUND_ENABLE && !inname){
-				// •ªŠ„ƒoƒbƒtƒ@
+				// ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½bï¿½tï¿½@
 				TCHAR *tok, *next;
 				TCHAR s1[MAX_KEYWORD];
 				_tcscpy_s(s1, MTOPTION.KEYWORD);
@@ -1295,12 +1294,12 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 					tok = wcstok_s(NULL, _T(","), &next);
 				}
 			}
-			// ”­Œ¾‚ÅƒEƒBƒ“ƒhƒE“_–Å
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ÅƒEï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½_ï¿½ï¿½
 			if(MemberList[0]->ID != id && !inname) {
 				if(MTOPTION.TALK_FLASH) {
 					WindowFlash();
 				}
-				// ”­Œ¾‚Å‰¹‚ğÄ¶
+				// ï¿½ï¿½ï¿½ï¿½ï¿½Å‰ï¿½ï¿½ï¿½ï¿½Äï¿½
 				if(MTOPTION.TALK_SOUND_ENABLE && !inkeyword){
 					try{
 						Media::SoundPlayer^ wav = gcnew Media::SoundPlayer(gcnew String(MTOPTION.TALK_SOUND));
@@ -1311,13 +1310,13 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				}
 			}
 
-			// ŠÔ
+			// ï¿½ï¿½ï¿½ï¿½
 			if(inname||inkeyword){
 				WriteTime(1, DebugMessageColor);
 			}else{
 				WriteTime(1, SystemMessageColor);
 			}
-			// •\¦
+			// ï¿½\ï¿½ï¿½
 			WriteMessage(String::Format("[ {0} ] ", name), col);
 			WriteMessage(String::Format("{0}\n", tmpMsg), TalkMessageColor);
 		}
@@ -1354,7 +1353,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			}
 		}
 		void WriteNotice(String^ msg){
-			// ‰¹‚Å‚¨’m‚ç‚¹
+			// ï¿½ï¿½ï¿½Å‚ï¿½ï¿½mï¿½ç‚¹
 			if(MTOPTION.CONNECTION_TYPE != CT_SERVER){
 				if(MTOPTION.NOTICE_SOUND_ENABLE){
 					try{
@@ -1366,7 +1365,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				}
 			}
 
-			// \n‚Å‰üs
+			// \nï¿½Å‰ï¿½ï¿½s
 			msg = msg->Replace("\\n", "\n");
 
 			Monitor::Enter(richTextBoxLog);
@@ -1398,7 +1397,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				return;
 			}
 
-			// ‰¹‚Å‚¨’m‚ç‚¹
+			// ï¿½ï¿½ï¿½Å‚ï¿½ï¿½mï¿½ç‚¹
 			if(MTOPTION.ENTER_SOUND_ENABLE){
 				try{
 					Media::SoundPlayer^ wav = gcnew Media::SoundPlayer(gcnew String(MTOPTION.ENTER_SOUND));
@@ -1409,7 +1408,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			}
 
 			if(comment->Length > 0){
-				// ŠÔ
+				// ï¿½ï¿½ï¿½ï¿½
 				WriteTime(1, SystemMessageColor);
 				Monitor::Enter(richTextBoxLog);
 				try{
@@ -1471,7 +1470,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				Monitor::Enter(MemberList);
 				try{
 					for(int i = 1; i < MemberList->Count; i++){
-						// ƒNƒ‰ƒCƒAƒ“ƒg‚à‘Îí‘ÎÛ
+						// ï¿½Nï¿½ï¿½ï¿½Cï¿½Aï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Îï¿½Îï¿½
 						if(MemberList[i]->STATE == MS_FREE || MemberList[i]->STATE == MS_SEEK){
 						// if(MemberList[i]->STATE == MS_FREE && MemberList[i]->TYPE != CT_CLIENT){
 							list->Add(i);
@@ -1491,7 +1490,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 					StartGame(RT_VS);
 				}
 				else{
-					WriteMessage("‘Îí‚Å‚«‚é‘Šè‚ª‚¢‚Ü‚¹‚ñ‚Å‚µ‚½B\n", SystemMessageColor);
+					WriteMessage("ï¿½Îï¿½Å‚ï¿½ï¿½é‘Šï¿½è‚ªï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½B\n", SystemMessageColor);
 				}
 			}
 		}
@@ -1504,7 +1503,22 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				ClearLog();
 			}
 			else if(textBoxInput->Text->StartsWith("/log", StringComparison::OrdinalIgnoreCase)){
-				SaveLog();
+				String^ path = gcnew String(MTOPTION.PATH);
+				String^ file = String::Format(L"MT_{0}.rtf", DateTime::Now.ToString("yyMMdd-HHmmss"));
+				path += file;
+
+				Monitor::Enter(richTextBoxLog);
+				try{
+					richTextBoxLog->SaveFile(path, RichTextBoxStreamType::RichText);
+				}
+				catch(Exception ^e){
+					WriteErrorLog(e->ToString(), "SaveLog");
+				}
+				finally{
+					Monitor::Exit(richTextBoxLog);
+				}
+
+				WriteMessage(String::Format(L"Log saved to \"{0}\".\n", file), SystemMessageColor);
 			}
 			else if(textBoxInput->Text->StartsWith("/debug", StringComparison::OrdinalIgnoreCase)){
 				MTINFO.DEBUG ^= 1;
@@ -1536,11 +1550,11 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 
 				if(MemberList[0]->STATE == MS_FREE){
 					ChangeState((BYTE)MS_REST);
-					WriteMessage("‹xŒeó‘Ô‚ğ•ÏX‚µ‚Ü‚µ‚½B > ƒIƒ“\n", SystemMessageColor);
+					WriteMessage("ï¿½xï¿½eï¿½ï¿½Ô‚ï¿½ÏXï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B > ï¿½Iï¿½ï¿½\n", SystemMessageColor);
 				}
 				else if(MemberList[0]->STATE == MS_REST){
 					ChangeState((BYTE)MS_FREE);
-					WriteMessage("‹xŒeó‘Ô‚ğ•ÏX‚µ‚Ü‚µ‚½B > ƒIƒt\n", SystemMessageColor);
+					WriteMessage("ï¿½xï¿½eï¿½ï¿½Ô‚ï¿½ÏXï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B > ï¿½Iï¿½t\n", SystemMessageColor);
 				}
 			}
 			else if(textBoxInput->Text->StartsWith("/seek", StringComparison::OrdinalIgnoreCase)){
@@ -1587,7 +1601,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				this->Close();
 			}
 			else if(textBoxInput->Text->StartsWith("/memberlist", StringComparison::OrdinalIgnoreCase)){
-				// ƒfƒoƒbƒO—pƒRƒ}ƒ“ƒh
+				// ï¿½fï¿½oï¿½bï¿½Oï¿½pï¿½Rï¿½}ï¿½ï¿½ï¿½h
 				if(UDP == nullptr){
 					return;
 				}
@@ -1600,7 +1614,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				}
 			}
 			else if(textBoxInput->Text->StartsWith("/memberhistory", StringComparison::OrdinalIgnoreCase)){
-				// ƒfƒoƒbƒO—pƒRƒ}ƒ“ƒh
+				// ï¿½fï¿½oï¿½bï¿½Oï¿½pï¿½Rï¿½}ï¿½ï¿½ï¿½h
 				if(MTOPTION.CONNECTION_TYPE != CT_SERVER || UDP == nullptr){
 					return;
 				}
@@ -1615,7 +1629,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				ReloadList();
 			}
 			else if(textBoxInput->Text->StartsWith("/test", StringComparison::OrdinalIgnoreCase)){
-				// ƒfƒoƒbƒO—pƒRƒ}ƒ“ƒh
+				// ï¿½fï¿½oï¿½bï¿½Oï¿½pï¿½Rï¿½}ï¿½ï¿½ï¿½h
 
 				//Debug::WriteLine("test");
 				//Thread::Sleep(100 * 1000);
@@ -1636,12 +1650,12 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 					listBoxMember->Items->Add(info->COMMENT);
 				}
 				else{
-					listBoxMember->Items->Add(gcnew String("Ÿ"));
+					listBoxMember->Items->Add(gcnew String("ï¿½ï¿½"));
 				}
 				break;
 
 			case LV_BLIND:
-				listBoxMember->Items->Add(gcnew String("Ÿ"));
+				listBoxMember->Items->Add(gcnew String("ï¿½ï¿½"));
 				break;
 			}
 		}
@@ -1653,7 +1667,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				return;
 			}
 
-			// –¼‘O‚ÆƒRƒƒ“ƒg‚Ì©“®Ø‚è‘Ö‚¦
+			// ï¿½ï¿½ï¿½Oï¿½ÆƒRï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Ìï¿½ï¿½ï¿½ï¿½Ø‚ï¿½Ö‚ï¿½
 			if(auto_change){
 				switch(ListView){
 				case LV_NAME:
@@ -1682,12 +1696,12 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 							listBoxMember->Items[i] = MemberList[i]->COMMENT;
 						}
 						else{
-							listBoxMember->Items[i] = gcnew String("Ÿ");
+							listBoxMember->Items[i] = gcnew String("ï¿½ï¿½");
 						}
 						break;
 
 					case LV_BLIND:
-						listBoxMember->Items[i] = gcnew String("Ÿ");
+						listBoxMember->Items[i] = gcnew String("ï¿½ï¿½");
 						break;
 					}
 				}
@@ -1766,7 +1780,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 
 
 		void ReloadList(){
-			// ƒƒ“ƒo[ƒŠƒXƒgXV
+			// ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½[ï¿½ï¿½ï¿½Xï¿½gï¿½Xï¿½V
 			if(MTOPTION.CONNECTION_TYPE == CT_SERVER || UDP == nullptr){
 				return;
 			}
@@ -1781,23 +1795,23 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			Array::Copy(BitConverter::GetBytes(0), 0, send, 1, 2);
 			UDP->Send(send, 3, MemberList[1]->IP_EP);
 
-			WriteMessage("ƒƒ“ƒo[ƒŠƒXƒg‚ğXV‚µ‚Ü‚µ‚½B(˜A‘±‚µ‚Ä‚ÌXV‚ÍƒT[ƒo‚É•‰‰×‚ª‚©‚©‚é‚½‚ßA’ˆÓ‚µ‚Ä‚­‚¾‚³‚¢B)\n", SystemMessageColor);
+			WriteMessage(L"Manually updated the players list. (The list is usually updated continuously as manual requests place a load on the server.)\n", SystemMessageColor);
 		}
 		void WriteStatus(String^ msg){
 			toolStripStatusLabel->Text = msg;
 		}
 	public:
-		// IPæ“¾Š®—¹
+		// IPï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
 		void GetIPOpenReadCompleted(System::Object^ sender, System::Net::OpenReadCompletedEventArgs^ e) {
 
-			// I—¹—p
+			// ï¿½Iï¿½ï¿½ï¿½p
 			if(GetIPClient == nullptr) return;
 			if(GetIPCancelled == true) {
 				GetIPCancelled = false;
 				GetIPClient = nullptr;
 				return;
 			}
-			// TimerGetIPƒ^ƒCƒ€ƒAƒEƒg
+			// TimerGetIPï¿½^ï¿½Cï¿½ï¿½ï¿½Aï¿½Eï¿½g
 			if(e->Cancelled) {
 				WriteMessage("IP address acquisition request failed due to a timeout.\n", ErrorMessageColor);
 				if(MTINFO.DEBUG){
@@ -1806,7 +1820,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				GetIPClient = nullptr;
 				return;
 			}
-			// ƒAƒhƒŒƒX‚Ì’Šo
+			// ï¿½Aï¿½hï¿½ï¿½ï¿½Xï¿½Ì’ï¿½ï¿½o
 			String^ html;
 			_int64 Global_address;
 			array<String^> ^s1, ^s2, ^s3;
@@ -1830,7 +1844,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				}
 			}
 			finally{
-				// Stream‚Í‚µ‚Á‚©‚èŠJ•ú
+				// Streamï¿½Í‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½
 				if(sr != nullptr) sr->Close();
 				if(reply != nullptr) reply->Close();
 			}
@@ -1865,7 +1879,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 					listBoxMember->Items[0] = comment;
 				}
 				else{
-					listBoxMember->Items[0] = gcnew String("Ÿ");
+					listBoxMember->Items[0] = gcnew String("ï¿½ï¿½");
 				}
 			}
 
@@ -1911,11 +1925,11 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 
 		void GetIPAddress(){
 			if(GetIPClient == nullptr){
-				// ƒOƒ[ƒoƒ‹IP‚Ìæ“¾
+				// ï¿½Oï¿½ï¿½ï¿½[ï¿½oï¿½ï¿½IPï¿½Ìæ“¾
 				GetIPClient = gcnew WebClient();
 				GetIPClient->OpenReadCompleted += gcnew OpenReadCompletedEventHandler(this, &MainForm::GetIPOpenReadCompleted);
 
-				// ƒ^ƒCƒ€ƒAƒEƒgƒ^ƒCƒ}[
+				// ï¿½^ï¿½Cï¿½ï¿½ï¿½Aï¿½Eï¿½gï¿½^ï¿½Cï¿½}ï¿½[
 				WriteMessage("Obtaining IP address from http://checkip.dyndns.org/ \n", SystemMessageColor);
 				TimerGetIPThread = gcnew Thread(gcnew ThreadStart(this, &MainForm::TimerGetIP));
 				TimerGetIPThread->Start();
@@ -1932,7 +1946,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			}
 		}
 		void ChangeProfileEnabled(){
-			// ƒvƒƒtƒ@ƒCƒ‹ƒhƒƒbƒvƒ_ƒEƒ“XV
+			// ï¿½vï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½hï¿½ï¿½ï¿½bï¿½vï¿½_ï¿½Eï¿½ï¿½ï¿½Xï¿½V
 			toolStripDropDownButtonProfile->DropDownItems->Clear();
 			for(int i=0; i < Profile::ProfileList->Count; i++){
 				if(Profile::ProfileList[i] == gcnew String(MTOPTION.PROFILE)){
@@ -1955,10 +1969,10 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 		}
 	private:
 		System::Void MainForm_Load(System::Object^  sender, System::EventArgs^  e) {
-			// sŠÔ‚ğ‹l‚ß‚é
+			// ï¿½sï¿½Ô‚ï¿½ï¿½lï¿½ß‚ï¿½
 			richTextBoxLog->LanguageOption = RichTextBoxLanguageOptions::UIFonts;
 
-			// ƒXƒŒƒbƒhŠÔ‚ÌŒÄ‚Ño‚µŠm”F‚ğ–³Œø‚É‚·‚é
+			// ï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½Ô‚ÌŒÄ‚Ñoï¿½ï¿½ï¿½mï¿½Fï¿½ğ–³Œï¿½ï¿½É‚ï¿½ï¿½ï¿½
 			Control::CheckForIllegalCrossThreadCalls = false;
 
 			if(MTWS.LEFT > 0 && MTWS.TOP > 0){
@@ -2022,7 +2036,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			WatchHistory        = gcnew array<UINT16>(TIME_OUT/5 * 3);
 			InputHistory        = gcnew array<UINT16>(TIME_OUT/5 * 3);
 
-			// richtextbox‚ÌƒfƒtƒHƒ‹ƒgfalseƒoƒO‘Îô
+			// richtextboxï¿½Ìƒfï¿½tï¿½Hï¿½ï¿½ï¿½gfalseï¿½oï¿½Oï¿½Îï¿½
 			richTextBoxLog->AutoWordSelection = true;
 			richTextBoxLog->AutoWordSelection = false;
 
@@ -2035,7 +2049,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			this->toolStripMenuItemVersion_Click(nullptr, nullptr);
 
 			if(MTINFO.SERVER_MODE){
-				// ƒT[ƒoƒ‚[ƒh‹N“®
+				// ï¿½Tï¿½[ï¿½oï¿½ï¿½ï¿½[ï¿½hï¿½Nï¿½ï¿½
 				MTOPTION.CONNECTION_TYPE = CT_SERVER;
 				if(MTINFO.SERVER_MODE_PORT > 0){
 					MTOPTION.OPEN_PORT = MTINFO.SERVER_MODE_PORT;
@@ -2077,7 +2091,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			QuitWatch(true);
 			CloseUdp(true);
 
-			// IPæ“¾‚ÌƒLƒƒƒ“ƒZƒ‹
+			// IPï¿½æ“¾ï¿½ÌƒLï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½
 			if(GetIPClient != nullptr){
 				GetIPCancelled = true;
 				GetIPClient->CancelAsync();
@@ -2089,8 +2103,21 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				TimerGetIPThread->Join();
 			}
 
-			// ”O‚Ì‚½‚ß
-			Thread::Sleep(500);
+			if(MTINFO.DEBUG){
+				String^ path = gcnew String(MTOPTION.PATH);
+				path += "log.rtf";
+
+				Monitor::Enter(richTextBoxLog);
+				try{
+					richTextBoxLog->SaveFile(path, RichTextBoxStreamType::RichText);
+				}
+				catch(Exception ^e){
+					WriteErrorLog(e->ToString(), "SaveLog");
+				}
+				finally{
+					Monitor::Exit(richTextBoxLog);
+				}
+			}
 		}
 
 		System::Void MainForm_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
@@ -2104,7 +2131,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 		}
 
 		System::Void textBoxInput_KeyDown( Object^ sender, System::Windows::Forms::KeyEventArgs^ e ) {
-			// ƒ`ƒƒƒbƒg—š—ğ‚©‚ç‘I‘ğ
+			// ï¿½`ï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½
 			if(ChatHistory->Count > 0){
 				if(e->KeyCode == Keys::Up){
 					ChatHistoryNumber--;
@@ -2133,9 +2160,9 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				}
 			}
 
-			// ƒƒbƒZ[ƒW‘—M
+			// ï¿½ï¿½ï¿½bï¿½Zï¿½[ï¿½Wï¿½ï¿½ï¿½M
 			if(e->KeyCode == Keys::Enter && textBoxInput->Text->Length > 0){
-				// ƒ`ƒƒƒbƒg—š—ğXV
+				// ï¿½`ï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½V
 				if(ChatHistoryNumber < ChatHistory->Count){
 					if(ChatHistory[ChatHistoryNumber] != textBoxInput->Text){
 						ChatHistory->Add(textBoxInput->Text);
@@ -2152,7 +2179,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 
 				try{
 					if(e->Control && MTOPTION.CONNECTION_TYPE == CT_SERVER){
-						// ’m
+						// ï¿½ï¿½ï¿½m
 						BYTE len = (BYTE)(textBoxInput->Text->Length * 2);
 						array<BYTE>^ msg = gcnew array<BYTE>(2 + len);
 
@@ -2173,7 +2200,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 						WriteMessage("Chat is disabled on this server.\n", SystemMessageColor);
 					}
 					else if(UDP != nullptr){
-						// ƒ`ƒƒƒbƒg”­Œ¾
+						// ï¿½`ï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½ï¿½
 						BYTE len = (BYTE)(textBoxInput->Text->Length * 2);
 						array<BYTE>^ msg = gcnew array<BYTE>(4 + len);
 
@@ -2246,7 +2273,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			if(index == 0){
 				int state = MemberList[0]->STATE;
 
-				// ‹xŒeó‘Ô‚Ì•ÏX
+				// ï¿½xï¿½eï¿½ï¿½Ô‚Ì•ÏX
 				if(state == MS_FREE){
 					ChangeState((BYTE)MS_REST);
 					WriteMessage("Rest mode is now ON.\n", SystemMessageColor);
@@ -2265,7 +2292,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				}
 			}
 			else if(index > 0 && UDP != nullptr){
-				// ó‘Ô‚ÌÄæ“¾
+				// ï¿½ï¿½Ô‚ÌÄæ“¾
 				array<BYTE>^ send = gcnew array<BYTE>(3){ PH_REQ_STATE };
 				Array::Copy(BitConverter::GetBytes(MemberList[index]->ID), 0, send, 1, 2);
 
@@ -2295,25 +2322,24 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			if(index > 0){
 				cap += String::Format(", VS = {0}", MemberList[index]->NUM_VS);
 			}
-			if(ListView == LV_NAME){
-				if(MemberList[index]->COMMENT->Length > 0){
-					cap += "\n" + MemberList[index]->COMMENT;
+			if (ListView == LV_NAME) {
+				if (MemberList[index]->COMMENT->Length) {
+					cap += "\nLooking: " + MemberList[index]->LOOKING;
+					cap += "\nAvoiding: " + MemberList[index]->AVOIDING;
+					cap += "\nComment: " + MemberList[index]->COMMENT;
 				}
 			}
 			else if(ListView == LV_COMMENT){
 				cap += "\n" + MemberList[index]->NAME;
 			}
+
+
+
 			toolTipMember->SetToolTip(listBoxMember, cap);
 		}
 		System::Void toolStripMenuItemSetting_Click(System::Object^  sender, System::EventArgs^  e) {
-			if(Option == nullptr || Option->IsDisposed){
-				toolStripDropDownButtonProfile->Enabled = false;
-				Option = gcnew OptionForm;
-				Option->Show(this);
-			}
-			else{
-				Option->Activate();
-			}
+			Option = gcnew OptionForm;
+			Option->ShowDialog(this);
 		}
 
 		System::Void toolStripMenuItemViewCommand_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -2332,7 +2358,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			this->Close();
 		}
 
-		// ƒuƒbƒNƒ}[ƒN’Ç‰Á
+		// ï¿½uï¿½bï¿½Nï¿½}ï¿½[ï¿½Nï¿½Ç‰ï¿½
 		System::Void toolStripMenuItemAddBookMark_Click(System::Object^  sender, System::EventArgs^  e) {
 			if((MTOPTION.BOOKMARK_COUNT - MTOPTION.BOOKMARK_DELETED_COUNT) > 9) {
 				MessageBox::Show(L"You can only have up to 10 bookmarks. Please free up some space by deleting some bookmarks.", L"Add Bookmark", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
@@ -2354,10 +2380,10 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			toolStripMenuItemBookMark->Tag = MTOPTION.BOOKMARK_COUNT;
 			toolStripMenuItemBookMark->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemBookMark_Click);
 
-			// íœƒƒjƒ…[
+			// ï¿½íœï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[
 			toolStripMenuItemDelBookMark = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			toolStripMenuItemBookMark->DropDownItems->Add(toolStripMenuItemDelBookMark);
-			toolStripMenuItemDelBookMark->Text = L"Delete";
+			toolStripMenuItemDelBookMark->Text = L"ï¿½Delete";
 			toolStripMenuItemDelBookMark->Tag = L"toolStripMenuItemBookMark" + MTOPTION.BOOKMARK_COUNT;
 			toolStripMenuItemDelBookMark->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelBookMark_Click);
 			
@@ -2376,7 +2402,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 
 			SaveMTOption();
 		}
-		// ƒuƒbƒNƒ}[ƒNÚ‘±
+		// ï¿½uï¿½bï¿½Nï¿½}ï¿½[ï¿½Nï¿½Ú‘ï¿½
 		System::Void toolStripMenuItemBookMark_Click(System::Object^ sender, System::EventArgs^ e) {
 			UINT tmpInt = (UINT)((ToolStripMenuItem^)sender)->Tag;
 
@@ -2391,7 +2417,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 
 			Restart();
 		}
-		// ƒuƒbƒNƒ}[ƒNíœ
+		// ï¿½uï¿½bï¿½Nï¿½}ï¿½[ï¿½Nï¿½íœ
 		System::Void toolStripMenuItemDelBookMark_Click(System::Object^ sender, System::EventArgs^ e) {
 			Object^ tmpTag;
 			tmpTag = ((ToolStripMenuItem^)sender)->Tag;
@@ -2409,14 +2435,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			}
 		}
 
-		// ƒQ[ƒ€‚Ì‹N“®
+		// ï¿½Qï¿½[ï¿½ï¿½ï¿½Ì‹Nï¿½ï¿½
 		System::Void GameStartToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			StartGame(RT_FREE);			
 		}
-		// ƒQ[ƒ€‚Ì‹N“®(ƒŠƒvƒŒƒC‚ğ•Û‘¶‚µ‚È‚¢)
+		// ï¿½Qï¿½[ï¿½ï¿½ï¿½Ì‹Nï¿½ï¿½(ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½Û‘ï¿½ï¿½ï¿½ï¿½È‚ï¿½)
 		System::Void GameStartNoReplayToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			bool primary = 0;
-			// ƒŠƒvƒŒƒC•Û‘¶ON‚È‚çˆê“I–³Œø‰»
+			// ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½Û‘ï¿½ONï¿½È‚ï¿½êï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if(toolStripMenuItemRecordReplay->Checked == 1) {
 				primary = 1;
 				MTOPTION.RECORD_REPLAY = 0;
@@ -2425,12 +2451,12 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			StartGame(RT_FREE);
 			
 			if(primary == 1) {
-				// ‹N“®‘O‚É–ß‚µ‚Ä‚µ‚Ü‚¤‚Ì–h~
+				// ï¿½Nï¿½ï¿½ï¿½Oï¿½É–ß‚ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½Ì–hï¿½~
 				Thread::Sleep(100);
 				MTOPTION.RECORD_REPLAY = toolStripMenuItemRecordReplay->Checked;
 			}
 		}
-		// Ä‹N“®
+		// ï¿½Ä‹Nï¿½ï¿½
 		System::Void RestartToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			if(MTOPTION.CONNECTION_TYPE == CT_SERVER) {
 				if(MessageBox::Show("his will shut down the server and drop all players.\nAre you sure you want to do this?", "Restart", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
@@ -2449,7 +2475,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			Restart();
 		}
 
-		// ‘Şº
+		// ï¿½Şï¿½
 		System::Void LeaveToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			if(MTOPTION.CONNECTION_TYPE == CT_SERVER) {
 				if(MessageBox::Show("This will shut down the server and drop all players.\nAre you sure you want to do this?", "Leave", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
@@ -2468,7 +2494,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			Leave(true);
 		}
 
-		// ‹xŒeó‘Ô‚ÌØ‚è‘Ö‚¦
+		// ï¿½xï¿½eï¿½ï¿½Ô‚ÌØ‚ï¿½Ö‚ï¿½
 		System::Void RestToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			if(MTOPTION.CONNECTION_TYPE == CT_FREE) return;
 
@@ -2482,19 +2508,19 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			}
 		}
 
-		// ‘Îí•åWó‘Ô‚ÌØ‚è‘Ö‚¦
+		// ï¿½Îï¿½ï¿½Wï¿½ï¿½Ô‚ÌØ‚ï¿½Ö‚ï¿½
 		System::Void SeekToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ChangeSeek();
 		}
 
-		// ƒƒO‚Ì‘Síœ
+		// ï¿½ï¿½ï¿½Oï¿½Ì‘Sï¿½íœ
 		System::Void ClearToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ClearLog();
 		}
 
-		// “–‚½‚è”»’è‚Ì•\¦Ø‘Ö
+		// ï¿½ï¿½ï¿½ï¿½ï¿½è”»ï¿½ï¿½Ì•\ï¿½ï¿½ï¿½Ø‘ï¿½
 		System::Void ToggleHitJudgeToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-			// ƒQ[ƒ€‹N“®’†‚È‚ç‘¦•ÏX
+			// ï¿½Qï¿½[ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½È‚ç‘¦ï¿½ï¿½ï¿½ÏX
 			MTOPTION.HIT_JUDGE ^= 1;
 			if(MTINFO.INITIALIZED && MTINFO.PROCESS != NULL){
 				DWORD b = MTOPTION.HIT_JUDGE;
@@ -2509,7 +2535,22 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 		}
 
 		System::Void toolStripMenuItemSaveLog_Click(System::Object^  sender, System::EventArgs^  e) {
-			SaveLog();
+			String^ path = gcnew String(MTOPTION.PATH);
+			String^ file = String::Format(L"LilithPort_{0}.log", DateTime::Now.ToString("yyMMdd-HHmmss"));
+			path += file;
+
+			Monitor::Enter(richTextBoxLog);
+			try{
+				richTextBoxLog->SaveFile(path, RichTextBoxStreamType::PlainText);
+			}
+			catch(Exception ^e){
+				WriteErrorLog(e->ToString(), "SaveLog");
+			}
+			finally{
+				Monitor::Exit(richTextBoxLog);
+			}
+
+			WriteMessage(String::Format(L"Saved log to \"{0}\".\n", file), SystemMessageColor);
 		}
 
 		System::Void toolStripMenuItemReplay_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -2546,16 +2587,16 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			}
 		}
 
-		// IPƒAƒhƒŒƒX‚Ìæ“¾ƒRƒ}ƒ“ƒh
+		// IPï¿½Aï¿½hï¿½ï¿½ï¿½Xï¿½Ìæ“¾ï¿½Rï¿½}ï¿½ï¿½ï¿½h
 		System::Void GetIPToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			GetIPAddress();
 		}
-		// ƒƒO‚ÌƒXƒNƒ[ƒ‹‚ğŒÅ’è
+		// ï¿½ï¿½ï¿½Oï¿½ÌƒXï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Å’ï¿½
 		System::Void LogLockToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			LogLockToolStripMenuItem->Checked ^= 1;
 			MTOPTION.LOG_LOCK = LogLockToolStripMenuItem->Checked;
 		}
-		// ƒƒ“ƒo[ƒŠƒXƒg‚ÌXVƒRƒ}ƒ“ƒh
+		// ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½[ï¿½ï¿½ï¿½Xï¿½gï¿½ÌXï¿½Vï¿½Rï¿½}ï¿½ï¿½ï¿½h
 		System::Void ReloadListToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ReloadList();
 		}
@@ -2618,12 +2659,12 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 		}
 
 		System::Void richTextBoxLog_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkClickedEventArgs^  e) {
-			// ‹­§I—¹‘Îô
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½Îï¿½
 			try{
 				Process::Start(e->LinkText);
 			}
 			catch(Exception^){
-				WriteMessage("•s³‚È•¶š—ñƒŠƒ“ƒN‚Å‚·B\n", ErrorMessageColor);
+				WriteMessage("ï¿½sï¿½ï¿½ï¿½È•ï¿½ï¿½ï¿½ï¿½ñƒŠƒï¿½ï¿½Nï¿½Å‚ï¿½ï¿½B\n", ErrorMessageColor);
 			}
 		}
 
@@ -2644,9 +2685,9 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 
 		}
 
-		// “_–ÅŠÖ”
+		// ï¿½_ï¿½ÅŠÖï¿½
 		System::Void WindowFlash() {
-			// ƒEƒBƒ“ƒhƒE“_–Å
+			// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½_ï¿½ï¿½
 			FLASHWINFO stfi;
 			ZeroMemory(&stfi, sizeof(FLASHWINFO));
 			stfi.cbSize = sizeof(FLASHWINFO);
@@ -2664,7 +2705,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			array<BYTE>^ send = gcnew array<BYTE>(3);
 
 			if(state == MS_FREE || state == MS_REST){
-				// ŠÏíŠJn
+				// ï¿½Ïï¿½Jï¿½n
 				if(state == MS_FREE) ChangeState((BYTE)MS_WATCH);
 				if(state == MS_REST) ChangeState((BYTE)MS_COUCH);
 
@@ -2693,7 +2734,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			UDP->BeginSend(ping, 1, MemberList[si]->IP_EP, gcnew AsyncCallback(SendPackets), UDP);
 		}
 
-		// –¼‘O‚ğƒRƒs[
+		// ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Rï¿½sï¿½[
 		System::Void toolStripMenuItemClipBoardCopy_Click(System::Object^  sender, System::EventArgs^  e) {
 			if(listBoxMember->SelectedIndex == -1){return;}
 
@@ -2701,7 +2742,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			System::Windows::Forms::Clipboard::SetDataObject(MemberList[si]->NAME, true);
 		}
 
-		// ƒLƒbƒN
+		// ï¿½Lï¿½bï¿½N
 		System::Void toolStripMenuItemKick_Click(System::Object^  sender, System::EventArgs^  e) {
 			if(listBoxMember->SelectedIndex == -1 || MTOPTION.CONNECTION_TYPE != CT_SERVER){return;}
 
@@ -2714,7 +2755,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			}
 			
 			try{
-				// –{l‚É’Ê’m
+				// ï¿½{ï¿½lï¿½É’Ê’m
 				array<BYTE>^ send = gcnew array<BYTE>(3){ PH_LOST, 0xFF, 0xFF };
 				UDP->BeginSend(send, send->Length, MemberList[index]->IP_EP, gcnew AsyncCallback(SendPackets), UDP);
 
@@ -2728,11 +2769,11 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 					}
 				}
 
-				// ƒOƒbƒoƒC
+				// ï¿½Oï¿½bï¿½oï¿½C
 				MemberList->RemoveAt(index);
 				listBoxMember->Items->RemoveAt(index);
 
-				// ‘¼‚Ìƒƒ“ƒo[‚É’Ê’m
+				// ï¿½ï¿½ï¿½Ìƒï¿½ï¿½ï¿½ï¿½oï¿½[ï¿½É’Ê’m
 				array<BYTE>^ quit = gcnew array<BYTE>(3){ PH_QUIT };
 				Array::Copy(BitConverter::GetBytes(id), 0, quit, 1, 2);
 
@@ -2795,7 +2836,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 				String^ extension = Path::GetExtension(file[0])->ToLower();
 				FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(file[0]);
 
-				if(extension == ".mtr" || (extension == ".exe" && (info->LegalCopyright == "(C)2001 ENTERBRAIN,INC / OUTBACK"))){
+				if (extension == ".mtr" || (extension == ".exe" && (IsCompatibleFMExecutable(info->FileDescription, info->LegalCopyright)))) {
 					e->Effect = DragDropEffects::All;
 				}
 			}
@@ -2819,12 +2860,12 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 						_tcscpy_s(MTOPTION.GAME_EXE, static_cast<PTCHAR>(mp.ToPointer()));
 						Runtime::InteropServices::Marshal::FreeHGlobal(mp);
 
-						// ini‚ÌƒpƒX‚ğ’²‚×‚é
+						// iniï¿½Ìƒpï¿½Xï¿½ğ’²‚×‚ï¿½
 						TCHAR ini[_MAX_PATH], dir[_MAX_PATH], drive[_MAX_DRIVE];
 
 						_tsplitpath_s(MTOPTION.GAME_EXE, drive, _MAX_DRIVE, dir, _MAX_DIR, NULL, 0, NULL, 0);
 
-						if(info->LegalCopyright == "(C)2001 ENTERBRAIN,INC / OUTBACK"){
+						if(IsCompatibleFM2KExecutable(info->FileDescription, info->LegalCopyright)){
 							b2nd = true;
 							//_stprintf_s(ini, _T("%s%sgame.ini"), drive, dir);
 							PathCombine(ini, PathCombine(ini, drive, dir), L"game.ini");
@@ -2842,15 +2883,15 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 								MTOPTION.TIMER     = GetPrivateProfileInt(_T("GamePlay"), _T("Editor.TestPlay.time"), 0, ini);
 							}
 							else{
-								MTOPTION.MAX_STAGE = GetPrivateProfileInt(_T("ƒQ[ƒ€İ’è"), _T("Editer.TestPlay.BackGroundNb"), 0, ini) + 1;
+								MTOPTION.MAX_STAGE = GetPrivateProfileInt(_T("ï¿½Qï¿½[ï¿½ï¿½ï¿½İ’ï¿½"), _T("Editer.TestPlay.BackGroundNb"), 0, ini) + 1;
 								MTOPTION.ROUND     = 2;
-								MTOPTION.TIMER     = GetPrivateProfileInt(_T("ƒQ[ƒ€İ’è"), _T("Editer.TestPlay.time"), 0, ini);
+								MTOPTION.TIMER     = GetPrivateProfileInt(_T("ï¿½Qï¿½[ï¿½ï¿½ï¿½İ’ï¿½"), _T("Editer.TestPlay.time"), 0, ini);
 							}
 
 							MTOPTION.STAGE_SELECT = MTOPTION.MAX_STAGE == 1 ? 1 : 0;
 						}
 
-						WriteMessage(String::Format("Game file changed to \"{0}\"‚É•ÏX‚µ‚Ü‚µ‚½B\n", Path::GetFileNameWithoutExtension(file[0])), SystemMessageColor);
+						WriteMessage(String::Format("Game file changed to \"{0}\"ï¿½É•ÏXï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B\n", Path::GetFileNameWithoutExtension(file[0])), SystemMessageColor);
 					}
 					else{
 						Option->SetGameExePath(file[0]);
@@ -2859,7 +2900,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			}
 		}
 
-		// ƒvƒƒtƒ@ƒCƒ‹•ÏX
+		// ï¿½vï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ÏX
 		System::Void toolStripDropDownItemProfile_Click(System::Object^ sender, System::EventArgs^ e) {
 			if(((ToolStripDropDownItem^)sender)->Text == gcnew String(MTOPTION.PROFILE)){
 				return;
@@ -2877,7 +2918,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 		System::Void toolStripMenuItemSeek_Click(System::Object^ sender, System::EventArgs^ e) {
 			this->SeekToolStripMenuItem_Click(nullptr, nullptr);
 		}
-		// ©“®‹xŒe—LŒø
+		// ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½eï¿½Lï¿½ï¿½
 		System::Void toolStripMenuItemAutoRestEnable_Click(System::Object^  sender, System::EventArgs^  e) {
 			toolStripMenuItemAutoRestEnable->Checked ^= 1;
 			MTOPTION.AUTO_REST = toolStripMenuItemAutoRestEnable->Checked;
@@ -2922,9 +2963,46 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardC
 			SetAutoRestTime(120);
 			toolStripMenuItemAutoRestTime120->Checked = 1;
 		}
-		// ƒƒO‚ÌƒeƒLƒXƒg‚ğÜ‚è•Ô‚·
+		// ï¿½ï¿½ï¿½Oï¿½Ìƒeï¿½Lï¿½Xï¿½gï¿½ï¿½Ü‚ï¿½Ô‚ï¿½
 		System::Void toolStripMenuItemWordWrap_Click(System::Object^ sender, System::EventArgs^  e) {
 			ChangeLogWordWrap();
 		}
-	};
+private: System::Void trainButton_Click(System::Object^  sender, System::EventArgs^  e) {
+	StartGame(RT_FREE);
+}
+private: System::Void reconnectButton_Click_1(System::Object^  sender, System::EventArgs^  e) {
+	if (MTOPTION.CONNECTION_TYPE == CT_SERVER) {
+		if (MessageBox::Show(L"This will shut down the server and drop all players.\nAre you sure you want to do this?", L"Restart", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes) {
+		}
+		else {
+			return;
+		}
+	}
+
+	if (MTOPTION.CONNECTION_TYPE == CT_HOST || MTOPTION.CONNECTION_TYPE == CT_CLIENT) {
+		if (MessageBox::Show(L"This will disconnect you from the server.\nContinue?", L"Restart", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes) {
+		}
+		else {
+			return;
+		}
+	}
+
+	Restart();
+}
+private: System::Void refreshButton_Click(System::Object^  sender, System::EventArgs^  e) {
+	ReloadList();
+}
+private: System::Void restButton_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (MTOPTION.CONNECTION_TYPE == CT_FREE) return;
+
+	if (MemberList[0]->STATE == MS_FREE) {
+		ChangeState((BYTE)MS_REST);
+		WriteMessage(L"Rest mode is now ON.\n", SystemMessageColor);
+	}
+	else if (MemberList[0]->STATE == MS_REST) {
+		ChangeState((BYTE)MS_FREE);
+		WriteMessage(L"Rest mode is now OFF.\n", SystemMessageColor);
+	}
+}
+};
 }

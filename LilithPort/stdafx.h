@@ -1,10 +1,10 @@
-// stdafx.h : •W€‚ÌƒVƒXƒeƒ€ ƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹A‚Ü‚½‚Í
-// QÆ‰ñ”‚ª‘½‚­A‚©‚Â‚ ‚Ü‚è•ÏX‚³‚ê‚È‚¢AƒvƒƒWƒFƒNƒgê—p‚ÌƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹
-// ‚ğ‹Lq‚µ‚Ü‚·B
+// stdafx.h : ï¿½Wï¿½ï¿½ï¿½ÌƒVï¿½Xï¿½eï¿½ï¿½ ï¿½Cï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½[ï¿½h ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ÌƒCï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½[ï¿½h ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Aï¿½Ü‚ï¿½ï¿½ï¿½
+// ï¿½Qï¿½Æ‰ñ”‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Â‚ï¿½ï¿½Ü‚ï¿½ÏXï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Aï¿½vï¿½ï¿½ï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½pï¿½ÌƒCï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½[ï¿½h ï¿½tï¿½@ï¿½Cï¿½ï¿½
+// ï¿½ï¿½ï¿½Lï¿½qï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
 #pragma once
 #pragma warning(disable: 4100)
 
-// TODO: ƒvƒƒOƒ‰ƒ€‚É•K—v‚È’Ç‰Áƒwƒbƒ_[‚ğ‚±‚±‚ÅQÆ‚µ‚Ä‚­‚¾‚³‚¢B
+// TODO: ï¿½vï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½É•Kï¿½vï¿½È’Ç‰ï¿½ï¿½wï¿½bï¿½_ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅQï¿½Æ‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
 #include <windows.h>
 #include <Shlwapi.h>
 #include <stdio.h>
@@ -22,7 +22,7 @@
 #pragma comment(lib,"ole32.lib")
 #pragma comment(lib,"oleaut32.lib")
 
-// IPæ“¾—p
+// IPï¿½æ“¾ï¿½p
 #include <winsock.h>
 #include <oleauto.h>
 
@@ -43,12 +43,15 @@ void ApplicationUnhandledException(Object^ sender, UnhandledExceptionEventArgs^ 
 
 void LoadMTOption();
 void SaveMTOption();
-void ReplaceWelcomeTab(bool TtoN);
 void SaveProfileOption();
 void CheckMTOption();
 void DeleteSection(TCHAR* obj);
 void ChangeStageValue();
 void SetCaption();
+
+bool IsCompatibleFM2KExecutable(String^ fileDesc, String ^ LegalCopyright);
+bool IsCompatibleFM95Executable(String^ fileDesc);
+bool IsCompatibleFMExecutable(String^ fileDesc, String ^ LegalCopyright);
 
 String^ EncryptionIP(String^ ip);
 String^ MTEncryptionIP(String^ ip);
@@ -61,11 +64,13 @@ UINT CipherRand(UINT32 seed = 0);
 UINT XorShift(UINT32 seed = 0);
 UINT RandomStage(UINT32 seed = 0);
 
-// ƒƒ“ƒo[î•ñ
+// ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½[ï¿½ï¿½ï¿½
 public ref struct MemberInfo
 {
 	IPEndPoint^ IP_EP;
 	String^     NAME;
+	String^		LOOKING;
+	String^		AVOIDING;
 	String^     COMMENT;
 	UINT16      ID;
 	UINT        TYPE;
@@ -74,19 +79,19 @@ public ref struct MemberInfo
 	DWORD       RESPONSE;
 };
 
-// ƒoƒbƒNƒAƒbƒv
+// ï¿½oï¿½bï¿½Nï¿½Aï¿½bï¿½v
 public ref struct MemberInfoBackUp
 {
 	IPEndPoint^ IP_EP;
 	UINT16      ID;
 };
 
-// ƒvƒƒtƒ@ƒCƒ‹ƒŠƒXƒg
+// ï¿½vï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½g
 public ref class Profile
 {
 	public:
 		static Generic::List<String^>^ ProfileList = gcnew Generic::List<String^>;
-		// ƒoƒŠƒf[ƒVƒ‡ƒ“—p
+		// ï¿½oï¿½ï¿½ï¿½fï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½p
 		static array<String^>^ SystemSection = gcnew array<String^>{"System", "State", "Color"};
 };
 
@@ -212,11 +217,11 @@ const UINT VOLUME_SET_2_95 = 0x0040203F;
 const BYTE VOLUME_SET_2_95_CODE[] = {0x50,0x8B,0x08,0xCC,0x52,0x50,0xFF,0x51,0x3C,0xE9,0x7B,0xFF,0xFF,0xFF,0x50,0x8B,
                                      0x08,0xCC,0x52,0x50,0xFF,0x51,0x3C,0xE9,0x7A,0xFF,0xFF,0xFF};
 
-// ƒo[ƒWƒ‡ƒ“î•ñ
-// LilithPort 1.03ˆÈãŒİŠ·, ‚»‚êˆÈ‘O‚Í‚È‚µ
+// ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±
+// LilithPort 1.03ä»¥ä¸Šäº’æ›, ãã‚Œä»¥å‰ã¯ãªã—
 const UINT LP_VERSION = 108;
 
-// İ’è€–Ú
+// ï¿½İ’è€ï¿½ï¿½
 const UINT MAX_NAME   = 32;
 const UINT MAX_ARRAY  = 64;
 const UINT MAX_ID     = 0x3FFF;
@@ -229,7 +234,7 @@ const UINT MAX_PROFILE = 2048;
 const BYTE TYMT_VERSION = 6;
 const UINT TIME_OUT = 3000;
 
-// ƒ`[ƒ€ƒvƒŒƒCl”
+// ï¿½`ï¿½[ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½lï¿½ï¿½
 const UINT MAX_TEAM_ROUND = 4;
 
 
@@ -295,6 +300,8 @@ typedef struct _MT_SP_OPTION
 	TCHAR KEYWORD[MAX_KEYWORD];
 	TCHAR NAME[MAX_NAME];
 	TCHAR COMMENT[MAX_NAME];
+	TCHAR LOOKING[MAX_NAME];
+	TCHAR AVOIDING[MAX_NAME];
 	UINT  PORT;
 	UINT  OPEN_PORT;
 	UINT  AUTO_SAVE;
@@ -335,6 +342,7 @@ typedef struct _MT_SP_OPTION
 	TCHAR PROFILE[MAX_ARRAY];
 	TCHAR PROFILE_LIST[MAX_PROFILE];
 	UINT  PROFILE_INDEX;
+	bool  CONNECT_REST;
 } MT_SP_OPTION;
 
 typedef struct _MT_SP_WINDOW_STATE
@@ -422,13 +430,13 @@ typedef enum {
 	PH_PING,
 	PH_PONG,
 	PH_REQ_CONNECTION,   // 1:protocol 1:name_l n:name 1:comment_l n:comment
-	PH_REQ_CONNECTION_H, // HOST‚ÈÚ‘±—v‹
+	PH_REQ_CONNECTION_H, // HOSTï¿½ÈÚ‘ï¿½ï¿½vï¿½ï¿½
 	PH_RES_CONNECTION,   // 1:server_name_l n:server_name 2:ID 1:name_l n:name 1:comment_l n:comment 1:state
 	PH_MESSAGE,          // 2:ID 1:msg_l n:msg
 	PH_NOTICE,           // 1:len n:notice
-	PH_REQ_LIST,         // 2:ID 0‚Å‘Sˆõ•ª
-	PH_RES_LIST,         // 2:ID 1:name_l n:name 1:comment_l n:comment 1:state 4:IP 2:Port + ˆÃ†
-	PH_NEW_MEMBER,       // ã‚Æ“¯‚¶
+	PH_REQ_LIST,         // 2:ID 0ï¿½Å‘Sï¿½ï¿½ï¿½ï¿½
+	PH_RES_LIST,         // 2:ID 1:name_l n:name 1:comment_l n:comment 1:state 4:IP 2:Port + ï¿½Ãï¿½
+	PH_NEW_MEMBER,       // ï¿½ï¿½Æ“ï¿½ï¿½ï¿½
 	PH_QUIT,             // 2:ID
 	PH_LOST,             // 2:ID
 	PH_CHANGE_STATE,     // 2:ID 1:STATE
@@ -436,21 +444,21 @@ typedef enum {
 	PH_RES_STATE,        // 2:ID 1:STATE
 	PH_CHANGE_COMMENT,   // 2:ID 1:comment_l n:comment
 	PH_DICE,             // 1:value
-	PH_REQ_VS,           // 2:ID 4:Àsƒtƒ@ƒCƒ‹‚ÌƒnƒbƒVƒ…
+	PH_REQ_VS,           // 2:ID 4:ï¿½ï¿½ï¿½sï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Ìƒnï¿½bï¿½Vï¿½ï¿½
 	PH_RES_VS,           // 1:state
-	PH_REQ_VS_PING,      // 1:ID 5ŒÂƒoƒ‰‚Åsend
-	PH_RES_VS_PONG,      // 1•bŠÔ‚É4ŒÂˆÈãóM‚Å‘ÎíŠJn
-	PH_REQ_VS_SETTING,   // 1:delay local‚Æhost‚Å‘å‚«‚È’l‚É‚ ‚í‚¹‚é
+	PH_REQ_VS_PING,      // 1:ID 5ï¿½Âƒoï¿½ï¿½ï¿½ï¿½send
+	PH_RES_VS_PONG,      // 1ï¿½bï¿½Ô‚ï¿½4ï¿½ÂˆÈï¿½ï¿½Mï¿½Å‘Îï¿½Jï¿½n
+	PH_REQ_VS_SETTING,   // 1:delay localï¿½ï¿½hostï¿½Å‘å‚«ï¿½È’lï¿½É‚ï¿½ï¿½í‚¹ï¿½ï¿½
 	PH_RES_VS_SETTING,   // 1:delay 4:seed 1:max_stage 1:stage 1:round 1:timer
-	PH_VS_DATA,          // 4:frame n:data 4*delayŒÂ•ª‘—M
-	PH_REQ_VS_DATA,      // 4:frame ƒpƒPƒbƒg—ˆ‚Ä‚È‚¢‚Ì‚Å‹Ù‹}—v¿
+	PH_VS_DATA,          // 4:frame n:data 4*delayï¿½Â•ï¿½ï¿½ï¿½ï¿½M
+	PH_REQ_VS_DATA,      // 4:frame ï¿½pï¿½Pï¿½bï¿½gï¿½ï¿½ï¿½Ä‚È‚ï¿½ï¿½Ì‚Å‹Ù‹}ï¿½vï¿½ï¿½
 	PH_RES_VS_DATA,      // 4:frame 2:input
 	PH_VS_END,
 	PH_REQ_WATCH,        // 2:ID
-	PH_RES_WATCH,        // 1:state 2:P1ID 2:P2ID 4:seed 1:max_stage 1:stage 1:round 1:timer  state = 0:ŠÏíŠJn 1`:ŠÏí•s‰Â
-	PH_WATCH_DATA,       // 4:frame 40:10ƒtƒŒ[ƒ€•ª‚Ìƒf[ƒ^
-	PH_WATCH_END,        // 2:ID ©•ª‚Ì‚Æ“¯‚¶ID‚È‚çŠÏíI—¹A‘¼‚ÌID‚È‚çƒŠƒXƒg‚©‚çíœ
-	PH_SECRET,           // 1:type n:type‚²‚Æ‚É‚¢‚ë‚¢‚ë
+	PH_RES_WATCH,        // 1:state 2:P1ID 2:P2ID 4:seed 1:max_stage 1:stage 1:round 1:timer  state = 0:ï¿½Ïï¿½Jï¿½n 1ï¿½`:ï¿½Ïï¿½sï¿½ï¿½
+	PH_WATCH_DATA,       // 4:frame 40:10ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒfï¿½[ï¿½^
+	PH_WATCH_END,        // 2:ID ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚Æ“ï¿½ï¿½ï¿½IDï¿½È‚ï¿½Ïï¿½Iï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½IDï¿½È‚çƒŠï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½íœ
+	PH_SECRET,           // 1:type n:typeï¿½ï¿½ï¿½Æ‚É‚ï¿½ï¿½ë‚¢ï¿½ï¿½
 } MT_SP_PACKET_HEADER;
 
 typedef enum {

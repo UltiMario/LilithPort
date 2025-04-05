@@ -1,23 +1,23 @@
-# LilithPort
-LilithPort is a UDP multiplayer/netplay program for 2D Fighter Maker games. It includes chat and makes accommodations for players who cannot forward their ports. LilithPort is based off MT Special Edition, which is in turn based off LunaPort.
+# Telepone Reborn
+Telepone Reborn is a UDP multiplayer/netplay program for 2D Fighter Maker games. It includes chat and makes accommodations for players who cannot forward their ports. Telepone Reborn is based off LilithPort and MT Special Edition, which is in turn based off LunaPort.
 
-This program was *not* made with Enterbrain's permission. It was ultimately made by reverse engineering the 2D Fighter Maker code. More so, my translation/continuation of LilithPort was not made with the original LilithPort developer's permission. If he ever decides to pick this back up or make changes to the code, I will comply.
+Telepone Reborn was *not* made with Enterbrain's permission. It was ultimately made by reverse engineering the 2D Fighter Maker code. More so, my translation/continuation of Telepone Reborn was not made with the original LilithPort developer's permission. If he ever decides to pick this back up or make changes to the code, I will comply.
 
-> LilithPort requires .NET Framework 3.5. **You also need the Visual C++ 2015 redistributable. [Get both x86 and x64 versions!](https://www.microsoft.com/en-us/download/details.aspx?id=48145)**
+Telepone Reborn requires .NET Framework 4.0.
 
 ## Games
-Any game that uses 2D Fighter Maker (95/2002) will work. LilithPort is also backwards compatible with servers that use MTSP.
+Any game that uses 2D Fighter Maker (95/2002) will work. Telepone Reborn is also backwards compatible with servers that use MTSP.
  - [Pokémon Type: Wild](http://oneweakness.com/pokemon-type-wild.html)
  - [Vanguard Princess](http://wiki.mizuumi.net/w/Vanguard_Princess/Netplay)
  - [WonderfulWorld](http://www55.atwiki.jp/ainefill_oinusama/pages/111.html)
  - and many more...
  
 ## Public Servers
-This 24/7 server is run by Vick, for Vanguard Princess and Pokémon Type: Wild players:
-
-    alavanguard.ddns.net:7500
+Currently, no servers are being advertised for general use. Please visit your game's website for multiplayer information.
 
 ## Instructions
+Sorry for everyone who has been waiting for so long for proper instructions on how to use LilithPort.
+
 When you start LilithPort, a Welcome menu appears. There are 4 main modes of operation:
 - **Free Play** - just play locally and configure options. To go to Free Play mode, just disconnect from a server (`Commands > Leave`) or press `Cancel` on the Welcome dialog.
 - **Client** - connect to a server without match hosting capabilities. Useful if you cannot forward ports on your network.
@@ -27,24 +27,6 @@ When you start LilithPort, a Welcome menu appears. There are 4 main modes of ope
   - *Listen port* - port used for hosting server (default is 7500).
 
 On the destination name, you can also enter the port separated by a colon (:) such as `MyServer:7500`.
-
-### Port forwarding via UPnP
-Since LilithPort 1.08, you can use UPnP to directly communicate to your router to open a port without any admin access.
-
-How to use:
-
-1. Enter the port number. This should be your listen port.
-2. Press either `Open` or `Close` to open or close the desired port.
-3. After opening the port, you can use the port in Host or Server mode.
-4. After closing the port, it is no longer open to the Internet.
-
-You cannot use UPnP in the following circumstances:
-
- - UPnP is not supported by your router (unlikely; most home routers enable UPnP by default)
- - Your IP address is designated as private by your ISP (for instance, if there exists an additional NAT layer on the ISP's side to mitigate IPv4 address exhaustion)
- - Double NAT or double router configuration (unless the outer router has the inner router set as the DMZ)
- - Firewall is present (in which case you should add an exception to your firewall)
- - Bugged UPnP implementation on router (very common)
 
 ### Special server modes
 You can prepend a special symbol on your server name to activate some special behaviors:
@@ -117,14 +99,14 @@ where the maximum frame delay is 12.
 
 Player 2 calculates the delay and passes it to Player 1. If Player 1 has a greater frame delay (as set either manually or determined with ping), that larger delay will be sent back to Player 2.
 
-## Easy game path changing
+## Easy Game Path Changing
 By dragging and dropping your game executable on the main window, the game path is automatically changed without having to enter the options menu. If a profile was configured for that specific game, then that profile will automatically be opened as well.
 
-## Joystick warning
-If you are playing an FM95 game, the joystick is disabled due to compatibility reasons. Please use JoyToKey or [AntiMicro](https://github.com/AntiMicro/antimicro/releases).
+## Joystick Warning
+If you are playing an FM95 game, the joystick is disabled due to compatibility reasons. Please use JoyToKey or [AntiMicro](https://github.com/Ryochan7/antimicro/releases).
 
 In addition, there is a massive performance penalty for turning on joystick support in 2DFM in most cases. 
 The reason is that 2DFM will silently error out when a joystick is expected but is not detected. In order to mitigate this, please have at least two controllers plugged in.
 
 ## Dedicated Server
-A dedicated server is coming in the very distant future. In the meantime, you can pass the `-s <port>` command line argument to LilithPort to start server mode immediately and close silently on exception.
+A dedicated server is coming in the very distant future. In the meantime, you can pass the `-s <port>` command line argument to Telepone Reborn to start server mode immediately and close silently on exception.

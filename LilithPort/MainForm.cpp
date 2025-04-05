@@ -15,6 +15,8 @@ void MainForm::Begin()
 	me->IP_EP    = gcnew IPEndPoint(0, 0);
 	me->ID       = 0;
 	me->NAME     = gcnew String(MTOPTION.NAME);
+	me->LOOKING = gcnew String(MTOPTION.LOOKING);
+	me->AVOIDING = gcnew String(MTOPTION.AVOIDING);
 	me->COMMENT  = gcnew String(MTOPTION.COMMENT);
 	me->TYPE     = MTOPTION.CONNECTION_TYPE;
 	me->STATE    = MS_FREE;
@@ -26,16 +28,16 @@ void MainForm::Begin()
 		bk->IP_EP    = gcnew IPEndPoint(0, 0);
 		bk->ID       = 0;
 
-		// “ÁêƒT[ƒoƒ‚[ƒh”»’è
+		// ï¿½ï¿½ï¿½ï¿½Tï¿½[ï¿½oï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½ï¿½
 		if(ServerName[0] == '#'){
 			ServerMode = SM_NORA;
 			ListView = LV_BLIND;
-			me->NAME = gcnew String("Ÿ");
+			me->NAME = gcnew String("ï¿½ï¿½");
 			me->COMMENT = String::Empty;
 
 			MemberList->Add(me);
 			MemberListBackUp->Add(bk);
-			listBoxMember->Items->Add(gcnew String("“½–¼ƒ‚[ƒh"));
+			listBoxMember->Items->Add(gcnew String("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½h"));
 		}
 		else{
 			MemberList->Add(me);
@@ -56,7 +58,7 @@ void MainForm::Begin()
 	}
 
 	try{
-		// ‰ñüİ’è
+		// ï¿½ï¿½ï¿½ï¿½İ’ï¿½
 		if(MTOPTION.CONNECTION_TYPE == CT_SERVER || MTOPTION.CONNECTION_TYPE == CT_HOST){
 			UDP = gcnew UdpClient(MTOPTION.OPEN_PORT);
 		}
@@ -78,13 +80,13 @@ void MainForm::Begin()
 		}
 	}
 
-	// ƒlƒbƒg‚ÉÚ‘±
+	// ï¿½lï¿½bï¿½gï¿½ÉÚ‘ï¿½
 	if(UDP != nullptr && MTOPTION.CONNECTION_TYPE != CT_FREE){
 
-		// İ’è‚ğ•Û‘¶
+		// ï¿½İ’ï¿½ï¿½Û‘ï¿½
 		SaveMTOption();
 
-		// ©“®‹xŒeƒXƒŒƒbƒhŠJn
+		// ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½eï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½Jï¿½n
 		if(MTOPTION.AUTO_REST && MemberList[0]->STATE == MS_FREE){
 			AutoRestThread = gcnew Thread(gcnew ThreadStart(this, &MainForm::RunAutoRest));
 			AutoRestThread->Start();
@@ -92,10 +94,10 @@ void MainForm::Begin()
 
 		if(MTOPTION.CONNECTION_TYPE == CT_SERVER){
 
-			// IóMŠJn
+			// ï¿½Iï¿½ï¿½Mï¿½Jï¿½n
 			UDP->BeginReceive(gcnew AsyncCallback(ReceivePackets), this);
 
-			// ƒ\ƒi[‹N“®
+			// ï¿½\ï¿½iï¿½[ï¿½Nï¿½ï¿½
 			Ranging = true;
 			SonarThread = gcnew Thread(gcnew ThreadStart(this, &MainForm::RunSonar));
 			SonarThread->Start();
@@ -104,8 +106,13 @@ void MainForm::Begin()
 			WriteTime(0, SystemMessageColor);
 			WriteMessage("Server Initializing\n[MOTD]---------------------\n", SystemMessageColor);
 
-			// WelcomeƒƒbƒZ[ƒW‚Ì•\¦
-			ReplaceWelcomeTab(true);
+			// Welcomeãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è¡¨ç¤º
+			int len = _tcslen(MTOPTION.WELCOME);
+			for(int i = 0; i < len; i++){
+				if(MTOPTION.WELCOME[i] == _T('\t')){
+					MTOPTION.WELCOME[i] = _T('\n');
+				}
+			}
 			richTextBoxLog->SelectionFont = gcnew Drawing::Font(richTextBoxLog->Font->FontFamily, richTextBoxLog->Font->Size + 2);
 			richTextBoxLog->SelectionColor = TalkMessageColor;
 			richTextBoxLog->SelectionBackColor = NoticeBackColor;
@@ -113,19 +120,19 @@ void MainForm::Begin()
 
 			WriteMessage("-------------------------------\n", SystemMessageColor);
 			
-			// IPƒAƒhƒŒƒX‚ğæ“¾‚µ‚Ä•\¦
+			// IPï¿½Aï¿½hï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½Ä•\ï¿½ï¿½
 			if(MTOPTION.GET_IP_ENABLE){
 				GetIPAddress();
 			}
 
 		}
 		else{
-			// ƒNƒ‰ƒCƒAƒ“ƒg
+			// ï¿½Nï¿½ï¿½ï¿½Cï¿½Aï¿½ï¿½ï¿½g
 			_int64 address;
 			int port = MTOPTION.PORT;
 			array<String^>^ host = ConnectIP->Split(gcnew array<wchar_t>{':'}, 2, StringSplitOptions::RemoveEmptyEntries);
 
-			// ƒ|[ƒg":"w’è
+			// ï¿½|ï¿½[ï¿½g":"ï¿½wï¿½ï¿½
 			if(host->Length > 1){
 				try{
 					port = Convert::ToInt32(host[1]);
@@ -137,7 +144,7 @@ void MainForm::Begin()
 
 			try{
 
-				// MTSPƒAƒhƒŒƒXÚ‘±
+				// MTSPï¿½Aï¿½hï¿½ï¿½ï¿½Xï¿½Ú‘ï¿½
 				if(host[0]->Length == 5){
 					try{
 						if(MTINFO.DEBUG){
@@ -153,7 +160,7 @@ void MainForm::Begin()
 					}
 				}
 
-				// •ÏŠ·ƒAƒhƒŒƒXÚ‘±(ASCII)
+				// ï¿½ÏŠï¿½ï¿½Aï¿½hï¿½ï¿½ï¿½Xï¿½Ú‘ï¿½(ASCII)
 				if(address == 0){
 					try{
 						if(MTINFO.DEBUG){
@@ -169,7 +176,7 @@ void MainForm::Begin()
 					}
 				}
 
-				// DNSÚ‘±
+				// DNSï¿½Ú‘ï¿½
 				if(address == 0){
 					try{
 						if(MTINFO.DEBUG){
@@ -179,14 +186,14 @@ void MainForm::Begin()
 					}
 					catch(Exception^ e){
 						if(MTINFO.DEBUG){
-							WriteMessage("DNS Error”s\n", ErrorMessageColor);
+							WriteMessage("DNS Errorï¿½s\n", ErrorMessageColor);
 							WriteMessage(e->ToString() + "\n", DebugMessageColor);
 						}
 						address = 0;
 					}
 				}
 
-				// •ÏŠ·ƒAƒhƒŒƒXÚ‘±(Unicode)
+				// ï¿½ÏŠï¿½ï¿½Aï¿½hï¿½ï¿½ï¿½Xï¿½Ú‘ï¿½(Unicode)
 				if(address == 0){
 					try{
 						if(MTINFO.DEBUG){
@@ -202,7 +209,7 @@ void MainForm::Begin()
 					}
 				}
 
-				// ƒ[ƒJƒ‹Ú‘±—p
+				// ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½Ú‘ï¿½ï¿½p
 				/*
 				if(address == 0){
 					try{
@@ -212,7 +219,7 @@ void MainForm::Begin()
 					}
 					catch(Exception^ e){
 						if(MTINFO.DEBUG){
-							WriteMessage("ƒ[ƒJƒ‹Ú‘±¸”s\n", ErrorMessageColor);
+							WriteMessage("ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½Ú‘ï¿½ï¿½ï¿½ï¿½s\n", ErrorMessageColor);
 							WriteMessage(e->ToString() + "\n", DebugMessageColor);
 						}
 						address = 0;
@@ -222,7 +229,7 @@ void MainForm::Begin()
 				
 
 				if(address == 0){
-					WriteMessage("ERROR: Could not find destination address.\n", ErrorMessageColor);
+					WriteMessage("ï¿½ERROR: Could not find destination address.\n", ErrorMessageColor);
 					throw gcnew SocketException;
 				}
 
@@ -242,17 +249,17 @@ void MainForm::Begin()
 				pp->Pack((BYTE)cmnt->Length);
 				pp->Pack(cmnt);
 
-				// ƒT[ƒo‚ÉÚ‘±—v‹
+				// ï¿½Tï¿½[ï¿½oï¿½ÉÚ‘ï¿½ï¿½vï¿½ï¿½
 				UDP->Send(pp->Packet, pp->Length, ep);
 
-				// •ÔM‘Ò‚¿
+				// ï¿½ÔMï¿½Ò‚ï¿½
 				UDP->Client->ReceiveTimeout = TIME_OUT;
 				array<BYTE>^ rcv = UDP->Receive(ep);
 				UDP->Client->ReceiveTimeout = 0;
 
 				PacketDivider^ pd = gcnew PacketDivider(rcv);
 
-				// Ú‘±OK
+				// ï¿½Ú‘ï¿½OK
 				if(pd->Divide() == PH_RES_CONNECTION){
 					int len = pd->Divide();
 
@@ -270,24 +277,24 @@ void MainForm::Begin()
 					mi->NUM_VS   = 0;
 					mi->RESPONSE = timeGetTime();
 
-					// –¼‘O
+					// ï¿½ï¿½ï¿½O
 					len = pd->Divide();
 					mi->NAME = Encoding::Unicode->GetString(pd->Divide(len));
 
-					// ƒRƒƒ“ƒg
+					// ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½g
 					len = pd->Divide();
 					mi->COMMENT = Encoding::Unicode->GetString(pd->Divide(len));
 
-					// ó‘Ô
+					// ï¿½ï¿½ï¿½
 					mi->STATE = pd->Divide();
 
 					MemberList->Add(mi);
 					AddListView(mi);
 
-					// ƒo[ƒWƒ‡ƒ“Šm”F
+					// ï¿½oï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½mï¿½F
 					UINT ServerVersion;
 					try{
-						// 1.03ˆÈã‚È‚ç—ˆ‚é
+						// 1.03ï¿½Èï¿½È‚ç—ˆï¿½ï¿½
 						ServerVersion = pd->Divide();
 						MTINFO.VERSION_CHECKED = true;
 					}
@@ -307,7 +314,7 @@ void MainForm::Begin()
 						WriteMessage("WARNING: MTSP Server Joined", ErrorMessageColor);
 					}
 
-					// ‘ óMŠJn
+					// ï¿½ï¿½ï¿½ï¿½Mï¿½Jï¿½n
 					UDP->BeginReceive(gcnew AsyncCallback(ReceivePackets), this);
 
 
@@ -322,7 +329,7 @@ void MainForm::Begin()
 					if(ServerName->Length > 0){
 						if(ServerName[0] == '+'){
 							ServerMode = SM_MIX;
-							WriteMessage("Server is in mixed mode.\n", SystemMessageColor);
+							WriteMessage("ï¿½Server is in mixed mode.\n", SystemMessageColor);
 						}
 						if(ServerName[0] == '@'){
 							ServerMode = SM_MATCH;
@@ -337,14 +344,14 @@ void MainForm::Begin()
 						}
 					}
 
-					// ƒƒ“ƒo[ƒŠƒXƒg‚ğ—v‹
+					// ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½[ï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½vï¿½ï¿½
 					pp->Clear();
 					pp->Pack(PH_REQ_LIST);
 					pp->Pack(0);
 					pp->Pack(0);
 					UDP->Send(pp->Packet, pp->Length, ep);
 
-					// ƒ\ƒi[‹N“®
+					// ï¿½\ï¿½iï¿½[ï¿½Nï¿½ï¿½
 					Ranging = true;
 					SonarThread = gcnew Thread(gcnew ThreadStart(this, &MainForm::RunSonar));
 					SonarThread->Start();
@@ -459,7 +466,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 
 		case PH_REQ_CONNECTION:
 		case PH_REQ_CONNECTION_H:
-			// I‚¶‚á‚È‚¢‚Ì‚ÉÚ‘±—v‹‚ª—ˆ‚½
+			// ï¿½Iï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Ì‚ÉÚ‘ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if(MTOPTION.CONNECTION_TYPE != CT_SERVER){
 				break;
 			}
@@ -477,18 +484,18 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 
 				i = pd->Divide() == PH_REQ_CONNECTION ? CT_CLIENT : CT_HOST;
 
-				// ƒT[ƒo–¼
+				// ï¿½Tï¿½[ï¿½oï¿½ï¿½
 				pp->Pack(PH_RES_CONNECTION);
 				pp->Pack((BYTE)saba->Length);
 				pp->Pack(saba);
 
-				// ID‚Ì”­s
+				// IDï¿½Ì”ï¿½ï¿½s
 				if(MemberList->Count > (int)MTOPTION.MAX_CONNECTION){
-					// –º
+					// ï¿½ï¿½ï¿½ï¿½
 					a_id = gcnew array<BYTE>{ 0xFF, 0xFF };
 				}
 				else if(pd->Divide() != TYMT_VERSION){
-					// ƒo[ƒWƒ‡ƒ“ˆá‚¢
+					// ï¿½oï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½á‚¢
 					a_id = gcnew array<BYTE>{ 0xFE, 0xFF };
 				}
 				else{
@@ -499,7 +506,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 							form->WriteMessage("ERROR: issued ID is above the max ID!\n", ErrorMessageColor);
 						}
 
-						// ƒƒ“ƒo[“o˜^
+						// ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½[ï¿½oï¿½^
 						mi = gcnew MemberInfo;
 						mi->IP_EP    = ep;
 						mi->ID       = IDCounter;
@@ -508,11 +515,11 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 						mi->NUM_VS   = 0;
 						mi->RESPONSE = timeGetTime();
 
-						// –¼‘O
+						// ï¿½ï¿½ï¿½O
 						i = pd->Divide();
 						mi->NAME = Encoding::Unicode->GetString(pd->Divide(i));
 
-						// ƒRƒƒ“ƒg
+						// ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½g
 						i = pd->Divide();
 						mi->COMMENT = Encoding::Unicode->GetString(pd->Divide(i));
 
@@ -524,7 +531,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 						MemberList->Add(mi);
 						form->AddListView(mi);
 
-						// ƒoƒbƒNƒAƒbƒv
+						// ï¿½oï¿½bï¿½Nï¿½Aï¿½bï¿½v
 						MemberInfoBackUp^ mibk = gcnew MemberInfoBackUp;
 						mibk->IP_EP = ep;
 						mibk->ID    = IDCounter;
@@ -545,27 +552,27 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				// ID
 				pp->Pack(a_id);
 
-				// Iå‚ÌƒjƒbƒNƒl[ƒ€
+				// ï¿½Iï¿½ï¿½Ìƒjï¿½bï¿½Nï¿½lï¿½[ï¿½ï¿½
 				pp->Pack((BYTE)name->Length);
 				pp->Pack(name);
 
-				// Iå‚ÌƒRƒƒ“ƒg
+				// ï¿½Iï¿½ï¿½ÌƒRï¿½ï¿½ï¿½ï¿½ï¿½g
 				pp->Pack((BYTE)cmnt->Length);
 				pp->Pack(cmnt);
 
-				// ó‘Ô
+				// ï¿½ï¿½ï¿½
 				pp->Pack((BYTE)MemberList[0]->STATE);
 
-				// ƒo[ƒWƒ‡ƒ“î•ñ‘—M
+				// ï¿½oï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ñ‘—M
 				pp->Pack((BYTE)LP_VERSION);
 
-				// “o˜^Š®—¹
+				// ï¿½oï¿½^ï¿½ï¿½ï¿½ï¿½
 				UDP->Send(pp->Packet, pp->Length, ep);
 
 				if(mi != nullptr){
 					pp->Clear();
 
-					// ‘Sˆõ‚É“üº‚ğ’Ê’m
+					// ï¿½Sï¿½ï¿½ï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½Ê’m
 					name = Encoding::Unicode->GetBytes(mi->NAME);
 					cmnt = Encoding::Unicode->GetBytes(mi->COMMENT);
 					array<BYTE>^ address = ep->Address->GetAddressBytes();
@@ -583,7 +590,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 					pp->Pack(address);
 					pp->Pack(port);
 
-					// ŠÈˆÕˆÃ†
+					// ï¿½ÈˆÕˆÃï¿½
 					Monitor::Enter(ServerName);
 					try{
 						CipherRand(ServerName->GetHashCode());
@@ -605,9 +612,14 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				Monitor::Exit(MemberList);
 			}
 
-			// WelcomeƒƒbƒZ[ƒW
-			ReplaceWelcomeTab(true);
+			// Welcomeãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+			for(UINT j = 0; j < _tcslen(MTOPTION.WELCOME); j++){
+				if(MTOPTION.WELCOME[j] == _T('\t')){
+					MTOPTION.WELCOME[j] = _T('\n');
+				}
+			}
 			i = _tcslen(MTOPTION.WELCOME)*2;
+
 
 			if(i > 0){
 				Thread::Sleep(50);
@@ -630,7 +642,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				form->TalkMessage(BitConverter::ToUInt16(rcv, 1), rcv);
 			}
 			else{
-				// óMONLY
+				// ï¿½ï¿½MONLY
 				form->TalkMessage(0xFFFF, rcv);
 			}
 			break;
@@ -655,7 +667,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				Monitor::Enter(MemberList);
 				try{
 					for(i = 1; i < MemberList->Count; i++){
-						// id == 0‚Å‘Sˆõ•ª
+						// id == 0ï¿½Å‘Sï¿½ï¿½ï¿½ï¿½
 						if(id == 0 || id == MemberList[i]->ID){
 							a_id = BitConverter::GetBytes((UINT16)(MemberList[i]->ID | MemberList[i]->TYPE << 14));
 							name = Encoding::Unicode->GetBytes(MemberList[i]->NAME);
@@ -674,7 +686,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 							pp->Pack(address);
 							pp->Pack(port);
 
-							// ŠÈˆÕˆÃ†
+							// ï¿½ÈˆÕˆÃï¿½
 							Monitor::Enter(ServerName);
 							try{
 								CipherRand(ServerName->GetHashCode());
@@ -701,15 +713,15 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 					}
 
 					if(id > 0 && i >= MemberList->Count){
-						// ƒT[ƒo‚Å‚àƒNƒ‰‚Å‚àŒ©‚¦‚È‚¢ó‘Ô
+						// ï¿½Tï¿½[ï¿½oï¿½Å‚ï¿½ï¿½Nï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½
 						if(MTINFO.DEBUG){
-							form->WriteMessage(String::Format("Unknown({0})‚ÌŒŸõ\n", id), ErrorMessageColor);
+							form->WriteMessage(String::Format("Unknown({0})ï¿½ÌŒï¿½ï¿½ï¿½\n", id), ErrorMessageColor);
 						}
 
-						// ƒoƒbƒNƒAƒbƒvŒŸõ
+						// ï¿½oï¿½bï¿½Nï¿½Aï¿½bï¿½vï¿½ï¿½ï¿½ï¿½
 						if(id <= MemberListBackUp->Count){
 							try{
-								// Unknown’Ê’m
+								// Unknownï¿½Ê’m
 								array<BYTE>^ send = gcnew array<BYTE>(3){ PH_LOST, 0xFF, 0xFF };
 								UDP->BeginSend(send, send->Length, MemberListBackUp[id]->IP_EP, gcnew AsyncCallback(SendPackets), UDP);
 								form->WriteMessage(String::Format("Sent notice to Unknown ({0})\n", id), SystemMessageColor);
@@ -720,7 +732,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 								}
 							}
 						}else{
-							// ƒoƒbƒNƒAƒbƒvƒŠƒXƒgˆÈã‚ÌID
+							// ï¿½oï¿½bï¿½Nï¿½Aï¿½bï¿½vï¿½ï¿½ï¿½Xï¿½gï¿½Èï¿½ï¿½ID
 							form->WriteMessage(String::Format("This ID is not present in the log. Shut down and restart the server after waiting a while.\n", id), ErrorMessageColor);
 						}
 					}
@@ -733,7 +745,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 
 		case PH_RES_LIST:
 		case PH_NEW_MEMBER:
-			// ŠÈˆÕ•œ†
+			// ï¿½ÈˆÕ•ï¿½ï¿½ï¿½
 			Monitor::Enter(ServerName);
 			try{
 				CipherRand(ServerName->GetHashCode());
@@ -761,25 +773,25 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 					mi->TYPE   = id >> 14;
 					mi->NUM_VS = 0;
 
-					// –¼‘O
+					// ï¿½ï¿½ï¿½O
 					len = pd->Divide();
 					mi->NAME = Encoding::Unicode->GetString(pd->Divide(len));
 
-					// ƒRƒƒ“ƒg
+					// ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½g
 					len = pd->Divide();
 					mi->COMMENT = Encoding::Unicode->GetString(pd->Divide(len));
 
-					// ó‘Ô
+					// ï¿½ï¿½ï¿½
 					mi->STATE = pd->Divide();
 
-					// ƒGƒ“ƒhƒ|ƒCƒ“ƒg
+					// ï¿½Gï¿½ï¿½ï¿½hï¿½|ï¿½Cï¿½ï¿½ï¿½g
 					mi->IP_EP->Address = gcnew IPAddress(pd->Divide(4));
 					mi->IP_EP->Port    = BitConverter::ToUInt16(pd->Divide(2), 0);
 
 					MemberList->Add(mi);
 					form->AddListView(mi);
 
-					// ˆ¥A‘ã‚í‚è
+					// ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½
 					UDP->Send(gcnew array<BYTE>{PH_PING}, 1, mi->IP_EP);
 
 					if(rcv[0] == PH_NEW_MEMBER){
@@ -800,7 +812,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 			try{
 				if(MTOPTION.CONNECTION_TYPE == CT_SERVER){
 					int member = 0;
-					// ‘Sˆõ‚É’Ê’B
+					// ï¿½Sï¿½ï¿½ï¿½É’Ê’B
 					for(i = 1; i < MemberList->Count; i++){
 						if(id != MemberList[i]->ID){
 							UDP->BeginSend(rcv, rcv->Length, MemberList[i]->IP_EP, gcnew AsyncCallback(SendPackets), UDP);
@@ -816,7 +828,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 							form->WriteMessage(MemberList[member]->NAME + " has left.\n", SystemMessageColor);
 						}
 
-						// ŠÏí’†~
+						// ï¿½Ïí’†ï¿½~
 						if(MemberList[0]->STATE == MS_WATCH || MemberList[0]->STATE == MS_COUCH){
 							if(TargetID == MemberList[member]->ID){
 								form->QuitWatch(false);
@@ -860,7 +872,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 										}
 									}
 
-									// ŠÏí’†~
+									// ï¿½Ïí’†ï¿½~
 									if(MemberList[0]->STATE == MS_WATCH || MemberList[0]->STATE == MS_COUCH){
 										if(TargetID == MemberList[i]->ID){
 											form->QuitWatch(false);
@@ -978,12 +990,12 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 						MemberList[i]->RESPONSE = timeGetTime();
 
 						if(rcv[3] == 0xFF){
-							// ‚»‚ñ‚Èl‚¢‚È‚©‚Á‚½
+							// ï¿½ï¿½ï¿½ï¿½Èlï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½
 							form->WriteTime(0, SystemMessageColor);
 							form->WriteMessage(MemberList[i]->NAME + " is new.\n", SystemMessageColor);
 
 							if(MTOPTION.CONNECTION_TYPE == CT_SERVER){
-								// ‘Sˆõ‚É’Ê’B
+								// ï¿½Sï¿½ï¿½ï¿½É’Ê’B
 								rcv[0] = PH_LOST;
 
 								for(int j = 1; j < MemberList->Count; j++){
@@ -993,9 +1005,9 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 								}
 							}
 							else{
-								// ‚¢‚È‚©‚Á‚½’Ê’m ‰‹}ˆ’uVer
-								// ‘ ‚©‚ç‚Ì‚İŒ©‚¦‚Ä‚¢‚éó‘Ô
-								// ƒT[ƒo‚É‚Íî•ñ‚ª‚È‚¢‚Ì‚ÅŠÔÚ“I‚É’Ê’m‚µ‚Ä‚à‚ç‚¤
+								// ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê’m ï¿½ï¿½ï¿½}ï¿½ï¿½ï¿½uVer
+								// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚İŒï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½
+								// ï¿½Tï¿½[ï¿½oï¿½É‚Íï¿½ñ‚ª‚È‚ï¿½ï¿½Ì‚ÅŠÔÚ“Iï¿½É’Ê’mï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ç‚¤
 								rcv[0] = PH_LOST;
 								rcv[1] = 0xFF;
 								rcv[2] = 0xFF;
@@ -1047,7 +1059,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 						form->listBoxMember->Items[i] = MemberList[i]->COMMENT;
 					}
 					else{
-						form->listBoxMember->Items[i] = gcnew String("Ÿ");
+						form->listBoxMember->Items[i] = gcnew String("ï¿½ï¿½");
 					}
 				}
 			}
@@ -1092,7 +1104,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				Thread::Sleep(500);
 			}
 
-			// €”õŠÔ‚ª’·‚·‚¬‚½ê‡‚ÍV‹KÚ‘±ó•t
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½ÍVï¿½Kï¿½Ú‘ï¿½ï¿½ï¿½t
 			if(NetVS != nullptr && MemberList[0]->STATE == MS_READY){
 				if((timeGetTime() - NetVS->START_UP) > TIME_OUT*2 + 1000){
 					MemberList[0]->STATE = MS_FREE;
@@ -1101,21 +1113,27 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				}
 			}
 
+			if(MemberList[0]->STATE == MS_SEEK && GameThread != nullptr){
+				form->QuitGame();
+				GameThread = nullptr;
+				Thread::Sleep(500);
+			}
+
 			send = gcnew array<BYTE>(2);
 			send[0] = PH_RES_VS;
 			send[1] = (BYTE)MemberList[0]->STATE;
 
-			// ŠiƒcƒN‚¶‚á‚È‚¢‚æ
+			// ï¿½iï¿½cï¿½Nï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½
 			try{
 				String^ exe = gcnew String(MTOPTION.GAME_EXE);
 				FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(exe);
 
-				if (info->LegalCopyright != "(C)2001 ENTERBRAIN,INC / OUTBACK") {
+				if(!IsCompatibleFMExecutable(info->FileDescription, info->LegalCopyright)){
 					throw gcnew Exception;
 				}
 				/*
 				else if(ServerMode == SM_MIX){
-					// ¬İƒT[ƒoƒ‚[ƒh‚È‚Ì‚ÅAÀsƒtƒ@ƒCƒ‹‚Ìƒ`ƒFƒbƒN
+					// ï¿½ï¿½ï¿½İƒTï¿½[ï¿½oï¿½ï¿½ï¿½[ï¿½hï¿½È‚Ì‚ÅAï¿½ï¿½ï¿½sï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Ìƒ`ï¿½Fï¿½bï¿½N
 					if((INT32)(Path::GetFileNameWithoutExtension(exe)->GetHashCode()) != BitConverter::ToInt32(rcv, 3)){
 						send[1] = 0xFE;
 					}
@@ -1125,7 +1143,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 					if((INT32)(Path::GetFileNameWithoutExtension(exe)->GetHashCode()) != BitConverter::ToInt32(rcv, 3)){
 						send[1] = 0xFE;
 					}
-					//if(info->FileDescription == "‚Q‚cŠi“¬ƒcƒN[ƒ‹2nd."){
+					//if(info->FileDescription == "ï¿½Qï¿½cï¿½iï¿½ï¿½ï¿½cï¿½Nï¿½[ï¿½ï¿½2nd."){
 						MTINFO.KGT2K = true;
 					//}
 					//else{
@@ -1157,7 +1175,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 						MemberList[0]->STATE = MS_FREE;
 
 						if(MTOPTION.CONNECTION_TYPE != CT_SERVER){
-							// ’m‚ç‚È‚¢l‚ª‚¢‚½‚Ì‚ÅƒT[ƒo‚É–â‚¢‡‚í‚¹
+							// ï¿½mï¿½ï¿½È‚ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÅƒTï¿½[ï¿½oï¿½É–â‚¢ï¿½ï¿½ï¿½í‚¹
 							array<BYTE>^ send = gcnew array<BYTE>(3){ PH_REQ_LIST };
 							Array::Copy(BitConverter::GetBytes(id), 0, send, 1, 2);
 							UDP->Send(send, 3, MemberList[1]->IP_EP);
@@ -1179,11 +1197,11 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 					NetVS->R_FRAME  = 0;
 					NetVS->R_READ   = 0;
 
-					// ŠÏí—pID
+					// ï¿½Ïï¿½pID
 					P1ID = MemberList[0]->ID;
 					P2ID = id;
 
-					// –¼‘O
+					// ï¿½ï¿½ï¿½O
 					ZeroMemory(MTINFO.P1_NAME, sizeof(MTINFO.P1_NAME));
 					ZeroMemory(MTINFO.P2_NAME, sizeof(MTINFO.P2_NAME));
 
@@ -1195,7 +1213,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 						Runtime::InteropServices::Marshal::FreeHGlobal(mp);
 					}
 
-					// ‘Îí‰ñ”
+					// ï¿½Îï¿½ï¿½
 					MemberList[i]->NUM_VS++;
 
 					if(ListView != LV_BLIND){
@@ -1283,7 +1301,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 			if(NetVS != nullptr && NetVS->SEQUENCE == VS_SETTING){
 				send = gcnew array<BYTE>(11){ PH_RES_VS_SETTING };
 
-				// ‘Îíİ’è
+				// ï¿½Îï¿½İ’ï¿½
 				MTINFO.SEED          = XorShift();
 				MTINFO.MAX_STAGE     = MTOPTION.MAX_STAGE;
 				MTINFO.STAGE_SELECT  = MTOPTION.STAGE_SELECT;
@@ -1291,7 +1309,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				MTINFO.TIMER         = MTOPTION.TIMER;
 				MTINFO.TEAM_ROUND_HP = MTOPTION.TEAM_ROUND_HP;
 
-				// ƒfƒBƒŒƒC
+				// ï¿½fï¿½Bï¿½ï¿½ï¿½C
 				if(MTOPTION.DELAY == 0 || rcv[1] > MTOPTION.DELAY){
 					send[1] = rcv[1];
 				}
@@ -1323,11 +1341,11 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 
 				MTINFO.CONTROL = 0;
 
-				// ‘ÎíŠJn
+				// ï¿½Îï¿½Jï¿½n
 				form->WriteTime(0, SystemMessageColor);
 				form->WriteMessage(String::Format("Starting match... (Delay: {0})\n", NetVS->DELAY), SystemMessageColor);
 
-				// ‰¹‚Å‚¨’m‚ç‚¹
+				// ï¿½ï¿½ï¿½Å‚ï¿½ï¿½mï¿½ç‚¹
 				if(MTOPTION.VS_SOUND_ENABLE){
 					try{
 						Media::SoundPlayer^ wav = gcnew Media::SoundPlayer(gcnew String(MTOPTION.VS_SOUND));
@@ -1337,7 +1355,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 					}
 				}
 
-				// ‘Ò‚¿ó‚¯—p‚¿‚å‚Á‚ÆƒXƒŠ[ƒv
+				// ï¿½Ò‚ï¿½ï¿½ó‚¯—pï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÆƒXï¿½ï¿½ï¿½[ï¿½v
 				Thread::Sleep(1000);
 
 				GameThread = gcnew Thread(gcnew ParameterizedThreadStart(form, &MainForm::RunGame));
@@ -1365,7 +1383,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				MTINFO.STAGE_SELECT = rcv[7];
 				MTINFO.ROUND        = rcv[8];
 				MTINFO.TIMER        = rcv[9];
-				// v1.04ˆÈãŒİŠ·
+				// v1.04ï¿½Èï¿½İŠï¿½
 				try{
 					if(rcv[10]){
 						MTINFO.TEAM_ROUND_HP = true;
@@ -1423,7 +1441,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 						break;
 					}
 					else if(f > NetVS->R_FRAME + NetVS->DELAY){
-						// ‚Ü‚¸‚±‚È‚¢
+						// ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½È‚ï¿½
 						if(MTINFO.DEBUG){
 							form->WriteMessage(String::Format("Invalid packet (preceding): {0} / {1}\n", f, NetVS->R_FRAME), DebugMessageColor);
 						}
@@ -1469,7 +1487,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 						break;
 					}
 					else if(NetVS->L_FRAME > f + NetVS->DELAY*2){
-						// Šù‚Éƒf[ƒ^‚ª‚È‚¢‚Ì‚Å‚±‚ê‚ª‚­‚é‚ÆƒQ[ƒ€‚É‚È‚ç‚È‚¢
+						// ï¿½ï¿½ï¿½Éƒfï¿½[ï¿½^ï¿½ï¿½ï¿½È‚ï¿½ï¿½Ì‚Å‚ï¿½ï¿½ê‚ªï¿½ï¿½ï¿½ï¿½ÆƒQï¿½[ï¿½ï¿½ï¿½É‚È‚ï¿½È‚ï¿½
 						if(MTINFO.DEBUG){
 							form->WriteMessage(String::Format("Invalid packet (delayed request): {0} / {1}\n", f, NetVS->L_FRAME), DebugMessageColor);
 						}
@@ -1521,25 +1539,25 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 			id = BitConverter::ToUInt16(rcv, 1);
 
 			if(MTOPTION.ALLOW_SPECTATOR == false){
-				// ŠÏí•s‹–‰Â
+				// ï¿½Ïï¿½sï¿½ï¿½ï¿½ï¿½
 				rcv[1] = 1;
 				UDP->Send(rcv, 2, ep);
 				break;
 			}
 			else if(SpectatorList->Count >= (int)MTOPTION.MAX_CONNECTION){
-				// –È
+				// ï¿½ï¿½ï¿½ï¿½
 				rcv[1] = 2;
 				UDP->Send(rcv, 2, ep);
 				break;
 			}
 			else if(InputFrame > (UINT)InputHistory->Length - 200){
-				// ’x
+				// ï¿½xï¿½ï¿½
 				rcv[1] = 3;
 				UDP->Send(rcv, 2, ep);
 				break;
 			}
 			else if(WatchTarget != nullptr && id == TargetID){
-				// ‘ŠŒİŠÏí
+				// ï¿½ï¿½ï¿½İŠÏï¿½
 				rcv[1] = 4;
 				UDP->Send(rcv, 2, ep);
 				break;
@@ -1551,7 +1569,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 				si->FRAME = 0;
 
 				if(SpectacleThread != nullptr && SpectacleThread->IsAlive && AllowWatch){
-					// Šù‚É‚Í‚¶‚ß‚Ä‚é
+					// æ—¢ã«ã¯ã˜ã‚ã¦ã‚‹
 					send = gcnew array<BYTE>(14);
 					send[0] = PH_RES_WATCH;
 					send[1] = 0;
@@ -1565,7 +1583,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 
 					UDP->Send(send, send->Length, ep);
 
-					// ‚È‚©‚È‚©ƒfƒ“ƒWƒƒƒ‰ƒX‚ÈSleep
+					// ï¿½È‚ï¿½ï¿½È‚ï¿½ï¿½fï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½Sleep
 					Thread::Sleep(100);
 				}
 
@@ -1587,7 +1605,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 						}
 
 						if(i >= MemberList->Count){
-							// ŠO—ˆ‹q
+							// ï¿½Oï¿½ï¿½ï¿½q
 							form->WriteMessage("A spectator has joined.\n", SystemMessageColor);
 						}
 						else{
@@ -1643,7 +1661,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 					if(ListView != LV_BLIND){
 						Monitor::Enter(MemberList);
 						try{
-							// –¼‘O
+							// ï¿½ï¿½ï¿½O
 							for(i = 0; i < MemberList->Count; i++){
 								if(MemberList[i]->ID == P1ID){
 									mp = Runtime::InteropServices::Marshal::StringToHGlobalAuto(MemberList[i]->NAME);
@@ -1722,12 +1740,12 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 			id = BitConverter::ToUInt16(rcv, 1);
 
 			if(id == MemberList[0]->ID){
-				// •Â–‹‚Ì‚¨’m‚ç‚¹
+				// ï¿½Â–ï¿½ï¿½Ì‚ï¿½ï¿½mï¿½ç‚¹
 				form->WriteMessage("The match was ended. Leaving spectator mode.\n", SystemMessageColor);
 				form->QuitWatch(false);
 			}
 			else{
-				// ŠÏí’†~‚Ì‚¨’m‚ç‚¹
+				// ï¿½Ïí’†ï¿½~ï¿½Ì‚ï¿½ï¿½mï¿½ç‚¹
 				Monitor::Enter(InputHistory);
 				try{
 					if(MTINFO.DEBUG){
@@ -1748,7 +1766,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 			break;
 
 		case PH_SECRET:
-			// ‰B‚µƒRƒ}ƒ“ƒh
+			// ï¿½Bï¿½ï¿½ï¿½Rï¿½}ï¿½ï¿½ï¿½h
 			switch(rcv[1]){
 			case ST_PING:
 				rcv[1] = ST_PONG;
@@ -1814,7 +1832,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 		}
 	}
 	catch(ObjectDisposedException^){
-		// UDPÚ‘±I—¹
+		// UDPæ¥ç¶šçµ‚äº†
 		if(UDP != nullptr){
 			UDP = nullptr;
 			form->WriteMessage("You have left the server.\n", SystemMessageColor);
@@ -1824,7 +1842,7 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 		UDP->BeginReceive(gcnew AsyncCallback(ReceivePackets), form);
 
 		if(e->ErrorCode == WSAECONNRESET){
-			// ƒpƒPƒbƒg‚ª’e‚©‚ê‚½
+			// ï¿½pï¿½Pï¿½bï¿½gï¿½ï¿½ï¿½eï¿½ï¿½ï¿½ê‚½
 			if(MTINFO.DEBUG){
 				form->WriteMessage("ERROR > WSAECONNRESET\n", DebugMessageColor);
 			}
@@ -1840,12 +1858,12 @@ void MainForm::ReceivePackets(IAsyncResult^ asyncResult)
 		form->WriteMessage(e->ToString() + "\n", ErrorMessageColor);
 	}
 }
-// IPæ“¾ƒ^ƒCƒ€ƒAƒEƒg—pƒ^ƒCƒ}[
+// IPï¿½æ“¾ï¿½^ï¿½Cï¿½ï¿½ï¿½Aï¿½Eï¿½gï¿½pï¿½^ï¿½Cï¿½}ï¿½[
 void MainForm::TimerGetIP()
 {
 	GetIPSleeping = true;
 	try{
-		// 15•b‚®‚ç‚¢‚Åƒ^ƒCƒ€ƒAƒEƒg
+		// 15ï¿½bï¿½ï¿½ï¿½ç‚¢ï¿½Åƒ^ï¿½Cï¿½ï¿½ï¿½Aï¿½Eï¿½g
 		Thread::Sleep(1000*15);
 	}
 	catch(ThreadInterruptedException^){
@@ -1862,7 +1880,7 @@ void MainForm::TimerGetIP()
 	}
 }
 
-// HP‚¿‰z‚µƒ^ƒCƒ}[
+// HPï¿½ï¿½ï¿½ï¿½ï¿½zï¿½ï¿½ï¿½^ï¿½Cï¿½}ï¿½[
 void MainForm::SetTeamHP(){
 	if(MTINFO.DEBUG){
 		WriteMessage("EVENT:SET_TEAM_HP\n", DebugMessageColor);
@@ -1890,7 +1908,7 @@ void MainForm::RunSonar()
 
 	SonarSleeping = false;
 
-	// 20s‚Éˆê“xƒpƒPƒbƒg‚ğ‘—‚èA100sˆÈã‰“š‚ª‚È‚©‚Á‚½‚çØ’f‚·‚é
+	// 20sï¿½Éˆï¿½xï¿½pï¿½Pï¿½bï¿½gï¿½ğ‘—‚ï¿½A100sï¿½Èã‰ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø’fï¿½ï¿½ï¿½ï¿½
 	while(Ranging){
 		SonarSleeping = true;
 		try{
@@ -1900,7 +1918,7 @@ void MainForm::RunSonar()
 		}
 		SonarSleeping = false;
 
-		// ƒƒO‚Ì©“®•Û‘¶
+		// ï¿½ï¿½ï¿½Oï¿½Ìï¿½ï¿½ï¿½ï¿½Û‘ï¿½
 		if(MTOPTION.AUTO_SAVE){
 			if(((timeGetTime() - MemberList[0]->RESPONSE) / 60000) >= MTOPTION.AUTO_SAVE){
 				String^ path = gcnew String(MTOPTION.PATH);
@@ -1948,7 +1966,7 @@ void MainForm::RunSonar()
 						i--;
 					}
 					else{
-						// Šm”FƒpƒP
+						// ï¿½mï¿½Fï¿½pï¿½P
 						UDP->BeginSend(send, send->Length, MemberList[i]->IP_EP, gcnew AsyncCallback(SendPackets), UDP);
 					}
 				}
@@ -1986,10 +2004,10 @@ void MainForm::RunGame(Object^ obj)
 	bool allow_spectator = MTOPTION.ALLOW_SPECTATOR;
 	UINT sim_delay       = MTOPTION.SIMULATE_DELAY;
 
-	// ‘—MŠÔŠu‚ğŒvZ
+	// ï¿½ï¿½ï¿½Mï¿½ÔŠuï¿½ï¿½ï¿½vï¿½Z
 	if(run_type == RT_VS){
 		if(NetVS == nullptr){
-			// “¯“Ê‘Îô
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ê‘Îï¿½
 			WriteMessage("An error occurred. This may be caused by you and your opponent having sent a match request at the same time.\n", ErrorMessageColor);
 			return;
 		}
@@ -2038,7 +2056,7 @@ void MainForm::RunGame(Object^ obj)
 				NetVS->INTERVAL = (NetVS->DELAY + 1) / 2;
 
 				if(NetVS->INTERVAL == 1){
-					// Delay:2 ‚Ì‚İ
+					// Delay:2 ï¿½Ì‚ï¿½
 					NetVS->INTERVAL2 = 3;
 				}
 			}
@@ -2062,17 +2080,17 @@ void MainForm::RunGame(Object^ obj)
 	ZeroMemory(MTINFO.ORIGINAL_TITLE, sizeof(MTINFO.ORIGINAL_TITLE));
 	ZeroMemory(MTINFO.TITLE, sizeof(MTINFO.TITLE));
 
-	// ƒŠƒvƒŒƒCƒtƒ@ƒCƒ‹
+	// ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½tï¿½@ï¿½Cï¿½ï¿½
 	BinaryWriter^ bw = nullptr;
 	BinaryReader^ br = nullptr;
 
 	REPLAY_INFO ri;
-	// deque‚ª‚ ‚é‚½‚ß‰Šú‰»‚Íè“®‚Å
+	// dequeï¿½ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ßï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íè“®ï¿½ï¿½
 	ri.CONTROL = 0;
 	ri.KEY[0] = ri.KEY[1] = 0xFFFF;
 	ri.COUNT[0] = ri.COUNT[1] = 0;
 
-	// ƒfƒBƒŒƒCƒVƒ~ƒ…ƒŒ[ƒg
+	// ï¿½fï¿½Bï¿½ï¿½ï¿½Cï¿½Vï¿½~ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½g
 	std::deque<UINT16> sim_que;
 	std::deque<UINT16> sim_que_p2;
 
@@ -2091,23 +2109,23 @@ void MainForm::RunGame(Object^ obj)
 		if(run_type == RT_PLAYBACK){
 			br = gcnew BinaryReader(File::OpenRead(ReplayFilePath));
 
-			// ƒwƒbƒ_
+			// ï¿½wï¿½bï¿½_
 			br->ReadChars(header->Length);
 			ri.VERSION = br->ReadChar();
 
-			// P1ƒl[ƒ€
+			// P1ï¿½lï¿½[ï¿½ï¿½
 			len = br->ReadByte();
 			for(i = 0; i < len; i++){
 				MTINFO.P1_NAME[i] = br->ReadChar();
 			}
 
-			// P2ƒl[ƒ€
+			// P2ï¿½lï¿½[ï¿½ï¿½
 			len = br->ReadByte();
 			for(i = 0; i < len; i++){
 				MTINFO.P2_NAME[i] = br->ReadChar();
 			}
 
-			// —”ƒV[ƒh
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Vï¿½[ï¿½h
 			MTINFO.SEED = br->ReadUInt32();
 			MTINFO.TEAM_ROUND_HP = MTOPTION.TEAM_ROUND_HP;
 
@@ -2127,7 +2145,7 @@ void MainForm::RunGame(Object^ obj)
 		else if(record_replay){
 			path = gcnew String(MTOPTION.REPLAY_FOLDER);
 
-			// ƒQ[ƒ€•Ê‚ÉƒŠƒvƒŒƒC‚ğU‚è•ª‚¯
+			// ï¿½Qï¿½[ï¿½ï¿½ï¿½Ê‚Éƒï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½Uï¿½è•ªï¿½ï¿½
 			if(MTOPTION.REPLAY_DIVIDE){
 				path += "\\" + Path::GetFileNameWithoutExtension(gcnew String(MTOPTION.GAME_EXE));
 			}
@@ -2153,7 +2171,7 @@ void MainForm::RunGame(Object^ obj)
 
 			WriteMessage(String::Format("Replay file will be created: \"{0}\"\n", file), SystemMessageColor);
 
-			// ƒwƒbƒ_
+			// ï¿½wï¿½bï¿½_
 			bw->Write(header);
 
 			switch(MTOPTION.REPLAY_VERSION){
@@ -2169,24 +2187,24 @@ void MainForm::RunGame(Object^ obj)
 
 			bw->Write(ri.VERSION);
 
-			// P1ƒl[ƒ€
+			// P1ï¿½lï¿½[ï¿½ï¿½
 			len = (BYTE)_tcslen(MTINFO.P1_NAME);
 			bw->Write(len);
 			for(i = 0; i < len; i++){
 				bw->Write(MTINFO.P1_NAME[i]);
 			}
 
-			// P2ƒl[ƒ€
+			// P2ï¿½lï¿½[ï¿½ï¿½
 			len = (BYTE)_tcslen(MTINFO.P2_NAME);
 			bw->Write(len);
 			for(i = 0; i < len; i++){
 				bw->Write(MTINFO.P2_NAME[i]);
 			}
 
-			// —”ƒV[ƒh
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Vï¿½[ï¿½h
 			bw->Write(MTINFO.SEED);
 
-			// Šeíİ’è
+			// ï¿½eï¿½ï¿½İ’ï¿½
 			bw->Write((BYTE)MTINFO.MAX_STAGE);
 			bw->Write((BYTE)MTINFO.STAGE_SELECT);
 			bw->Write((BYTE)MTINFO.ROUND);
@@ -2202,19 +2220,19 @@ void MainForm::RunGame(Object^ obj)
 		}
 	}
 
-	// –¼‘O•\¦—p
+	// ï¿½ï¿½ï¿½Oï¿½\ï¿½ï¿½ï¿½p
 	int is_p1 = _tcslen(MTINFO.P1_NAME);
 	int is_p2 = _tcslen(MTINFO.P2_NAME);
 
-	// ƒ‰ƒ“ƒ_ƒ€ƒXƒe[ƒW—p
+	// ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Xï¿½eï¿½[ï¿½Wï¿½p
 	RandomStage(MTINFO.SEED);
 
-	// ƒXƒe[ƒWƒ‹[ƒv—p
+	// ï¿½Xï¿½eï¿½[ï¿½Wï¿½ï¿½ï¿½[ï¿½vï¿½p
 	if(MTINFO.STAGE_SELECT > MTINFO.MAX_STAGE){
 		stage_loop = MTINFO.MAX_STAGE;
 	}
 
-	// ŠÏíƒpƒP‘—M€”õ
+	// ï¿½Ïï¿½pï¿½Pï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½ï¿½
 	if(allow_spectator){
 		AllowWatch = false;
 		InputFrame = 0;
@@ -2223,7 +2241,7 @@ void MainForm::RunGame(Object^ obj)
 		SpectacleThread->Start();
 	}
 
-	// ‘Îí’†’Ê’m
+	// ï¿½Îí’†ï¿½Ê’m
 	if(run_type != RT_WATCH){
 		if(MemberList[0]->STATE == MS_SEEK && run_type == RT_FREE){
 			//WriteMessage("aiueo\n", ErrorMessageColor);
@@ -2236,7 +2254,7 @@ void MainForm::RunGame(Object^ obj)
 		ZeroMemory(&si, sizeof(STARTUPINFO));
 		si.cb = sizeof(STARTUPINFO);
 
-		// ì‹ÆƒfƒBƒŒƒNƒgƒŠ
+		// ï¿½ï¿½Æƒfï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½
 		_tsplitpath_s(MTOPTION.GAME_EXE, drive, _MAX_DRIVE, buf, _MAX_DIR, NULL, 0, NULL, 0);
 		//_stprintf_s(wdir, _T("%s%s"), drive, buf);
 		PathCombine(wdir, drive, buf);
@@ -2265,7 +2283,7 @@ void MainForm::RunGame(Object^ obj)
 				, MTINFO.MAX_STAGE, MTINFO.STAGE_SELECT, MTINFO.ROUND, MTINFO.TIMER, MTINFO.TEAM_ROUND_HP == true ? "ON" : "OFF"), SystemMessageColor);
 		}
 
-		// ‹N“®‘Ò‚¿
+		// ï¿½Nï¿½ï¿½ï¿½Ò‚ï¿½
 		Thread::Sleep(300);
 
 		MTINFO.PROCESS    = pi.hProcess;
@@ -2340,10 +2358,10 @@ void MainForm::RunGame(Object^ obj)
 
 						if(vs_end == false){
 
-							// HP‚¿‰z‚µ  Edx:1P_ROUND  Esi:2P_ROUND  Eax:ROUND
+							// HPï¿½ï¿½ï¿½ï¿½ï¿½zï¿½ï¿½  Edx:1P_ROUND  Esi:2P_ROUND  Eax:ROUND
 							if(MTINFO.TEAM_ROUND_HP){
 								if(c.Edx > (UINT)p1_round && c.Esi > (UINT)p2_round){
-									// ‘Š‘Å‚¿
+									// ï¿½ï¿½ï¿½Å‚ï¿½
 								}else{
 									if(c.Edx > (UINT)p1_round){
 										p1_round = c.Edx;
@@ -2362,7 +2380,7 @@ void MainForm::RunGame(Object^ obj)
 								}
 							}
 							
-							// ‘ÎíI—¹‚Í‚Q‰ñ”ò‚ñ‚Å‚­‚é
+							// ï¿½Îï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Í‚Qï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½
 							if(c.Eax == c.Edx){
 								p1_win++;
 								vs_end = true;
@@ -2389,7 +2407,7 @@ void MainForm::RunGame(Object^ obj)
 						SetThreadContext(thread, &c);
 
 						if(vs_end == false){
-							// ‘ÎíI—¹‚Í‚R‰ñ”ò‚ñ‚Å‚­‚é
+							// ï¿½Îï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Í‚Rï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½
 							ReadProcessMemory(pi.hProcess, (LPVOID)P1_WIN_95, &mem, 4, NULL);
 							if(mem == 2){
 								p1_win++;
@@ -2495,7 +2513,7 @@ void MainForm::RunGame(Object^ obj)
 							}
 						}
 						else if(run_type == RT_WATCH && WaitingWatch > 0){
-							// ŠÏíƒoƒbƒtƒ@‚©‚ç“Ç‚İ‚İ
+							// ï¿½Ïï¿½oï¿½bï¿½tï¿½@ï¿½ï¿½ï¿½ï¿½Ç‚İï¿½ï¿½ï¿½
 							c.Eax = WatchHistory[WatchFrame % WatchHistory->Length];
 
 							if(c.Eax == 0xFFFF){
@@ -2529,7 +2547,7 @@ void MainForm::RunGame(Object^ obj)
 							c.Eax = ReadReplayData(br, ri);
 						}
 						else if(run_type == RT_FREE && sim_delay > 0){
-							// ƒfƒBƒŒƒCƒVƒ~ƒ…ƒŒ[ƒg
+							// ï¿½fï¿½Bï¿½ï¿½ï¿½Cï¿½Vï¿½~ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½g
 							if(e_address != VS_P2_KEY){
 								sim_que.push_back((UINT16)c.Eax);
 								c.Eax = sim_que.front();
@@ -2545,7 +2563,7 @@ void MainForm::RunGame(Object^ obj)
 							RecordInput((UINT16)c.Eax, bw, ri, allow_spectator);
 						}
 
-						// ƒƒ‚ƒŠ‚É‘‚«‚İ
+						// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						if(e_address == VS_P2_KEY){
 							WriteProcessMemory(pi.hProcess, (LPVOID)P2_INPUT, &c.Eax, 4, NULL);
 						}
@@ -2581,7 +2599,7 @@ void MainForm::RunGame(Object^ obj)
 							c.Edx = mem;
 						}
 
-						// ƒL[“ü—Í‚ ‚ê‚±‚ê 95Ver
+						// ï¿½Lï¿½[ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ê‚±ï¿½ï¿½ 95Ver
 						if(run_type == RT_VS){
 							if((e_address == STORY_P1_KEY_95 && MTINFO.CONTROL == 0) || (e_address == STORY_P2_KEY_95 && MTINFO.CONTROL == 1) ||
 								(e_address == VS_P1_KEY_95 && MTINFO.CONTROL == 0) || (e_address == VS_P2_KEY_95 && MTINFO.CONTROL == 1)){
@@ -2592,7 +2610,7 @@ void MainForm::RunGame(Object^ obj)
 							}
 						}
 						else if(run_type == RT_WATCH && WaitingWatch > 0){
-							// ŠÏíƒoƒbƒtƒ@‚©‚ç“Ç‚İ‚İ
+							// ï¿½Ïï¿½oï¿½bï¿½tï¿½@ï¿½ï¿½ï¿½ï¿½Ç‚İï¿½ï¿½ï¿½
 							c.Eax = WatchHistory[WatchFrame % WatchHistory->Length];
 
 							if(c.Eax == 0xFFFF){
@@ -2626,7 +2644,7 @@ void MainForm::RunGame(Object^ obj)
 							c.Eax = ReadReplayData(br, ri);
 						}
 						else if(run_type == RT_FREE && sim_delay > 0){
-							// 2P“ü—Í‚ÌƒVƒ~ƒ…ƒŒ[ƒg‚Í‚µ‚È‚¢
+							// 2Pï¿½ï¿½ï¿½Í‚ÌƒVï¿½~ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½gï¿½Í‚ï¿½ï¿½È‚ï¿½
 							
 							if(e_address != STORY_P2_KEY_95 && e_address != VS_P2_KEY_95){
 								sim_que.push_back((UINT16)c.Eax);
@@ -2721,7 +2739,7 @@ void MainForm::RunGame(Object^ obj)
 						break;
 					}
 
-					// ƒfƒoƒbƒO:ƒCƒxƒ“ƒg•\¦
+					// ï¿½fï¿½oï¿½bï¿½O:ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½\ï¿½ï¿½
 					if(MTINFO.DEBUG){
 						/*
 						if (e_address != VS_P1_KEY && e_address != RAND_FUNC && e_address != VS_P2_KEY
@@ -2733,7 +2751,7 @@ void MainForm::RunGame(Object^ obj)
 							WriteMessage(String::Format("EVENT:{0}\n", gcnew String(pszText)), DebugMessageColor);
 						}
 						*/
-						// ‰ğÍ—p
+						// ï¿½ï¿½Í—p
 						if (e_address != VS_P1_KEY && e_address != RAND_FUNC && e_address != VS_P2_KEY
 							 && e_address != FRAME_RATE && e_address != SE_VOLUME && e_address != VS_ROUND) {
 							int nValue = e_address;
@@ -2761,9 +2779,9 @@ void MainForm::RunGame(Object^ obj)
 				thread    = de.u.CreateProcessInfo.hThread;
 				thread_id = de.dwThreadId;
 
-				// ‚±‚±‚©‚ç‘‚«Š·‚¦ƒ][ƒ“
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½]ï¿½[ï¿½ï¿½
 				if(MTINFO.KGT2K){
-					// 2nd.—p
+					// 2nd.ï¿½p
 					mem = MTOPTION.HIT_JUDGE;
 					WriteProcessMemory(pi.hProcess, (LPVOID)HIT_JUDGE, &mem, 4, NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)HIT_JUDGE_SET, HIT_JUDGE_SET_CODE, sizeof(HIT_JUDGE_SET_CODE), NULL);
@@ -2775,7 +2793,7 @@ void MainForm::RunGame(Object^ obj)
 					WriteProcessMemory(pi.hProcess, (LPVOID)DEFAULT_ROUND, &MTINFO.ROUND, 4, NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)DEFAULT_TIMER, &MTINFO.TIMER, 4, NULL);
 
-					// ƒ`[ƒ€ƒvƒŒƒCƒ‰ƒEƒ“ƒh”
+					// ï¿½`ï¿½[ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½hï¿½ï¿½
 					WriteProcessMemory(pi.hProcess, (LPVOID)TEAM_ROUND_SET, TEAM_ROUND_SET_CODE, sizeof(TEAM_ROUND_SET_CODE), NULL);
 					if(MTINFO.ROUND > 4) {
 						WriteProcessMemory(pi.hProcess, (LPVOID)TEAM_ROUND, &MAX_TEAM_ROUND, 4, NULL);
@@ -2784,28 +2802,28 @@ void MainForm::RunGame(Object^ obj)
 					}
 
 
-					// ƒ^ƒCƒgƒ‹ƒo[•\¦—p
+					// ï¿½^ï¿½Cï¿½gï¿½ï¿½ï¿½oï¿½[ï¿½\ï¿½ï¿½ï¿½p
 					WriteProcessMemory(pi.hProcess, (LPVOID)VS_ROUND, VS_ROUND_CODE, sizeof(VS_ROUND_CODE), NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)ROUND_END, ROUND_END_CODE, sizeof(ROUND_END_CODE), NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)FRAME_RATE, FRAME_RATE_CODE, sizeof(FRAME_RATE_CODE), NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)RAND_FUNC, RAND_FUNC_CODE, sizeof(RAND_FUNC_CODE), NULL);
 
-					// ‰¹—Ê
+					// ï¿½ï¿½ï¿½ï¿½
 					WriteProcessMemory(pi.hProcess, (LPVOID)VOLUME_SET_1, VOLUME_SET_1_CODE, sizeof(VOLUME_SET_1_CODE), NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)VOLUME_SET_2, VOLUME_SET_2_CODE, sizeof(VOLUME_SET_2_CODE), NULL);
 
-					// ”M‘Ñ’†‚Íí‚É1P“ü—Í
+					// ï¿½Mï¿½Ñ’ï¿½ï¿½Íï¿½ï¿½1Pï¿½ï¿½ï¿½ï¿½
 					if(run_type == RT_VS){
 						WriteProcessMemory(pi.hProcess, (LPVOID)SINGLE_CONTROL_HOOK, SINGLE_CONTROL_HOOK_CODE, sizeof(SINGLE_CONTROL_HOOK_CODE), NULL);
 						WriteProcessMemory(pi.hProcess, (LPVOID)VS_CONTROL_HOOK, VS_CONTROL_HOOK_CODE, sizeof(VS_CONTROL_HOOK_CODE), NULL);
 					}
 
-					// ƒL[î•ñ‚ğæ“¾
+					// ï¿½Lï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
 					WriteProcessMemory(pi.hProcess, (LPVOID)STORY_KEY, STORY_KEY_CODE, sizeof(STORY_KEY_CODE), NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)VS_P1_KEY, VS_P1_KEY_CODE, sizeof(VS_P1_KEY_CODE), NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)VS_P2_KEY, VS_P2_KEY_CODE, sizeof(VS_P2_KEY_CODE), NULL);
 
-					// ƒEƒBƒ“ƒhƒEƒTƒCƒY‚ğ640x480‚É
+					// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Tï¿½Cï¿½Yï¿½ï¿½640x480ï¿½ï¿½
 					if(MTOPTION.CHANGE_WINDOW_SIZE){
 						TCHAR val[32];
 
@@ -2821,7 +2839,7 @@ void MainForm::RunGame(Object^ obj)
 					}
 				}
 				else{
-					// 95—p
+					// 95ï¿½p
 					mem = MTOPTION.HIT_JUDGE;
 					WriteProcessMemory(pi.hProcess, (LPVOID)HIT_JUDGE_95, &mem, 4, NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)HIT_JUDGE_SET_95, HIT_JUDGE_SET_95_CODE, sizeof(HIT_JUDGE_SET_95_CODE), NULL);
@@ -2830,26 +2848,26 @@ void MainForm::RunGame(Object^ obj)
 					WriteProcessMemory(pi.hProcess, (LPVOID)TIMER_SET_95, TIMER_SET_95_CODE, sizeof(TIMER_SET_95_CODE), NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)DEFAULT_TIMER_95, &MTINFO.TIMER, 4, NULL);
 
-					// ƒ^ƒCƒgƒ‹ƒo[•\¦—p
+					// ï¿½^ï¿½Cï¿½gï¿½ï¿½ï¿½oï¿½[ï¿½\ï¿½ï¿½ï¿½p
 					WriteProcessMemory(pi.hProcess, (LPVOID)VS_ROUND_95, VS_ROUND_95_CODE, sizeof(VS_ROUND_95_CODE), NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)ROUND_END_95, ROUND_END_95_CODE, sizeof(ROUND_END_95_CODE), NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)FRAME_RATE_95, FRAME_RATE_95_CODE, sizeof(FRAME_RATE_95_CODE), NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)RAND_FUNC_95, RAND_FUNC_95_CODE, sizeof(RAND_FUNC_95_CODE), NULL);
 
-					// ‰¹—Ê
+					// ï¿½ï¿½ï¿½ï¿½
 					WriteProcessMemory(pi.hProcess, (LPVOID)VOLUME_SET_1_95, VOLUME_SET_1_95_CODE, sizeof(VOLUME_SET_1_95_CODE), NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)VOLUME_SET_2_95, VOLUME_SET_2_95_CODE, sizeof(VOLUME_SET_2_95_CODE), NULL);
 
-					// JoyStick‚ÍƒGƒ‰[‹N‚±‚·‚Ì‚ÅƒIƒt‚É‚·‚é
+					// JoyStickï¿½ÍƒGï¿½ï¿½ï¿½[ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÅƒIï¿½tï¿½É‚ï¿½ï¿½ï¿½
 					WriteProcessMemory(pi.hProcess, (LPVOID)UNCHECK_JOYSTICK_95, UNCHECK_JOYSTICK_95_CODE, sizeof(UNCHECK_JOYSTICK_95_CODE), NULL);
 
-					// ”M‘Ñ’†‚Íí‚É1P“ü—Í
+					// ï¿½Mï¿½Ñ’ï¿½ï¿½Íï¿½ï¿½1Pï¿½ï¿½ï¿½ï¿½
 					if(run_type == RT_VS){
 						WriteProcessMemory(pi.hProcess, (LPVOID)CONTROL_HOOK1_95, CONTROL_HOOK1_95_CODE, sizeof(CONTROL_HOOK1_95_CODE), NULL);
 						WriteProcessMemory(pi.hProcess, (LPVOID)CONTROL_HOOK2_95, CONTROL_HOOK2_95_CODE, sizeof(CONTROL_HOOK2_95_CODE), NULL);
 					}
 
-					// ƒL[î•ñ‚ğæ“¾
+					// ï¿½Lï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
 					WriteProcessMemory(pi.hProcess, (LPVOID)STORY_P1_KEY_95, STORY_P1_KEY_95_CODE, sizeof(STORY_P1_KEY_95_CODE), NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)STORY_P2_KEY_95, STORY_P2_KEY_95_CODE, sizeof(STORY_P2_KEY_95_CODE), NULL);
 					WriteProcessMemory(pi.hProcess, (LPVOID)VS_P1_KEY_95, VS_P1_KEY_95_CODE, sizeof(VS_P1_KEY_95_CODE), NULL);
@@ -2967,7 +2985,7 @@ void MainForm::RunGame(Object^ obj)
 			NetVS->SEQUENCE = VS_END;
 			UDP->Send(gcnew array<BYTE>{ PH_VS_END }, 1, NetVS->IP_EP);
 
-			// ƒƒbƒNŠJ•ú‘Ò‚¿
+			// ï¿½ï¿½ï¿½bï¿½Nï¿½Jï¿½ï¿½ï¿½Ò‚ï¿½
 			Monitor::Enter(NetVS->LOCAL);
 			Monitor::Exit(NetVS->LOCAL);
 			Monitor::Enter(NetVS->REMOTE);
@@ -2990,7 +3008,7 @@ void MainForm::RunGame(Object^ obj)
 			QuitWatch(true);
 		}
 		else{
-			// ‘ÎíI—¹‚ğ’Ê’m
+			// ï¿½Îï¿½Iï¿½ï¿½ï¿½ï¿½Ê’m
 			if(MTOPTION.AFTER_REST && run_type == RT_VS){
 				ChangeState((BYTE)MS_REST);
 			}
@@ -3020,7 +3038,7 @@ void MainForm::RunVersus()
 	array<BYTE>^ send = gcnew array<BYTE>(7);
 
 	try{
-		// ‘Îí—v‹
+		// ï¿½Îï¿½vï¿½ï¿½
 		send[0] = PH_REQ_VS;
 		Array::Copy(BitConverter::GetBytes(MemberList[0]->ID), 0, send, 1, 2);
 		Array::Copy(BitConverter::GetBytes((INT32)(Path::GetFileNameWithoutExtension(gcnew String(MTOPTION.GAME_EXE))->GetHashCode())), 0, send, 3, 4);
@@ -3041,7 +3059,7 @@ void MainForm::RunVersus()
 			return;
 		}
 
-		// PING‚Å‘Ñˆæ’²¸
+		// PINGï¿½Å‘Ñˆæ’²ï¿½ï¿½
 		send[0] = PH_REQ_VS_PING;
 
 		for(BYTE i = 0; i < 5; i++){
@@ -3055,7 +3073,7 @@ void MainForm::RunVersus()
 		if(NetVS->SEQUENCE == VS_PING){
 			NetVS->SLEEPING = true;
 			try{
-				// Å’á‚Å‚à‚P•bŠÔ‚ÉƒpƒP‚S‚Â‚Í—~‚µ‚¢‚Æ‚±‚ë
+				// ï¿½Å’ï¿½Å‚ï¿½ï¿½Pï¿½bï¿½Ô‚Éƒpï¿½Pï¿½Sï¿½Â‚Í—~ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½
 				Thread::Sleep(1000);
 			}
 			catch(ThreadInterruptedException^){
@@ -3068,11 +3086,11 @@ void MainForm::RunVersus()
 			return;
 		}
 
-		// DELAY‚Ìİ’è
+		// DELAYï¿½Ìİ’ï¿½
 		send[0] = PH_REQ_VS_SETTING;
 
 		if(MTOPTION.DELAY == 0){
-			// ƒI[ƒgİ’è
+			// ï¿½Iï¿½[ï¿½gï¿½İ’ï¿½
 			int d = 0, c = 0;
 
 			for(int i = 0; i < 5; i++){
@@ -3117,7 +3135,7 @@ void MainForm::RunVersus()
 
 		NetVS->SEQUENCE = VS_DATA;
 
-		// ‘ÎíŠJn
+		// ï¿½Îï¿½Jï¿½n
 		WriteMessage(String::Format("Match starting! (Delay: {0})\n", NetVS->DELAY), SystemMessageColor);
 
 		GameThread = gcnew Thread(gcnew ParameterizedThreadStart(this, &MainForm::RunGame));
@@ -3138,7 +3156,7 @@ void MainForm::RunSpectacle()
 	int i, d;
 	UINT32 frame = 0, s_frame;
 
-	// ŠJn‡}
+	// ï¿½Jï¿½nï¿½ï¿½ï¿½}
 	array<BYTE>^ send = gcnew array<BYTE>(14);
 	send[0] = PH_RES_WATCH;
 	send[1] = 0;
@@ -3162,13 +3180,13 @@ void MainForm::RunSpectacle()
 
 	Thread::Sleep(100);
 
-	// ƒf[ƒ^‘—M€”õ
+	// ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½ï¿½
 	send = gcnew array<BYTE>(45){ PH_WATCH_DATA };
 
-	// €”õŠ®—¹
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	AllowWatch = true;
 
-	// ƒf[ƒ^‘—M
+	// ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½M
 	while(AllowWatch){
 		Monitor::Enter(InputHistory);
 		try{
@@ -3177,9 +3195,9 @@ void MainForm::RunSpectacle()
 			for(i = 0; i < SpectatorList->Count; i++){
 				s_frame = SpectatorList[i]->FRAME;
 /*
-				// ƒf[ƒ^‚ÍŠù‚Éƒoƒbƒtƒ@‚©‚ç‚È‚­‚È‚Á‚Ä‚é
+				// ï¿½fï¿½[ï¿½^ï¿½ÍŠï¿½ï¿½Éƒoï¿½bï¿½tï¿½@ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½È‚ï¿½ï¿½Ä‚ï¿½
 				if(frame > s_frame && (frame - s_frame) >= (UINT)InputHistory->Length - 20){
-					if(MTINFO.DEBUG) WriteMessage(String::Format("ŠÏíÒ‚Ì’Ç‚¢o‚µ > {0} / {1}\n", SpectatorList[i]->ID, SpectatorList->Count), DebugMessageColor);
+					if(MTINFO.DEBUG) WriteMessage(String::Format("ï¿½Ïï¿½Ò‚Ì’Ç‚ï¿½ï¿½oï¿½ï¿½ > {0} / {1}\n", SpectatorList[i]->ID, SpectatorList->Count), DebugMessageColor);
 
 					send[0] = PH_WATCH_END;
 					Array::Copy(BitConverter::GetBytes(SpectatorList[i]->ID), 0, send, 1, 2);
@@ -3192,7 +3210,7 @@ void MainForm::RunSpectacle()
 					continue;
 				}
 */
-				// 5ƒtƒŒ[ƒ€‚²‚Æ‚É10ƒtƒŒ[ƒ€•ª‘—‚é
+				// 5ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½10ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if(s_frame + 20 < frame){
 					Array::Copy(BitConverter::GetBytes(s_frame), 0, send, 1, 4);
 
@@ -3202,7 +3220,7 @@ void MainForm::RunSpectacle()
 
 					UDP->BeginSend(send, send->Length, SpectatorList[i]->IP_EP, gcnew AsyncCallback(SendPackets), UDP);
 
-					// 0frame‚Ì‚Í”O‚Ì‚½‚ß‚QŒÂ‘—M
+					// 0frameï¿½Ìï¿½ï¿½Í”Oï¿½Ì‚ï¿½ï¿½ß‚Qï¿½Â‘ï¿½ï¿½M
 					if(s_frame == 0){
 						UDP->BeginSend(send, send->Length, SpectatorList[i]->IP_EP, gcnew AsyncCallback(SendPackets), UDP);
 					}
@@ -3215,11 +3233,11 @@ void MainForm::RunSpectacle()
 			Monitor::Exit(InputHistory);
 		}
 
-		// ‚¿‚å‚Á‚Æ‚¾‚¯‹xŒe
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½xï¿½e
 		Thread::Sleep(20);
 	}
 
-	// I—¹‡}
+	// ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½}
 	send[0] = PH_WATCH_END;
 
 	Monitor::Enter(InputHistory);
@@ -3238,7 +3256,7 @@ void MainForm::RunSpectacle()
 
 UINT16 MainForm::LocalInput(UINT16 eax)
 {
-	// ¶‰E“¯‰Ÿ‚µ‹Ö~ if((eax & 3) == 3) eax ^= 2
+	// ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö~ if((eax & 3) == 3) eax ^= 2
 	if((eax & 0x0003) == 0x0003){
 		eax &= 0xFFFD;
 	}
@@ -3252,13 +3270,13 @@ UINT16 MainForm::LocalInput(UINT16 eax)
 
 		if(NetVS->INTERVAL > 0){
 			if(NetVS->INTERVAL == 1){
-				// ŠÔŠu‚P(’èŠú‹xŒeƒ‚[ƒh)
+				// ï¿½ÔŠuï¿½P(ï¿½ï¿½ï¿½ï¿½xï¿½eï¿½ï¿½ï¿½[ï¿½h)
 				if((NetVS->L_FRAME % NetVS->INTERVAL2) == (NetVS->INTERVAL2 - 1)){
 					send = false;
 				}
 			}
 			else{
-				// ŠÔŠu‚QˆÈã
+				// ï¿½ÔŠuï¿½Qï¿½Èï¿½
 				if((NetVS->L_FRAME % NetVS->INTERVAL) != 0){
 					send = false;
 				}
@@ -3266,7 +3284,7 @@ UINT16 MainForm::LocalInput(UINT16 eax)
 		}
 
 		if(send){
-			// ‘—MŠJn
+			// ï¿½ï¿½ï¿½Mï¿½Jï¿½n
 			Array::Copy(BitConverter::GetBytes(NetVS->L_FRAME), 0, NetVS->SEND, 1, 4);
 
 			UINT i;
@@ -3296,11 +3314,11 @@ UINT16 MainForm::RemoteInput()
 
 	eax = NetVS->REMOTE[NetVS->R_READ];
 
-	// ƒpƒP—ˆ‚Ä‚È‚¢
+	// ï¿½pï¿½Pï¿½ï¿½ï¿½Ä‚È‚ï¿½
 	if(eax == 0xFFFF){
 		Monitor::Enter(NetVS->REMOTE);
 		try{
-			// ¡—ˆ‚Ä‚é‚©‚à
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚é‚©ï¿½ï¿½
 			NetVS->WAITING = 2;
 			Monitor::Wait(NetVS->REMOTE, NetVS->DELAY*10);
 			eax = NetVS->REMOTE[NetVS->R_READ];
@@ -3310,7 +3328,7 @@ UINT16 MainForm::RemoteInput()
 		}
 	}
 
-	// ƒƒX‚Á‚½H
+	// ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½H
 	if(eax == 0xFFFF){
 		NetVS->WAITING = 1;
 
@@ -3346,8 +3364,8 @@ UINT16 MainForm::RemoteInput()
 			}
 			else{
 				i = 0;
-				// ‚±‚±‚ª‚©‚Ì—L–¼‚Èƒ‰ƒO‚Ì¶Y’n‚Å‚·
-				// Delay*10 / 2   ƒfƒBƒŒƒC‚Ì”¼ƒtƒŒ[ƒ€•ª‚Í‘Ò‹@‚µ‚Ä‚à‚æ‚³‚»‚¤H
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì—Lï¿½ï¿½ï¿½Èƒï¿½ï¿½Oï¿½Ìï¿½ï¿½Yï¿½nï¿½Å‚ï¿½
+				// Delay*10 / 2   ï¿½fï¿½Bï¿½ï¿½ï¿½Cï¿½Ì”ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Í‘Ò‹@ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½æ‚³ï¿½ï¿½ï¿½ï¿½ï¿½H
 				Thread::Sleep(NetVS->DELAY*5);
 			}
 		}
@@ -3405,13 +3423,13 @@ UINT16 MainForm::ReadReplayData(BinaryReader^ br, REPLAY_INFO& ri)
 			eax = br->ReadUInt16();
 		}
 		else{
-			// ƒŠƒvƒŒƒCƒtƒ@ƒCƒ‹‚ÌRLEƒfƒR[ƒh
+			// ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½RLEï¿½fï¿½Rï¿½[ï¿½h
 			if(ri.COUNT[ri.CONTROL] == 0){
 				REPLAY_DATA rd;
 				bool ctrl;
 
 				if(ri.DEQUE[ri.CONTROL].size() > 0){
-					// ƒLƒ…[‚Éƒf[ƒ^‚ ‚è
+					// ï¿½Lï¿½ï¿½ï¿½[ï¿½Éƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½
 					rd = ri.DEQUE[ri.CONTROL].front();
 					ri.DEQUE[ri.CONTROL].pop_front();
 				}
@@ -3421,10 +3439,10 @@ UINT16 MainForm::ReadReplayData(BinaryReader^ br, REPLAY_INFO& ri)
 					ctrl     = (rd.KEY & 0x0800) > 0 ? true : false;
 
 					while(ctrl != ri.CONTROL){
-						// ƒLƒ…[‚É‘Ş”ğ
+						// ï¿½Lï¿½ï¿½ï¿½[ï¿½É‘Ş”ï¿½
 						ri.DEQUE[ctrl].push_back(rd);
 
-						// Ä“Ç‚İ‚İ
+						// ï¿½Ä“Ç‚İï¿½ï¿½ï¿½
 						rd.KEY   = br->ReadUInt16();
 						rd.COUNT = br->ReadByte();
 						ctrl     = (rd.KEY & 0x0800) > 0 ? true : false;
@@ -3463,7 +3481,7 @@ UINT16 MainForm::ReadReplayData(BinaryReader^ br, REPLAY_INFO& ri)
 
 void MainForm::RecordInput(UINT16 eax, BinaryWriter^ bw, REPLAY_INFO& ri, bool watch)
 {
-	// ƒŠƒvƒŒƒCƒtƒ@ƒCƒ‹‚Ì‹L˜^
+	// ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Ì‹Lï¿½^
 	if(bw != nullptr){
 		if(ri.VERSION == _T('3')){
 			bw->Write(eax);
@@ -3471,12 +3489,12 @@ void MainForm::RecordInput(UINT16 eax, BinaryWriter^ bw, REPLAY_INFO& ri, bool w
 		else{
 			// RLE
 			if(ri.KEY[ri.CONTROL] == 0xFFFF){
-				// ‰‰ñ
+				// ï¿½ï¿½ï¿½ï¿½
 				ri.KEY[ri.CONTROL] = eax;
 			}
 			else{
 				if(eax == ri.KEY[ri.CONTROL]){
-					// ˆêü‚µ‚Ä‚«‚½
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
 					if(ri.COUNT[ri.CONTROL] == 0xFF){
 						bw->Write((UINT16)(ri.KEY[ri.CONTROL] | ri.CONTROL << 11));
 						bw->Write(ri.COUNT[ri.CONTROL]);
@@ -3500,7 +3518,7 @@ void MainForm::RecordInput(UINT16 eax, BinaryWriter^ bw, REPLAY_INFO& ri, bool w
 		}
 	}
 
-	// ŠÏíOK
+	// ï¿½Ïï¿½OK
 	if(watch && UDP != nullptr){
 		Monitor::Enter(InputHistory);
 		try{
@@ -3513,11 +3531,11 @@ void MainForm::RecordInput(UINT16 eax, BinaryWriter^ bw, REPLAY_INFO& ri, bool w
 	}
 }
 void MainForm::RunAutoRest() {
-	// ©“®‹xŒe
+	// ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½e
 	LASTINPUTINFO li;
 	li.cbSize = sizeof(LASTINPUTINFO);
 	DWORD te;
-	int to = MTOPTION.AUTO_REST_TIME;  // ƒ^ƒCƒ€ƒAƒEƒgw’èŠÔ
+	int to = MTOPTION.AUTO_REST_TIME;  // ï¿½^ï¿½Cï¿½ï¿½ï¿½Aï¿½Eï¿½gï¿½wï¿½èï¿½ï¿½
 	AutoRestRanging = true;
 	if(MTINFO.DEBUG){
 		WriteMessage(String::Format("Auto rest thread starts in {0} minute(s)!\n", to), DebugMessageColor);
@@ -3538,11 +3556,11 @@ void MainForm::RunAutoRest() {
 		to = MTOPTION.AUTO_REST_TIME;
 
 		if(MTINFO.DEBUG){
-			// WriteMessage(String::Format("{0}•bŒo‰ß\n", ((te-li.dwTime)/1000) ), DebugMessageColor);
+			// WriteMessage(String::Format("{0}ï¿½bï¿½oï¿½ï¿½\n", ((te-li.dwTime)/1000) ), DebugMessageColor);
 		}
 
 		if(((te-li.dwTime)/1000) >= UINT(to*60)){
-			// ƒtƒŠ[ó‘Ô‚È‚ç‹xŒeó‘Ô‚É‚·‚é
+			// ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½Ô‚È‚ï¿½xï¿½eï¿½ï¿½Ô‚É‚ï¿½ï¿½ï¿½
 			if(UDP != nullptr && MemberList[0]->STATE == MS_FREE){
 				ChangeState((BYTE)MS_REST);
 				WriteMessage("Rest mode set to ON.\n", SystemMessageColor);
@@ -3559,9 +3577,7 @@ void MainForm::ChangeSeek() {
 		ChangeState((BYTE)MS_SEEK);
 		WriteMessage("Seek mode set to ON.", SystemMessageColor);
 		WriteTime(0, SystemMessageColor);
-		WriteMessage(String::Format("{0} is now in seek mode.\n", (ServerMode == SM_NORA ? L"<>" :
-																			MemberList[0]->NAME)), SystemMessageColor);
-
+		WriteMessage(String::Format(L"{0} is now in seek mode.\n", MemberList[0]->NAME), SystemMessageColor);
 	}
 	else if(MemberList[0]->STATE == MS_SEEK){
 		if(GameThread != nullptr && GameThread->IsAlive){
@@ -3571,8 +3587,7 @@ void MainForm::ChangeSeek() {
 		}
 		WriteMessage("Seek mode set to OFF.\n", SystemMessageColor);
 		WriteTime(0, SystemMessageColor);
-		WriteMessage(String::Format("{0} has left seek mode.\n", (ServerMode == SM_NORA ? L"<>" :
-																			MemberList[0]->NAME)), SystemMessageColor);
+		WriteMessage(String::Format(L"{0} has left seek mode.\n", MemberList[0]->NAME), SystemMessageColor);
 	}
 }
 void MainForm::ChangeLogWordWrap() {
@@ -3586,27 +3601,18 @@ void MainForm::ChangeLogWordWrap() {
 	}
 }
 void MainForm::ClearLog(){
-	if(MessageBox::Show("This will remove the entire log.\nAre you sure you want to clear the log?", "Clear Log", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
+	if(MessageBox::Show(L"This will remove all but the last 10 lines of the log.\nAre you sure you want to clear the log?", L"Clear Log", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
 	}else{
 		return;
 	}
 	Monitor::Enter(richTextBoxLog);
 	try{
-		// ƒƒOíœ
-		richTextBoxLog->Clear();
-
-		WriteTime(0, SystemMessageColor);
-		WriteMessage("[Deleted]\n", SystemMessageColor);
-
-		if(MemberList[0]->TYPE == CT_FREE){return;}
-
-		if(MTOPTION.LOG_CLEAR_WITHOUT_WELCOME){ // ƒT[ƒo’mc‚·
-			WriteMessage("[MOTD]---------------------\n", SystemMessageColor);
-			richTextBoxLog->SelectionFont = gcnew Drawing::Font(richTextBoxLog->Font->FontFamily, richTextBoxLog->Font->Size + 2);
-			richTextBoxLog->SelectionColor = TalkMessageColor;
-			richTextBoxLog->SelectionBackColor = NoticeBackColor;
-			richTextBoxLog->AppendText(gcnew String(MTOPTION.WELCOME)+"\n");
-			WriteMessage("-------------------------------\n", SystemMessageColor);
+		int len = richTextBoxLog->Lines->Length;	// å…¨ä½“è¡Œæ•°
+		if(len > 10){
+			int index = richTextBoxLog->GetFirstCharIndexFromLine(len-11);
+			richTextBoxLog->SelectionStart=0;
+			richTextBoxLog->Select(0, index);
+			richTextBoxLog->SelectedText= L"[Deleted]\n";
 		}
 		
 	}
@@ -3618,7 +3624,7 @@ void MainForm::ClearLog(){
 	}
 }
 void MainForm::SaveLog(){
-	// Œ`®•ÊƒƒO•Û‘¶
+	// ï¿½`ï¿½ï¿½ï¿½Êƒï¿½ï¿½Oï¿½Û‘ï¿½
 	String^ path = gcnew String(MTOPTION.PATH);
 	String^ file = String::Format("LilithPort_{0}.{1}", DateTime::Now.ToString("yyyyMMdd-HHmmss"),
 														MTOPTION.LOG_FORMAT_RTF ? "rtf" : "txt");
