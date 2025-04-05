@@ -1,4 +1,4 @@
-ï»¿// LilithPort.cpp : ãƒ¡ã‚¤ãƒ³ ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ ãƒ•ã‚¡ã‚¤ãƒ«ã§ã™ã€‚
+// LilithPort.cpp : ƒƒCƒ“ ƒvƒƒWƒFƒNƒg ƒtƒ@ƒCƒ‹‚Å‚·B
 
 #include "stdafx.h"
 #include "MainForm.h"
@@ -6,7 +6,7 @@
 
 using namespace LilithPort;
 
-// ã‚°ãƒ­ãƒ¼ãƒãƒ«
+// ƒOƒ[ƒoƒ‹
 MT_SP_INFORMATION  MTINFO;
 MT_SP_OPTION       MTOPTION;
 MT_SP_WINDOW_STATE MTWS;
@@ -17,11 +17,11 @@ CRITICAL_SECTION CS_CAPTION;
 [STAThreadAttribute]
 int main(array<System::String ^> ^args)
 {
-	// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãŒä½œæˆã•ã‚Œã‚‹å‰ã«ã€Windows XP ãƒ“ã‚¸ãƒ¥ã‚¢ãƒ«åŠ¹æœã‚’æœ‰åŠ¹ã«ã—ã¾ã™
+	// ƒRƒ“ƒgƒ[ƒ‹‚ªì¬‚³‚ê‚é‘O‚ÉAWindows XP ƒrƒWƒ…ƒAƒ‹Œø‰Ê‚ğ—LŒø‚É‚µ‚Ü‚·
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(true);
 
-	// è‡ªãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ‘ã‚¹
+	// ©ƒvƒƒOƒ‰ƒ€‚ÌƒpƒX
 	TCHAR drive[_MAX_DRIVE], dir[_MAX_DIR];
 
 	GetModuleFileName(NULL, MTOPTION.PATH, _MAX_PATH);
@@ -29,7 +29,7 @@ int main(array<System::String ^> ^args)
 	//_stprintf_s(MTOPTION.PATH, _T("%s%s"), drive, dir);
 	PathCombine(MTOPTION.PATH, drive, dir);
 
-	// ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³å¼•æ•°
+	// ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ˆø”
 	if(args->Length > 0){
 		if(args[0] == "-s"){
 			MTINFO.SERVER_MODE = true;
@@ -48,34 +48,34 @@ int main(array<System::String ^> ^args)
 	}
 
 #ifdef _DEBUG
-	MTINFO.DEBUG = true;
+	MTINFO.DEBUG = false;
 #endif
 
 	LoadMTOption();
 	CheckMTOption();
 
-	// ä¹±æ•°ã®åˆæœŸåŒ–ï¼†ã¾ãœã¾ãœ
+	// —”‚Ì‰Šú‰»•‚Ü‚º‚Ü‚º
 	XorShift((UINT)DateTime::Now.Ticks);
 	XorShift();
 	XorShift();
 	XorShift();
 
-	// éŸ³é‡(dB)ã‚’ã‚ã‚‰ã‹ã˜ã‚è¨ˆç®—ã—ã¦ãŠã
+	// ‰¹—Ê(dB)‚ğ‚ ‚ç‚©‚¶‚ßŒvZ‚µ‚Ä‚¨‚­
 	MTINFO.VOLUME[0] = -10000;
 
 	for(int i = 1; i < 21; i++){
-		// -6dBã§éŸ³é‡åŠæ¸›ã€DirectSoundçš„ã«ã¯-600
+		// -6dB‚Å‰¹—Ê”¼Œ¸ADirectSound“I‚É‚Í-600
 		// 19.931568f = -6.0f / log10(0.5f); 
 		MTINFO.VOLUME[i] = (INT32)(19.931568f*log10((float)(i*5)/100.0f)*100.0f);
 	}
 
 	InitializeCriticalSection(&CS_CAPTION);
 
-	// æœªå‡¦ç†ã®ä¾‹å¤–ã‚’ã‚­ãƒ£ãƒƒãƒ
+	// –¢ˆ—‚Ì—áŠO‚ğƒLƒƒƒbƒ`
 	Application::ThreadException += gcnew ThreadExceptionEventHandler(ApplicationThreadException);
 	Threading::Thread::GetDomain()->UnhandledException += gcnew UnhandledExceptionEventHandler(ApplicationUnhandledException);
 
-	// ãƒ¡ã‚¤ãƒ³ ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã—ã¦ã€å®Ÿè¡Œã—ã¾ã™
+	// ƒƒCƒ“ ƒEƒBƒ“ƒhƒE‚ğì¬‚µ‚ÄAÀs‚µ‚Ü‚·
 	Application::Run(gcnew MainForm());
 
 	DeleteCriticalSection(&CS_CAPTION);

@@ -1,4 +1,4 @@
-ï»¿#pragma once
+#pragma once
 
 #include "stdafx.h"
 #include "StartupForm.h"
@@ -18,13 +18,13 @@ namespace LilithPort {
 	using namespace System::Diagnostics;
 
 	/// <summary>
-	/// MainForm ã®æ¦‚è¦
+	/// MainForm ‚ÌŠT—v
 	///
-	/// è­¦å‘Š: ã“ã®ã‚¯ãƒ©ã‚¹ã®åå‰ã‚’å¤‰æ›´ã™ã‚‹å ´åˆã€ã“ã®ã‚¯ãƒ©ã‚¹ãŒä¾å­˜ã™ã‚‹ã™ã¹ã¦ã® .resx ãƒ•ã‚¡ã‚¤ãƒ«ã«é–¢é€£ä»˜ã‘ã‚‰ã‚ŒãŸ
-	///          ãƒãƒãƒ¼ã‚¸ ãƒªã‚½ãƒ¼ã‚¹ ã‚³ãƒ³ãƒ‘ã‚¤ãƒ© ãƒ„ãƒ¼ãƒ«ã«å¯¾ã—ã¦ 'Resource File Name' ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’
-	///          å¤‰æ›´ã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚ã“ã®å¤‰æ›´ã‚’è¡Œã‚ãªã„ã¨ã€
-	///          ãƒ‡ã‚¶ã‚¤ãƒŠã¨ã€ã“ã®ãƒ•ã‚©ãƒ¼ãƒ ã«é–¢é€£ä»˜ã‘ã‚‰ã‚ŒãŸãƒ­ãƒ¼ã‚«ãƒ©ã‚¤ã‚ºæ¸ˆã¿ãƒªã‚½ãƒ¼ã‚¹ã¨ãŒã€
-	///          æ­£ã—ãç›¸äº’ã«åˆ©ç”¨ã§ããªããªã‚Šã¾ã™ã€‚
+	/// Œx: ‚±‚ÌƒNƒ‰ƒX‚Ì–¼‘O‚ğ•ÏX‚·‚éê‡A‚±‚ÌƒNƒ‰ƒX‚ªˆË‘¶‚·‚é‚·‚×‚Ä‚Ì .resx ƒtƒ@ƒCƒ‹‚ÉŠÖ˜A•t‚¯‚ç‚ê‚½
+	///          ƒ}ƒl[ƒW ƒŠƒ\[ƒX ƒRƒ“ƒpƒCƒ‰ ƒc[ƒ‹‚É‘Î‚µ‚Ä 'Resource File Name' ƒvƒƒpƒeƒB‚ğ
+	///          •ÏX‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B‚±‚Ì•ÏX‚ğs‚í‚È‚¢‚ÆA
+	///          ƒfƒUƒCƒi‚ÆA‚±‚ÌƒtƒH[ƒ€‚ÉŠÖ˜A•t‚¯‚ç‚ê‚½ƒ[ƒJƒ‰ƒCƒYÏ‚İƒŠƒ\[ƒX‚Æ‚ªA
+	///          ³‚µ‚­‘ŠŒİ‚É—˜—p‚Å‚«‚È‚­‚È‚è‚Ü‚·B
 	/// </summary>
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
@@ -32,34 +32,32 @@ namespace LilithPort {
 		MainForm(void)
 		{
 			InitializeComponent();
+			//
+			//TODO: ‚±‚±‚ÉƒRƒ“ƒXƒgƒ‰ƒNƒ^ ƒR[ƒh‚ğ’Ç‰Á‚µ‚Ü‚·
+			//
 
-			// ãƒ–ãƒƒã‚¯ãƒãƒ¼ã‚¯ã‚’ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«ç™»éŒ²
+			// ƒuƒbƒNƒ}[ƒN‚ğƒƒjƒ…[‚É“o˜^
 			String^ tmpName;
 			if(MTOPTION.BOOKMARK_COUNT > 0) {
 				for(UINT i=0;i < MTOPTION.BOOKMARK_COUNT;i++) {
 					tmpName = gcnew String(MTOPTION.BOOKMARK_SERVER_NAME[i]);
 					
-					toolStripMenuItemBookMark = (gcnew System::Windows::Forms::MenuItem());
-					toolStripMenuItemBookMarkMenu->MenuItems->Add(toolStripMenuItemBookMark);
+					toolStripMenuItemBookMark = (gcnew System::Windows::Forms::ToolStripMenuItem());
+					toolStripMenuItemBookMarkMenu->DropDownItems->Add(toolStripMenuItemBookMark);
 					toolStripMenuItemBookMark->Text = tmpName;
 					toolStripMenuItemBookMark->Name = L"toolStripMenuItemBookMark" + i;
 					toolStripMenuItemBookMark->Tag = i;
+					toolStripMenuItemBookMark->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemBookMark_Click);
 					
-					toolStripMenuItemDelBookMark = (gcnew System::Windows::Forms::MenuItem());
-					toolStripMenuItemBookMark->MenuItems->Add(toolStripMenuItemDelBookMark);
-                    toolStripMenuItemDelBookMark->Text = L"&Delete";
+					toolStripMenuItemDelBookMark = (gcnew System::Windows::Forms::ToolStripMenuItem());
+					toolStripMenuItemBookMark->DropDownItems->Add(toolStripMenuItemDelBookMark);
+					toolStripMenuItemDelBookMark->Text = L"Delete";
 					toolStripMenuItemDelBookMark->Tag = L"toolStripMenuItemBookMark" + i;
 					toolStripMenuItemDelBookMark->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelBookMark_Click);
-
-                    toolStripMenuItemConnectToBookmark = gcnew System::Windows::Forms::MenuItem();
-                    toolStripMenuItemBookMark->MenuItems->Add(toolStripMenuItemConnectToBookmark);
-                    toolStripMenuItemConnectToBookmark->Text = L"&Connect";
-                    toolStripMenuItemConnectToBookmark->Tag = i;
-                    toolStripMenuItemConnectToBookmark->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemConnectToBookMark_Click);
 				}
 			}
 
-			// ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã«ç™»éŒ²
+			// ƒvƒƒtƒ@ƒCƒ‹‚ğƒRƒ“ƒ{ƒ{ƒbƒNƒX‚É“o˜^
 			for(int i=0; i < Profile::ProfileList->Count; i++){
 				if(Profile::ProfileList[i] == gcnew String(MTOPTION.PROFILE)){
 					toolStripDropDownButtonProfile->Text = Profile::ProfileList[i];			
@@ -71,7 +69,7 @@ namespace LilithPort {
 
 	protected:
 		/// <summary>
-		/// ä½¿ç”¨ä¸­ã®ãƒªã‚½ãƒ¼ã‚¹ã‚’ã™ã¹ã¦ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ—ã—ã¾ã™ã€‚
+		/// g—p’†‚ÌƒŠƒ\[ƒX‚ğ‚·‚×‚ÄƒNƒŠ[ƒ“ƒAƒbƒv‚µ‚Ü‚·B
 		/// </summary>
 		~MainForm()
 		{
@@ -80,103 +78,102 @@ namespace LilithPort {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::MainMenu^  menuStrip1;
+	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 	private: System::Windows::Forms::SplitContainer^  splitContainer1;
 	private: System::Windows::Forms::ListBox^  listBoxMember;
 	private: System::Windows::Forms::RichTextBox^  richTextBoxLog;
 	private: System::Windows::Forms::TextBox^  textBoxInput;
 
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemFile;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemSaveLog;
-    private: System::Windows::Forms::MenuItem^  toolStripSeparator1;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemExit;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemFile;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemSaveLog;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator1;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemExit;
 
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemOption;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemSetting;
-	private: System::Windows::Forms::MenuItem^  toolStripSeparator2;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelay;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelayAuto;
-	private: System::Windows::Forms::MenuItem^  toolStripSeparator4;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelay2;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelay3;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelay4;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelay5;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelay6;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelay7;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelay8;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelay9;
-	private: System::Windows::Forms::MenuItem^  toolStripSeparator3;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemRecordReplay;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemAllowSpectator;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemOption;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemSetting;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator2;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelayAuto;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator4;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay2;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay3;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay4;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay5;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay6;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay7;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay8;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay9;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator3;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemRecordReplay;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAllowSpectator;
 
 
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemHelp;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemViewCommand;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemHelp;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemViewCommand;
 
-	private: System::Windows::Forms::MenuItem^  toolStripSeparator5;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemVersion;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator5;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemVersion;
 
-	private: System::Windows::Forms::ContextMenu^  contextMenuStripMember;
-	private: System::Windows::Forms::ContextMenu^  contextMenuStripLog;
-	private: System::Windows::Forms::MenuItem^  contextMenuItemCopy;
+	private: System::Windows::Forms::ContextMenuStrip^  contextMenuStripMember;
+	private: System::Windows::Forms::ContextMenuStrip^  contextMenuStripLog;
+	private: System::Windows::Forms::ToolStripMenuItem^  contextMenuItemCopy;
 
-	private: System::Windows::Forms::MenuItem^  toolStripSeparator6;
-	private: System::Windows::Forms::MenuItem^  contxtMenuItemSaveLog;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemVS;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator6;
+	private: System::Windows::Forms::ToolStripMenuItem^  contxtMenuItemSaveLog;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemVS;
 	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
 	private: System::Windows::Forms::ToolTip^  toolTipMember;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemPing;
-    private: System::Windows::Forms::MenuItem^  toolStripMenuItemReplay;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemPing;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemReplay;
 
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemWatch;
-	private: System::Windows::Forms::MenuItem^  toolStripSeparator7;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemAfterRest;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemChangeList;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelay10;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelay11;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelay12;
-    private: System::Windows::Forms::MenuItem^  toolStripMenuItemBookMarkMenu;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemAddBookMark;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemBookMark;
-	private: System::Windows::Forms::MenuItem^  toolStripMenuItemDelBookMark;
-    private: System::Windows::Forms::MenuItem^  toolStripMenuItemConnectToBookmark;
-    private: System::Windows::Forms::MenuItem^  toolStripSeparator8;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemWatch;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator7;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAfterRest;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemChangeList;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay10;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay11;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelay12;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemBookMarkMenu;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAddBookMark;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemBookMark;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemDelBookMark;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator8;
 
-    private: System::Windows::Forms::MenuItem^  CommandToolStripMenuItem;
-    private: System::Windows::Forms::MenuItem^  GameStartToolStripMenuItem;
-    private: System::Windows::Forms::MenuItem^  RestartToolStripMenuItem;
-    private: System::Windows::Forms::MenuItem^  toolStripSeparator9;
-	private: System::Windows::Forms::MenuItem^  LeaveToolStripMenuItem;
-	private: System::Windows::Forms::MenuItem^  RestToolStripMenuItem;
-	private: System::Windows::Forms::MenuItem^  SeekToolStripMenuItem;
-	private: System::Windows::Forms::MenuItem^  ClearToolStripMenuItem;
-    private: System::Windows::Forms::MenuItem^  toolStripSeparator10;
+	private: System::Windows::Forms::ToolStripMenuItem^  CommandToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  GameStartToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  RestartToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator9;
+	private: System::Windows::Forms::ToolStripMenuItem^  LeaveToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  RestToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  SeekToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  ClearToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator10;
 
-private: System::Windows::Forms::MenuItem^  ToggleHitJudgeToolStripMenuItem;
-private: System::Windows::Forms::MenuItem^  LogLockToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^  ToggleHitJudgeToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^  LogLockToolStripMenuItem;
 
-private: System::Windows::Forms::MenuItem^  GetIPToolStripMenuItem;
-private: System::Windows::Forms::MenuItem^  toolStripSeparator11;
-private: System::Windows::Forms::MenuItem^  GameStartNoReplayToolStripMenuItem;
-private: System::Windows::Forms::MenuItem^  toolStripSeparator12;
-private: System::Windows::Forms::MenuItem^  toolStripMenuItemKick;
+private: System::Windows::Forms::ToolStripMenuItem^  GetIPToolStripMenuItem;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator11;
+private: System::Windows::Forms::ToolStripMenuItem^  GameStartNoReplayToolStripMenuItem;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator12;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemKick;
 private: System::Windows::Forms::StatusStrip^  statusStrip1;
 private: System::Windows::Forms::ToolStripStatusLabel^  toolStripStatusLabel;
 
 private: System::Windows::Forms::ToolStripDropDownButton^  toolStripDropDownButtonProfile;
-private: System::Windows::Forms::MenuItem^  toolStripMenuItemSeek;
-private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRest;
-private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestEnable;
-private: System::Windows::Forms::MenuItem^  toolStripSeparator13;
-private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime5;
-private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime10;
-private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime15;
-private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime20;
-private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime30;
-private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime60;
-private: System::Windows::Forms::MenuItem^  toolStripMenuItemAutoRestTime120;
-private: System::Windows::Forms::MenuItem^  toolStripMenuItemWordWrap;
-private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemSeek;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAutoRest;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAutoRestEnable;
+private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator13;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAutoRestTime5;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAutoRestTime10;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAutoRestTime15;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAutoRestTime20;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAutoRestTime30;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAutoRestTime60;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemAutoRestTime120;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemWordWrap;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItemClipBoardCopy;
 
 
 
@@ -186,717 +183,520 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 	private:
 		/// <summary>
-		/// å¿…è¦ãªãƒ‡ã‚¶ã‚¤ãƒŠå¤‰æ•°ã§ã™ã€‚
+		/// •K—v‚ÈƒfƒUƒCƒi•Ï”‚Å‚·B
 		/// </summary>
 		System::ComponentModel::IContainer^  components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// ãƒ‡ã‚¶ã‚¤ãƒŠ ã‚µãƒãƒ¼ãƒˆã«å¿…è¦ãªãƒ¡ã‚½ãƒƒãƒ‰ã§ã™ã€‚ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã®å†…å®¹ã‚’
-		/// ã‚³ãƒ¼ãƒ‰ ã‚¨ãƒ‡ã‚£ã‚¿ã§å¤‰æ›´ã—ãªã„ã§ãã ã•ã„ã€‚
+		/// ƒfƒUƒCƒi ƒTƒ|[ƒg‚É•K—v‚Èƒƒ\ƒbƒh‚Å‚·B‚±‚Ìƒƒ\ƒbƒh‚Ì“à—e‚ğ
+		/// ƒR[ƒh ƒGƒfƒBƒ^‚Å•ÏX‚µ‚È‚¢‚Å‚­‚¾‚³‚¢B
 		/// </summary>
 		void InitializeComponent(void)
 		{
-            this->components = (gcnew System::ComponentModel::Container());
-            System::Windows::Forms::MenuItem^  ReloadListToolStripMenuItem;
-            System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
-            this->menuStrip1 = (gcnew System::Windows::Forms::MainMenu(this->components));
-            this->toolStripMenuItemFile = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemReplay = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemSaveLog = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripSeparator1 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemExit = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemBookMarkMenu = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemAddBookMark = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripSeparator8 = (gcnew System::Windows::Forms::MenuItem());
-            this->CommandToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
-            this->GameStartToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
-            this->GameStartNoReplayToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripSeparator9 = (gcnew System::Windows::Forms::MenuItem());
-            this->RestartToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
-            this->LeaveToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
-            this->RestToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
-            this->SeekToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripSeparator10 = (gcnew System::Windows::Forms::MenuItem());
-            this->ClearToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
-            this->ToggleHitJudgeToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripSeparator11 = (gcnew System::Windows::Forms::MenuItem());
-            this->GetIPToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemOption = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemSetting = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripSeparator2 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemDelay = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemDelayAuto = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripSeparator4 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemDelay2 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemDelay3 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemDelay4 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemDelay5 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemDelay6 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemDelay7 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemDelay8 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemDelay9 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemDelay10 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemDelay11 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemDelay12 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripSeparator3 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemRecordReplay = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemAllowSpectator = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemWordWrap = (gcnew System::Windows::Forms::MenuItem());
-            this->LogLockToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripSeparator7 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemAfterRest = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemAutoRest = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemAutoRestEnable = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripSeparator13 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemAutoRestTime5 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemAutoRestTime10 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemAutoRestTime15 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemAutoRestTime20 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemAutoRestTime30 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemAutoRestTime60 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemAutoRestTime120 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemHelp = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemViewCommand = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemChangeList = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripSeparator5 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemVersion = (gcnew System::Windows::Forms::MenuItem());
-            this->splitContainer1 = (gcnew System::Windows::Forms::SplitContainer());
-            this->listBoxMember = (gcnew System::Windows::Forms::ListBox());
-            this->textBoxInput = (gcnew System::Windows::Forms::TextBox());
-            this->richTextBoxLog = (gcnew System::Windows::Forms::RichTextBox());
-            this->contextMenuStrip2 = (gcnew System::Windows::Forms::ContextMenu());
-            this->contextMenuItemCopy = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripSeparator6 = (gcnew System::Windows::Forms::MenuItem());
-            this->contxtMenuItemSaveLog = (gcnew System::Windows::Forms::MenuItem());
-            this->contextMenuStripMember = (gcnew System::Windows::Forms::ContextMenu());
-            this->toolStripMenuItemVS = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemWatch = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemSeek = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemPing = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripSeparator12 = (gcnew System::Windows::Forms::MenuItem());
-            this->toolStripMenuItemKick = (gcnew System::Windows::Forms::MenuItem());
-            this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
-            this->toolTipMember = (gcnew System::Windows::Forms::ToolTip(this->components));
-            this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
-            this->toolStripDropDownButtonProfile = (gcnew System::Windows::Forms::ToolStripDropDownButton());
-            this->toolStripStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
-            ReloadListToolStripMenuItem = (gcnew System::Windows::Forms::MenuItem());
-            (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
-            this->splitContainer1->Panel1->SuspendLayout();
-            this->splitContainer1->Panel2->SuspendLayout();
-            this->splitContainer1->SuspendLayout();
-            this->statusStrip1->SuspendLayout();
-            this->SuspendLayout();
-            // 
-            // ReloadListToolStripMenuItem
-            // 
-            ReloadListToolStripMenuItem->Index = 7;
-            ReloadListToolStripMenuItem->Shortcut = System::Windows::Forms::Shortcut::F5;
-            ReloadListToolStripMenuItem->Text = L"&Refresh player list";
-            ReloadListToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ReloadListToolStripMenuItem_Click);
-            // 
-            // menuStrip1
-            // 
-            this->menuStrip1->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(5) {
-                this->toolStripMenuItemFile,
-                    this->toolStripMenuItemBookMarkMenu, this->CommandToolStripMenuItem, this->toolStripMenuItemOption, this->toolStripMenuItemHelp
-            });
-            // 
-            // toolStripMenuItemFile
-            // 
-            this->toolStripMenuItemFile->Index = 0;
-            this->toolStripMenuItemFile->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(4) {
-                this->toolStripMenuItemReplay,
-                    this->toolStripMenuItemSaveLog, this->toolStripSeparator1, this->toolStripMenuItemExit
-            });
-            this->toolStripMenuItemFile->Text = L"&File";
-            // 
-            // toolStripMenuItemReplay
-            // 
-            this->toolStripMenuItemReplay->Index = 0;
-            this->toolStripMenuItemReplay->Text = L"Open &Replay File...";
-            this->toolStripMenuItemReplay->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemReplay_Click);
-            // 
-            // toolStripMenuItemSaveLog
-            // 
-            this->toolStripMenuItemSaveLog->Index = 1;
-            this->toolStripMenuItemSaveLog->Shortcut = System::Windows::Forms::Shortcut::CtrlS;
-            this->toolStripMenuItemSaveLog->Text = L"&Save Log";
-            this->toolStripMenuItemSaveLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemSaveLog_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this->toolStripSeparator1->Index = 2;
-            this->toolStripSeparator1->Text = L"-";
-            // 
-            // toolStripMenuItemExit
-            // 
-            this->toolStripMenuItemExit->Index = 3;
-            this->toolStripMenuItemExit->Text = L"&Exit";
-            this->toolStripMenuItemExit->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemExit_Click);
-            // 
-            // toolStripMenuItemBookMarkMenu
-            // 
-            this->toolStripMenuItemBookMarkMenu->Index = 1;
-            this->toolStripMenuItemBookMarkMenu->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(2) {
-                this->toolStripMenuItemAddBookMark,
-                    this->toolStripSeparator8
-            });
-            this->toolStripMenuItemBookMarkMenu->Text = L"&Bookmarks";
-            // 
-            // toolStripMenuItemAddBookMark
-            // 
-            this->toolStripMenuItemAddBookMark->Index = 0;
-            this->toolStripMenuItemAddBookMark->Text = L"&Add server";
-            this->toolStripMenuItemAddBookMark->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAddBookMark_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this->toolStripSeparator8->Index = 1;
-            this->toolStripSeparator8->Text = L"-";
-            // 
-            // CommandToolStripMenuItem
-            // 
-            this->CommandToolStripMenuItem->Index = 2;
-            this->CommandToolStripMenuItem->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(13) {
-                this->GameStartToolStripMenuItem,
-                    this->GameStartNoReplayToolStripMenuItem, this->toolStripSeparator9, this->RestartToolStripMenuItem, this->LeaveToolStripMenuItem,
-                    this->RestToolStripMenuItem, this->SeekToolStripMenuItem, ReloadListToolStripMenuItem, this->toolStripSeparator10, this->ClearToolStripMenuItem,
-                    this->ToggleHitJudgeToolStripMenuItem, this->toolStripSeparator11, this->GetIPToolStripMenuItem
-            });
-            this->CommandToolStripMenuItem->Text = L"&Commands";
-            // 
-            // GameStartToolStripMenuItem
-            // 
-            this->GameStartToolStripMenuItem->Index = 0;
-            this->GameStartToolStripMenuItem->Text = L"Start &game";
-            this->GameStartToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::GameStartToolStripMenuItem_Click);
-            // 
-            // GameStartNoReplayToolStripMenuItem
-            // 
-            this->GameStartNoReplayToolStripMenuItem->Index = 1;
-            this->GameStartNoReplayToolStripMenuItem->Text = L"S&tart game (no replay)";
-            this->GameStartNoReplayToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::GameStartNoReplayToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this->toolStripSeparator9->Index = 2;
-            this->toolStripSeparator9->Text = L"-";
-            // 
-            // RestartToolStripMenuItem
-            // 
-            this->RestartToolStripMenuItem->Index = 3;
-            this->RestartToolStripMenuItem->Text = L"&Restart";
-            this->RestartToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::RestartToolStripMenuItem_Click);
-            // 
-            // LeaveToolStripMenuItem
-            // 
-            this->LeaveToolStripMenuItem->Index = 4;
-            this->LeaveToolStripMenuItem->Text = L"&Leave";
-            this->LeaveToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::LeaveToolStripMenuItem_Click);
-            // 
-            // RestToolStripMenuItem
-            // 
-            this->RestToolStripMenuItem->Index = 5;
-            this->RestToolStripMenuItem->Text = L"Toggle rest &mode";
-            this->RestToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::RestToolStripMenuItem_Click);
-            // 
-            // SeekToolStripMenuItem
-            // 
-            this->SeekToolStripMenuItem->Index = 6;
-            this->SeekToolStripMenuItem->Text = L"Toggle &seek mode";
-            this->SeekToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::SeekToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator10
-            // 
-            this->toolStripSeparator10->Index = 8;
-            this->toolStripSeparator10->Text = L"-";
-            // 
-            // ClearToolStripMenuItem
-            // 
-            this->ClearToolStripMenuItem->Index = 9;
-            this->ClearToolStripMenuItem->Text = L"&Clear chat";
-            this->ClearToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ClearToolStripMenuItem_Click);
-            // 
-            // ToggleHitJudgeToolStripMenuItem
-            // 
-            this->ToggleHitJudgeToolStripMenuItem->Index = 10;
-            this->ToggleHitJudgeToolStripMenuItem->Shortcut = System::Windows::Forms::Shortcut::F1;
-            this->ToggleHitJudgeToolStripMenuItem->Text = L"Switch player list view (&H)";
-            this->ToggleHitJudgeToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ToggleHitJudgeToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator11
-            // 
-            this->toolStripSeparator11->Index = 11;
-            this->toolStripSeparator11->Text = L"-";
-            // 
-            // GetIPToolStripMenuItem
-            // 
-            this->GetIPToolStripMenuItem->Index = 12;
-            this->GetIPToolStripMenuItem->Text = L"Get &IP address";
-            this->GetIPToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::GetIPToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItemOption
-            // 
-            this->toolStripMenuItemOption->Index = 3;
-            this->toolStripMenuItemOption->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(11) {
-                this->toolStripMenuItemSetting,
-                    this->toolStripSeparator2, this->toolStripMenuItemDelay, this->toolStripSeparator3, this->toolStripMenuItemRecordReplay, this->toolStripMenuItemAllowSpectator,
-                    this->toolStripMenuItemWordWrap, this->LogLockToolStripMenuItem, this->toolStripSeparator7, this->toolStripMenuItemAfterRest,
-                    this->toolStripMenuItemAutoRest
-            });
-            this->toolStripMenuItemOption->Text = L"&Options";
-            // 
-            // toolStripMenuItemSetting
-            // 
-            this->toolStripMenuItemSetting->Index = 0;
-            this->toolStripMenuItemSetting->Text = L"&Settings...";
-            this->toolStripMenuItemSetting->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemSetting_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this->toolStripSeparator2->Index = 1;
-            this->toolStripSeparator2->Text = L"-";
-            // 
-            // toolStripMenuItemDelay
-            // 
-            this->toolStripMenuItemDelay->Index = 2;
-            this->toolStripMenuItemDelay->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(13) {
-                this->toolStripMenuItemDelayAuto,
-                    this->toolStripSeparator4, this->toolStripMenuItemDelay2, this->toolStripMenuItemDelay3, this->toolStripMenuItemDelay4, this->toolStripMenuItemDelay5,
-                    this->toolStripMenuItemDelay6, this->toolStripMenuItemDelay7, this->toolStripMenuItemDelay8, this->toolStripMenuItemDelay9, this->toolStripMenuItemDelay10,
-                    this->toolStripMenuItemDelay11, this->toolStripMenuItemDelay12
-            });
-            this->toolStripMenuItemDelay->Text = L"&Delay";
-            // 
-            // toolStripMenuItemDelayAuto
-            // 
-            this->toolStripMenuItemDelayAuto->Checked = true;
-            this->toolStripMenuItemDelayAuto->Index = 0;
-            this->toolStripMenuItemDelayAuto->Text = L"Auto";
-            this->toolStripMenuItemDelayAuto->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelayAuto_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this->toolStripSeparator4->Index = 1;
-            this->toolStripSeparator4->Text = L"-";
-            // 
-            // toolStripMenuItemDelay2
-            // 
-            this->toolStripMenuItemDelay2->Index = 2;
-            this->toolStripMenuItemDelay2->Text = L"2";
-            this->toolStripMenuItemDelay2->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay2_Click);
-            // 
-            // toolStripMenuItemDelay3
-            // 
-            this->toolStripMenuItemDelay3->Index = 3;
-            this->toolStripMenuItemDelay3->Text = L"3";
-            this->toolStripMenuItemDelay3->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay3_Click);
-            // 
-            // toolStripMenuItemDelay4
-            // 
-            this->toolStripMenuItemDelay4->Index = 4;
-            this->toolStripMenuItemDelay4->Text = L"4";
-            this->toolStripMenuItemDelay4->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay4_Click);
-            // 
-            // toolStripMenuItemDelay5
-            // 
-            this->toolStripMenuItemDelay5->Index = 5;
-            this->toolStripMenuItemDelay5->Text = L"5";
-            this->toolStripMenuItemDelay5->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay5_Click);
-            // 
-            // toolStripMenuItemDelay6
-            // 
-            this->toolStripMenuItemDelay6->Index = 6;
-            this->toolStripMenuItemDelay6->Text = L"6";
-            this->toolStripMenuItemDelay6->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay6_Click);
-            // 
-            // toolStripMenuItemDelay7
-            // 
-            this->toolStripMenuItemDelay7->Index = 7;
-            this->toolStripMenuItemDelay7->Text = L"7";
-            this->toolStripMenuItemDelay7->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay7_Click);
-            // 
-            // toolStripMenuItemDelay8
-            // 
-            this->toolStripMenuItemDelay8->Index = 8;
-            this->toolStripMenuItemDelay8->Text = L"8";
-            this->toolStripMenuItemDelay8->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay8_Click);
-            // 
-            // toolStripMenuItemDelay9
-            // 
-            this->toolStripMenuItemDelay9->Index = 9;
-            this->toolStripMenuItemDelay9->Text = L"9";
-            this->toolStripMenuItemDelay9->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay9_Click);
-            // 
-            // toolStripMenuItemDelay10
-            // 
-            this->toolStripMenuItemDelay10->Index = 10;
-            this->toolStripMenuItemDelay10->Text = L"10";
-            this->toolStripMenuItemDelay10->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay10_Click);
-            // 
-            // toolStripMenuItemDelay11
-            // 
-            this->toolStripMenuItemDelay11->Index = 11;
-            this->toolStripMenuItemDelay11->Text = L"11";
-            this->toolStripMenuItemDelay11->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay11_Click);
-            // 
-            // toolStripMenuItemDelay12
-            // 
-            this->toolStripMenuItemDelay12->Index = 12;
-            this->toolStripMenuItemDelay12->Text = L"12";
-            this->toolStripMenuItemDelay12->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay12_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this->toolStripSeparator3->Index = 3;
-            this->toolStripSeparator3->Text = L"-";
-            // 
-            // toolStripMenuItemRecordReplay
-            // 
-            this->toolStripMenuItemRecordReplay->Checked = true;
-            this->toolStripMenuItemRecordReplay->Index = 4;
-            this->toolStripMenuItemRecordReplay->Text = L"Save &replays";
-            this->toolStripMenuItemRecordReplay->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemRecordReplay_Click);
-            // 
-            // toolStripMenuItemAllowSpectator
-            // 
-            this->toolStripMenuItemAllowSpectator->Checked = true;
-            this->toolStripMenuItemAllowSpectator->Index = 5;
-            this->toolStripMenuItemAllowSpectator->Text = L"&Allow spectators";
-            this->toolStripMenuItemAllowSpectator->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAllowSpectator_Click);
-            // 
-            // toolStripMenuItemWordWrap
-            // 
-            this->toolStripMenuItemWordWrap->Index = 6;
-            this->toolStripMenuItemWordWrap->Text = L"&Word wrap chat";
-            this->toolStripMenuItemWordWrap->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemWordWrap_Click);
-            // 
-            // LogLockToolStripMenuItem
-            // 
-            this->LogLockToolStripMenuItem->Checked = true;
-            this->LogLockToolStripMenuItem->Index = 7;
-            this->LogLockToolStripMenuItem->Shortcut = System::Windows::Forms::Shortcut::F3;
-            this->LogLockToolStripMenuItem->Text = L"Auto-scro&ll chat";
-            this->LogLockToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::LogLockToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this->toolStripSeparator7->Index = 8;
-            this->toolStripSeparator7->Text = L"-";
-            // 
-            // toolStripMenuItemAfterRest
-            // 
-            this->toolStripMenuItemAfterRest->Index = 9;
-            this->toolStripMenuItemAfterRest->Text = L"Rest after &net battle";
-            this->toolStripMenuItemAfterRest->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAfterRest_Click);
-            // 
-            // toolStripMenuItemAutoRest
-            // 
-            this->toolStripMenuItemAutoRest->Index = 10;
-            this->toolStripMenuItemAutoRest->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(9) {
-                this->toolStripMenuItemAutoRestEnable,
-                    this->toolStripSeparator13, this->toolStripMenuItemAutoRestTime5, this->toolStripMenuItemAutoRestTime10, this->toolStripMenuItemAutoRestTime15,
-                    this->toolStripMenuItemAutoRestTime20, this->toolStripMenuItemAutoRestTime30, this->toolStripMenuItemAutoRestTime60, this->toolStripMenuItemAutoRestTime120
-            });
-            this->toolStripMenuItemAutoRest->Text = L"Auto-rest after";
-            // 
-            // toolStripMenuItemAutoRestEnable
-            // 
-            this->toolStripMenuItemAutoRestEnable->Index = 0;
-            this->toolStripMenuItemAutoRestEnable->Text = L"Enabled";
-            this->toolStripMenuItemAutoRestEnable->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestEnable_Click);
-            // 
-            // toolStripSeparator13
-            // 
-            this->toolStripSeparator13->Index = 1;
-            this->toolStripSeparator13->Text = L"-";
-            // 
-            // toolStripMenuItemAutoRestTime5
-            // 
-            this->toolStripMenuItemAutoRestTime5->Index = 2;
-            this->toolStripMenuItemAutoRestTime5->RadioCheck = true;
-            this->toolStripMenuItemAutoRestTime5->Text = L"5 minutes";
-            this->toolStripMenuItemAutoRestTime5->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime5_Click);
-            // 
-            // toolStripMenuItemAutoRestTime10
-            // 
-            this->toolStripMenuItemAutoRestTime10->Index = 3;
-            this->toolStripMenuItemAutoRestTime10->RadioCheck = true;
-            this->toolStripMenuItemAutoRestTime10->Text = L"10 minutes";
-            this->toolStripMenuItemAutoRestTime10->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime10_Click);
-            // 
-            // toolStripMenuItemAutoRestTime15
-            // 
-            this->toolStripMenuItemAutoRestTime15->Index = 4;
-            this->toolStripMenuItemAutoRestTime15->RadioCheck = true;
-            this->toolStripMenuItemAutoRestTime15->Text = L"15 minutes";
-            this->toolStripMenuItemAutoRestTime15->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime15_Click);
-            // 
-            // toolStripMenuItemAutoRestTime20
-            // 
-            this->toolStripMenuItemAutoRestTime20->Index = 5;
-            this->toolStripMenuItemAutoRestTime20->RadioCheck = true;
-            this->toolStripMenuItemAutoRestTime20->Text = L"20 minutes";
-            this->toolStripMenuItemAutoRestTime20->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime20_Click);
-            // 
-            // toolStripMenuItemAutoRestTime30
-            // 
-            this->toolStripMenuItemAutoRestTime30->Index = 6;
-            this->toolStripMenuItemAutoRestTime30->RadioCheck = true;
-            this->toolStripMenuItemAutoRestTime30->Text = L"30 minutes";
-            this->toolStripMenuItemAutoRestTime30->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime30_Click);
-            // 
-            // toolStripMenuItemAutoRestTime60
-            // 
-            this->toolStripMenuItemAutoRestTime60->Index = 7;
-            this->toolStripMenuItemAutoRestTime60->RadioCheck = true;
-            this->toolStripMenuItemAutoRestTime60->Text = L"60 minutes";
-            this->toolStripMenuItemAutoRestTime60->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime60_Click);
-            // 
-            // toolStripMenuItemAutoRestTime120
-            // 
-            this->toolStripMenuItemAutoRestTime120->Index = 8;
-            this->toolStripMenuItemAutoRestTime120->RadioCheck = true;
-            this->toolStripMenuItemAutoRestTime120->Text = L"120 minutes";
-            this->toolStripMenuItemAutoRestTime120->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime120_Click);
-            // 
-            // toolStripMenuItemHelp
-            // 
-            this->toolStripMenuItemHelp->Index = 4;
-            this->toolStripMenuItemHelp->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(4) {
-                this->toolStripMenuItemViewCommand,
-                    this->toolStripMenuItemChangeList, this->toolStripSeparator5, this->toolStripMenuItemVersion
-            });
-            this->toolStripMenuItemHelp->Text = L"&Help";
-            // 
-            // toolStripMenuItemViewCommand
-            // 
-            this->toolStripMenuItemViewCommand->Index = 0;
-            this->toolStripMenuItemViewCommand->Text = L"&Command List";
-            this->toolStripMenuItemViewCommand->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemViewCommand_Click);
-            // 
-            // toolStripMenuItemChangeList
-            // 
-            this->toolStripMenuItemChangeList->Index = 1;
-            this->toolStripMenuItemChangeList->Shortcut = System::Windows::Forms::Shortcut::F2;
-            this->toolStripMenuItemChangeList->Text = L"Toggle &list view";
-            this->toolStripMenuItemChangeList->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemChangeList_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this->toolStripSeparator5->Index = 2;
-            this->toolStripSeparator5->Text = L"-";
-            // 
-            // toolStripMenuItemVersion
-            // 
-            this->toolStripMenuItemVersion->Index = 3;
-            this->toolStripMenuItemVersion->Text = L"&About...";
-            this->toolStripMenuItemVersion->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemVersion_Click);
-            // 
-            // splitContainer1
-            // 
-            this->splitContainer1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-                | System::Windows::Forms::AnchorStyles::Left)
-                | System::Windows::Forms::AnchorStyles::Right));
-            this->splitContainer1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-            this->splitContainer1->Location = System::Drawing::Point(0, 0);
-            this->splitContainer1->Name = L"splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this->splitContainer1->Panel1->Controls->Add(this->listBoxMember);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this->splitContainer1->Panel2->Controls->Add(this->textBoxInput);
-            this->splitContainer1->Panel2->Controls->Add(this->richTextBoxLog);
-            this->splitContainer1->Size = System::Drawing::Size(656, 375);
-            this->splitContainer1->SplitterDistance = 96;
-            this->splitContainer1->TabIndex = 2;
-            this->splitContainer1->TabStop = false;
-            // 
-            // listBoxMember
-            // 
-            this->listBoxMember->BorderStyle = System::Windows::Forms::BorderStyle::None;
-            this->listBoxMember->Dock = System::Windows::Forms::DockStyle::Fill;
-            this->listBoxMember->DrawMode = System::Windows::Forms::DrawMode::OwnerDrawFixed;
-            this->listBoxMember->FormattingEnabled = true;
-            this->listBoxMember->ItemHeight = 12;
-            this->listBoxMember->Location = System::Drawing::Point(0, 0);
-            this->listBoxMember->Name = L"listBoxMember";
-            this->listBoxMember->Size = System::Drawing::Size(94, 373);
-            this->listBoxMember->TabIndex = 2;
-            this->listBoxMember->DrawItem += gcnew System::Windows::Forms::DrawItemEventHandler(this, &MainForm::listBoxMember_DrawItem);
-            this->listBoxMember->MouseDoubleClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::listBoxMember_MouseDoubleClick);
-            this->listBoxMember->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::listBoxMember_MouseDown);
-            this->listBoxMember->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::listBoxMember_MouseUp);
-            // 
-            // textBoxInput
-            // 
-            this->textBoxInput->BackColor = System::Drawing::SystemColors::Window;
-            this->textBoxInput->Dock = System::Windows::Forms::DockStyle::Bottom;
-            this->textBoxInput->Location = System::Drawing::Point(0, 353);
-            this->textBoxInput->MaxLength = 127;
-            this->textBoxInput->Name = L"textBoxInput";
-            this->textBoxInput->Size = System::Drawing::Size(554, 20);
-            this->textBoxInput->TabIndex = 0;
-            this->textBoxInput->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::textBoxInput_KeyDown);
-            // 
-            // richTextBoxLog
-            // 
-            this->richTextBoxLog->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-                | System::Windows::Forms::AnchorStyles::Left)
-                | System::Windows::Forms::AnchorStyles::Right));
-            this->richTextBoxLog->BackColor = System::Drawing::SystemColors::Window;
-            this->richTextBoxLog->BorderStyle = System::Windows::Forms::BorderStyle::None;
-            this->richTextBoxLog->ContextMenu = this->contextMenuStrip2;
-            this->richTextBoxLog->Location = System::Drawing::Point(0, 0);
-            this->richTextBoxLog->Name = L"richTextBoxLog";
-            this->richTextBoxLog->ReadOnly = true;
-            this->richTextBoxLog->Size = System::Drawing::Size(554, 353);
-            this->richTextBoxLog->TabIndex = 0;
-            this->richTextBoxLog->TabStop = false;
-            this->richTextBoxLog->Text = L"";
-            this->richTextBoxLog->WordWrap = false;
-            this->richTextBoxLog->LinkClicked += gcnew System::Windows::Forms::LinkClickedEventHandler(this, &MainForm::richTextBoxLog_LinkClicked);
-            // 
-            // contextMenuStrip2
-            // 
-            this->contextMenuStrip2->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(3) {
-                this->contextMenuItemCopy,
-                    this->toolStripSeparator6, this->contxtMenuItemSaveLog
-            });
-            // 
-            // contextMenuItemCopy
-            // 
-            this->contextMenuItemCopy->Index = 0;
-            this->contextMenuItemCopy->Shortcut = System::Windows::Forms::Shortcut::CtrlC;
-            this->contextMenuItemCopy->Text = L"&Copy";
-            this->contextMenuItemCopy->Click += gcnew System::EventHandler(this, &MainForm::contextMenuItemCopy_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this->toolStripSeparator6->Index = 1;
-            this->toolStripSeparator6->Text = L"-";
-            // 
-            // contxtMenuItemSaveLog
-            // 
-            this->contxtMenuItemSaveLog->Index = 2;
-            this->contxtMenuItemSaveLog->Shortcut = System::Windows::Forms::Shortcut::CtrlS;
-            this->contxtMenuItemSaveLog->Text = L"&Save log";
-            this->contxtMenuItemSaveLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemSaveLog_Click);
-            // 
-            // contextMenuStripMember
-            // 
-            this->contextMenuStripMember->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(6) {
-                this->toolStripMenuItemVS,
-                    this->toolStripMenuItemWatch, this->toolStripMenuItemSeek, this->toolStripMenuItemPing, this->toolStripSeparator12, this->toolStripMenuItemKick
-            });
-            this->contextMenuStripMember->Popup += gcnew System::EventHandler(this, &MainForm::contextMenuStripMember_Opening);
-            // 
-            // toolStripMenuItemVS
-            // 
-            this->toolStripMenuItemVS->Index = 0;
-            this->toolStripMenuItemVS->Text = L"Fight";
-            this->toolStripMenuItemVS->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemVS_Click);
-            // 
-            // toolStripMenuItemWatch
-            // 
-            this->toolStripMenuItemWatch->Index = 1;
-            this->toolStripMenuItemWatch->Text = L"Spectate";
-            this->toolStripMenuItemWatch->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemWatch_Click);
-            // 
-            // toolStripMenuItemSeek
-            // 
-            this->toolStripMenuItemSeek->Index = 2;
-            this->toolStripMenuItemSeek->Text = L"Seek/Challenge";
-            this->toolStripMenuItemSeek->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemSeek_Click);
-            // 
-            // toolStripMenuItemPing
-            // 
-            this->toolStripMenuItemPing->Index = 3;
-            this->toolStripMenuItemPing->Text = L"Ping";
-            this->toolStripMenuItemPing->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemPing_Click);
-            // 
-            // toolStripSeparator12
-            // 
-            this->toolStripSeparator12->Index = 4;
-            this->toolStripSeparator12->Text = L"-";
-            // 
-            // toolStripMenuItemKick
-            // 
-            this->toolStripMenuItemKick->Index = 5;
-            this->toolStripMenuItemKick->Text = L"Kick";
-            this->toolStripMenuItemKick->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemKick_Click);
-            // 
-            // openFileDialog1
-            // 
-            this->openFileDialog1->Filter = L"MT replay file (*.mtr)|*.mtr";
-            this->openFileDialog1->Title = L"Open LilithPort replay";
-            // 
-            // statusStrip1
-            // 
-            this->statusStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-                this->toolStripDropDownButtonProfile,
-                    this->toolStripStatusLabel
-            });
-            this->statusStrip1->Location = System::Drawing::Point(0, 378);
-            this->statusStrip1->Name = L"statusStrip1";
-            this->statusStrip1->RightToLeft = System::Windows::Forms::RightToLeft::No;
-            this->statusStrip1->Size = System::Drawing::Size(658, 22);
-            this->statusStrip1->TabIndex = 3;
-            this->statusStrip1->Text = L"statusStrip1";
-            // 
-            // toolStripDropDownButtonProfile
-            // 
-            this->toolStripDropDownButtonProfile->Alignment = System::Windows::Forms::ToolStripItemAlignment::Right;
-            this->toolStripDropDownButtonProfile->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
-            this->toolStripDropDownButtonProfile->ImageScaling = System::Windows::Forms::ToolStripItemImageScaling::None;
-            this->toolStripDropDownButtonProfile->Name = L"toolStripDropDownButtonProfile";
-            this->toolStripDropDownButtonProfile->RightToLeft = System::Windows::Forms::RightToLeft::No;
-            this->toolStripDropDownButtonProfile->Size = System::Drawing::Size(13, 20);
-            // 
-            // toolStripStatusLabel
-            // 
-            this->toolStripStatusLabel->BorderSides = System::Windows::Forms::ToolStripStatusLabelBorderSides::Left;
-            this->toolStripStatusLabel->BorderStyle = System::Windows::Forms::Border3DStyle::Raised;
-            this->toolStripStatusLabel->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
-            this->toolStripStatusLabel->Margin = System::Windows::Forms::Padding(5, 3, 0, 2);
-            this->toolStripStatusLabel->Name = L"toolStripStatusLabel";
-            this->toolStripStatusLabel->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
-            this->toolStripStatusLabel->Size = System::Drawing::Size(9, 17);
-            // 
-            // MainForm
-            // 
-            this->AllowDrop = true;
-            this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-            this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-            this->ClientSize = System::Drawing::Size(658, 400);
-            this->Controls->Add(this->statusStrip1);
-            this->Controls->Add(this->splitContainer1);
-            this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-            this->Menu = this->menuStrip1;
-            this->Name = L"MainForm";
-            this->Text = L"LilithPort";
-            this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
-            this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MainForm::MainForm_FormClosed);
-            this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
-            this->Shown += gcnew System::EventHandler(this, &MainForm::MainForm_Shown);
-            this->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::MainForm_DragDrop);
-            this->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::MainForm_DragEnter);
-            this->splitContainer1->Panel1->ResumeLayout(false);
-            this->splitContainer1->Panel2->ResumeLayout(false);
-            this->splitContainer1->Panel2->PerformLayout();
-            (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->EndInit();
-            this->splitContainer1->ResumeLayout(false);
-            this->statusStrip1->ResumeLayout(false);
-            this->statusStrip1->PerformLayout();
-            this->ResumeLayout(false);
-            this->PerformLayout();
+			this->components = (gcnew System::ComponentModel::Container());
+			System::Windows::Forms::ToolStripMenuItem^  ReloadListToolStripMenuItem;
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->toolStripMenuItemFile = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemReplay = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemSaveLog = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator1 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->toolStripMenuItemExit = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemBookMarkMenu = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemAddBookMark = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator8 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->CommandToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->GameStartToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->GameStartNoReplayToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator9 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->RestartToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->LeaveToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->RestToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->SeekToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator10 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->ClearToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ToggleHitJudgeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator11 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->GetIPToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemOption = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemSetting = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator2 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->toolStripMenuItemDelay = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemDelayAuto = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator4 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->toolStripMenuItemDelay2 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemDelay3 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemDelay4 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemDelay5 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemDelay6 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemDelay7 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemDelay8 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemDelay9 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemDelay10 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemDelay11 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemDelay12 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator3 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->toolStripMenuItemRecordReplay = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemAllowSpectator = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemWordWrap = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->LogLockToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator7 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->toolStripMenuItemAfterRest = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemAutoRest = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemAutoRestEnable = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator13 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->toolStripMenuItemAutoRestTime5 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemAutoRestTime10 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemAutoRestTime15 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemAutoRestTime20 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemAutoRestTime30 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemAutoRestTime60 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemAutoRestTime120 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemHelp = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemViewCommand = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemChangeList = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator5 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->toolStripMenuItemVersion = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->splitContainer1 = (gcnew System::Windows::Forms::SplitContainer());
+			this->listBoxMember = (gcnew System::Windows::Forms::ListBox());
+			this->contextMenuStripMember = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->toolStripMenuItemVS = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemWatch = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemSeek = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemPing = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItemClipBoardCopy = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator12 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->toolStripMenuItemKick = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->richTextBoxLog = (gcnew System::Windows::Forms::RichTextBox());
+			this->contextMenuStripLog = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->contextMenuItemCopy = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator6 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->contxtMenuItemSaveLog = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->textBoxInput = (gcnew System::Windows::Forms::TextBox());
+			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->toolTipMember = (gcnew System::Windows::Forms::ToolTip(this->components));
+			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
+			this->toolStripDropDownButtonProfile = (gcnew System::Windows::Forms::ToolStripDropDownButton());
+			this->toolStripStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			ReloadListToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->menuStrip1->SuspendLayout();
+			this->splitContainer1->Panel1->SuspendLayout();
+			this->splitContainer1->Panel2->SuspendLayout();
+			this->splitContainer1->SuspendLayout();
+			this->contextMenuStripMember->SuspendLayout();
+			this->contextMenuStripLog->SuspendLayout();
+			this->statusStrip1->SuspendLayout();
+			this->SuspendLayout();
+			ReloadListToolStripMenuItem->Name = L"ReloadListToolStripMenuItem";
+			ReloadListToolStripMenuItem->ShortcutKeys = System::Windows::Forms::Keys::F5;
+			ReloadListToolStripMenuItem->Size = System::Drawing::Size(310, 22);
+			ReloadListToolStripMenuItem->Text = L"Refresh Player List";
+			ReloadListToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ReloadListToolStripMenuItem_Click);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {this->toolStripMenuItemFile, 
+				this->toolStripMenuItemBookMarkMenu, this->CommandToolStripMenuItem, this->toolStripMenuItemOption, this->toolStripMenuItemHelp});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(528, 26);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			this->toolStripMenuItemFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->toolStripMenuItemReplay, 
+				this->toolStripMenuItemSaveLog, this->toolStripSeparator1, this->toolStripMenuItemExit});
+			this->toolStripMenuItemFile->Name = L"toolStripMenuItemFile";
+			this->toolStripMenuItemFile->Size = System::Drawing::Size(85, 22);
+			this->toolStripMenuItemFile->Text = L"File";
+			this->toolStripMenuItemReplay->Name = L"toolStripMenuItemReplay";
+			this->toolStripMenuItemReplay->Size = System::Drawing::Size(226, 22);
+			this->toolStripMenuItemReplay->Text = L"Open Replay";
+			this->toolStripMenuItemReplay->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemReplay_Click);
+			this->toolStripMenuItemSaveLog->Name = L"toolStripMenuItemSaveLog";
+			this->toolStripMenuItemSaveLog->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::S));
+			this->toolStripMenuItemSaveLog->Size = System::Drawing::Size(226, 22);
+			this->toolStripMenuItemSaveLog->Text = L"Save Logs";
+			this->toolStripMenuItemSaveLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemSaveLog_Click);
+			this->toolStripSeparator1->Name = L"toolStripSeparator1";
+			this->toolStripSeparator1->Size = System::Drawing::Size(223, 6);
+			this->toolStripMenuItemExit->Name = L"toolStripMenuItemExit";
+			this->toolStripMenuItemExit->Size = System::Drawing::Size(226, 22);
+			this->toolStripMenuItemExit->Text = L"Exit";
+			this->toolStripMenuItemExit->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemExit_Click);
+			this->toolStripMenuItemBookMarkMenu->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->toolStripMenuItemAddBookMark, 
+				this->toolStripSeparator8});
+			this->toolStripMenuItemBookMarkMenu->Name = L"toolStripMenuItemBookMarkMenu";
+			this->toolStripMenuItemBookMarkMenu->Size = System::Drawing::Size(110, 22);
+			this->toolStripMenuItemBookMarkMenu->Text = L"Bookmarks";
+			this->toolStripMenuItemAddBookMark->Name = L"toolStripMenuItemAddBookMark";
+			this->toolStripMenuItemAddBookMark->Size = System::Drawing::Size(166, 22);
+			this->toolStripMenuItemAddBookMark->Text = L"Add Server";
+			this->toolStripMenuItemAddBookMark->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAddBookMark_Click);
+			this->toolStripSeparator8->Name = L"toolStripSeparator8";
+			this->toolStripSeparator8->Size = System::Drawing::Size(163, 6);
+			this->CommandToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(13) {this->GameStartToolStripMenuItem, 
+				this->GameStartNoReplayToolStripMenuItem, this->toolStripSeparator9, this->RestartToolStripMenuItem, this->LeaveToolStripMenuItem, 
+				this->RestToolStripMenuItem, this->SeekToolStripMenuItem, ReloadListToolStripMenuItem, this->toolStripSeparator10, this->ClearToolStripMenuItem, 
+				this->ToggleHitJudgeToolStripMenuItem, this->toolStripSeparator11, this->GetIPToolStripMenuItem});
+			this->CommandToolStripMenuItem->Name = L"CommandToolStripMenuItem";
+			this->CommandToolStripMenuItem->Size = System::Drawing::Size(86, 22);
+			this->CommandToolStripMenuItem->Text = L"Commands";
+			this->GameStartToolStripMenuItem->BackColor = System::Drawing::SystemColors::Control;
+			this->GameStartToolStripMenuItem->Name = L"GameStartToolStripMenuItem";
+			this->GameStartToolStripMenuItem->Size = System::Drawing::Size(310, 22);
+			this->GameStartToolStripMenuItem->Text = L"Start 1P Game";
+			this->GameStartToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::GameStartToolStripMenuItem_Click);
+			this->GameStartNoReplayToolStripMenuItem->Name = L"GameStartNoReplayToolStripMenuItem";
+			this->GameStartNoReplayToolStripMenuItem->Size = System::Drawing::Size(310, 22);
+			this->GameStartNoReplayToolStripMenuItem->Text = L"Start 1P Game (No Replay)";
+			this->GameStartNoReplayToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::GameStartNoReplayToolStripMenuItem_Click);
+			this->toolStripSeparator9->Name = L"toolStripSeparator9";
+			this->toolStripSeparator9->Size = System::Drawing::Size(307, 6);
+			this->RestartToolStripMenuItem->Name = L"RestartToolStripMenuItem";
+			this->RestartToolStripMenuItem->Size = System::Drawing::Size(310, 22);
+			this->RestartToolStripMenuItem->Text = L"Restart";
+			this->RestartToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::RestartToolStripMenuItem_Click);
+			this->LeaveToolStripMenuItem->Name = L"LeaveToolStripMenuItem";
+			this->LeaveToolStripMenuItem->Size = System::Drawing::Size(310, 22);
+			this->LeaveToolStripMenuItem->Text = L"Leave Server";
+			this->LeaveToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::LeaveToolStripMenuItem_Click);
+			this->RestToolStripMenuItem->Name = L"RestToolStripMenuItem";
+			this->RestToolStripMenuItem->Size = System::Drawing::Size(310, 22);
+			this->RestToolStripMenuItem->Text = L"Toggle Rest Mode";
+			this->RestToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::RestToolStripMenuItem_Click);
+			this->SeekToolStripMenuItem->Name = L"SeekToolStripMenuItem";
+			this->SeekToolStripMenuItem->Size = System::Drawing::Size(310, 22);
+			this->SeekToolStripMenuItem->Text = L"Toggle Seek Mode";
+			this->SeekToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::SeekToolStripMenuItem_Click);
+			this->toolStripSeparator10->Name = L"toolStripSeparator10";
+			this->toolStripSeparator10->Size = System::Drawing::Size(307, 6);
+			this->ClearToolStripMenuItem->Name = L"ClearToolStripMenuItem";
+			this->ClearToolStripMenuItem->Size = System::Drawing::Size(310, 22);
+			this->ClearToolStripMenuItem->Text = L"Clear Chat";
+			this->ClearToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ClearToolStripMenuItem_Click);
+			this->ToggleHitJudgeToolStripMenuItem->Name = L"ToggleHitJudgeToolStripMenuItem";
+			this->ToggleHitJudgeToolStripMenuItem->ShortcutKeys = System::Windows::Forms::Keys::F1;
+			this->ToggleHitJudgeToolStripMenuItem->Size = System::Drawing::Size(310, 22);
+			this->ToggleHitJudgeToolStripMenuItem->Text = L"Switch Player List View";
+			this->ToggleHitJudgeToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ToggleHitJudgeToolStripMenuItem_Click);
+			this->toolStripSeparator11->Name = L"toolStripSeparator11";
+			this->toolStripSeparator11->Size = System::Drawing::Size(307, 6);
+			this->GetIPToolStripMenuItem->Name = L"GetIPToolStripMenuItem";
+			this->GetIPToolStripMenuItem->Size = System::Drawing::Size(310, 22);
+			this->GetIPToolStripMenuItem->Text = L"Get IP Address";
+			this->GetIPToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::GetIPToolStripMenuItem_Click);
+			this->toolStripMenuItemOption->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(11) {this->toolStripMenuItemSetting, 
+				this->toolStripSeparator2, this->toolStripMenuItemDelay, this->toolStripSeparator3, this->toolStripMenuItemRecordReplay, this->toolStripMenuItemAllowSpectator, 
+				this->toolStripMenuItemWordWrap, this->LogLockToolStripMenuItem, this->toolStripSeparator7, this->toolStripMenuItemAfterRest, 
+				this->toolStripMenuItemAutoRest});
+			this->toolStripMenuItemOption->Name = L"toolStripMenuItemOption";
+			this->toolStripMenuItemOption->Size = System::Drawing::Size(99, 22);
+			this->toolStripMenuItemOption->Text = L"Options";
+			this->toolStripMenuItemSetting->Name = L"toolStripMenuItemSetting";
+			this->toolStripMenuItemSetting->Size = System::Drawing::Size(247, 22);
+			this->toolStripMenuItemSetting->Text = L"Settings";
+			this->toolStripMenuItemSetting->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemSetting_Click);
+			this->toolStripSeparator2->Name = L"toolStripSeparator2";
+			this->toolStripSeparator2->Size = System::Drawing::Size(244, 6);
+			this->toolStripMenuItemDelay->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(13) {this->toolStripMenuItemDelayAuto, 
+				this->toolStripSeparator4, this->toolStripMenuItemDelay2, this->toolStripMenuItemDelay3, this->toolStripMenuItemDelay4, this->toolStripMenuItemDelay5, 
+				this->toolStripMenuItemDelay6, this->toolStripMenuItemDelay7, this->toolStripMenuItemDelay8, this->toolStripMenuItemDelay9, this->toolStripMenuItemDelay10, 
+				this->toolStripMenuItemDelay11, this->toolStripMenuItemDelay12});
+			this->toolStripMenuItemDelay->Name = L"toolStripMenuItemDelay";
+			this->toolStripMenuItemDelay->Size = System::Drawing::Size(247, 22);
+			this->toolStripMenuItemDelay->Text = L"Delay";
+			this->toolStripMenuItemDelayAuto->Checked = true;
+			this->toolStripMenuItemDelayAuto->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->toolStripMenuItemDelayAuto->Name = L"toolStripMenuItemDelayAuto";
+			this->toolStripMenuItemDelayAuto->Size = System::Drawing::Size(103, 22);
+			this->toolStripMenuItemDelayAuto->Text = L"Auto";
+			this->toolStripMenuItemDelayAuto->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelayAuto_Click);
+			this->toolStripSeparator4->Name = L"toolStripSeparator4";
+			this->toolStripSeparator4->Size = System::Drawing::Size(100, 6);
+			this->toolStripMenuItemDelay2->Name = L"toolStripMenuItemDelay2";
+			this->toolStripMenuItemDelay2->Size = System::Drawing::Size(103, 22);
+			this->toolStripMenuItemDelay2->Text = L"2";
+			this->toolStripMenuItemDelay2->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay2_Click);
+			this->toolStripMenuItemDelay3->Name = L"toolStripMenuItemDelay3";
+			this->toolStripMenuItemDelay3->Size = System::Drawing::Size(103, 22);
+			this->toolStripMenuItemDelay3->Text = L"3";
+			this->toolStripMenuItemDelay3->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay3_Click);
+			this->toolStripMenuItemDelay4->Name = L"toolStripMenuItemDelay4";
+			this->toolStripMenuItemDelay4->Size = System::Drawing::Size(103, 22);
+			this->toolStripMenuItemDelay4->Text = L"4";
+			this->toolStripMenuItemDelay4->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay4_Click);
+			this->toolStripMenuItemDelay5->Name = L"toolStripMenuItemDelay5";
+			this->toolStripMenuItemDelay5->Size = System::Drawing::Size(103, 22);
+			this->toolStripMenuItemDelay5->Text = L"5";
+			this->toolStripMenuItemDelay5->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay5_Click);
+			this->toolStripMenuItemDelay6->Name = L"toolStripMenuItemDelay6";
+			this->toolStripMenuItemDelay6->Size = System::Drawing::Size(103, 22);
+			this->toolStripMenuItemDelay6->Text = L"6";
+			this->toolStripMenuItemDelay6->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay6_Click);
+			this->toolStripMenuItemDelay7->Name = L"toolStripMenuItemDelay7";
+			this->toolStripMenuItemDelay7->Size = System::Drawing::Size(103, 22);
+			this->toolStripMenuItemDelay7->Text = L"7";
+			this->toolStripMenuItemDelay7->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay7_Click);
+			this->toolStripMenuItemDelay8->Name = L"toolStripMenuItemDelay8";
+			this->toolStripMenuItemDelay8->Size = System::Drawing::Size(103, 22);
+			this->toolStripMenuItemDelay8->Text = L"8";
+			this->toolStripMenuItemDelay8->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay8_Click);
+			this->toolStripMenuItemDelay9->Name = L"toolStripMenuItemDelay9";
+			this->toolStripMenuItemDelay9->Size = System::Drawing::Size(103, 22);
+			this->toolStripMenuItemDelay9->Text = L"9";
+			this->toolStripMenuItemDelay9->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay9_Click);
+			this->toolStripMenuItemDelay10->Name = L"toolStripMenuItemDelay10";
+			this->toolStripMenuItemDelay10->Size = System::Drawing::Size(103, 22);
+			this->toolStripMenuItemDelay10->Text = L"10";
+			this->toolStripMenuItemDelay10->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay10_Click);
+			this->toolStripMenuItemDelay11->Name = L"toolStripMenuItemDelay11";
+			this->toolStripMenuItemDelay11->Size = System::Drawing::Size(103, 22);
+			this->toolStripMenuItemDelay11->Text = L"11";
+			this->toolStripMenuItemDelay11->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay11_Click);
+			this->toolStripMenuItemDelay12->Name = L"toolStripMenuItemDelay12";
+			this->toolStripMenuItemDelay12->Size = System::Drawing::Size(103, 22);
+			this->toolStripMenuItemDelay12->Text = L"12";
+			this->toolStripMenuItemDelay12->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelay12_Click);
+			this->toolStripSeparator3->Name = L"toolStripSeparator3";
+			this->toolStripSeparator3->Size = System::Drawing::Size(244, 6);
+			this->toolStripMenuItemRecordReplay->Checked = true;
+			this->toolStripMenuItemRecordReplay->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->toolStripMenuItemRecordReplay->Name = L"toolStripMenuItemRecordReplay";
+			this->toolStripMenuItemRecordReplay->Size = System::Drawing::Size(247, 22);
+			this->toolStripMenuItemRecordReplay->Text = L"Save Replays";
+			this->toolStripMenuItemRecordReplay->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemRecordReplay_Click);
+			this->toolStripMenuItemAllowSpectator->Checked = true;
+			this->toolStripMenuItemAllowSpectator->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->toolStripMenuItemAllowSpectator->Name = L"toolStripMenuItemAllowSpectator";
+			this->toolStripMenuItemAllowSpectator->Size = System::Drawing::Size(247, 22);
+			this->toolStripMenuItemAllowSpectator->Text = L"Allow Spectators";
+			this->toolStripMenuItemAllowSpectator->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAllowSpectator_Click);
+			this->toolStripMenuItemWordWrap->Name = L"toolStripMenuItemWordWrap";
+			this->toolStripMenuItemWordWrap->Size = System::Drawing::Size(247, 22);
+			this->toolStripMenuItemWordWrap->Text = L"Word Wrap";
+			this->toolStripMenuItemWordWrap->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemWordWrap_Click);
+			this->LogLockToolStripMenuItem->Checked = true;
+			this->LogLockToolStripMenuItem->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->LogLockToolStripMenuItem->Name = L"LogLockToolStripMenuItem";
+			this->LogLockToolStripMenuItem->ShortcutKeys = System::Windows::Forms::Keys::F3;
+			this->LogLockToolStripMenuItem->Size = System::Drawing::Size(247, 22);
+			this->LogLockToolStripMenuItem->Text = L"Auto-Scroll";
+			this->LogLockToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::LogLockToolStripMenuItem_Click);
+			this->toolStripSeparator7->Name = L"toolStripSeparator7";
+			this->toolStripSeparator7->Size = System::Drawing::Size(244, 6);
+			this->toolStripMenuItemAfterRest->Name = L"toolStripMenuItemAfterRest";
+			this->toolStripMenuItemAfterRest->Size = System::Drawing::Size(247, 22);
+			this->toolStripMenuItemAfterRest->Text = L"Rest Mode after Match";
+			this->toolStripMenuItemAfterRest->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAfterRest_Click);
+			this->toolStripMenuItemAutoRest->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(9) {this->toolStripMenuItemAutoRestEnable, 
+				this->toolStripSeparator13, this->toolStripMenuItemAutoRestTime5, this->toolStripMenuItemAutoRestTime10, this->toolStripMenuItemAutoRestTime15, 
+				this->toolStripMenuItemAutoRestTime20, this->toolStripMenuItemAutoRestTime30, this->toolStripMenuItemAutoRestTime60, this->toolStripMenuItemAutoRestTime120});
+			this->toolStripMenuItemAutoRest->Name = L"toolStripMenuItemAutoRest";
+			this->toolStripMenuItemAutoRest->Size = System::Drawing::Size(247, 22);
+			this->toolStripMenuItemAutoRest->Text = L"Auto Rest After";
+			this->toolStripMenuItemAutoRestEnable->Name = L"toolStripMenuItemAutoRestEnable";
+			this->toolStripMenuItemAutoRestEnable->Size = System::Drawing::Size(109, 22);
+			this->toolStripMenuItemAutoRestEnable->Text = L"Enabled";
+			this->toolStripMenuItemAutoRestEnable->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestEnable_Click);
+			this->toolStripSeparator13->Name = L"toolStripSeparator13";
+			this->toolStripSeparator13->Size = System::Drawing::Size(106, 6);
+			this->toolStripMenuItemAutoRestTime5->Name = L"toolStripMenuItemAutoRestTime5";
+			this->toolStripMenuItemAutoRestTime5->Size = System::Drawing::Size(109, 22);
+			this->toolStripMenuItemAutoRestTime5->Text = L"5 Minutes";
+			this->toolStripMenuItemAutoRestTime5->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime5_Click);
+			this->toolStripMenuItemAutoRestTime10->Name = L"toolStripMenuItemAutoRestTime10";
+			this->toolStripMenuItemAutoRestTime10->Size = System::Drawing::Size(109, 22);
+			this->toolStripMenuItemAutoRestTime10->Text = L"10 Minutes";
+			this->toolStripMenuItemAutoRestTime10->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime10_Click);
+			this->toolStripMenuItemAutoRestTime15->Name = L"toolStripMenuItemAutoRestTime15";
+			this->toolStripMenuItemAutoRestTime15->Size = System::Drawing::Size(109, 22);
+			this->toolStripMenuItemAutoRestTime15->Text = L"15 Minutes";
+			this->toolStripMenuItemAutoRestTime15->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime15_Click);
+			this->toolStripMenuItemAutoRestTime20->Name = L"toolStripMenuItemAutoRestTime20";
+			this->toolStripMenuItemAutoRestTime20->Size = System::Drawing::Size(109, 22);
+			this->toolStripMenuItemAutoRestTime20->Text = L"20 Minutes";
+			this->toolStripMenuItemAutoRestTime20->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime20_Click);
+			this->toolStripMenuItemAutoRestTime30->Name = L"toolStripMenuItemAutoRestTime30";
+			this->toolStripMenuItemAutoRestTime30->Size = System::Drawing::Size(109, 22);
+			this->toolStripMenuItemAutoRestTime30->Text = L"30 Minutes";
+			this->toolStripMenuItemAutoRestTime30->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime30_Click);
+			this->toolStripMenuItemAutoRestTime60->Name = L"toolStripMenuItemAutoRestTime60";
+			this->toolStripMenuItemAutoRestTime60->Size = System::Drawing::Size(109, 22);
+			this->toolStripMenuItemAutoRestTime60->Text = L"1 Hour";
+			this->toolStripMenuItemAutoRestTime60->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime60_Click);
+			this->toolStripMenuItemAutoRestTime120->Name = L"toolStripMenuItemAutoRestTime120";
+			this->toolStripMenuItemAutoRestTime120->Size = System::Drawing::Size(109, 22);
+			this->toolStripMenuItemAutoRestTime120->Text = L"2 Hours";
+			this->toolStripMenuItemAutoRestTime120->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemAutoRestTime120_Click);
+			this->toolStripMenuItemHelp->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->toolStripMenuItemViewCommand, 
+				this->toolStripMenuItemChangeList, this->toolStripSeparator5, this->toolStripMenuItemVersion});
+			this->toolStripMenuItemHelp->Name = L"toolStripMenuItemHelp";
+			this->toolStripMenuItemHelp->ShortcutKeyDisplayString = L"Ctrl+L";
+			this->toolStripMenuItemHelp->Size = System::Drawing::Size(75, 22);
+			this->toolStripMenuItemHelp->Text = L"Help";
+			this->toolStripMenuItemViewCommand->Name = L"toolStripMenuItemViewCommand";
+			this->toolStripMenuItemViewCommand->Size = System::Drawing::Size(211, 22);
+			this->toolStripMenuItemViewCommand->Text = L"Command List";
+			this->toolStripMenuItemViewCommand->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemViewCommand_Click);
+			this->toolStripMenuItemChangeList->Name = L"toolStripMenuItemChangeList";
+			this->toolStripMenuItemChangeList->ShortcutKeys = System::Windows::Forms::Keys::F2;
+			this->toolStripMenuItemChangeList->Size = System::Drawing::Size(211, 22);
+			this->toolStripMenuItemChangeList->Text = L"Toggle List View";
+			this->toolStripMenuItemChangeList->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemChangeList_Click);
+			this->toolStripSeparator5->Name = L"toolStripSeparator5";
+			this->toolStripSeparator5->Size = System::Drawing::Size(208, 6);
+			this->toolStripMenuItemVersion->Name = L"toolStripMenuItemVersion";
+			this->toolStripMenuItemVersion->Size = System::Drawing::Size(211, 22);
+			this->toolStripMenuItemVersion->Text = L"LilithPort Version";
+			this->toolStripMenuItemVersion->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemVersion_Click);
+			this->splitContainer1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom) 
+				| System::Windows::Forms::AnchorStyles::Left) 
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->splitContainer1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->splitContainer1->Location = System::Drawing::Point(0, 26);
+			this->splitContainer1->Name = L"splitContainer1";
+			this->splitContainer1->Panel1->Controls->Add(this->listBoxMember);
+			this->splitContainer1->Panel2->Controls->Add(this->richTextBoxLog);
+			this->splitContainer1->Panel2->Controls->Add(this->textBoxInput);
+			this->splitContainer1->Size = System::Drawing::Size(528, 297);
+			this->splitContainer1->SplitterDistance = 90;
+			this->splitContainer1->TabIndex = 2;
+			this->splitContainer1->TabStop = false;
+			this->listBoxMember->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->listBoxMember->ContextMenuStrip = this->contextMenuStripMember;
+			this->listBoxMember->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->listBoxMember->DrawMode = System::Windows::Forms::DrawMode::OwnerDrawFixed;
+			this->listBoxMember->FormattingEnabled = true;
+			this->listBoxMember->ItemHeight = 12;
+			this->listBoxMember->Location = System::Drawing::Point(0, 0);
+			this->listBoxMember->Name = L"listBoxMember";
+			this->listBoxMember->Size = System::Drawing::Size(88, 288);
+			this->listBoxMember->TabIndex = 2;
+			this->listBoxMember->MouseDoubleClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::listBoxMember_MouseDoubleClick);
+			this->listBoxMember->DrawItem += gcnew System::Windows::Forms::DrawItemEventHandler(this, &MainForm::listBoxMember_DrawItem);
+			this->listBoxMember->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::listBoxMember_MouseClick);
+			this->contextMenuStripMember->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(7) {this->toolStripMenuItemVS, 
+				this->toolStripMenuItemWatch, this->toolStripMenuItemSeek, this->toolStripMenuItemPing, this->toolStripMenuItemClipBoardCopy, 
+				this->toolStripSeparator12, this->toolStripMenuItemKick});
+			this->contextMenuStripMember->Name = L"contextMenuStrip1";
+			this->contextMenuStripMember->ShowImageMargin = false;
+			this->contextMenuStripMember->Size = System::Drawing::Size(124, 142);
+			this->contextMenuStripMember->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &MainForm::contextMenuStripMember_Opening);
+			this->toolStripMenuItemVS->Name = L"toolStripMenuItemVS";
+			this->toolStripMenuItemVS->Size = System::Drawing::Size(123, 22);
+			this->toolStripMenuItemVS->Text = L"Fight";
+			this->toolStripMenuItemVS->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemVS_Click);
+			this->toolStripMenuItemWatch->Name = L"toolStripMenuItemWatch";
+			this->toolStripMenuItemWatch->Size = System::Drawing::Size(123, 22);
+			this->toolStripMenuItemWatch->Text = L"Spectate";
+			this->toolStripMenuItemWatch->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemWatch_Click);
+			this->toolStripMenuItemSeek->Name = L"toolStripMenuItemSeek";
+			this->toolStripMenuItemSeek->Size = System::Drawing::Size(123, 22);
+			this->toolStripMenuItemSeek->Text = L"Seek";
+			this->toolStripMenuItemSeek->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemSeek_Click);
+			this->toolStripMenuItemPing->Name = L"toolStripMenuItemPing";
+			this->toolStripMenuItemPing->Size = System::Drawing::Size(123, 22);
+			this->toolStripMenuItemPing->Text = L"Ping";
+			this->toolStripMenuItemPing->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemPing_Click);
+			this->toolStripMenuItemClipBoardCopy->Name = L"toolStripMenuItemClipBoardCopy";
+			this->toolStripMenuItemClipBoardCopy->Size = System::Drawing::Size(123, 22);
+			this->toolStripMenuItemClipBoardCopy->Text = L"Copy Name";
+			this->toolStripMenuItemClipBoardCopy->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemClipBoardCopy_Click);
+			this->toolStripSeparator12->Name = L"toolStripSeparator12";
+			this->toolStripSeparator12->Size = System::Drawing::Size(120, 6);
+			this->toolStripMenuItemKick->Name = L"toolStripMenuItemKick";
+			this->toolStripMenuItemKick->Size = System::Drawing::Size(123, 22);
+			this->toolStripMenuItemKick->Text = L"Kick";
+			this->toolStripMenuItemKick->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemKick_Click);
+			this->richTextBoxLog->BackColor = System::Drawing::SystemColors::Window;
+			this->richTextBoxLog->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->richTextBoxLog->ContextMenuStrip = this->contextMenuStripLog;
+			this->richTextBoxLog->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->richTextBoxLog->Location = System::Drawing::Point(0, 0);
+			this->richTextBoxLog->Name = L"richTextBoxLog";
+			this->richTextBoxLog->ReadOnly = true;
+			this->richTextBoxLog->Size = System::Drawing::Size(432, 276);
+			this->richTextBoxLog->TabIndex = 0;
+			this->richTextBoxLog->TabStop = false;
+			this->richTextBoxLog->Text = L"";
+			this->richTextBoxLog->WordWrap = false;
+			this->richTextBoxLog->LinkClicked += gcnew System::Windows::Forms::LinkClickedEventHandler(this, &MainForm::richTextBoxLog_LinkClicked);
+			this->contextMenuStripLog->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {this->contextMenuItemCopy, 
+				this->toolStripSeparator6, this->contxtMenuItemSaveLog});
+			this->contextMenuStripLog->Name = L"contextMenuStrip2";
+			this->contextMenuStripLog->ShowImageMargin = false;
+			this->contextMenuStripLog->Size = System::Drawing::Size(177, 54);
+			this->contextMenuItemCopy->Name = L"contextMenuItemCopy";
+			this->contextMenuItemCopy->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::C));
+			this->contextMenuItemCopy->Size = System::Drawing::Size(176, 22);
+			this->contextMenuItemCopy->Text = L"Copy";
+			this->contextMenuItemCopy->Click += gcnew System::EventHandler(this, &MainForm::contextMenuItemCopy_Click);
+			this->toolStripSeparator6->Name = L"toolStripSeparator6";
+			this->toolStripSeparator6->Size = System::Drawing::Size(173, 6);
+			this->contxtMenuItemSaveLog->Name = L"contxtMenuItemSaveLog";
+			this->contxtMenuItemSaveLog->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::S));
+			this->contxtMenuItemSaveLog->Size = System::Drawing::Size(176, 22);
+			this->contxtMenuItemSaveLog->Text = L"Save Log";
+			this->contxtMenuItemSaveLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemSaveLog_Click);
+			this->textBoxInput->BackColor = System::Drawing::SystemColors::Window;
+			this->textBoxInput->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->textBoxInput->Location = System::Drawing::Point(0, 276);
+			this->textBoxInput->MaxLength = 127;
+			this->textBoxInput->Name = L"textBoxInput";
+			this->textBoxInput->Size = System::Drawing::Size(432, 19);
+			this->textBoxInput->TabIndex = 0;
+			this->textBoxInput->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::textBoxInput_KeyDown);
+			this->openFileDialog1->Filter = L"MT Replay file (*.mtr)|*.mtr";
+			this->openFileDialog1->Title = L"Open Replay File";
+			this->statusStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->toolStripDropDownButtonProfile, 
+				this->toolStripStatusLabel});
+			this->statusStrip1->Location = System::Drawing::Point(0, 328);
+			this->statusStrip1->Name = L"statusStrip1";
+			this->statusStrip1->RightToLeft = System::Windows::Forms::RightToLeft::No;
+			this->statusStrip1->Size = System::Drawing::Size(528, 22);
+			this->statusStrip1->TabIndex = 3;
+			this->statusStrip1->Text = L"statusStrip1";
+			this->toolStripDropDownButtonProfile->Alignment = System::Windows::Forms::ToolStripItemAlignment::Right;
+			this->toolStripDropDownButtonProfile->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
+			this->toolStripDropDownButtonProfile->ImageScaling = System::Windows::Forms::ToolStripItemImageScaling::None;
+			this->toolStripDropDownButtonProfile->Name = L"toolStripDropDownButtonProfile";
+			this->toolStripDropDownButtonProfile->RightToLeft = System::Windows::Forms::RightToLeft::No;
+			this->toolStripDropDownButtonProfile->Size = System::Drawing::Size(13, 20);
+			this->toolStripStatusLabel->BorderSides = System::Windows::Forms::ToolStripStatusLabelBorderSides::Left;
+			this->toolStripStatusLabel->BorderStyle = System::Windows::Forms::Border3DStyle::Raised;
+			this->toolStripStatusLabel->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
+			this->toolStripStatusLabel->Margin = System::Windows::Forms::Padding(5, 3, 0, 2);
+			this->toolStripStatusLabel->Name = L"toolStripStatusLabel";
+			this->toolStripStatusLabel->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
+			this->toolStripStatusLabel->Size = System::Drawing::Size(9, 17);
+			this->AllowDrop = true;
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(528, 350);
+			this->Controls->Add(this->statusStrip1);
+			this->Controls->Add(this->splitContainer1);
+			this->Controls->Add(this->menuStrip1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip1;
+			this->Name = L"MainForm";
+			this->Text = L"LilithPort";
+			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
+			this->Shown += gcnew System::EventHandler(this, &MainForm::MainForm_Shown);
+			this->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::MainForm_DragDrop);
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MainForm::MainForm_FormClosed);
+			this->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::MainForm_DragEnter);
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
+			this->splitContainer1->Panel1->ResumeLayout(false);
+			this->splitContainer1->Panel2->ResumeLayout(false);
+			this->splitContainer1->Panel2->PerformLayout();
+			this->splitContainer1->ResumeLayout(false);
+			this->contextMenuStripMember->ResumeLayout(false);
+			this->contextMenuStripLog->ResumeLayout(false);
+			this->statusStrip1->ResumeLayout(false);
+			this->statusStrip1->PerformLayout();
+			this->ResumeLayout(false);
+			this->PerformLayout();
 
-        }
+		}
 #pragma endregion
 	private:
 		static OptionForm^ Option;
@@ -906,16 +706,16 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		static LIST_VIEW ListView;
 		static String^ ReplayFilePath;
 
-		// ãƒ–ãƒƒã‚¯ãƒãƒ¼ã‚¯
+		// ƒuƒbƒNƒ}[ƒN
 		Object^ tmpIP;
 		IntPtr BookMarkServerName;
 		IntPtr BookMarkConnectIP;
 
-		// ãƒãƒ£ãƒƒãƒˆå±¥æ­´
+		// ƒ`ƒƒƒbƒg—š—ğ
 		static int ChatHistoryNumber;
 		static Generic::List<String^>^ ChatHistory;
 
-		// å„è‰²
+		// ŠeF
 		static array<Color>^ NameColor;
 		static array<Color>^ StateRectColor;
 		static Color TalkMessageColor;
@@ -928,7 +728,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 		delegate void WriteMessageDelegate(String^ msg, Color color);
 
-		// MemberInfoã¯stdafx.hã«ãŠå¼•è¶Šã—ã—ã¾ã—ãŸ
+		// MemberInfo‚³‚ñ‚Ístdafx.h‚É‚¨ˆø‰z‚µ‚µ‚Ü‚µ‚½
 		static Generic::List<MemberInfo^>^ MemberList;
 		static Generic::List<MemberInfoBackUp^>^ MemberListBackUp;
 		static UINT16 IDCounter; // Max 3FFF(16383)
@@ -938,51 +738,51 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		static UdpClient^ UDP;
 		static String^ ServerName;
 		static String^ ConnectIP;
-		static bool AfterCloseUDP; // å¯¾æˆ¦ä¸­ã®é¯–è½ã¡ã«å·»ãè¾¼ã¾ã‚Œãªã„ã‚ˆã†ã«
+		static bool AfterCloseUDP; // ‘Îí’†‚ÌI—‚¿‚ÉŠª‚«‚Ü‚ê‚È‚¢‚æ‚¤‚É
 
-		// IPå–å¾—ç”¨
+		// IPæ“¾—p
 		static WebClient^ GetIPClient;
-		static Uri^ GetIPUri = gcnew Uri("http://checkip.dyndns.org/"); //TODO: change checkip.dyndns.org to something more futureproof
+		static Uri^ GetIPUri = gcnew Uri("http://checkip.dyndns.org/");
 		static Thread^ TimerGetIPThread;
 		static bool    GetIPCancelled;
 		static bool    GetIPSleeping;
 
-		// ãƒãƒ¼ãƒ HPæŒã¡è¶Šã—ç”¨
+		// ƒ`[ƒ€HP‚¿‰z‚µ—p
 		static Thread^ SetTeamHPThread;
 		static UINT P_HP;
 		static UINT Winner;
 
-		// å›ç·šã®ç”Ÿæ­»åˆ¤å®š
+		// ‰ñü‚Ì¶€”»’è
 		static Thread^ SonarThread;
 		static bool    Ranging;
 		static bool    SonarSleeping;
 
-		// ãƒãƒƒãƒˆå¯¾æˆ¦é–¢é€£
+		// ƒlƒbƒg‘ÎíŠÖ˜A
 		ref struct VersusInfo
 		{
-			UINT           SEQUENCE;  // ã‚„ã‚Šå–ã‚ŠåŒæœŸç”¨
-			bool           SLEEPING;  // ã‚¹ãƒ¬ãƒƒãƒ‰å¾…æ©Ÿç”¨
-			int            WAITING;   // ãƒ‘ã‚±å—ä¿¡å¾…æ©Ÿç”¨ 1-:Wait ON 2:Sleep
-			DWORD          START_UP;  // èµ·å‹•æ™‚é–“
+			UINT           SEQUENCE;  // ‚â‚èæ‚è“¯Šú—p
+			bool           SLEEPING;  // ƒXƒŒƒbƒh‘Ò‹@—p
+			int            WAITING;   // ƒpƒPóM‘Ò‹@—p 1-:Wait ON 2:Sleep
+			DWORD          START_UP;  // ‹N“®ŠÔ
 			IPEndPoint^    IP_EP;
 			array<UINT>^   PING;
 			array<UINT>^   PONG;
-			UINT           DELAY;     // ãƒ‡ã‚£ãƒ¬ã‚¤ã¯å¤§ãã„æ–¹ã«åˆã‚ã›ã‚‹
-			UINT           INTERVAL;  // é€ä¿¡é–“éš” å°:1fã‚ãŸã‚Šã®å…¥åŠ›ãƒ‡ãƒ¼ã‚¿é€ä¿¡å›æ•°ã‚’4ã« ä¸­:3å› å¤§:2å›
-			UINT           INTERVAL2; // é€ä¿¡é–“éš”è¨ˆç®—ç”¨
-			array<BYTE>^   SEND;      // é€ä¿¡ç”¨ãƒãƒƒãƒ•ã‚¡
-			array<UINT16>^ LOCAL;     // ãƒªãƒ³ã‚°ãƒãƒƒãƒ•ã‚¡
-			UINT32         L_FRAME;   // ç·ãƒ•ãƒ¬ãƒ¼ãƒ æ•°
-			int            L_READ;    // èª­ã¿å–ã‚Šä½ç½®
-			array<UINT16>^ REMOTE;    // ã“ã®ï¼’ã¤ã¯ã‚­ãƒ¼ã®å±¥æ­´ã‚’ä¿æŒã™ã‚‹
-			UINT32         R_FRAME;   // ç·ãƒ•ãƒ¬ãƒ¼ãƒ æ•°
-			int            R_READ;    // èª­ã¿å–ã‚Šä½ç½®
+			UINT           DELAY;     // ƒfƒBƒŒƒC‚Í‘å‚«‚¢•û‚É‡‚í‚¹‚é
+			UINT           INTERVAL;  // ‘—MŠÔŠu ¬:1f‚ ‚½‚è‚Ì“ü—Íƒf[ƒ^‘—M‰ñ”‚ğ4‚É ’†:3‰ñ ‘å:2‰ñ
+			UINT           INTERVAL2; // ‘—MŠÔŠuŒvZ—p
+			array<BYTE>^   SEND;      // ‘—M—pƒoƒbƒtƒ@
+			array<UINT16>^ LOCAL;     // ƒŠƒ“ƒOƒoƒbƒtƒ@
+			UINT32         L_FRAME;   // ‘ƒtƒŒ[ƒ€”
+			int            L_READ;    // “Ç‚İæ‚èˆÊ’u
+			array<UINT16>^ REMOTE;    // ‚±‚Ì‚Q‚Â‚ÍƒL[‚Ì—š—ğ‚ğ•Û‚·‚é
+			UINT32         R_FRAME;   // ‘ƒtƒŒ[ƒ€”
+			int            R_READ;    // “Ç‚İæ‚èˆÊ’u
 		};
 
 		static Thread^ VersusThread;
 		static VersusInfo^ NetVS;
 
-		// è¦³æˆ¦é–¢é€£
+		// ŠÏíŠÖ˜A
 		ref struct SpectatorInfo
 		{
 			UINT16      ID;
@@ -990,31 +790,31 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			UINT32      FRAME;
 		};
 
-		static Thread^ SpectatorThread;
+		static Thread^ SpectacleThread;
 		static Generic::List<SpectatorInfo^>^ SpectatorList;
-		static bool           AllowWatch;      // ã‚¹ãƒ¬ãƒƒãƒ‰åˆ¶å¾¡
-		static UINT           WaitingWatch;    // ãƒ‘ã‚±ãƒƒãƒˆå¾…ã¡ 1:é–‹å§‹å¾…ã¡ 2:ãƒ‡ãƒ¼ã‚¿å¾…ã¡
-		static IPEndPoint^    WatchTarget;     // è¦³æˆ¦å¯¾è±¡
+		static bool           AllowWatch;      // ƒXƒŒƒbƒh§Œä
+		static UINT           WaitingWatch;    // ƒpƒPƒbƒg‘Ò‚¿ 1:ŠJn‘Ò‚¿ 2:ƒf[ƒ^‘Ò‚¿
+		static IPEndPoint^    WatchTarget;     // ŠÏí‘ÎÛ
 		static UINT16         TargetID;
-		static UINT16         P1ID, P2ID;      // P2ãŒ0xFFFFã§ä¸€äººãƒ—ãƒ¬ã‚¤
-		static UINT32         WatchFrame;      // èª­ã¿å–ã‚Šä½ç½®
-		static array<UINT16>^ WatchHistory;    // ãƒãƒƒãƒ•ã‚¡ TIME_OUT/5 * 3 = 1800ã®900ãƒ•ãƒ¬ãƒ¼ãƒ åˆ†
-		static UINT32         InputFrame;      // æ›¸ãè¾¼ã¿ä½ç½®
-		static array<UINT16>^ InputHistory;    // ãƒãƒƒãƒ•ã‚¡
+		static UINT16         P1ID, P2ID;      // P2‚ª0xFFFF‚ÅˆêlƒvƒŒƒC
+		static UINT32         WatchFrame;      // “Ç‚İæ‚èˆÊ’u
+		static array<UINT16>^ WatchHistory;    // ƒoƒbƒtƒ@ TIME_OUT/5 * 3 = 1800‚Ì900ƒtƒŒ[ƒ€•ª
+		static UINT32         InputFrame;      // ‘‚«‚İˆÊ’u
+		static array<UINT16>^ InputHistory;    // ƒoƒbƒtƒ@
 
-		// è‡ªå‹•ä¼‘æ†©
+		// ©“®‹xŒe
 		static Thread^ AutoRestThread;
 		static bool AutoRestRanging;
 		static bool AutoRestSleeping;
 
-		// MainForm.cppã«è¨˜è¿°
+		// MainForm.cpp‚É‹Lq
 		void Begin();
 		void TimerGetIP();
 		void SetTeamHP();
 		void RunSonar();
 		void RunGame(Object^ obj);
 		void RunVersus();
-		void RunSpectator();
+		void RunSpectacle();
 		UINT16 LocalInput(UINT16 eax);
 		UINT16 RemoteInput();
 		UINT16 ReadReplayData(BinaryReader^ br, REPLAY_INFO& ri);
@@ -1031,25 +831,26 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 	protected:
 		void StartGame(UINT type){
-			// æ ¼ãƒ„ã‚¯ã˜ã‚ƒãªã„ã‚ˆ
+			// ŠiƒcƒN‚¶‚á‚È‚¢‚æ
 			try{
 				FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(gcnew String(MTOPTION.GAME_EXE));
 
-				if(!IsCompatibleFMExecutable(info->FileDescription)){
+				if (info->LegalCopyright != "(C)2001 ENTERBRAIN,INC / OUTBACK") {
 					throw gcnew Exception;
 				}
 				else{
-					if(IsCompatibleFM2KExecutable(info->FileDescription)){
+					//if(info->FileDescription == "‚Q‚cŠi“¬ƒcƒN[ƒ‹2nd."){
 						MTINFO.KGT2K = true;
-					}
-					else{
-						MTINFO.KGT2K = false;
-					}
+					//}
+					//else{
+						//MTINFO.KGT2K = false;
+					//} 
+					//commenting out for now
 				}
 			}
 			catch(Exception^){
-				WriteMessage(L"ERROR: This is not a valid or supported Fighter Maker executable.\n", ErrorMessageColor);
-				WriteMessage(L"Please go to the Options menu and set the path to a supported FM executable.\n", ErrorMessageColor);
+				WriteMessage("Replay could not be started.\n", ErrorMessageColor);
+				WriteMessage("Executable is not a valid Fighter Maker game.\n", ErrorMessageColor);
 				return;
 			}
 
@@ -1112,11 +913,11 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 						NetVS->R_FRAME  = 0;
 						NetVS->L_READ   = 0;
 
-						// è¦³æˆ¦ç”¨ID
+						// ŠÏí—pID
 						P1ID = MemberList[listBoxMember->SelectedIndex]->ID;
 						P2ID = MemberList[0]->ID;
 
-						// åå‰
+						// –¼‘O
 						ZeroMemory(MTINFO.P1_NAME, sizeof(MTINFO.P1_NAME));
 						ZeroMemory(MTINFO.P2_NAME, sizeof(MTINFO.P2_NAME));
 
@@ -1128,10 +929,10 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 							_tcscpy_s(MTINFO.P2_NAME, MTOPTION.NAME);
 						}
 
-						// å¯¾æˆ¦å›æ•°
+						// ‘Îí‰ñ”
 						MemberList[listBoxMember->SelectedIndex]->NUM_VS++;
 
-						// ãƒãƒƒãƒˆå¯¾æˆ¦æº–å‚™ç”¨ã‚¹ãƒ¬ãƒƒãƒ‰ã®èµ·å‹•
+						// ƒlƒbƒg‘Îí€”õ—pƒXƒŒƒbƒh‚Ì‹N“®
 						MTINFO.CONTROL = 1;
 						VersusThread = gcnew Thread(gcnew ThreadStart(this, &MainForm::RunVersus));
 						VersusThread->Start();
@@ -1153,17 +954,17 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 						}
 					}
 
-					// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®ç¢ºèª
+					// ƒtƒH[ƒ}ƒbƒg‚ÌŠm”F
 					TCHAR ver;
 					array<TCHAR>^ header = gcnew array<TCHAR>{'T', 'Y', 'M', 'T', 'R'};
 					BinaryReader^ br = gcnew BinaryReader(File::OpenRead(ReplayFilePath));
 
 					try{
-						// ãƒ˜ãƒƒãƒ€
+						// ƒwƒbƒ_
 						array<TCHAR>^ h = br->ReadChars(header->Length);
 						for(int i = 0; i < h->Length; i++){
 							if(h[i] != header[i]){
-								WriteMessage(L"ERROR: This is not a valid replay file. The header was not recognized.\n", ErrorMessageColor);
+								WriteMessage("Not a valid replay file.\n", ErrorMessageColor);
 								return;
 							}
 						}
@@ -1171,7 +972,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 						ver = br->ReadChar();
 
 						if(ver < _T('1') || ver > _T('4')){
-							WriteMessage(L"ERROR: This replay is not supported. Only replays between versions 1 and 4 are supported.\n", ErrorMessageColor);
+							WriteMessage("Not a valid replay version. \n", ErrorMessageColor);
 							return;
 						}
 					}
@@ -1185,10 +986,10 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			}
 			else{
 				if(_tcslen(MTINFO.ORIGINAL_TITLE) > 0){
-					WriteMessage(String::Format(L"{0} is starting.\n", gcnew String(MTINFO.ORIGINAL_TITLE)), SystemMessageColor);
+					WriteMessage(String::Format("{0}‚ª‹N“®’†‚Å‚·B\n", gcnew String(MTINFO.ORIGINAL_TITLE)), SystemMessageColor);
 				}
 				else{
-					WriteMessage(L"Another game is already starting.\n", SystemMessageColor);
+					WriteMessage("‘¼‚ÌƒQ[ƒ€‚ª‹N“®’†‚Å‚·B\n", SystemMessageColor);
 				}
 			}
 		}
@@ -1196,14 +997,14 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		void QuitGame(){
 			if(GameThread != nullptr && GameThread->IsAlive){
 				if(MTINFO.DEBUG){
-					WriteMessage(L"Closing game process...\n", DebugMessageColor);
+					WriteMessage("Closing game process.\n", DebugMessageColor);
 				}
 				try{
 					Process::GetProcessById(MTINFO.PROCESS_ID)->CloseMainWindow();
 				}
 				catch(ArgumentException^){
 					if(MTINFO.DEBUG){
-						WriteMessage(L"Caught an ArgumentException trying to close the game! Abandoning game thread.\n", DebugMessageColor);
+						WriteMessage("Caught ArgumentException\n", DebugMessageColor);
 					}
 					GameThread->Abort();
 					GameThread = nullptr;
@@ -1217,19 +1018,19 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 					if(ps->Length > 0){
 						for(int i=0; i < ps->Length; i++){
 							if(ps[0]->MainWindowTitle == game){
-								WriteMessage(String::Format(L"{0}ã‚’çµ‚äº†ã—ã¾ã™ã€‚\n", ps[0]->MainWindowTitle), SystemMessageColor);
+								WriteMessage(String::Format("{0}‚ğI—¹‚µ‚Ü‚·B\n", ps[0]->MainWindowTitle), SystemMessageColor);
 								ps[0]->CloseMainWindow();
 							}
 						}
 					}else{
-						WriteMessage(String::Format(L"çµ‚äº†ã™ã‚‹ã‚²ãƒ¼ãƒ \"{0}\"ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚\nã‚ªãƒ—ã‚·ãƒ§ãƒ³ã®å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã€ã¾ãŸã¯ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«ãŒåˆã£ã¦ã„ã‚‹ã‹ç¢ºèªã—ã¦ãã ã•ã„ã€‚\n", game), ErrorMessageColor);
+						WriteMessage(String::Format("I—¹‚·‚éƒQ[ƒ€\"{0}\"‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B\nƒIƒvƒVƒ‡ƒ“‚ÌÀsƒtƒ@ƒCƒ‹‚ÌƒpƒXA‚Ü‚½‚Íƒvƒƒtƒ@ƒCƒ‹‚ª‡‚Á‚Ä‚¢‚é‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢B\n", game), ErrorMessageColor);
 						return;
 					}
 				}
 				catch(Exception^ e){
-					WriteMessage(L"ã‚²ãƒ¼ãƒ ã‚’çµ‚äº†ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚\n", ErrorMessageColor);
+					WriteMessage("ƒQ[ƒ€‚ğI—¹‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B\n", ErrorMessageColor);
 					if(MTINFO.DEBUG){
-						WriteMessage(String::Format(L"{0}\n", e->ToString()), DebugMessageColor);
+						WriteMessage(String::Format("{0}\n", e->ToString()), DebugMessageColor);
 					}
 				}
 			}
@@ -1270,11 +1071,11 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			if(state == MS_WATCH) ChangeState((BYTE)MS_FREE);
 			if(state == MS_COUCH) ChangeState((BYTE)MS_REST);
 
-			toolStripMenuItemWatch->Text = gcnew String(L"Spectate");
+			toolStripMenuItemWatch->Text = gcnew String("Spectate");
 		}
 
 		void Restart(){
-			// ãƒ•ãƒªãƒ¼ãƒ—ãƒ¬ã‚¤ã ã‘ã©å¯¾æˆ¦ä¸­
+			// ƒtƒŠ[ƒvƒŒƒC‚¾‚¯‚Ç‘Îí’†
 			if(AfterCloseUDP) return;
 
 			CloseUdp(true);
@@ -1282,7 +1083,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			MemberList->Clear();
 			listBoxMember->Items->Clear();
 
-			// IPå–å¾—ã®ã‚­ãƒ£ãƒ³ã‚»ãƒ«
+			// IPæ“¾‚ÌƒLƒƒƒ“ƒZƒ‹
 			if(GetIPClient != nullptr){
 				GetIPClient->CancelAsync();
 			}
@@ -1293,7 +1094,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				TimerGetIPThread->Join();
 			}
 			
-			this->Text = gcnew String(L"LilithPort");
+			this->Text = gcnew String("LilithPort");
 
 			StartupForm^ s = gcnew StartupForm;
 			s->ShowDialog(this);
@@ -1324,8 +1125,9 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			MTOPTION.CONNECTION_TYPE = CT_FREE;
 			MemberList[0]->TYPE  = CT_FREE;
 			MemberList[0]->STATE = MS_FREE;
-			this->Text = gcnew String(L"LilithPort (Free Play)");
+			this->Text = gcnew String("LilithPort  [Free Play]");
 			listBoxMember->Refresh();
+
 		}
 
 		void ChangeState(Object^ obj){
@@ -1364,7 +1166,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			if(UDP != nullptr){
 				array<BYTE>^ quit;
 
-				// ã‚½ãƒŠãƒ¼åœæ­¢
+				// ƒ\ƒi[’â~
 				if(SonarThread != nullptr && SonarThread->IsAlive && Ranging){
 					Ranging = false;
 
@@ -1374,7 +1176,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 					SonarThread->Join();
 				}
-				// è‡ªå‹•ä¼‘æ†©ã‚¹ãƒ¬ãƒƒãƒ‰åœæ­¢
+				// ©“®‹xŒeƒXƒŒƒbƒh’â~
 				if(AutoRestThread != nullptr && AutoRestThread->IsAlive && AutoRestRanging){
 					AutoRestRanging = false;
 					AutoRestThread->Abort();
@@ -1382,7 +1184,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				}
 
 				if(send_packet){
-					// é€€å®¤ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ä¿¡
+					// ‘ŞºƒƒbƒZ[ƒW‚ğ‘—M
 					if(MTOPTION.CONNECTION_TYPE == CT_SERVER){
 						quit = gcnew array<BYTE>(3){ PH_QUIT, 0, 0 };
 						PacketSendAllMember(quit, 0);
@@ -1409,25 +1211,25 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			String^ name;
 			Color col;
 
-			// é€å—ä¿¡
+			// ‘—óM
 			if(UDP != nullptr && MemberList->Count > 1){
 				if(MTOPTION.CONNECTION_TYPE == CT_SERVER){
-					// æœ¬äººã¨ç™ºä¿¡è€…ä»¥å¤–ã«é€ä¿¡
+					// –{l‚Æ”­MÒˆÈŠO‚É‘—M
 					PacketSendAllMember(msg, id);
 				}
 				else{
-					// å—ä¿¡ã§ãªã‘ã‚Œã°ã€ã‚µãƒ¼ãƒã«é€ä¿¡
+					// óM‚Å‚È‚¯‚ê‚ÎAƒT[ƒo‚É‘—M
 					if(id != 0xFFFF){
 						UDP->BeginSend(msg, msg->Length, MemberList[1]->IP_EP, gcnew AsyncCallback(SendPackets), UDP);
 					}
 					else{
-						// å—ä¿¡ãƒ•ãƒ©ã‚°ã‚’ã‚¯ãƒªã‚¢
+						// óMƒtƒ‰ƒO‚ğƒNƒŠƒA
 						id = BitConverter::ToUInt16(msg, 1);
 					}
 				}
 			}
 
-			// ãƒ¡ãƒ³ãƒãƒ¼æ¤œç´¢
+			// ƒƒ“ƒo[ŒŸõ
 			Monitor::Enter(MemberList);
 			try{
 				for(i = 0; i < MemberList->Count; i++){
@@ -1439,10 +1241,10 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				}
 
 				if(i >= MemberList->Count && MTOPTION.CONNECTION_TYPE != CT_SERVER){
-					name = gcnew String(String::Format(L"Unknown (ID: {0})", id));
+					name = gcnew String(String::Format("Unknown(ID:{0})", id));
 					col  = ErrorMessageColor;
 
-					// ãƒ¡ãƒ³ãƒãƒ¼ãƒªã‚¹ãƒˆå¤–ã®IDãŒã„ãŸã®ã§å•ã„åˆã‚ã›
+					// ƒƒ“ƒo[ƒŠƒXƒgŠO‚ÌID‚ª‚¢‚½‚Ì‚Å–â‚¢‡‚í‚¹
 					array<BYTE>^ send = gcnew array<BYTE>(3){ PH_REQ_LIST };
 					Array::Copy(BitConverter::GetBytes(id), 0, send, 1, 2);
 					UDP->Send(send, 3, MemberList[1]->IP_EP);
@@ -1452,12 +1254,12 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				Monitor::Exit(MemberList);
 			}
 
-			// éŸ³å£°å„ªå…ˆåº¦: ãƒ‹ãƒƒã‚¯ãƒãƒ¼ãƒ  > ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ > ç™ºè¨€
-			// ãƒ‹ãƒƒã‚¯ãƒãƒ¼ãƒ éŸ³å£°å†ç”Ÿ
+			// ‰¹º—Dæ“x: ƒjƒbƒNƒl[ƒ€ > ƒL[ƒ[ƒh > ”­Œ¾
+			// ƒjƒbƒNƒl[ƒ€‰¹ºÄ¶
 			String ^tmpMsg = Encoding::Unicode->GetString(msg, 4, msg[3]);
 			bool inname = 0;
 			if(tmpMsg->Contains(gcnew String(MTOPTION.NAME))) {
-				// åå‰ãŒå‘¼ã°ã‚ŒãŸã‚‰ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ç‚¹æ»…
+				// –¼‘O‚ªŒÄ‚Î‚ê‚½‚çƒEƒBƒ“ƒhƒE“_–Å
 				if(MTOPTION.NAME_FLASH) {
 					WindowFlash();
 				}
@@ -1471,10 +1273,10 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 					}
 				}
 			}
-			// ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰åå¿œ
+			// ƒL[ƒ[ƒh”½‰
 			bool inkeyword = 0;
 			if(MTOPTION.KEYWORD_SOUND_ENABLE && !inname){
-				// åˆ†å‰²ãƒãƒƒãƒ•ã‚¡
+				// •ªŠ„ƒoƒbƒtƒ@
 				TCHAR *tok, *next;
 				TCHAR s1[MAX_KEYWORD];
 				_tcscpy_s(s1, MTOPTION.KEYWORD);
@@ -1493,12 +1295,12 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 					tok = wcstok_s(NULL, _T(","), &next);
 				}
 			}
-			// ç™ºè¨€ã§ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ç‚¹æ»…
-			if(MemberList[0]->ID != id && !inname && MemberList[0]->STATE != MEMBER_STATE::MS_VS) {
+			// ”­Œ¾‚ÅƒEƒBƒ“ƒhƒE“_–Å
+			if(MemberList[0]->ID != id && !inname) {
 				if(MTOPTION.TALK_FLASH) {
 					WindowFlash();
 				}
-				// ç™ºè¨€ã§éŸ³ã‚’å†ç”Ÿ
+				// ”­Œ¾‚Å‰¹‚ğÄ¶
 				if(MTOPTION.TALK_SOUND_ENABLE && !inkeyword){
 					try{
 						Media::SoundPlayer^ wav = gcnew Media::SoundPlayer(gcnew String(MTOPTION.TALK_SOUND));
@@ -1509,21 +1311,18 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				}
 			}
 
-			// æ™‚é–“
+			// ŠÔ
 			if(inname||inkeyword){
 				WriteTime(1, DebugMessageColor);
 			}else{
 				WriteTime(1, SystemMessageColor);
 			}
-			// è¡¨ç¤º
-			WriteMessage(String::Format(L"<{0}> ", name), col);
-			WriteMessage(String::Format(L"{0}\n", tmpMsg), TalkMessageColor);
+			// •\¦
+			WriteMessage(String::Format("[ {0} ] ", name), col);
+			WriteMessage(String::Format("{0}\n", tmpMsg), TalkMessageColor);
 		}
 
 		void WriteMessage(String^ msg, Color color){
-            //Prevents an error writing to the chat log when you are closing the program
-            if (richTextBoxLog->IsDisposed) return;
-
 			if(richTextBoxLog->InvokeRequired){
 				WriteMessageDelegate^ wmd = gcnew WriteMessageDelegate(this, &MainForm::WriteMessage);
 				richTextBoxLog->Invoke(wmd, msg, color);
@@ -1549,13 +1348,13 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		}
 		void WriteTime(bool f, Color color){
 			if(f){
-				WriteMessage(String::Format(L"[{0}]", DateTime::Now.ToString("HH:mm")), color);
+				WriteMessage(String::Format("[{0}]", DateTime::Now.ToString("HH:mm")), color);
 			}else{
-				WriteMessage(String::Format(L"[{0}] ", DateTime::Now.ToString("HH:mm")), color);
+				WriteMessage(String::Format("[{0}] ", DateTime::Now.ToString("HH:mm")), color);
 			}
 		}
 		void WriteNotice(String^ msg){
-			// éŸ³ã§ãŠçŸ¥ã‚‰ã›
+			// ‰¹‚Å‚¨’m‚ç‚¹
 			if(MTOPTION.CONNECTION_TYPE != CT_SERVER){
 				if(MTOPTION.NOTICE_SOUND_ENABLE){
 					try{
@@ -1567,7 +1366,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				}
 			}
 
-			// \nã§æ”¹è¡Œ
+			// \n‚Å‰üs
 			msg = msg->Replace("\\n", "\n");
 
 			Monitor::Enter(richTextBoxLog);
@@ -1577,7 +1376,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				richTextBoxLog->SelectionFont = gcnew Drawing::Font(richTextBoxLog->Font->FontFamily, richTextBoxLog->Font->Size + 2);
 				richTextBoxLog->SelectionColor = TalkMessageColor;
 				richTextBoxLog->SelectionBackColor = NoticeBackColor;
-				richTextBoxLog->AppendText(msg + L"\n");
+				richTextBoxLog->AppendText(msg + "\n");
 
 				richTextBoxLog->SelectionStart = richTextBoxLog->Text->Length;
 
@@ -1599,7 +1398,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				return;
 			}
 
-			// éŸ³ã§ãŠçŸ¥ã‚‰ã›
+			// ‰¹‚Å‚¨’m‚ç‚¹
 			if(MTOPTION.ENTER_SOUND_ENABLE){
 				try{
 					Media::SoundPlayer^ wav = gcnew Media::SoundPlayer(gcnew String(MTOPTION.ENTER_SOUND));
@@ -1610,18 +1409,18 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			}
 
 			if(comment->Length > 0){
-				// æ™‚é–“
+				// ŠÔ
 				WriteTime(1, SystemMessageColor);
 				Monitor::Enter(richTextBoxLog);
 				try{
 					richTextBoxLog->SelectionStart = richTextBoxLog->Text->Length;
 					richTextBoxLog->SelectionColor = NameColor[type];
 					richTextBoxLog->SelectionBackColor = CommentBackColor;
-					richTextBoxLog->AppendText(String::Format(L"<{0}> ", name));
+					richTextBoxLog->AppendText(String::Format("[ {0} ] ", name));
 
 					richTextBoxLog->SelectionColor = TalkMessageColor;
 					richTextBoxLog->SelectionBackColor = CommentBackColor;
-					richTextBoxLog->AppendText(String::Format(L"{0}\n", comment));
+					richTextBoxLog->AppendText(String::Format("{0}\n", comment));
 
 					richTextBoxLog->SelectionStart = richTextBoxLog->Text->Length;
 					if(!MTOPTION.LOG_LOCK) {
@@ -1637,7 +1436,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			}
 			else{
 				WriteTime(0, SystemMessageColor);
-				WriteMessage(String::Format(L"{0} has joined.\n", name), SystemMessageColor);
+				WriteMessage(String::Format("{0} has joined.\n", name), SystemMessageColor);
 			}
 		}
 
@@ -1657,9 +1456,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				L"/seek:    Toggles seek mode.\n"
 				L"/list:    Displays the player list.\n"
 				L"/leave:   Exits the server and enters Free Play mode.\n"
-				L"/exit:    Exits the program.\n"
-                L"LilithPort also supports drag-and-drop for replay files and for locating the FM executable.\n"
-				L"More information can be found at https://github.com/oldmud0/LilithPort/blob/master/README.md \n", SystemMessageColor);
+				L"/exit:    Exits the program.\n", SystemMessageColor);
 		}
 
 		void RandomVersus(){
@@ -1674,7 +1471,9 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				Monitor::Enter(MemberList);
 				try{
 					for(int i = 1; i < MemberList->Count; i++){
-						if(MemberList[i]->STATE == MS_FREE || MemberList[i]->STATE == MS_SEEK) {
+						// ƒNƒ‰ƒCƒAƒ“ƒg‚à‘Îí‘ÎÛ
+						if(MemberList[i]->STATE == MS_FREE || MemberList[i]->STATE == MS_SEEK){
+						// if(MemberList[i]->STATE == MS_FREE && MemberList[i]->TYPE != CT_CLIENT){
 							list->Add(i);
 						}
 					}
@@ -1692,7 +1491,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 					StartGame(RT_VS);
 				}
 				else{
-					WriteMessage(L"Could not find the opponent in the player list.\n", SystemMessageColor);
+					WriteMessage("‘Îí‚Å‚«‚é‘Šè‚ª‚¢‚Ü‚¹‚ñ‚Å‚µ‚½B\n", SystemMessageColor);
 				}
 			}
 		}
@@ -1710,10 +1509,10 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			else if(textBoxInput->Text->StartsWith("/debug", StringComparison::OrdinalIgnoreCase)){
 				MTINFO.DEBUG ^= 1;
 				if(MTINFO.DEBUG){
-					WriteMessage(L"Debug mode is now ON!\n", SystemMessageColor);
+					WriteMessage("Debug mode is now on.\n", SystemMessageColor);
 				}
 				else{
-					WriteMessage(L"Debug mode is now OFF.\n", SystemMessageColor);
+					WriteMessage("Debug mode is now off.\n", SystemMessageColor);
 				}
 			}
 			else if(textBoxInput->Text->StartsWith("/vs", StringComparison::OrdinalIgnoreCase)){
@@ -1737,11 +1536,11 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 				if(MemberList[0]->STATE == MS_FREE){
 					ChangeState((BYTE)MS_REST);
-					WriteMessage(L"Rest mode set to ON.\n", SystemMessageColor);
+					WriteMessage("‹xŒeó‘Ô‚ğ•ÏX‚µ‚Ü‚µ‚½B > ƒIƒ“\n", SystemMessageColor);
 				}
 				else if(MemberList[0]->STATE == MS_REST){
 					ChangeState((BYTE)MS_FREE);
-					WriteMessage(L"Rest mode set to OFF.\n", SystemMessageColor);
+					WriteMessage("‹xŒeó‘Ô‚ğ•ÏX‚µ‚Ü‚µ‚½B > ƒIƒt\n", SystemMessageColor);
 				}
 			}
 			else if(textBoxInput->Text->StartsWith("/seek", StringComparison::OrdinalIgnoreCase)){
@@ -1751,7 +1550,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				ChangeListView(true);	
 			}
 			else if(textBoxInput->Text->StartsWith("/time", StringComparison::OrdinalIgnoreCase)){
-				WriteMessage(String::Format(L"{0} {1}\n", DateTime::Now.ToLongDateString(), DateTime::Now.ToLongTimeString()), SecretColor);
+				WriteMessage(String::Format("{0} {1}\n", DateTime::Now.ToLongDateString(), DateTime::Now.ToLongTimeString()), SecretColor);
 			}
 			else if(textBoxInput->Text->StartsWith("/dice", StringComparison::OrdinalIgnoreCase)){
 				if(MTOPTION.CONNECTION_TYPE == CT_SERVER){
@@ -1766,7 +1565,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 						richTextBoxLog->SelectionColor = TalkMessageColor;
 						richTextBoxLog->SelectionBackColor = NoticeBackColor;
-						richTextBoxLog->AppendText("Rolled a "+Byte(dice).ToString() + L"\n");
+						richTextBoxLog->AppendText(Byte(dice).ToString() + "\n");
 
 						richTextBoxLog->SelectionStart = richTextBoxLog->Text->Length;
 						if(!MTOPTION.LOG_LOCK) {
@@ -1788,30 +1587,27 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				this->Close();
 			}
 			else if(textBoxInput->Text->StartsWith("/memberlist", StringComparison::OrdinalIgnoreCase)){
-				// ãƒ‡ãƒãƒƒã‚°ç”¨ã‚³ãƒãƒ³ãƒ‰
+				// ƒfƒoƒbƒO—pƒRƒ}ƒ“ƒh
 				if(UDP == nullptr){
 					return;
 				}
 				if(MTINFO.DEBUG){
-					WriteMessage(L"NAME / ID / IP_EP / TYPE\n", DebugMessageColor);
+					WriteMessage("NAME / ID / IP_EP / TYPE\n", DebugMessageColor);
 					for(int i = 0; i < MemberList->Count; i++){
 						// TYPE 0:Server 1:Host 2:Client	
-						WriteMessage(String::Format(L"{0} / {1} / {2} / {3}\n", MemberList[i]->NAME, MemberList[i]->ID, MemberList[i]->IP_EP, MemberList[i]->TYPE), DebugMessageColor);
+						WriteMessage(String::Format("{0} / {1} / {2} / {3}\n", MemberList[i]->NAME, MemberList[i]->ID, MemberList[i]->IP_EP, MemberList[i]->TYPE), DebugMessageColor);
 					}
-                }
-                else {
-                    WriteMessage("/memberlist can only be performed when debug mode is enabled.", ErrorMessageColor);
-                }
+				}
 			}
 			else if(textBoxInput->Text->StartsWith("/memberhistory", StringComparison::OrdinalIgnoreCase)){
-				// ãƒ‡ãƒãƒƒã‚°ç”¨ã‚³ãƒãƒ³ãƒ‰
+				// ƒfƒoƒbƒO—pƒRƒ}ƒ“ƒh
 				if(MTOPTION.CONNECTION_TYPE != CT_SERVER || UDP == nullptr){
 					return;
 				}
 				if(MTINFO.DEBUG){
-					WriteMessage(L"ID / IP_EP\n", DebugMessageColor);
+					WriteMessage("ID / IP_EP\n", DebugMessageColor);
 					for(int i = 0; i < MemberListBackUp->Count; i++){
-						WriteMessage(String::Format(L"{0} / {1}\n", MemberListBackUp[i]->ID, MemberListBackUp[i]->IP_EP), DebugMessageColor);
+						WriteMessage(String::Format("{0} / {1}\n", MemberListBackUp[i]->ID, MemberListBackUp[i]->IP_EP), DebugMessageColor);
 					}
 				}
 			}
@@ -1819,12 +1615,13 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				ReloadList();
 			}
 			else if(textBoxInput->Text->StartsWith("/test", StringComparison::OrdinalIgnoreCase)){
-				// ãƒ‡ãƒãƒƒã‚°ç”¨ã‚³ãƒãƒ³ãƒ‰
+				// ƒfƒoƒbƒO—pƒRƒ}ƒ“ƒh
 
 				//Debug::WriteLine("test");
 				//Thread::Sleep(100 * 1000);
-
 				//ChangeState((BYTE)MS_FREE);
+
+				
 			}
 		}
 
@@ -1839,12 +1636,12 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 					listBoxMember->Items->Add(info->COMMENT);
 				}
 				else{
-					listBoxMember->Items->Add(gcnew String(L"â—†"));
+					listBoxMember->Items->Add(gcnew String("Ÿ"));
 				}
 				break;
 
 			case LV_BLIND:
-				listBoxMember->Items->Add(gcnew String(L"â—†"));
+				listBoxMember->Items->Add(gcnew String("Ÿ"));
 				break;
 			}
 		}
@@ -1856,7 +1653,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				return;
 			}
 
-			// åå‰ã¨ã‚³ãƒ¡ãƒ³ãƒˆã®è‡ªå‹•åˆ‡ã‚Šæ›¿ãˆ
+			// –¼‘O‚ÆƒRƒƒ“ƒg‚Ì©“®Ø‚è‘Ö‚¦
 			if(auto_change){
 				switch(ListView){
 				case LV_NAME:
@@ -1885,12 +1682,12 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 							listBoxMember->Items[i] = MemberList[i]->COMMENT;
 						}
 						else{
-							listBoxMember->Items[i] = gcnew String(L"â—†");
+							listBoxMember->Items[i] = gcnew String("Ÿ");
 						}
 						break;
 
 					case LV_BLIND:
-						listBoxMember->Items[i] = gcnew String(L"â—†");
+						listBoxMember->Items[i] = gcnew String("Ÿ");
 						break;
 					}
 				}
@@ -1969,7 +1766,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 
 		void ReloadList(){
-			// ãƒ¡ãƒ³ãƒãƒ¼ãƒªã‚¹ãƒˆæ›´æ–°
+			// ƒƒ“ƒo[ƒŠƒXƒgXV
 			if(MTOPTION.CONNECTION_TYPE == CT_SERVER || UDP == nullptr){
 				return;
 			}
@@ -1984,32 +1781,32 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			Array::Copy(BitConverter::GetBytes(0), 0, send, 1, 2);
 			UDP->Send(send, 3, MemberList[1]->IP_EP);
 
-			WriteMessage(L"Manually updated the players list. (The list is usually updated as players join, since manual requests place a load on the server.)\n", SystemMessageColor);
+			WriteMessage("ƒƒ“ƒo[ƒŠƒXƒg‚ğXV‚µ‚Ü‚µ‚½B(˜A‘±‚µ‚Ä‚ÌXV‚ÍƒT[ƒo‚É•‰‰×‚ª‚©‚©‚é‚½‚ßA’ˆÓ‚µ‚Ä‚­‚¾‚³‚¢B)\n", SystemMessageColor);
 		}
 		void WriteStatus(String^ msg){
 			toolStripStatusLabel->Text = msg;
 		}
 	public:
-		// IPå–å¾—å®Œäº†
+		// IPæ“¾Š®—¹
 		void GetIPOpenReadCompleted(System::Object^ sender, System::Net::OpenReadCompletedEventArgs^ e) {
 
-			// çµ‚äº†ç”¨
+			// I—¹—p
 			if(GetIPClient == nullptr) return;
 			if(GetIPCancelled == true) {
 				GetIPCancelled = false;
 				GetIPClient = nullptr;
 				return;
 			}
-			// TimerGetIPã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆ
+			// TimerGetIPƒ^ƒCƒ€ƒAƒEƒg
 			if(e->Cancelled) {
-				WriteMessage(L"IP address acquisition request failed due to a timeout.\n", ErrorMessageColor);
+				WriteMessage("IP address acquisition request failed due to a timeout.\n", ErrorMessageColor);
 				if(MTINFO.DEBUG){
-					WriteMessage(e->ToString() + L"\n", DebugMessageColor);
+					WriteMessage(e->ToString() + "\n", DebugMessageColor);
 				}
 				GetIPClient = nullptr;
 				return;
 			}
-			// ã‚¢ãƒ‰ãƒ¬ã‚¹ã®æŠ½å‡º
+			// ƒAƒhƒŒƒX‚Ì’Šo
 			String^ html;
 			_int64 Global_address;
 			array<String^> ^s1, ^s2, ^s3;
@@ -2026,32 +1823,32 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			}
 			catch(Exception^ e) {
 				Global_address = 0;
-				WriteMessage(L"ERROR: Failed to extract IP address information. This version of LilithPort may be outdated.\n", ErrorMessageColor);
+				WriteMessage("ERROR: Failed to extract IP address information. This version of LilithPort may be outdated.\n", ErrorMessageColor);
 
 				if(MTINFO.DEBUG){
-					WriteMessage(e->ToString() + L"\n", DebugMessageColor);
+					WriteMessage(e->ToString() + "\n", DebugMessageColor);
 				}
 			}
 			finally{
-				// Streamã¯ã—ã£ã‹ã‚Šé–‹æ”¾
+				// Stream‚Í‚µ‚Á‚©‚èŠJ•ú
 				if(sr != nullptr) sr->Close();
 				if(reply != nullptr) reply->Close();
 			}
 			if(Global_address > 0) {
-				WriteMessage(String::Format(L"IP address acquired: {0}\n", s3[1]), SystemMessageColor);
-				WriteMessage(L"[Converted address]\nLilithPort: ", SystemMessageColor);
+				WriteMessage(String::Format("IP Address Obtained\n", s3[1]), SystemMessageColor);
+				WriteMessage("[Converted Address]\nLilithPort: ", SystemMessageColor);
 
 				richTextBoxLog->SelectionColor = TalkMessageColor;
 				richTextBoxLog->SelectionBackColor = NoticeBackColor;
-				richTextBoxLog->AppendText(String::Format(L"{0}:{1}\n", EncryptionIP(s3[1]), MTOPTION.OPEN_PORT));
+				richTextBoxLog->AppendText(String::Format("{0}:{1}\n", EncryptionIP(s3[1]), MTOPTION.OPEN_PORT));
 				
-				WriteMessage(L"MTSP: ", SystemMessageColor);
-				richTextBoxLog->SelectionColor = TalkMessageColor;
-				richTextBoxLog->SelectionBackColor = NoticeBackColor;
-				richTextBoxLog->AppendText(String::Format(L"{0}:{1}\n", MTEncryptionIP(s3[1]), MTOPTION.OPEN_PORT));
+				//WriteMessage("MTSP: ", SystemMessageColor);
+				//richTextBoxLog->SelectionColor = TalkMessageColor;
+				//richTextBoxLog->SelectionBackColor = NoticeBackColor;
+				//richTextBoxLog->AppendText(String::Format("{0}:{1}\n", MTEncryptionIP(s3[1]), MTOPTION.OPEN_PORT));
 
 
-				WriteMessage(L"-------------------------------\n", SystemMessageColor);
+				WriteMessage("-------------------------------\n", SystemMessageColor);
 			}
 			GetIPClient = nullptr;
 		}
@@ -2068,7 +1865,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 					listBoxMember->Items[0] = comment;
 				}
 				else{
-					listBoxMember->Items[0] = gcnew String(L"â—†");
+					listBoxMember->Items[0] = gcnew String("Ÿ");
 				}
 			}
 
@@ -2114,28 +1911,28 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 		void GetIPAddress(){
 			if(GetIPClient == nullptr){
-				// ã‚°ãƒ­ãƒ¼ãƒãƒ«IPã®å–å¾—
+				// ƒOƒ[ƒoƒ‹IP‚Ìæ“¾
 				GetIPClient = gcnew WebClient();
 				GetIPClient->OpenReadCompleted += gcnew OpenReadCompletedEventHandler(this, &MainForm::GetIPOpenReadCompleted);
 
-				// ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã‚¿ã‚¤ãƒãƒ¼
-				WriteMessage(L"Obtaining IP address from "+GetIPUri->ToString()+"...\n", SystemMessageColor);
+				// ƒ^ƒCƒ€ƒAƒEƒgƒ^ƒCƒ}[
+				WriteMessage("Obtaining IP address from http://checkip.dyndns.org/ \n", SystemMessageColor);
 				TimerGetIPThread = gcnew Thread(gcnew ThreadStart(this, &MainForm::TimerGetIP));
 				TimerGetIPThread->Start();
 				try{
 					GetIPClient->OpenReadAsync(GetIPUri);
 				}
 				catch(WebException^ e) {
-					WriteMessage(L"ERROR: Could not obtain IP address.\n", ErrorMessageColor);
+					WriteMessage("ERROR: Could not obtain IP address.\n", ErrorMessageColor);
 
 					if(MTINFO.DEBUG){
-						WriteMessage(e->ToString() + L"\n", DebugMessageColor);
+						WriteMessage(e->ToString() + "\n", DebugMessageColor);
 					}
 				}
 			}
 		}
 		void ChangeProfileEnabled(){
-			// ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‰ãƒ­ãƒƒãƒ—ãƒ€ã‚¦ãƒ³æ›´æ–°
+			// ƒvƒƒtƒ@ƒCƒ‹ƒhƒƒbƒvƒ_ƒEƒ“XV
 			toolStripDropDownButtonProfile->DropDownItems->Clear();
 			for(int i=0; i < Profile::ProfileList->Count; i++){
 				if(Profile::ProfileList[i] == gcnew String(MTOPTION.PROFILE)){
@@ -2158,10 +1955,10 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		}
 	private:
 		System::Void MainForm_Load(System::Object^  sender, System::EventArgs^  e) {
-			// è¡Œé–“ã‚’è©°ã‚ã‚‹
+			// sŠÔ‚ğ‹l‚ß‚é
 			richTextBoxLog->LanguageOption = RichTextBoxLanguageOptions::UIFonts;
 
-			// ã‚¹ãƒ¬ãƒƒãƒ‰é–“ã®å‘¼ã³å‡ºã—ç¢ºèªã‚’ç„¡åŠ¹ã«ã™ã‚‹
+			// ƒXƒŒƒbƒhŠÔ‚ÌŒÄ‚Ño‚µŠm”F‚ğ–³Œø‚É‚·‚é
 			Control::CheckForIllegalCrossThreadCalls = false;
 
 			if(MTWS.LEFT > 0 && MTWS.TOP > 0){
@@ -2225,7 +2022,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			WatchHistory        = gcnew array<UINT16>(TIME_OUT/5 * 3);
 			InputHistory        = gcnew array<UINT16>(TIME_OUT/5 * 3);
 
-			// richtextboxã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆfalseãƒã‚°å¯¾ç­–
+			// richtextbox‚ÌƒfƒtƒHƒ‹ƒgfalseƒoƒO‘Îô
 			richTextBoxLog->AutoWordSelection = true;
 			richTextBoxLog->AutoWordSelection = false;
 
@@ -2238,7 +2035,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			this->toolStripMenuItemVersion_Click(nullptr, nullptr);
 
 			if(MTINFO.SERVER_MODE){
-				// ã‚µãƒ¼ãƒãƒ¢ãƒ¼ãƒ‰èµ·å‹•
+				// ƒT[ƒoƒ‚[ƒh‹N“®
 				MTOPTION.CONNECTION_TYPE = CT_SERVER;
 				if(MTINFO.SERVER_MODE_PORT > 0){
 					MTOPTION.OPEN_PORT = MTINFO.SERVER_MODE_PORT;
@@ -2248,7 +2045,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				s->ShowDialog(this);
 
 				if(!File::Exists(gcnew String(MTOPTION.GAME_EXE))){
-					MessageBox::Show(L"Please set the path to the Fighter Maker executable file.", L"No game file found");
+					MessageBox::Show("Please set the path to the Fighter Maker executable file.", "No game file found");
 
 					OptionForm^ o = gcnew OptionForm;
 					o->GameExePathError = true;
@@ -2280,7 +2077,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			QuitWatch(true);
 			CloseUdp(true);
 
-			// IPå–å¾—ã®ã‚­ãƒ£ãƒ³ã‚»ãƒ«
+			// IPæ“¾‚ÌƒLƒƒƒ“ƒZƒ‹
 			if(GetIPClient != nullptr){
 				GetIPCancelled = true;
 				GetIPClient->CancelAsync();
@@ -2292,7 +2089,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				TimerGetIPThread->Join();
 			}
 
-			// "Just in case," he said...
+			// ”O‚Ì‚½‚ß
 			Thread::Sleep(500);
 		}
 
@@ -2307,7 +2104,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		}
 
 		System::Void textBoxInput_KeyDown( Object^ sender, System::Windows::Forms::KeyEventArgs^ e ) {
-			// ãƒãƒ£ãƒƒãƒˆå±¥æ­´ã‹ã‚‰é¸æŠ
+			// ƒ`ƒƒƒbƒg—š—ğ‚©‚ç‘I‘ğ
 			if(ChatHistory->Count > 0){
 				if(e->KeyCode == Keys::Up){
 					ChatHistoryNumber--;
@@ -2336,9 +2133,9 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				}
 			}
 
-			// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸é€ä¿¡
+			// ƒƒbƒZ[ƒW‘—M
 			if(e->KeyCode == Keys::Enter && textBoxInput->Text->Length > 0){
-				// ãƒãƒ£ãƒƒãƒˆå±¥æ­´æ›´æ–°
+				// ƒ`ƒƒƒbƒg—š—ğXV
 				if(ChatHistoryNumber < ChatHistory->Count){
 					if(ChatHistory[ChatHistoryNumber] != textBoxInput->Text){
 						ChatHistory->Add(textBoxInput->Text);
@@ -2355,7 +2152,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 				try{
 					if(e->Control && MTOPTION.CONNECTION_TYPE == CT_SERVER){
-						// å‘ŠçŸ¥
+						// ’m
 						BYTE len = (BYTE)(textBoxInput->Text->Length * 2);
 						array<BYTE>^ msg = gcnew array<BYTE>(2 + len);
 
@@ -2365,18 +2162,18 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 						PacketSendAllMember(msg, 0);
 	
-						WriteMessage(L"[Notice]-------------------\n", SystemMessageColor);
+						WriteMessage("[MOTD]---------------------\n", SystemMessageColor);
 						WriteNotice(textBoxInput->Text);
-						WriteMessage(L"-------------------------------\n", SystemMessageColor);
+						WriteMessage("-------------------------------\n", SystemMessageColor);
 					}
 					else if(textBoxInput->Text[0] == '/'){
 						AnalyzeCommand();
 					}
 					else if(UDP != nullptr && ServerMode >= SM_MATCH){
-						WriteMessage(L"Chat is disabled on this server.\n", SystemMessageColor);
+						WriteMessage("Chat is disabled on this server.\n", SystemMessageColor);
 					}
 					else if(UDP != nullptr){
-						// ãƒãƒ£ãƒƒãƒˆç™ºè¨€
+						// ƒ`ƒƒƒbƒg”­Œ¾
 						BYTE len = (BYTE)(textBoxInput->Text->Length * 2);
 						array<BYTE>^ msg = gcnew array<BYTE>(4 + len);
 
@@ -2388,12 +2185,12 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 						TalkMessage(MemberList[0]->ID, msg);
 					}
 					else{
-						WriteMessage(textBoxInput->Text + L"\n", TalkMessageColor);
+						WriteMessage(textBoxInput->Text + "\n", TalkMessageColor);
 					}
 				}
 				catch(Exception^ e){
 					if(MTINFO.DEBUG){
-						WriteMessage(String::Format(L"{0}\n", e->ToString()), DebugMessageColor);
+						WriteMessage(String::Format("{0}\n", e->ToString()), DebugMessageColor);
 					}
 				}
 
@@ -2449,26 +2246,26 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			if(index == 0){
 				int state = MemberList[0]->STATE;
 
-				// ä¼‘æ†©çŠ¶æ…‹ã®å¤‰æ›´
+				// ‹xŒeó‘Ô‚Ì•ÏX
 				if(state == MS_FREE){
 					ChangeState((BYTE)MS_REST);
-					WriteMessage(L"Rest mode is now ON.\n", SystemMessageColor);
+					WriteMessage("Rest mode is now ON.\n", SystemMessageColor);
 				}
 				else if(state == MS_REST){
 					ChangeState((BYTE)MS_FREE);
-					WriteMessage(L"Rest mode is now OFF.\n", SystemMessageColor);
+					WriteMessage("Rest mode is now OFF.\n", SystemMessageColor);
 				}
 				else if(state == MS_VS){
-					WriteMessage(L"Ending match...\n", SystemMessageColor);
+					WriteMessage("Ending match.\n", SystemMessageColor);
 					QuitGame();
 				}
 				else if(state == MS_WATCH || state == MS_COUCH){
-					WriteMessage(L"Ending spectate...\n", SystemMessageColor);
+					WriteMessage("Ending spectate.\n", SystemMessageColor);
 					QuitWatch(true);
 				}
 			}
 			else if(index > 0 && UDP != nullptr){
-				// çŠ¶æ…‹ã®å†å–å¾—
+				// ó‘Ô‚ÌÄæ“¾
 				array<BYTE>^ send = gcnew array<BYTE>(3){ PH_REQ_STATE };
 				Array::Copy(BitConverter::GetBytes(MemberList[index]->ID), 0, send, 1, 2);
 
@@ -2484,9 +2281,9 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			}
 		}
 
-		System::Void listBoxMember_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
+		System::Void listBoxMember_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
 			int index = listBoxMember->IndexFromPoint(e->X, e->Y);
-			
+
 			if(index == -1 || MTOPTION.CONNECTION_TYPE == CT_FREE || ListView == LV_BLIND){
 				toolTipMember->Active = false;
 				return;
@@ -2494,9 +2291,9 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			else{
 				toolTipMember->Active = true;
 			}
-			String^ cap = String::Format(L"ID = {0}", MemberList[index]->ID);
+			String^ cap = String::Format("ID = {0}", MemberList[index]->ID);
 			if(index > 0){
-				cap += String::Format(L", VS = {0}", MemberList[index]->NUM_VS);
+				cap += String::Format(", VS = {0}", MemberList[index]->NUM_VS);
 			}
 			if(ListView == LV_NAME){
 				if(MemberList[index]->COMMENT->Length > 0){
@@ -2508,16 +2305,6 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			}
 			toolTipMember->SetToolTip(listBoxMember, cap);
 		}
-
-		System::Void listBoxMember_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
-			int index = listBoxMember->IndexFromPoint(e->X, e->Y);
-
-			if (index != -1 && e->Button == ::MouseButtons::Right) {
-				listBoxMember->SelectedIndex = index;
-				this->contextMenuStripMember->Show(listBoxMember, e->Location);
-			}
-		}
-
 		System::Void toolStripMenuItemSetting_Click(System::Object^  sender, System::EventArgs^  e) {
 			if(Option == nullptr || Option->IsDisposed){
 				toolStripDropDownButtonProfile->Enabled = false;
@@ -2538,14 +2325,14 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		}
 
 		System::Void toolStripMenuItemVersion_Click(System::Object^  sender, System::EventArgs^  e) {
-			WriteMessage(L"LilithPort v1.08\nEnglish translation by longbyte1\n", SystemMessageColor);
+			WriteMessage("LilithPort v1.08\n", SystemMessageColor);
 		}
 
 		System::Void toolStripMenuItemExit_Click(System::Object^  sender, System::EventArgs^  e) {
 			this->Close();
 		}
 
-		// ãƒ–ãƒƒã‚¯ãƒãƒ¼ã‚¯è¿½åŠ 
+		// ƒuƒbƒNƒ}[ƒN’Ç‰Á
 		System::Void toolStripMenuItemAddBookMark_Click(System::Object^  sender, System::EventArgs^  e) {
 			if((MTOPTION.BOOKMARK_COUNT - MTOPTION.BOOKMARK_DELETED_COUNT) > 9) {
 				MessageBox::Show(L"You can only have up to 10 bookmarks. Please free up some space by deleting some bookmarks.", L"Add Bookmark", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
@@ -2560,25 +2347,20 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			String^ tmpIP = ConnectIP;
 			UINT tmpInt = MTOPTION.BOOKMARK_COUNT;
 
-			toolStripMenuItemBookMark = (gcnew System::Windows::Forms::MenuItem());
-			toolStripMenuItemBookMarkMenu->MenuItems->Add(toolStripMenuItemBookMark);
+			toolStripMenuItemBookMark = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			toolStripMenuItemBookMarkMenu->DropDownItems->Add(toolStripMenuItemBookMark);
 			toolStripMenuItemBookMark->Text = ServerName;
 			toolStripMenuItemBookMark->Name = L"toolStripMenuItemBookMark" + MTOPTION.BOOKMARK_COUNT;
 			toolStripMenuItemBookMark->Tag = MTOPTION.BOOKMARK_COUNT;
+			toolStripMenuItemBookMark->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemBookMark_Click);
 
-			// å‰Šé™¤ãƒ¡ãƒ‹ãƒ¥ãƒ¼
-			toolStripMenuItemDelBookMark = (gcnew System::Windows::Forms::MenuItem());
-			toolStripMenuItemBookMark->MenuItems->Add(toolStripMenuItemDelBookMark);
-			toolStripMenuItemDelBookMark->Text = L"&Delete";
+			// íœƒƒjƒ…[
+			toolStripMenuItemDelBookMark = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			toolStripMenuItemBookMark->DropDownItems->Add(toolStripMenuItemDelBookMark);
+			toolStripMenuItemDelBookMark->Text = L"Delete";
 			toolStripMenuItemDelBookMark->Tag = L"toolStripMenuItemBookMark" + MTOPTION.BOOKMARK_COUNT;
 			toolStripMenuItemDelBookMark->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemDelBookMark_Click);
 			
-            toolStripMenuItemConnectToBookmark = gcnew System::Windows::Forms::MenuItem();
-            toolStripMenuItemBookMark->MenuItems->Add(toolStripMenuItemConnectToBookmark);
-            toolStripMenuItemConnectToBookmark->Text = L"&Connect";
-            toolStripMenuItemConnectToBookmark->Tag = MTOPTION.BOOKMARK_COUNT;
-            toolStripMenuItemConnectToBookmark->Click += gcnew System::EventHandler(this, &MainForm::toolStripMenuItemConnectToBookMark_Click);
-
 			BookMarkServerName = Runtime::InteropServices::Marshal::StringToHGlobalAuto(tmpName);
 			_tcscpy_s(MTOPTION.BOOKMARK_SERVER_NAME[tmpInt], static_cast<PTCHAR>(BookMarkServerName.ToPointer()));
 			Runtime::InteropServices::Marshal::FreeHGlobal(BookMarkServerName);
@@ -2594,12 +2376,11 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 			SaveMTOption();
 		}
-		// ãƒ–ãƒƒã‚¯ãƒãƒ¼ã‚¯æ¥ç¶š
-		System::Void toolStripMenuItemConnectToBookMark_Click(System::Object^ sender, System::EventArgs^ e) {
-			UINT tmpInt = (UINT)((MenuItem^)sender)->Tag;
-            String^ tmpName = gcnew String(MTOPTION.BOOKMARK_SERVER_NAME[tmpInt]);
+		// ƒuƒbƒNƒ}[ƒNÚ‘±
+		System::Void toolStripMenuItemBookMark_Click(System::Object^ sender, System::EventArgs^ e) {
+			UINT tmpInt = (UINT)((ToolStripMenuItem^)sender)->Tag;
 
-			if(MessageBox::Show(L"Connect to "+ tmpName + L"?\n", L"Connect from Bookmark", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
+			if(MessageBox::Show(((ToolStripMenuItem^)sender)->Text+" Selected", "Connect to Bookmark?", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
 			}else{
 				return;
 			}
@@ -2610,13 +2391,13 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 			Restart();
 		}
-		// ãƒ–ãƒƒã‚¯ãƒãƒ¼ã‚¯å‰Šé™¤
+		// ƒuƒbƒNƒ}[ƒNíœ
 		System::Void toolStripMenuItemDelBookMark_Click(System::Object^ sender, System::EventArgs^ e) {
 			Object^ tmpTag;
-			tmpTag = ((MenuItem^)sender)->Tag;
-			UINT tmpInt = (UINT)toolStripMenuItemBookMarkMenu->MenuItems[(String^)tmpTag]->Tag;
-			if(MessageBox::Show((String^)toolStripMenuItemBookMarkMenu->MenuItems[(String^)tmpTag]->Text+ L" will be deleted.\nContinue?", L"Delete Bookmark", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
-				toolStripMenuItemBookMarkMenu->MenuItems->Remove(toolStripMenuItemBookMarkMenu->MenuItems[(String^)tmpTag]);
+			tmpTag = ((ToolStripMenuItem^)sender)->Tag;
+			UINT tmpInt = (UINT)toolStripMenuItemBookMarkMenu->DropDownItems[(String^)tmpTag]->Tag;
+			if(MessageBox::Show((String^)toolStripMenuItemBookMarkMenu->DropDownItems[(String^)tmpTag]->Text+" selected.\nDelete this bookmark?", "Delete Bookmark", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
+				toolStripMenuItemBookMarkMenu->DropDownItems->Remove(toolStripMenuItemBookMarkMenu->DropDownItems[(String^)tmpTag]);
 				MTOPTION.BOOKMARK_DELETED_COUNT++;
 
 				ZeroMemory(MTOPTION.BOOKMARK_SERVER_NAME[tmpInt], sizeof(MTOPTION.BOOKMARK_SERVER_NAME[tmpInt]));
@@ -2628,14 +2409,14 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			}
 		}
 
-		// ã‚²ãƒ¼ãƒ ã®èµ·å‹•
+		// ƒQ[ƒ€‚Ì‹N“®
 		System::Void GameStartToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			StartGame(RT_FREE);			
 		}
-		// ã‚²ãƒ¼ãƒ ã®èµ·å‹•(ãƒªãƒ—ãƒ¬ã‚¤ã‚’ä¿å­˜ã—ãªã„)
+		// ƒQ[ƒ€‚Ì‹N“®(ƒŠƒvƒŒƒC‚ğ•Û‘¶‚µ‚È‚¢)
 		System::Void GameStartNoReplayToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			bool primary = 0;
-			// ãƒªãƒ—ãƒ¬ã‚¤ä¿å­˜ONãªã‚‰ä¸€æ™‚çš„ç„¡åŠ¹åŒ–
+			// ƒŠƒvƒŒƒC•Û‘¶ON‚È‚çˆê“I–³Œø‰»
 			if(toolStripMenuItemRecordReplay->Checked == 1) {
 				primary = 1;
 				MTOPTION.RECORD_REPLAY = 0;
@@ -2644,22 +2425,22 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			StartGame(RT_FREE);
 			
 			if(primary == 1) {
-				// èµ·å‹•å‰ã«æˆ»ã—ã¦ã—ã¾ã†ã®é˜²æ­¢
+				// ‹N“®‘O‚É–ß‚µ‚Ä‚µ‚Ü‚¤‚Ì–h~
 				Thread::Sleep(100);
 				MTOPTION.RECORD_REPLAY = toolStripMenuItemRecordReplay->Checked;
 			}
 		}
-		// å†èµ·å‹•
+		// Ä‹N“®
 		System::Void RestartToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			if(MTOPTION.CONNECTION_TYPE == CT_SERVER) {
-				if(MessageBox::Show(L"This will shut down the server and drop all players.\nAre you sure you want to do this?", L"Restart", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
+				if(MessageBox::Show("his will shut down the server and drop all players.\nAre you sure you want to do this?", "Restart", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
 				}else{
 					return;
 				}
 			}
 
 			if(MTOPTION.CONNECTION_TYPE == CT_HOST || MTOPTION.CONNECTION_TYPE == CT_CLIENT){
-				if(MessageBox::Show(L"This will disconnect you from the server.\nContinue?", L"Restart", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
+				if(MessageBox::Show("This will disconnect you from the server.\nContinue?", "Restart", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
 				}else{
 					return;
 				}
@@ -2668,17 +2449,17 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			Restart();
 		}
 
-		// é€€å®¤
+		// ‘Şº
 		System::Void LeaveToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			if(MTOPTION.CONNECTION_TYPE == CT_SERVER) {
-				if(MessageBox::Show(L"This will shut down the server and drop all players.\nAre you sure you want to do this?", L"Leave", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
+				if(MessageBox::Show("This will shut down the server and drop all players.\nAre you sure you want to do this?", "Leave", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
 				}else{
 					return;
 				}
 			}
 
 			if(MTOPTION.CONNECTION_TYPE == CT_HOST || MTOPTION.CONNECTION_TYPE == CT_CLIENT){
-				if(MessageBox::Show(L"This will disconnect you from the server.\nContinue?", L"Leave", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
+				if(MessageBox::Show("This will disconnect you from the server.\nContinue?", "Leave", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
 				}else{
 					return;
 				}
@@ -2687,33 +2468,33 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			Leave(true);
 		}
 
-		// ä¼‘æ†©çŠ¶æ…‹ã®åˆ‡ã‚Šæ›¿ãˆ
+		// ‹xŒeó‘Ô‚ÌØ‚è‘Ö‚¦
 		System::Void RestToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			if(MTOPTION.CONNECTION_TYPE == CT_FREE) return;
 
 			if(MemberList[0]->STATE == MS_FREE){
 				ChangeState((BYTE)MS_REST);
-				WriteMessage(L"Rest mode is now ON.\n", SystemMessageColor);
+				WriteMessage("Rest mode is now ON.\n", SystemMessageColor);
 			}
 			else if(MemberList[0]->STATE == MS_REST){
 				ChangeState((BYTE)MS_FREE);
-				WriteMessage(L"Rest mode is now OFF.\n", SystemMessageColor);
+				WriteMessage("Rest mode is now OFF.\n", SystemMessageColor);
 			}
 		}
 
-		// å¯¾æˆ¦å‹Ÿé›†çŠ¶æ…‹ã®åˆ‡ã‚Šæ›¿ãˆ
+		// ‘Îí•åWó‘Ô‚ÌØ‚è‘Ö‚¦
 		System::Void SeekToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ChangeSeek();
 		}
 
-		// ãƒ­ã‚°ã®å…¨å‰Šé™¤
+		// ƒƒO‚Ì‘Síœ
 		System::Void ClearToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ClearLog();
 		}
 
-		// å½“ãŸã‚Šåˆ¤å®šã®è¡¨ç¤ºåˆ‡æ›¿
+		// “–‚½‚è”»’è‚Ì•\¦Ø‘Ö
 		System::Void ToggleHitJudgeToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-			// ã‚²ãƒ¼ãƒ èµ·å‹•ä¸­ãªã‚‰å³æ™‚å¤‰æ›´
+			// ƒQ[ƒ€‹N“®’†‚È‚ç‘¦•ÏX
 			MTOPTION.HIT_JUDGE ^= 1;
 			if(MTINFO.INITIALIZED && MTINFO.PROCESS != NULL){
 				DWORD b = MTOPTION.HIT_JUDGE;
@@ -2765,16 +2546,16 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			}
 		}
 
-		// IPã‚¢ãƒ‰ãƒ¬ã‚¹ã®å–å¾—ã‚³ãƒãƒ³ãƒ‰
+		// IPƒAƒhƒŒƒX‚Ìæ“¾ƒRƒ}ƒ“ƒh
 		System::Void GetIPToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			GetIPAddress();
 		}
-		// ãƒ­ã‚°ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚’å›ºå®š
+		// ƒƒO‚ÌƒXƒNƒ[ƒ‹‚ğŒÅ’è
 		System::Void LogLockToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			LogLockToolStripMenuItem->Checked ^= 1;
 			MTOPTION.LOG_LOCK = LogLockToolStripMenuItem->Checked;
 		}
-		// ãƒ¡ãƒ³ãƒãƒ¼ãƒªã‚¹ãƒˆã®æ›´æ–°ã‚³ãƒãƒ³ãƒ‰
+		// ƒƒ“ƒo[ƒŠƒXƒg‚ÌXVƒRƒ}ƒ“ƒh
 		System::Void ReloadListToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ReloadList();
 		}
@@ -2837,13 +2618,12 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		}
 
 		System::Void richTextBoxLog_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkClickedEventArgs^  e) {
-			// å¼·åˆ¶çµ‚äº†å¯¾ç­–
-            //XXX this is really insecure. Are you seriously going to trust a random link on the chat?
+			// ‹­§I—¹‘Îô
 			try{
 				Process::Start(e->LinkText);
 			}
 			catch(Exception^){
-				WriteMessage(L"Invalid link.\n", ErrorMessageColor);
+				WriteMessage("•s³‚È•¶š—ñƒŠƒ“ƒN‚Å‚·B\n", ErrorMessageColor);
 			}
 		}
 
@@ -2864,9 +2644,9 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 
 		}
 
-		// ç‚¹æ»…é–¢æ•°
+		// “_–ÅŠÖ”
 		System::Void WindowFlash() {
-			// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ç‚¹æ»…
+			// ƒEƒBƒ“ƒhƒE“_–Å
 			FLASHWINFO stfi;
 			ZeroMemory(&stfi, sizeof(FLASHWINFO));
 			stfi.cbSize = sizeof(FLASHWINFO);
@@ -2878,15 +2658,13 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		}
 
 		System::Void toolStripMenuItemWatch_Click(System::Object^  sender, System::EventArgs^  e) {
-			if(listBoxMember->SelectedIndex == -1){
-				return;
-			}
+			if(listBoxMember->SelectedIndex == -1){return;}
 
 			int state = MemberList[0]->STATE;
 			array<BYTE>^ send = gcnew array<BYTE>(3);
 
 			if(state == MS_FREE || state == MS_REST){
-				// è¦³æˆ¦é–‹å§‹
+				// ŠÏíŠJn
 				if(state == MS_FREE) ChangeState((BYTE)MS_WATCH);
 				if(state == MS_REST) ChangeState((BYTE)MS_COUCH);
 
@@ -2898,7 +2676,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				Array::Copy(BitConverter::GetBytes(MemberList[0]->ID), 0, send, 1, 2);
 				UDP->BeginSend(send, send->Length, WatchTarget, gcnew AsyncCallback(SendPackets), UDP);
 
-				toolStripMenuItemWatch->Text = gcnew String(L"Stop spectating");
+				toolStripMenuItemWatch->Text = gcnew String("Stop spectating");
 			}
 			else{
 				QuitWatch(true);
@@ -2906,9 +2684,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		}
 
 		System::Void toolStripMenuItemPing_Click(System::Object^  sender, System::EventArgs^  e) {
-			if(listBoxMember->SelectedIndex == -1){
-				return;
-			}
+			if(listBoxMember->SelectedIndex == -1){return;}
 
 			int si = listBoxMember->SelectedIndex;
 			array<BYTE>^ ping = gcnew array<BYTE>(1){ PH_PING };
@@ -2917,28 +2693,34 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			UDP->BeginSend(ping, 1, MemberList[si]->IP_EP, gcnew AsyncCallback(SendPackets), UDP);
 		}
 
-		// ã‚­ãƒƒã‚¯
+		// –¼‘O‚ğƒRƒs[
+		System::Void toolStripMenuItemClipBoardCopy_Click(System::Object^  sender, System::EventArgs^  e) {
+			if(listBoxMember->SelectedIndex == -1){return;}
+
+			int si = listBoxMember->SelectedIndex;
+			System::Windows::Forms::Clipboard::SetDataObject(MemberList[si]->NAME, true);
+		}
+
+		// ƒLƒbƒN
 		System::Void toolStripMenuItemKick_Click(System::Object^  sender, System::EventArgs^  e) {
-			if(listBoxMember->SelectedIndex == -1 || MTOPTION.CONNECTION_TYPE != CT_SERVER){
-				return;
-			}
+			if(listBoxMember->SelectedIndex == -1 || MTOPTION.CONNECTION_TYPE != CT_SERVER){return;}
 
 			int index = listBoxMember->SelectedIndex;
 			int id = MemberList[index]->ID;
 
-			if(MessageBox::Show(String::Format(L"{0} (ID: {1}) will be kicked.\nAre you sure you want to be kicked?", MemberList[index]->NAME, MemberList[index]->ID), "Kick Player", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
+			if(MessageBox::Show(String::Format("[ {0} ](ID:{1}) will be kicked.\nAre you sure you want to be kicked?", MemberList[index]->NAME, MemberList[index]->ID), "KICK", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes){
 			}else{
 				return;
 			}
 			
 			try{
-				// æœ¬äººã«é€šçŸ¥
+				// –{l‚É’Ê’m
 				array<BYTE>^ send = gcnew array<BYTE>(3){ PH_LOST, 0xFF, 0xFF };
 				UDP->BeginSend(send, send->Length, MemberList[index]->IP_EP, gcnew AsyncCallback(SendPackets), UDP);
 
 				if(ListView != LV_BLIND){
 					WriteTime(0, SystemMessageColor);
-					WriteMessage(String::Format(L"{0} (ID: {1}) was kicked.\n", MemberList[index]->NAME, MemberList[index]->ID), SystemMessageColor);
+					WriteMessage(String::Format("{0}(ID:{1}) was kicked.\n", MemberList[index]->NAME, MemberList[index]->ID), SystemMessageColor);
 				}
 				if(MemberList[0]->STATE == MS_WATCH || MemberList[0]->STATE == MS_COUCH){
 					if(TargetID == MemberList[index]->ID){
@@ -2946,50 +2728,51 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 					}
 				}
 
-				// ã‚°ãƒƒãƒã‚¤
+				// ƒOƒbƒoƒC
 				MemberList->RemoveAt(index);
 				listBoxMember->Items->RemoveAt(index);
 
-				// ä»–ã®ãƒ¡ãƒ³ãƒãƒ¼ã«é€šçŸ¥
+				// ‘¼‚Ìƒƒ“ƒo[‚É’Ê’m
 				array<BYTE>^ quit = gcnew array<BYTE>(3){ PH_QUIT };
 				Array::Copy(BitConverter::GetBytes(id), 0, quit, 1, 2);
 
 				for(int i = 1; i < MemberList->Count; i++){
 					UDP->BeginSend(quit, quit->Length, MemberList[i]->IP_EP, gcnew AsyncCallback(SendPackets), UDP);
 					if(MTINFO.DEBUG){
-						WriteMessage(String::Format(L"Notified {0}\n", MemberList[i]->ID), DebugMessageColor);
+						WriteMessage(String::Format("{0} was notified.\n", MemberList[i]->ID), DebugMessageColor);
 					}
 				}
 			}
 			catch(Exception^ e){
 				if(MTINFO.DEBUG){
-					WriteMessage(String::Format(L"{0}\n", e->ToString()), DebugMessageColor);
+					WriteMessage(String::Format("{0}\n", e->ToString()), DebugMessageColor);
 				}
 			}
 			
 		}
 
-		System::Void contextMenuStripMember_Opening(System::Object^  sender, System::EventArgs^  e) {
+		System::Void contextMenuStripMember_Opening(System::Object^  sender, System::ComponentModel::CancelEventArgs^  e) {
 			
 			toolStripMenuItemKick->Enabled     = false;
 
 			if(listBoxMember->SelectedIndex == -1){
-				toolStripMenuItemVS->Enabled       = false;
-				toolStripMenuItemWatch->Enabled    = false;
-				toolStripMenuItemPing->Enabled     = false;
+				toolStripMenuItemVS->Enabled			= false;
+				toolStripMenuItemWatch->Enabled			= false;
+				toolStripMenuItemPing->Enabled			= false;
+				toolStripMenuItemClipBoardCopy->Enabled	= false;
 				return;
 			}
 
 			int state = MemberList[listBoxMember->SelectedIndex]->STATE;
 
-			toolStripMenuItemVS->Enabled       = false;
-			toolStripMenuItemWatch->Enabled    = true;
-			toolStripMenuItemPing->Enabled     = true;
+			toolStripMenuItemVS->Enabled			= false;
+			toolStripMenuItemWatch->Enabled			= true;
+			toolStripMenuItemPing->Enabled			= true;
+			toolStripMenuItemClipBoardCopy->Enabled	= true;
 
 			if(( ( state == MS_FREE || state == MS_SEEK) && ( MemberList[0]->STATE == MS_FREE || MemberList[0]->STATE == MS_SEEK )) || ListView == LV_BLIND){
 				toolStripMenuItemVS->Enabled       = true;
 			}
-
 			if(listBoxMember->SelectedIndex == 0){
 				if(state != MS_WATCH && state != MS_COUCH){
 					toolStripMenuItemWatch->Enabled = false;
@@ -3012,7 +2795,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 				String^ extension = Path::GetExtension(file[0])->ToLower();
 				FileVersionInfo^ info = FileVersionInfo::GetVersionInfo(file[0]);
 
-				if(extension == ".mtr" || (extension == ".exe" && (IsCompatibleFMExecutable(info->FileDescription)))) {
+				if(extension == ".mtr" || (extension == ".exe" && (info->LegalCopyright == "(C)2001 ENTERBRAIN,INC / OUTBACK"))){
 					e->Effect = DragDropEffects::All;
 				}
 			}
@@ -3036,20 +2819,20 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 						_tcscpy_s(MTOPTION.GAME_EXE, static_cast<PTCHAR>(mp.ToPointer()));
 						Runtime::InteropServices::Marshal::FreeHGlobal(mp);
 
-						// iniã®ãƒ‘ã‚¹ã‚’èª¿ã¹ã‚‹
+						// ini‚ÌƒpƒX‚ğ’²‚×‚é
 						TCHAR ini[_MAX_PATH], dir[_MAX_PATH], drive[_MAX_DRIVE];
 
 						_tsplitpath_s(MTOPTION.GAME_EXE, drive, _MAX_DRIVE, dir, _MAX_DIR, NULL, 0, NULL, 0);
 
-						if(IsCompatibleFM2KExecutable(info->FileDescription)){
+						if(info->LegalCopyright == "(C)2001 ENTERBRAIN,INC / OUTBACK"){
 							b2nd = true;
 							//_stprintf_s(ini, _T("%s%sgame.ini"), drive, dir);
 							PathCombine(ini, PathCombine(ini, drive, dir), L"game.ini");
 						}
 						else{
 							b2nd = false;
-							//_stprintf_s(ini, _T("%s%sï¼’ï¼¤æ ¼é—˜ãƒ„ã‚¯ãƒ¼ãƒ«ï¼™ï¼•.ini"), drive, dir);
-							PathCombine(ini, PathCombine(ini, drive, dir), L"ï¼’ï¼¤æ ¼é—˜ãƒ„ã‚¯ãƒ¼ãƒ«ï¼™ï¼•.ini");
+							//_stprintf_s(ini, _T("game.ini"), drive, dir);
+							PathCombine(ini, PathCombine(ini, drive, dir), L"game.ini");
 						}
 
 						if(File::Exists(gcnew String(ini))){
@@ -3059,15 +2842,15 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 								MTOPTION.TIMER     = GetPrivateProfileInt(_T("GamePlay"), _T("Editor.TestPlay.time"), 0, ini);
 							}
 							else{
-								MTOPTION.MAX_STAGE = GetPrivateProfileInt(_T("ã‚²ãƒ¼ãƒ è¨­å®š"), _T("Editer.TestPlay.BackGroundNb"), 0, ini) + 1;
+								MTOPTION.MAX_STAGE = GetPrivateProfileInt(_T("ƒQ[ƒ€İ’è"), _T("Editer.TestPlay.BackGroundNb"), 0, ini) + 1;
 								MTOPTION.ROUND     = 2;
-								MTOPTION.TIMER     = GetPrivateProfileInt(_T("ã‚²ãƒ¼ãƒ è¨­å®š"), _T("Editer.TestPlay.time"), 0, ini);
+								MTOPTION.TIMER     = GetPrivateProfileInt(_T("ƒQ[ƒ€İ’è"), _T("Editer.TestPlay.time"), 0, ini);
 							}
 
 							MTOPTION.STAGE_SELECT = MTOPTION.MAX_STAGE == 1 ? 1 : 0;
 						}
 
-						WriteMessage(String::Format(L"Game file changed to \"{0}\".\n", Path::GetFileNameWithoutExtension(file[0])), SystemMessageColor);
+						WriteMessage(String::Format("Game file changed to \"{0}\"‚É•ÏX‚µ‚Ü‚µ‚½B\n", Path::GetFileNameWithoutExtension(file[0])), SystemMessageColor);
 					}
 					else{
 						Option->SetGameExePath(file[0]);
@@ -3076,7 +2859,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			}
 		}
 
-		// ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«å¤‰æ›´
+		// ƒvƒƒtƒ@ƒCƒ‹•ÏX
 		System::Void toolStripDropDownItemProfile_Click(System::Object^ sender, System::EventArgs^ e) {
 			if(((ToolStripDropDownItem^)sender)->Text == gcnew String(MTOPTION.PROFILE)){
 				return;
@@ -3094,7 +2877,7 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 		System::Void toolStripMenuItemSeek_Click(System::Object^ sender, System::EventArgs^ e) {
 			this->SeekToolStripMenuItem_Click(nullptr, nullptr);
 		}
-		// è‡ªå‹•ä¼‘æ†©æœ‰åŠ¹
+		// ©“®‹xŒe—LŒø
 		System::Void toolStripMenuItemAutoRestEnable_Click(System::Object^  sender, System::EventArgs^  e) {
 			toolStripMenuItemAutoRestEnable->Checked ^= 1;
 			MTOPTION.AUTO_REST = toolStripMenuItemAutoRestEnable->Checked;
@@ -3139,9 +2922,9 @@ private: System::Windows::Forms::ContextMenu^  contextMenuStrip2;
 			SetAutoRestTime(120);
 			toolStripMenuItemAutoRestTime120->Checked = 1;
 		}
-		// ãƒ­ã‚°ã®ãƒ†ã‚­ã‚¹ãƒˆã‚’æŠ˜ã‚Šè¿”ã™
+		// ƒƒO‚ÌƒeƒLƒXƒg‚ğÜ‚è•Ô‚·
 		System::Void toolStripMenuItemWordWrap_Click(System::Object^ sender, System::EventArgs^  e) {
 			ChangeLogWordWrap();
 		}
-};
+	};
 }

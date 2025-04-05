@@ -1,10 +1,10 @@
-ï»¿// stdafx.h : æ¨™æº–ã®ã‚·ã‚¹ãƒ†ãƒ  ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ ãƒ•ã‚¡ã‚¤ãƒ«ã€ã¾ãŸã¯
-// å‚ç…§å›æ•°ãŒå¤šãã€ã‹ã¤ã‚ã¾ã‚Šå¤‰æ›´ã•ã‚Œãªã„ã€ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå°‚ç”¨ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ ãƒ•ã‚¡ã‚¤ãƒ«
-// ã‚’è¨˜è¿°ã—ã¾ã™ã€‚
+// stdafx.h : •W€‚ÌƒVƒXƒeƒ€ ƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹A‚Ü‚½‚Í
+// QÆ‰ñ”‚ª‘½‚­A‚©‚Â‚ ‚Ü‚è•ÏX‚³‚ê‚È‚¢AƒvƒƒWƒFƒNƒgê—p‚ÌƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹
+// ‚ğ‹Lq‚µ‚Ü‚·B
 #pragma once
 #pragma warning(disable: 4100)
 
-// TODO: ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã«å¿…è¦ãªè¿½åŠ ãƒ˜ãƒƒãƒ€ãƒ¼ã‚’ã“ã“ã§å‚ç…§ã—ã¦ãã ã•ã„ã€‚
+// TODO: ƒvƒƒOƒ‰ƒ€‚É•K—v‚È’Ç‰Áƒwƒbƒ_[‚ğ‚±‚±‚ÅQÆ‚µ‚Ä‚­‚¾‚³‚¢B
 #include <windows.h>
 #include <Shlwapi.h>
 #include <stdio.h>
@@ -19,15 +19,16 @@
 
 // UPnP
 #include <natupnp.h>
-#pragma comment(lib, "ole32.lib")
-#pragma comment(lib, "oleauth32.lib")
+#pragma comment(lib,"ole32.lib")
+#pragma comment(lib,"oleaut32.lib")
 
-// IP acquisition
+// IPæ“¾—p
 #include <winsock.h>
-#include <OleAuto.h>
+#include <oleauto.h>
 
 //const IID UPNPNAT_CLSID = {0xAE1E00AA, 0x3FD5, 0x403C, {0x8A, 0x27, 0x2B, 0xBD, 0xC3, 0x0C, 0xD0, 0xE1}};
 //const IID IUPNPNAT_IID  = {0xb171c812, 0xcc76, 0x485a, {0x94, 0xd8, 0xb6, 0xb3, 0xa2, 0x79, 0x4e, 0x99}};
+
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -49,10 +50,6 @@ void DeleteSection(TCHAR* obj);
 void ChangeStageValue();
 void SetCaption();
 
-bool IsCompatibleFM2KExecutable(String^ fileDesc);
-bool IsCompatibleFM95Executable(String^ fileDesc);
-bool IsCompatibleFMExecutable(String^ fileDesc);
-
 String^ EncryptionIP(String^ ip);
 String^ MTEncryptionIP(String^ ip);
 _int64 DecryptionIP(String^ cipher_ip, bool enc);
@@ -64,7 +61,7 @@ UINT CipherRand(UINT32 seed = 0);
 UINT XorShift(UINT32 seed = 0);
 UINT RandomStage(UINT32 seed = 0);
 
-// ãƒ¡ãƒ³ãƒãƒ¼æƒ…å ±
+// ƒƒ“ƒo[î•ñ
 public ref struct MemberInfo
 {
 	IPEndPoint^ IP_EP;
@@ -77,19 +74,19 @@ public ref struct MemberInfo
 	DWORD       RESPONSE;
 };
 
-// ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—
+// ƒoƒbƒNƒAƒbƒv
 public ref struct MemberInfoBackUp
 {
 	IPEndPoint^ IP_EP;
 	UINT16      ID;
 };
 
-// ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆ
+// ƒvƒƒtƒ@ƒCƒ‹ƒŠƒXƒg
 public ref class Profile
 {
 	public:
 		static Generic::List<String^>^ ProfileList = gcnew Generic::List<String^>;
-		// ãƒãƒªãƒ‡ãƒ¼ã‚·ãƒ§ãƒ³ç”¨
+		// ƒoƒŠƒf[ƒVƒ‡ƒ“—p
 		static array<String^>^ SystemSection = gcnew array<String^>{"System", "State", "Color"};
 };
 
@@ -215,11 +212,11 @@ const UINT VOLUME_SET_2_95 = 0x0040203F;
 const BYTE VOLUME_SET_2_95_CODE[] = {0x50,0x8B,0x08,0xCC,0x52,0x50,0xFF,0x51,0x3C,0xE9,0x7B,0xFF,0xFF,0xFF,0x50,0x8B,
                                      0x08,0xCC,0x52,0x50,0xFF,0x51,0x3C,0xE9,0x7A,0xFF,0xFF,0xFF};
 
-// ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±
-// LilithPort 1.03ä»¥ä¸Šäº’æ›, ãã‚Œä»¥å‰ã¯ãªã—
+// ƒo[ƒWƒ‡ƒ“î•ñ
+// LilithPort 1.03ˆÈãŒİŠ·, ‚»‚êˆÈ‘O‚Í‚È‚µ
 const UINT LP_VERSION = 108;
 
-// è¨­å®šé …ç›®
+// İ’è€–Ú
 const UINT MAX_NAME   = 32;
 const UINT MAX_ARRAY  = 64;
 const UINT MAX_ID     = 0x3FFF;
@@ -232,7 +229,7 @@ const UINT MAX_PROFILE = 2048;
 const BYTE TYMT_VERSION = 6;
 const UINT TIME_OUT = 3000;
 
-// ãƒãƒ¼ãƒ ãƒ—ãƒ¬ã‚¤äººæ•°
+// ƒ`[ƒ€ƒvƒŒƒCl”
 const UINT MAX_TEAM_ROUND = 4;
 
 
@@ -425,13 +422,13 @@ typedef enum {
 	PH_PING,
 	PH_PONG,
 	PH_REQ_CONNECTION,   // 1:protocol 1:name_l n:name 1:comment_l n:comment
-	PH_REQ_CONNECTION_H, // HOSTãªæ¥ç¶šè¦æ±‚
+	PH_REQ_CONNECTION_H, // HOST‚ÈÚ‘±—v‹
 	PH_RES_CONNECTION,   // 1:server_name_l n:server_name 2:ID 1:name_l n:name 1:comment_l n:comment 1:state
 	PH_MESSAGE,          // 2:ID 1:msg_l n:msg
 	PH_NOTICE,           // 1:len n:notice
-	PH_REQ_LIST,         // 2:ID 0ã§å…¨å“¡åˆ†
-	PH_RES_LIST,         // 2:ID 1:name_l n:name 1:comment_l n:comment 1:state 4:IP 2:Port + æš—å·
-	PH_NEW_MEMBER,       // ä¸Šã¨åŒã˜
+	PH_REQ_LIST,         // 2:ID 0‚Å‘Sˆõ•ª
+	PH_RES_LIST,         // 2:ID 1:name_l n:name 1:comment_l n:comment 1:state 4:IP 2:Port + ˆÃ†
+	PH_NEW_MEMBER,       // ã‚Æ“¯‚¶
 	PH_QUIT,             // 2:ID
 	PH_LOST,             // 2:ID
 	PH_CHANGE_STATE,     // 2:ID 1:STATE
@@ -439,21 +436,21 @@ typedef enum {
 	PH_RES_STATE,        // 2:ID 1:STATE
 	PH_CHANGE_COMMENT,   // 2:ID 1:comment_l n:comment
 	PH_DICE,             // 1:value
-	PH_REQ_VS,           // 2:ID 4:å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒãƒƒã‚·ãƒ¥
+	PH_REQ_VS,           // 2:ID 4:Àsƒtƒ@ƒCƒ‹‚ÌƒnƒbƒVƒ…
 	PH_RES_VS,           // 1:state
-	PH_REQ_VS_PING,      // 1:ID 5å€‹ãƒãƒ©ã§send
-	PH_RES_VS_PONG,      // 1ç§’é–“ã«4å€‹ä»¥ä¸Šå—ä¿¡ã§å¯¾æˆ¦é–‹å§‹
-	PH_REQ_VS_SETTING,   // 1:delay localã¨hostã§å¤§ããªå€¤ã«ã‚ã‚ã›ã‚‹
+	PH_REQ_VS_PING,      // 1:ID 5ŒÂƒoƒ‰‚Åsend
+	PH_RES_VS_PONG,      // 1•bŠÔ‚É4ŒÂˆÈãóM‚Å‘ÎíŠJn
+	PH_REQ_VS_SETTING,   // 1:delay local‚Æhost‚Å‘å‚«‚È’l‚É‚ ‚í‚¹‚é
 	PH_RES_VS_SETTING,   // 1:delay 4:seed 1:max_stage 1:stage 1:round 1:timer
-	PH_VS_DATA,          // 4:frame n:data 4*delayå€‹åˆ†é€ä¿¡
-	PH_REQ_VS_DATA,      // 4:frame ãƒ‘ã‚±ãƒƒãƒˆæ¥ã¦ãªã„ã®ã§ç·Šæ€¥è¦è«‹
+	PH_VS_DATA,          // 4:frame n:data 4*delayŒÂ•ª‘—M
+	PH_REQ_VS_DATA,      // 4:frame ƒpƒPƒbƒg—ˆ‚Ä‚È‚¢‚Ì‚Å‹Ù‹}—v¿
 	PH_RES_VS_DATA,      // 4:frame 2:input
 	PH_VS_END,
 	PH_REQ_WATCH,        // 2:ID
-	PH_RES_WATCH,        // 1:state 2:P1ID 2:P2ID 4:seed 1:max_stage 1:stage 1:round 1:timer  state = 0:è¦³æˆ¦é–‹å§‹ 1ï½:è¦³æˆ¦ä¸å¯
-	PH_WATCH_DATA,       // 4:frame 40:10ãƒ•ãƒ¬ãƒ¼ãƒ åˆ†ã®ãƒ‡ãƒ¼ã‚¿
-	PH_WATCH_END,        // 2:ID è‡ªåˆ†ã®ã¨åŒã˜IDãªã‚‰è¦³æˆ¦çµ‚äº†ã€ä»–ã®IDãªã‚‰ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
-	PH_SECRET,           // 1:type n:typeã”ã¨ã«ã„ã‚ã„ã‚
+	PH_RES_WATCH,        // 1:state 2:P1ID 2:P2ID 4:seed 1:max_stage 1:stage 1:round 1:timer  state = 0:ŠÏíŠJn 1`:ŠÏí•s‰Â
+	PH_WATCH_DATA,       // 4:frame 40:10ƒtƒŒ[ƒ€•ª‚Ìƒf[ƒ^
+	PH_WATCH_END,        // 2:ID ©•ª‚Ì‚Æ“¯‚¶ID‚È‚çŠÏíI—¹A‘¼‚ÌID‚È‚çƒŠƒXƒg‚©‚çíœ
+	PH_SECRET,           // 1:type n:type‚²‚Æ‚É‚¢‚ë‚¢‚ë
 } MT_SP_PACKET_HEADER;
 
 typedef enum {
